@@ -1,0 +1,41 @@
+Circuit: * F:\CIRCUITS\DIGITALCURRENTSINKV2\HW\SIMULATION\LTC2058\DIFFERENTIALUNITYGAIN\DRAFT2.ASC
+
+R3: both pins shorted together -- ignoring.
+D1: both pins shorted together -- ignoring.
+WARNING: Less than two connections to node V-.  This node is used by V2.
+Direct Newton iteration for .op point succeeded.
+.step vsource=0
+.step vsource=0.2
+.step vsource=0.4
+.step vsource=0.6
+.step vsource=0.8
+.step vsource=1
+.step vsource=1.2
+.step vsource=1.4
+.step vsource=1.6
+.step vsource=1.8
+.step vsource=2
+.step vsource=2.2
+.step vsource=2.4
+.step vsource=2.6
+.step vsource=2.8
+.step vsource=3
+.step vsource=3.2
+
+Date: Fri Jun 28 01:02:07 2019
+Total elapsed time: 1.624 seconds.
+
+tnom = 27
+temp = 27
+method = modified trap
+totiter = 2488
+traniter = 2092
+tranpoints = 1047
+accept = 1047
+rejected = 0
+matrix size = 30
+fillins = 16
+solver = Normal
+Matrix Compiler1: 1.86 KB object code size  0.5/0.4/[0.2]
+Matrix Compiler2: 2.33 KB object code size  0.2/0.4/[0.2]
+

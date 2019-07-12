@@ -1,0 +1,3 @@
+(sym_lib_table
+  (lib (name DCConverters)(type Legacy)(uri /Users/GB080220/workspace/circuits/ProgrammableSymmetricalCurrentSink/HW/IsolatedThreeOutputSMPS/OutputFilteredConverters/lib/DCConverters.lib)(options "")(descr ""))
+)

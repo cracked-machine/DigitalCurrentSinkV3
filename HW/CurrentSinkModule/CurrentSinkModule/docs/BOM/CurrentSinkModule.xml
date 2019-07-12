@@ -1,0 +1,1863 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<export version="D">
+  <design>
+    <source>/Users/GB080220/workspace/circuits/DigitalCurrentSinkV2/HW/CurrentSinkModule/CurrentSinkModule/CurrentSinkModule.sch</source>
+    <date>Sunday, 23 June 2019 at 13:04:44</date>
+    <tool>Eeschema (5.1.2-1)-1</tool>
+    <sheet number="1" name="/" tstamps="/">
+      <title_block>
+        <title>Mixed Signal Board for Digital Programmable Current Sink</title>
+        <company>Designed by C Sutton</company>
+        <rev>C</rev>
+        <date>2019-05-12</date>
+        <source>CurrentSinkModule.sch</source>
+        <comment number="1" value=""/>
+        <comment number="2" value=""/>
+        <comment number="3" value=""/>
+        <comment number="4" value=""/>
+      </title_block>
+    </sheet>
+    <sheet number="2" name="/CurrentSink/" tstamps="/5C977310/">
+      <title_block>
+        <title>Mixed Signal Board for Digital Programmable Current Sink</title>
+        <company>Designed by C Sutton</company>
+        <rev>C</rev>
+        <date>2019-05-12</date>
+        <source>CurrentSink.sch</source>
+        <comment number="1" value=""/>
+        <comment number="2" value=""/>
+        <comment number="3" value=""/>
+        <comment number="4" value=""/>
+      </title_block>
+    </sheet>
+  </design>
+  <components>
+    <comp ref="J_DUT1">
+      <value>MolexMegaFit_01x04</value>
+      <footprint>Connector_Molex:Molex_Mega-Fit_76829-0004_2x02_P5.70mm_Vertical</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Connector_Generic" part="Conn_01x04" description="Generic connector, single row, 01x04, script generated (kicad-library-utils/schlib/autogen/connector/)"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5CDD2B07</tstamp>
+    </comp>
+    <comp ref="JFAN1">
+      <value>Conn_01x02</value>
+      <footprint>Connector_Molex:Molex_KK-254_AE-6410-02A_1x02_P2.54mm_Vertical</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Connector_Generic" part="Conn_01x02" description="Generic connector, single row, 01x02, script generated (kicad-library-utils/schlib/autogen/connector/)"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5CB1E649</tstamp>
+    </comp>
+    <comp ref="JADC1">
+      <value>SMA_RG402_Coax</value>
+      <footprint>Connector_Coaxial:SMA_Amphenol_901-144_Vertical</footprint>
+      <datasheet>https://www.te.com/commerce/DocumentDelivery/DDEController?Action=srchrtrv&amp;DocNm=1814832&amp;DocType=Customer+Drawing&amp;DocLang=English</datasheet>
+      <fields>
+        <field name="DigikeyNo">A97594-ND	</field>
+        <field name="Mfr. No:">5-1814832-1</field>
+        <field name="MouserNo">571-5-1814832-1</field>
+      </fields>
+      <libsource lib="Connector" part="Conn_Coaxial" description="coaxial connector (BNC, SMA, SMB, SMC, Cinch/RCA, ...)"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5CAD35C8</tstamp>
+    </comp>
+    <comp ref="JADC2">
+      <value>SMA_RG402_Coax</value>
+      <footprint>Connector_Coaxial:SMA_Amphenol_901-144_Vertical</footprint>
+      <datasheet>https://www.te.com/commerce/DocumentDelivery/DDEController?Action=srchrtrv&amp;DocNm=1814832&amp;DocType=Customer+Drawing&amp;DocLang=English</datasheet>
+      <fields>
+        <field name="DigikeyNo">A97594-ND	</field>
+        <field name="Mfr. No:">5-1814832-1</field>
+        <field name="MouserNo">571-5-1814832-1</field>
+      </fields>
+      <libsource lib="Connector" part="Conn_Coaxial" description="coaxial connector (BNC, SMA, SMB, SMC, Cinch/RCA, ...)"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5CAD35F2</tstamp>
+    </comp>
+    <comp ref="JPWR1">
+      <value>Conn_01x03</value>
+      <footprint>Connector_Molex:Molex_KK-254_AE-6410-03A_1x03_P2.54mm_Vertical</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Connector_Generic" part="Conn_01x03" description="Generic connector, single row, 01x03, script generated (kicad-library-utils/schlib/autogen/connector/)"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5CAE8712</tstamp>
+    </comp>
+    <comp ref="D1">
+      <value>D_Schottky</value>
+      <footprint>Diode_SMD:D_SOD-123</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="D_Schottky" description="Schottky diode"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5E7E7922</tstamp>
+    </comp>
+    <comp ref="D2">
+      <value>D_Schottky</value>
+      <footprint>Diode_SMD:D_SOD-123</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="D_Schottky" description="Schottky diode"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5E7E7971</tstamp>
+    </comp>
+    <comp ref="TP1">
+      <value>TestPoint</value>
+      <footprint>TestPoint:TestPoint_Pad_2.0x2.0mm</footprint>
+      <datasheet>https://cdn.harwin.com/pdfs/S2751R.pdf</datasheet>
+      <fields>
+        <field name="Mfr. No:">S2751-46R</field>
+        <field name="Mfr:">Harwin</field>
+        <field name="MouserNo">855-S2751-46R</field>
+      </fields>
+      <libsource lib="Connector" part="TestPoint" description="test point"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5E7F8F70</tstamp>
+    </comp>
+    <comp ref="TP2">
+      <value>TestPoint</value>
+      <footprint>TestPoint:TestPoint_Pad_2.0x2.0mm</footprint>
+      <datasheet>https://cdn.harwin.com/pdfs/S2751R.pdf</datasheet>
+      <fields>
+        <field name="Mfr. No:">S2751-46R</field>
+        <field name="Mfr:">Harwin</field>
+        <field name="MouserNo">855-S2751-46R</field>
+      </fields>
+      <libsource lib="Connector" part="TestPoint" description="test point"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5E7FA137</tstamp>
+    </comp>
+    <comp ref="JDAC1">
+      <value>SMA_RG402_Coax</value>
+      <footprint>Connector_Coaxial:SMA_Amphenol_901-144_Vertical</footprint>
+      <datasheet>https://www.te.com/commerce/DocumentDelivery/DDEController?Action=srchrtrv&amp;DocNm=1814832&amp;DocType=Customer+Drawing&amp;DocLang=English</datasheet>
+      <fields>
+        <field name="DigikeyNo">A97594-ND	</field>
+        <field name="Mfr. No:">5-1814832-1</field>
+        <field name="MouserNo">571-5-1814832-1</field>
+      </fields>
+      <libsource lib="Connector" part="Conn_Coaxial" description="coaxial connector (BNC, SMA, SMB, SMC, Cinch/RCA, ...)"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5D09BADF</tstamp>
+    </comp>
+    <comp ref="JDAC2">
+      <value>SMA_RG402_Coax</value>
+      <footprint>Connector_Coaxial:SMA_Amphenol_901-144_Vertical</footprint>
+      <datasheet>https://www.te.com/commerce/DocumentDelivery/DDEController?Action=srchrtrv&amp;DocNm=1814832&amp;DocType=Customer+Drawing&amp;DocLang=English</datasheet>
+      <fields>
+        <field name="DigikeyNo">A97594-ND	</field>
+        <field name="Mfr. No:">5-1814832-1</field>
+        <field name="MouserNo">571-5-1814832-1</field>
+      </fields>
+      <libsource lib="Connector" part="Conn_Coaxial" description="coaxial connector (BNC, SMA, SMB, SMC, Cinch/RCA, ...)"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5D09BAE5</tstamp>
+    </comp>
+    <comp ref="JP1">
+      <value>Isolation</value>
+      <footprint>Jumper:SolderJumper-2_P1.3mm_Bridged_Pad1.0x1.5mm</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="Jumper_NC_Small" description="Jumper, normally closed, small symbol"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5D30EC8D</tstamp>
+    </comp>
+    <comp ref="JP2">
+      <value>Isolation</value>
+      <footprint>Jumper:SolderJumper-2_P1.3mm_Bridged_Pad1.0x1.5mm</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="Jumper_NC_Small" description="Jumper, normally closed, small symbol"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5D31137D</tstamp>
+    </comp>
+    <comp ref="JP3">
+      <value>Isolation</value>
+      <footprint>Jumper:SolderJumper-2_P1.3mm_Bridged_Pad1.0x1.5mm</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="Jumper_NC_Small" description="Jumper, normally closed, small symbol"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5D312C46</tstamp>
+    </comp>
+    <comp ref="JP4">
+      <value>Isolation</value>
+      <footprint>Jumper:SolderJumper-2_P1.3mm_Bridged_Pad1.0x1.5mm</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="Jumper_NC_Small" description="Jumper, normally closed, small symbol"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5D31438F</tstamp>
+    </comp>
+    <comp ref="GND9">
+      <value>TestPoint</value>
+      <footprint>TestPoint:TestPoint_Pad_2.0x2.0mm</footprint>
+      <datasheet>https://cdn.harwin.com/pdfs/S2751R.pdf</datasheet>
+      <fields>
+        <field name="Mfr. No:">S2751-46R</field>
+        <field name="Mfr:">Harwin</field>
+        <field name="MouserNo">855-S2751-46R</field>
+      </fields>
+      <libsource lib="Connector" part="TestPoint" description="test point"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5D0D123D</tstamp>
+    </comp>
+    <comp ref="HS1">
+      <value>Power Resistor Heatsink</value>
+      <footprint>FischerElectronikFanHeatsink:LAM_5_75_12</footprint>
+      <datasheet>https://docs-emea.rs-online.com/webdocs/11e5/0900766b811e5a90.pdf</datasheet>
+      <fields>
+        <field name="MouserNo">774-2811</field>
+      </fields>
+      <libsource lib="Mechanical" part="Heatsink" description="Heatsink"/>
+      <sheetpath names="/CurrentSink/" tstamps="/5C977310/"/>
+      <tstamp>5C970CF0</tstamp>
+    </comp>
+    <comp ref="U_NEGIA1">
+      <value>INA128UA</value>
+      <footprint>Package_SO:SOIC-8_3.9x4.9mm_P1.27mm</footprint>
+      <datasheet>http://www.ti.com/general/docs/suppproductinfo.tsp?distId=26&amp;gotoUrl=http%3A%2F%2Fwww.ti.com%2Flit%2Fgpn%2Fina128</datasheet>
+      <fields>
+        <field name="MouserNo">595-INA128UA/2K5</field>
+      </fields>
+      <libsource lib="Amplifier_Instrumentation" part="AD620" description="Low Cost, Low Power, Instrumentation Amplifier, DIP-8/SOIC-8"/>
+      <sheetpath names="/CurrentSink/" tstamps="/5C977310/"/>
+      <tstamp>5C970D57</tstamp>
+    </comp>
+    <comp ref="Q_POSMOS1">
+      <value>IRF3710</value>
+      <footprint>Package_TO_SOT_THT:TO-220-3_Vertical</footprint>
+      <datasheet>https://www.mouser.co.uk/datasheet/2/196/irf3710pbf-1227029.pdf</datasheet>
+      <fields>
+        <field name="MouserNo">942-IRF3710PBF</field>
+      </fields>
+      <libsource lib="Transistor_FET" part="IRF3205" description="110A Id, 55V Vds, Single N-Channel HEXFET Power MOSFET, 8mOhm Ron, TO-220AB"/>
+      <sheetpath names="/CurrentSink/" tstamps="/5C977310/"/>
+      <tstamp>5C970D9A</tstamp>
+    </comp>
+    <comp ref="Q_NEGMOS1">
+      <value>IRF5210</value>
+      <footprint>Package_TO_SOT_THT:TO-220-3_Vertical</footprint>
+      <datasheet>https://www.mouser.co.uk/datasheet/2/196/irf5210pbf-1228304.pdf</datasheet>
+      <fields>
+        <field name="Mfr. No:">942-IRF4905PBF</field>
+        <field name="MouserNo">942-IRF5210PBF</field>
+      </fields>
+      <libsource lib="Transistor_FET" part="IRF4905" description="-74A Id, -55V Vds, Single P-Channel HEXFET Power MOSFET, 20mOhm Ron, TO-220AB"/>
+      <sheetpath names="/CurrentSink/" tstamps="/5C977310/"/>
+      <tstamp>5C970DA3</tstamp>
+    </comp>
+    <comp ref="R_SHUNTPOS1">
+      <value>220mΩ </value>
+      <footprint>AlumHousedResistors:TEConn_HSC100</footprint>
+      <datasheet>https://docs-emea.rs-online.com/webdocs/1360/0900766b8136054c.pdf</datasheet>
+      <fields>
+        <field name="Mfr. No:">HSC100R22J</field>
+        <field name="Mfr:">TE Connectivity</field>
+        <field name="MouserNo">720-5417</field>
+        <field name="Type">100W 50PPM 5%</field>
+      </fields>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <sheetpath names="/CurrentSink/" tstamps="/5C977310/"/>
+      <tstamp>5C970DAF</tstamp>
+    </comp>
+    <comp ref="R_SHUNTNEG1">
+      <value>220mΩ</value>
+      <footprint>AlumHousedResistors:TEConn_HSC100</footprint>
+      <datasheet>https://docs-emea.rs-online.com/webdocs/1360/0900766b8136054c.pdf</datasheet>
+      <fields>
+        <field name="Mfr. No:">HSC100R22J</field>
+        <field name="Mfr:">TE Connectivity</field>
+        <field name="MouserNo">720-5417</field>
+        <field name="Type">100W 50PPM 5%</field>
+      </fields>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <sheetpath names="/CurrentSink/" tstamps="/5C977310/"/>
+      <tstamp>5C970DBE</tstamp>
+    </comp>
+    <comp ref="U_POSIA1">
+      <value>INA128UA</value>
+      <footprint>Package_SO:SOIC-8_3.9x4.9mm_P1.27mm</footprint>
+      <datasheet>http://www.ti.com/general/docs/suppproductinfo.tsp?distId=26&amp;gotoUrl=http%3A%2F%2Fwww.ti.com%2Flit%2Fgpn%2Fina128</datasheet>
+      <fields>
+        <field name="MouserNo">595-INA128UA/2K5</field>
+      </fields>
+      <libsource lib="Amplifier_Instrumentation" part="AD620" description="Low Cost, Low Power, Instrumentation Amplifier, DIP-8/SOIC-8"/>
+      <sheetpath names="/CurrentSink/" tstamps="/5C977310/"/>
+      <tstamp>5C970D4B</tstamp>
+    </comp>
+    <comp ref="C7">
+      <value>10n</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
+      <sheetpath names="/CurrentSink/" tstamps="/5C977310/"/>
+      <tstamp>5CC3B25E</tstamp>
+    </comp>
+    <comp ref="C5">
+      <value>4.7u</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
+      <sheetpath names="/CurrentSink/" tstamps="/5C977310/"/>
+      <tstamp>5CC42393</tstamp>
+    </comp>
+    <comp ref="C11">
+      <value>10n</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
+      <sheetpath names="/CurrentSink/" tstamps="/5C977310/"/>
+      <tstamp>5CC4253F</tstamp>
+    </comp>
+    <comp ref="C9">
+      <value>4.7u</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
+      <sheetpath names="/CurrentSink/" tstamps="/5C977310/"/>
+      <tstamp>5CC42545</tstamp>
+    </comp>
+    <comp ref="C8">
+      <value>10n</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
+      <sheetpath names="/CurrentSink/" tstamps="/5C977310/"/>
+      <tstamp>5CCCEE35</tstamp>
+    </comp>
+    <comp ref="C6">
+      <value>4.7u</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
+      <sheetpath names="/CurrentSink/" tstamps="/5C977310/"/>
+      <tstamp>5CCCEE3B</tstamp>
+    </comp>
+    <comp ref="C12">
+      <value>10n</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
+      <sheetpath names="/CurrentSink/" tstamps="/5C977310/"/>
+      <tstamp>5CCD8C20</tstamp>
+    </comp>
+    <comp ref="C10">
+      <value>4.7u</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
+      <sheetpath names="/CurrentSink/" tstamps="/5C977310/"/>
+      <tstamp>5CCD8C26</tstamp>
+    </comp>
+    <comp ref="C26">
+      <value>10n</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
+      <sheetpath names="/CurrentSink/" tstamps="/5C977310/"/>
+      <tstamp>5CE5BDC4</tstamp>
+    </comp>
+    <comp ref="C22">
+      <value>330n</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
+      <sheetpath names="/CurrentSink/" tstamps="/5C977310/"/>
+      <tstamp>5CE6D14F</tstamp>
+    </comp>
+    <comp ref="C21">
+      <value>330n</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
+      <sheetpath names="/CurrentSink/" tstamps="/5C977310/"/>
+      <tstamp>5CE6D3AB</tstamp>
+    </comp>
+    <comp ref="C25">
+      <value>10n</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
+      <sheetpath names="/CurrentSink/" tstamps="/5C977310/"/>
+      <tstamp>5CE75F78</tstamp>
+    </comp>
+    <comp ref="C23">
+      <value>10n</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
+      <sheetpath names="/CurrentSink/" tstamps="/5C977310/"/>
+      <tstamp>5CEB5BBC</tstamp>
+    </comp>
+    <comp ref="C19">
+      <value>330n</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
+      <sheetpath names="/CurrentSink/" tstamps="/5C977310/"/>
+      <tstamp>5CEBFB51</tstamp>
+    </comp>
+    <comp ref="C20">
+      <value>330n</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
+      <sheetpath names="/CurrentSink/" tstamps="/5C977310/"/>
+      <tstamp>5CF11CF6</tstamp>
+    </comp>
+    <comp ref="C24">
+      <value>10n</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
+      <sheetpath names="/CurrentSink/" tstamps="/5C977310/"/>
+      <tstamp>5CF1C5F9</tstamp>
+    </comp>
+    <comp ref="R11">
+      <value>22K 1%</value>
+      <footprint>Resistor_SMD:R_0402_1005Metric</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <sheetpath names="/CurrentSink/" tstamps="/5C977310/"/>
+      <tstamp>5D2B734B</tstamp>
+    </comp>
+    <comp ref="R12">
+      <value>22K 1%</value>
+      <footprint>Resistor_SMD:R_0402_1005Metric</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <sheetpath names="/CurrentSink/" tstamps="/5C977310/"/>
+      <tstamp>5D2B749F</tstamp>
+    </comp>
+    <comp ref="C14">
+      <value>1n 5% Mica/C0G</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
+      <sheetpath names="/CurrentSink/" tstamps="/5C977310/"/>
+      <tstamp>5D34A57F</tstamp>
+    </comp>
+    <comp ref="C16">
+      <value>1n 5% Mica/C0G</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
+      <sheetpath names="/CurrentSink/" tstamps="/5C977310/"/>
+      <tstamp>5D366287</tstamp>
+    </comp>
+    <comp ref="R9">
+      <value>22K 1%</value>
+      <footprint>Resistor_SMD:R_0402_1005Metric</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <sheetpath names="/CurrentSink/" tstamps="/5C977310/"/>
+      <tstamp>5D44BA90</tstamp>
+    </comp>
+    <comp ref="R10">
+      <value>22K 1%</value>
+      <footprint>Resistor_SMD:R_0402_1005Metric</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <sheetpath names="/CurrentSink/" tstamps="/5C977310/"/>
+      <tstamp>5D44BA96</tstamp>
+    </comp>
+    <comp ref="C13">
+      <value>1n 5% Mica/C0G</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
+      <sheetpath names="/CurrentSink/" tstamps="/5C977310/"/>
+      <tstamp>5D44BAA0</tstamp>
+    </comp>
+    <comp ref="C15">
+      <value>1n 5% Mica/C0G</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
+      <sheetpath names="/CurrentSink/" tstamps="/5C977310/"/>
+      <tstamp>5D44BAA9</tstamp>
+    </comp>
+    <comp ref="C18">
+      <value>22n</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
+      <sheetpath names="/CurrentSink/" tstamps="/5C977310/"/>
+      <tstamp>5D4D9B2A</tstamp>
+    </comp>
+    <comp ref="C17">
+      <value>22n</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
+      <sheetpath names="/CurrentSink/" tstamps="/5C977310/"/>
+      <tstamp>5D4F9614</tstamp>
+    </comp>
+    <comp ref="J2">
+      <value>Conn_01x03</value>
+      <footprint>Connector_PinHeader_2.54mm:PinHeader_1x03_P2.54mm_Vertical</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Connector_Generic" part="Conn_01x03" description="Generic connector, single row, 01x03, script generated (kicad-library-utils/schlib/autogen/connector/)"/>
+      <sheetpath names="/CurrentSink/" tstamps="/5C977310/"/>
+      <tstamp>5D96E8B6</tstamp>
+    </comp>
+    <comp ref="R14">
+      <value>5K6</value>
+      <footprint>Resistor_SMD:R_0402_1005Metric</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <sheetpath names="/CurrentSink/" tstamps="/5C977310/"/>
+      <tstamp>5DD2778A</tstamp>
+    </comp>
+    <comp ref="R15">
+      <value>1K8</value>
+      <footprint>Resistor_SMD:R_0402_1005Metric</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <sheetpath names="/CurrentSink/" tstamps="/5C977310/"/>
+      <tstamp>5DD525FB</tstamp>
+    </comp>
+    <comp ref="R13">
+      <value>5K6</value>
+      <footprint>Resistor_SMD:R_0402_1005Metric</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <sheetpath names="/CurrentSink/" tstamps="/5C977310/"/>
+      <tstamp>5DECA316</tstamp>
+    </comp>
+    <comp ref="R16">
+      <value>1K2</value>
+      <footprint>Resistor_SMD:R_0402_1005Metric</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <sheetpath names="/CurrentSink/" tstamps="/5C977310/"/>
+      <tstamp>5DECA456</tstamp>
+    </comp>
+    <comp ref="TP9">
+      <value>TestPoint</value>
+      <footprint>TestPoint:TestPoint_Pad_2.0x2.0mm</footprint>
+      <datasheet>https://cdn.harwin.com/pdfs/S2751R.pdf</datasheet>
+      <fields>
+        <field name="Mfr. No:">S2751-46R</field>
+        <field name="Mfr:">Harwin</field>
+        <field name="MouserNo">855-S2751-46R</field>
+      </fields>
+      <libsource lib="Connector" part="TestPoint" description="test point"/>
+      <sheetpath names="/CurrentSink/" tstamps="/5C977310/"/>
+      <tstamp>5CA0B4AA</tstamp>
+    </comp>
+    <comp ref="TP10">
+      <value>TestPoint</value>
+      <footprint>TestPoint:TestPoint_Pad_2.0x2.0mm</footprint>
+      <datasheet>https://cdn.harwin.com/pdfs/S2751R.pdf</datasheet>
+      <fields>
+        <field name="Mfr. No:">S2751-46R</field>
+        <field name="Mfr:">Harwin</field>
+        <field name="MouserNo">855-S2751-46R</field>
+      </fields>
+      <libsource lib="Connector" part="TestPoint" description="test point"/>
+      <sheetpath names="/CurrentSink/" tstamps="/5C977310/"/>
+      <tstamp>5CA31463</tstamp>
+    </comp>
+    <comp ref="TP12">
+      <value>TestPoint</value>
+      <footprint>TestPoint:TestPoint_Pad_2.0x2.0mm</footprint>
+      <datasheet>https://cdn.harwin.com/pdfs/S2751R.pdf</datasheet>
+      <fields>
+        <field name="Mfr. No:">S2751-46R</field>
+        <field name="Mfr:">Harwin</field>
+        <field name="MouserNo">855-S2751-46R</field>
+      </fields>
+      <libsource lib="Connector" part="TestPoint" description="test point"/>
+      <sheetpath names="/CurrentSink/" tstamps="/5C977310/"/>
+      <tstamp>5CA3186E</tstamp>
+    </comp>
+    <comp ref="TP14">
+      <value>TestPoint</value>
+      <footprint>TestPoint:TestPoint_Pad_2.0x2.0mm</footprint>
+      <datasheet>https://cdn.harwin.com/pdfs/S2751R.pdf</datasheet>
+      <fields>
+        <field name="Mfr. No:">S2751-46R</field>
+        <field name="Mfr:">Harwin</field>
+        <field name="MouserNo">855-S2751-46R</field>
+      </fields>
+      <libsource lib="Connector" part="TestPoint" description="test point"/>
+      <sheetpath names="/CurrentSink/" tstamps="/5C977310/"/>
+      <tstamp>5CA44AAB</tstamp>
+    </comp>
+    <comp ref="TP13">
+      <value>TestPoint</value>
+      <footprint>TestPoint:TestPoint_Pad_2.0x2.0mm</footprint>
+      <datasheet>https://cdn.harwin.com/pdfs/S2751R.pdf</datasheet>
+      <fields>
+        <field name="Mfr. No:">S2751-46R</field>
+        <field name="Mfr:">Harwin</field>
+        <field name="MouserNo">855-S2751-46R</field>
+      </fields>
+      <libsource lib="Connector" part="TestPoint" description="test point"/>
+      <sheetpath names="/CurrentSink/" tstamps="/5C977310/"/>
+      <tstamp>5CA57E07</tstamp>
+    </comp>
+    <comp ref="TP11">
+      <value>TestPoint</value>
+      <footprint>TestPoint:TestPoint_Pad_2.0x2.0mm</footprint>
+      <datasheet>https://cdn.harwin.com/pdfs/S2751R.pdf</datasheet>
+      <fields>
+        <field name="Mfr. No:">S2751-46R</field>
+        <field name="Mfr:">Harwin</field>
+        <field name="MouserNo">855-S2751-46R</field>
+      </fields>
+      <libsource lib="Connector" part="TestPoint" description="test point"/>
+      <sheetpath names="/CurrentSink/" tstamps="/5C977310/"/>
+      <tstamp>5CA6B157</tstamp>
+    </comp>
+    <comp ref="TP8">
+      <value>TestPoint</value>
+      <footprint>TestPoint:TestPoint_Pad_2.0x2.0mm</footprint>
+      <datasheet>https://cdn.harwin.com/pdfs/S2751R.pdf</datasheet>
+      <fields>
+        <field name="Mfr. No:">S2751-46R</field>
+        <field name="Mfr:">Harwin</field>
+        <field name="MouserNo">855-S2751-46R</field>
+      </fields>
+      <libsource lib="Connector" part="TestPoint" description="test point"/>
+      <sheetpath names="/CurrentSink/" tstamps="/5C977310/"/>
+      <tstamp>5CAA3FD0</tstamp>
+    </comp>
+    <comp ref="TP7">
+      <value>TestPoint</value>
+      <footprint>TestPoint:TestPoint_Pad_2.0x2.0mm</footprint>
+      <datasheet>https://cdn.harwin.com/pdfs/S2751R.pdf</datasheet>
+      <fields>
+        <field name="Mfr. No:">S2751-46R</field>
+        <field name="Mfr:">Harwin</field>
+        <field name="MouserNo">855-S2751-46R</field>
+      </fields>
+      <libsource lib="Connector" part="TestPoint" description="test point"/>
+      <sheetpath names="/CurrentSink/" tstamps="/5C977310/"/>
+      <tstamp>5CAA40B1</tstamp>
+    </comp>
+    <comp ref="D4">
+      <value>3V3</value>
+      <footprint>Diode_SMD:D_SOD-123</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="D_Zener" description="Zener diode"/>
+      <sheetpath names="/CurrentSink/" tstamps="/5C977310/"/>
+      <tstamp>5CA87533</tstamp>
+    </comp>
+    <comp ref="D3">
+      <value>3V3</value>
+      <footprint>Diode_SMD:D_SOD-123</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="D_Zener" description="Zener diode"/>
+      <sheetpath names="/CurrentSink/" tstamps="/5C977310/"/>
+      <tstamp>5CABB9DB</tstamp>
+    </comp>
+    <comp ref="GND1">
+      <value>TestPoint</value>
+      <footprint>TestPoint:TestPoint_Pad_2.0x2.0mm</footprint>
+      <datasheet>https://cdn.harwin.com/pdfs/S2751R.pdf</datasheet>
+      <fields>
+        <field name="Mfr. No:">S2751-46R</field>
+        <field name="Mfr:">Harwin</field>
+        <field name="MouserNo">855-S2751-46R</field>
+      </fields>
+      <libsource lib="Connector" part="TestPoint" description="test point"/>
+      <sheetpath names="/CurrentSink/" tstamps="/5C977310/"/>
+      <tstamp>5CAA44C8</tstamp>
+    </comp>
+    <comp ref="GND2">
+      <value>TestPoint</value>
+      <footprint>TestPoint:TestPoint_Pad_2.0x2.0mm</footprint>
+      <datasheet>https://cdn.harwin.com/pdfs/S2751R.pdf</datasheet>
+      <fields>
+        <field name="Mfr. No:">S2751-46R</field>
+        <field name="Mfr:">Harwin</field>
+        <field name="MouserNo">855-S2751-46R</field>
+      </fields>
+      <libsource lib="Connector" part="TestPoint" description="test point"/>
+      <sheetpath names="/CurrentSink/" tstamps="/5C977310/"/>
+      <tstamp>5CB5F94D</tstamp>
+    </comp>
+    <comp ref="GND3">
+      <value>TestPoint</value>
+      <footprint>TestPoint:TestPoint_Pad_2.0x2.0mm</footprint>
+      <datasheet>https://cdn.harwin.com/pdfs/S2751R.pdf</datasheet>
+      <fields>
+        <field name="Mfr. No:">S2751-46R</field>
+        <field name="Mfr:">Harwin</field>
+        <field name="MouserNo">855-S2751-46R</field>
+      </fields>
+      <libsource lib="Connector" part="TestPoint" description="test point"/>
+      <sheetpath names="/CurrentSink/" tstamps="/5C977310/"/>
+      <tstamp>5CB5FA19</tstamp>
+    </comp>
+    <comp ref="GND4">
+      <value>TestPoint</value>
+      <footprint>TestPoint:TestPoint_Pad_2.0x2.0mm</footprint>
+      <datasheet>https://cdn.harwin.com/pdfs/S2751R.pdf</datasheet>
+      <fields>
+        <field name="Mfr. No:">S2751-46R</field>
+        <field name="Mfr:">Harwin</field>
+        <field name="MouserNo">855-S2751-46R</field>
+      </fields>
+      <libsource lib="Connector" part="TestPoint" description="test point"/>
+      <sheetpath names="/CurrentSink/" tstamps="/5C977310/"/>
+      <tstamp>5CB5FAE7</tstamp>
+    </comp>
+    <comp ref="GND5">
+      <value>TestPoint</value>
+      <footprint>TestPoint:TestPoint_Pad_2.0x2.0mm</footprint>
+      <datasheet>https://cdn.harwin.com/pdfs/S2751R.pdf</datasheet>
+      <fields>
+        <field name="Mfr. No:">S2751-46R</field>
+        <field name="Mfr:">Harwin</field>
+        <field name="MouserNo">855-S2751-46R</field>
+      </fields>
+      <libsource lib="Connector" part="TestPoint" description="test point"/>
+      <sheetpath names="/CurrentSink/" tstamps="/5C977310/"/>
+      <tstamp>5CB5FBB9</tstamp>
+    </comp>
+    <comp ref="GND6">
+      <value>TestPoint</value>
+      <footprint>TestPoint:TestPoint_Pad_2.0x2.0mm</footprint>
+      <datasheet>https://cdn.harwin.com/pdfs/S2751R.pdf</datasheet>
+      <fields>
+        <field name="Mfr. No:">S2751-46R</field>
+        <field name="Mfr:">Harwin</field>
+        <field name="MouserNo">855-S2751-46R</field>
+      </fields>
+      <libsource lib="Connector" part="TestPoint" description="test point"/>
+      <sheetpath names="/CurrentSink/" tstamps="/5C977310/"/>
+      <tstamp>5CB5FC8B</tstamp>
+    </comp>
+    <comp ref="C2">
+      <value>C</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
+      <sheetpath names="/CurrentSink/" tstamps="/5C977310/"/>
+      <tstamp>5D76AB84</tstamp>
+    </comp>
+    <comp ref="R4">
+      <value>R</value>
+      <footprint>Resistor_SMD:R_0402_1005Metric</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <sheetpath names="/CurrentSink/" tstamps="/5C977310/"/>
+      <tstamp>5D78674F</tstamp>
+    </comp>
+    <comp ref="R2">
+      <value>R</value>
+      <footprint>Resistor_SMD:R_0402_1005Metric</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <sheetpath names="/CurrentSink/" tstamps="/5C977310/"/>
+      <tstamp>5D7A2700</tstamp>
+    </comp>
+    <comp ref="C4">
+      <value>C</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
+      <sheetpath names="/CurrentSink/" tstamps="/5C977310/"/>
+      <tstamp>5D7BF10A</tstamp>
+    </comp>
+    <comp ref="R7">
+      <value>R</value>
+      <footprint>Resistor_SMD:R_0402_1005Metric</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <sheetpath names="/CurrentSink/" tstamps="/5C977310/"/>
+      <tstamp>5D818D26</tstamp>
+    </comp>
+    <comp ref="R8">
+      <value>R</value>
+      <footprint>Resistor_SMD:R_0402_1005Metric</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <sheetpath names="/CurrentSink/" tstamps="/5C977310/"/>
+      <tstamp>5D84683F</tstamp>
+    </comp>
+    <comp ref="C1">
+      <value>C</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
+      <sheetpath names="/CurrentSink/" tstamps="/5C977310/"/>
+      <tstamp>5D8CA453</tstamp>
+    </comp>
+    <comp ref="R3">
+      <value>R</value>
+      <footprint>Resistor_SMD:R_0402_1005Metric</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <sheetpath names="/CurrentSink/" tstamps="/5C977310/"/>
+      <tstamp>5D8CA45B</tstamp>
+    </comp>
+    <comp ref="R1">
+      <value>R</value>
+      <footprint>Resistor_SMD:R_0402_1005Metric</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <sheetpath names="/CurrentSink/" tstamps="/5C977310/"/>
+      <tstamp>5D8CA461</tstamp>
+    </comp>
+    <comp ref="C3">
+      <value>C</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
+      <sheetpath names="/CurrentSink/" tstamps="/5C977310/"/>
+      <tstamp>5D8CA469</tstamp>
+    </comp>
+    <comp ref="R5">
+      <value>R</value>
+      <footprint>Resistor_SMD:R_0402_1005Metric</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <sheetpath names="/CurrentSink/" tstamps="/5C977310/"/>
+      <tstamp>5D8CA477</tstamp>
+    </comp>
+    <comp ref="R6">
+      <value>R</value>
+      <footprint>Resistor_SMD:R_0402_1005Metric</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <sheetpath names="/CurrentSink/" tstamps="/5C977310/"/>
+      <tstamp>5D8CA47E</tstamp>
+    </comp>
+    <comp ref="R24">
+      <value>R</value>
+      <footprint>Resistor_SMD:R_0805_2012Metric_Pad1.15x1.40mm_HandSolder</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <sheetpath names="/CurrentSink/" tstamps="/5C977310/"/>
+      <tstamp>5D3A74AC</tstamp>
+    </comp>
+    <comp ref="R21">
+      <value>R</value>
+      <footprint>Resistor_SMD:R_0805_2012Metric_Pad1.15x1.40mm_HandSolder</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <sheetpath names="/CurrentSink/" tstamps="/5C977310/"/>
+      <tstamp>5D3F550C</tstamp>
+    </comp>
+    <comp ref="JP5">
+      <value>BYPASS</value>
+      <footprint>Jumper:SolderJumper-2_P1.3mm_Open_Pad1.0x1.5mm</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="Jumper_NO_Small" description="Jumper, normally open, small symbol"/>
+      <sheetpath names="/CurrentSink/" tstamps="/5C977310/"/>
+      <tstamp>5D41CFB9</tstamp>
+    </comp>
+    <comp ref="JP6">
+      <value>BYPASS</value>
+      <footprint>Jumper:SolderJumper-2_P1.3mm_Open_Pad1.0x1.5mm</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="Jumper_NO_Small" description="Jumper, normally open, small symbol"/>
+      <sheetpath names="/CurrentSink/" tstamps="/5C977310/"/>
+      <tstamp>5D4EBEF2</tstamp>
+    </comp>
+    <comp ref="TP3">
+      <value>TestPoint</value>
+      <footprint>TestPoint:TestPoint_Pad_2.0x2.0mm</footprint>
+      <datasheet>https://cdn.harwin.com/pdfs/S2751R.pdf</datasheet>
+      <fields>
+        <field name="Mfr. No:">S2751-46R</field>
+        <field name="Mfr:">Harwin</field>
+        <field name="MouserNo">855-S2751-46R</field>
+      </fields>
+      <libsource lib="Connector" part="TestPoint" description="test point"/>
+      <sheetpath names="/CurrentSink/" tstamps="/5C977310/"/>
+      <tstamp>5D519E40</tstamp>
+    </comp>
+    <comp ref="TP4">
+      <value>TestPoint</value>
+      <footprint>TestPoint:TestPoint_Pad_2.0x2.0mm</footprint>
+      <datasheet>https://cdn.harwin.com/pdfs/S2751R.pdf</datasheet>
+      <fields>
+        <field name="MouserNo">855-S2751-46R</field>
+      </fields>
+      <libsource lib="Connector" part="TestPoint" description="test point"/>
+      <sheetpath names="/CurrentSink/" tstamps="/5C977310/"/>
+      <tstamp>5D530A17</tstamp>
+    </comp>
+    <comp ref="R22">
+      <value>R</value>
+      <footprint>Resistor_SMD:R_0402_1005Metric</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <sheetpath names="/CurrentSink/" tstamps="/5C977310/"/>
+      <tstamp>5D57B560</tstamp>
+    </comp>
+    <comp ref="R23">
+      <value>R</value>
+      <footprint>Resistor_SMD:R_0402_1005Metric</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <sheetpath names="/CurrentSink/" tstamps="/5C977310/"/>
+      <tstamp>5D5D70C5</tstamp>
+    </comp>
+    <comp ref="R20">
+      <value>R</value>
+      <footprint>Resistor_SMD:R_0402_1005Metric</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <sheetpath names="/CurrentSink/" tstamps="/5C977310/"/>
+      <tstamp>5D6400C0</tstamp>
+    </comp>
+    <comp ref="R19">
+      <value>R</value>
+      <footprint>Resistor_SMD:R_0402_1005Metric</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <sheetpath names="/CurrentSink/" tstamps="/5C977310/"/>
+      <tstamp>5D70B13E</tstamp>
+    </comp>
+    <comp ref="R17">
+      <value>R</value>
+      <footprint>Resistor_SMD:R_0402_1005Metric</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <sheetpath names="/CurrentSink/" tstamps="/5C977310/"/>
+      <tstamp>5D794500</tstamp>
+    </comp>
+    <comp ref="R18">
+      <value>R</value>
+      <footprint>Resistor_SMD:R_0402_1005Metric</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <sheetpath names="/CurrentSink/" tstamps="/5C977310/"/>
+      <tstamp>5D864E1A</tstamp>
+    </comp>
+    <comp ref="U3">
+      <value>ADA4638-1</value>
+      <footprint>Package_SO:SOIC-8_3.9x4.9mm_P1.27mm</footprint>
+      <datasheet>https://www.analog.com/media/en/technical-documentation/data-sheets/ADA4522-1_4522-2_4522-4.pdf</datasheet>
+      <fields>
+        <field name="MouserNo">584-ADA4638-1ARZ-R7</field>
+      </fields>
+      <libsource lib="Amplifier_Operational" part="TL071" description="Single Low-Noise JFET-Input Operational Amplifiers, DIP-8/SOIC-8"/>
+      <sheetpath names="/CurrentSink/" tstamps="/5C977310/"/>
+      <tstamp>5D907FC4</tstamp>
+    </comp>
+    <comp ref="C28">
+      <value>C</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
+      <sheetpath names="/CurrentSink/" tstamps="/5C977310/"/>
+      <tstamp>5D9CB6C7</tstamp>
+    </comp>
+    <comp ref="C27">
+      <value>C</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
+      <sheetpath names="/CurrentSink/" tstamps="/5C977310/"/>
+      <tstamp>5DB00183</tstamp>
+    </comp>
+    <comp ref="U4">
+      <value>ADA4638-1</value>
+      <footprint>Package_SO:SOIC-8_3.9x4.9mm_P1.27mm</footprint>
+      <datasheet>https://www.analog.com/media/en/technical-documentation/data-sheets/ADA4522-1_4522-2_4522-4.pdf</datasheet>
+      <fields>
+        <field name="MouserNo">584-ADA4638-1ARZ-R7</field>
+      </fields>
+      <libsource lib="Amplifier_Operational" part="TL071" description="Single Low-Noise JFET-Input Operational Amplifiers, DIP-8/SOIC-8"/>
+      <sheetpath names="/CurrentSink/" tstamps="/5C977310/"/>
+      <tstamp>5DBABA92</tstamp>
+    </comp>
+    <comp ref="C29">
+      <value>C</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
+      <sheetpath names="/CurrentSink/" tstamps="/5C977310/"/>
+      <tstamp>5DED5B62</tstamp>
+    </comp>
+    <comp ref="C30">
+      <value>C</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
+      <sheetpath names="/CurrentSink/" tstamps="/5C977310/"/>
+      <tstamp>5DFD1CA1</tstamp>
+    </comp>
+    <comp ref="U2">
+      <value>ADA4522-2</value>
+      <footprint>Package_SO:SOIC-8_3.9x4.9mm_P1.27mm</footprint>
+      <datasheet>https://www.analog.com/media/en/technical-documentation/data-sheets/ADA4522-1_4522-2_4522-4.pdf</datasheet>
+      <fields>
+        <field name="MouserNo">ADA4522-2ARZ-RL</field>
+      </fields>
+      <libsource lib="Amplifier_Operational" part="TL072" description="Dual Low-Noise JFET-Input Operational Amplifiers, DIP-8/SOIC-8"/>
+      <sheetpath names="/CurrentSink/" tstamps="/5C977310/"/>
+      <tstamp>5E1E06F5</tstamp>
+    </comp>
+    <comp ref="U1">
+      <value>ADA4522-2</value>
+      <footprint>Package_SO:SOIC-8_3.9x4.9mm_P1.27mm</footprint>
+      <datasheet>https://www.analog.com/media/en/technical-documentation/data-sheets/ADA4522-1_4522-2_4522-4.pdf</datasheet>
+      <fields>
+        <field name="MouserNo">ADA4522-2ARZ-RL</field>
+      </fields>
+      <libsource lib="Amplifier_Operational" part="TL072" description="Dual Low-Noise JFET-Input Operational Amplifiers, DIP-8/SOIC-8"/>
+      <sheetpath names="/CurrentSink/" tstamps="/5C977310/"/>
+      <tstamp>5E1E138A</tstamp>
+    </comp>
+    <comp ref="HS2">
+      <value>MOSFET Heatsink</value>
+      <footprint>FischerElectronikFanHeatsink:SK_68_75</footprint>
+      <datasheet>https://docs-emea.rs-online.com/webdocs/13eb/0900766b813eb963.pdf</datasheet>
+      <fields>
+        <field name="MouserNo">189-8527</field>
+      </fields>
+      <libsource lib="Mechanical" part="Heatsink" description="Heatsink"/>
+      <sheetpath names="/CurrentSink/" tstamps="/5C977310/"/>
+      <tstamp>5E42F0C5</tstamp>
+    </comp>
+    <comp ref="GND7">
+      <value>TestPoint</value>
+      <footprint>TestPoint:TestPoint_Pad_2.0x2.0mm</footprint>
+      <datasheet>https://cdn.harwin.com/pdfs/S2751R.pdf</datasheet>
+      <fields>
+        <field name="Mfr. No:">S2751-46R</field>
+        <field name="Mfr:">Harwin</field>
+        <field name="MouserNo">855-S2751-46R</field>
+      </fields>
+      <libsource lib="Connector" part="TestPoint" description="test point"/>
+      <sheetpath names="/CurrentSink/" tstamps="/5C977310/"/>
+      <tstamp>5D14E2F2</tstamp>
+    </comp>
+    <comp ref="GND8">
+      <value>TestPoint</value>
+      <footprint>TestPoint:TestPoint_Pad_2.0x2.0mm</footprint>
+      <datasheet>https://cdn.harwin.com/pdfs/S2751R.pdf</datasheet>
+      <fields>
+        <field name="Mfr. No:">S2751-46R</field>
+        <field name="Mfr:">Harwin</field>
+        <field name="MouserNo">855-S2751-46R</field>
+      </fields>
+      <libsource lib="Connector" part="TestPoint" description="test point"/>
+      <sheetpath names="/CurrentSink/" tstamps="/5C977310/"/>
+      <tstamp>5D14E2FD</tstamp>
+    </comp>
+    <comp ref="J1">
+      <value>Conn_01x03</value>
+      <footprint>Connector_PinHeader_2.54mm:PinHeader_1x03_P2.54mm_Vertical</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Connector_Generic" part="Conn_01x03" description="Generic connector, single row, 01x03, script generated (kicad-library-utils/schlib/autogen/connector/)"/>
+      <sheetpath names="/CurrentSink/" tstamps="/5C977310/"/>
+      <tstamp>5DA0F2DC</tstamp>
+    </comp>
+    <comp ref="GND10">
+      <value>TestPoint</value>
+      <footprint>TestPoint:TestPoint_Pad_2.0x2.0mm</footprint>
+      <datasheet>https://cdn.harwin.com/pdfs/S2751R.pdf</datasheet>
+      <fields>
+        <field name="Mfr. No:">S2751-46R</field>
+        <field name="Mfr:">Harwin</field>
+        <field name="MouserNo">855-S2751-46R</field>
+      </fields>
+      <libsource lib="Connector" part="TestPoint" description="test point"/>
+      <sheetpath names="/CurrentSink/" tstamps="/5C977310/"/>
+      <tstamp>5D2B8F5C</tstamp>
+    </comp>
+    <comp ref="GND11">
+      <value>TestPoint</value>
+      <footprint>TestPoint:TestPoint_Pad_2.0x2.0mm</footprint>
+      <datasheet>https://cdn.harwin.com/pdfs/S2751R.pdf</datasheet>
+      <fields>
+        <field name="Mfr. No:">S2751-46R</field>
+        <field name="Mfr:">Harwin</field>
+        <field name="MouserNo">855-S2751-46R</field>
+      </fields>
+      <libsource lib="Connector" part="TestPoint" description="test point"/>
+      <sheetpath names="/CurrentSink/" tstamps="/5C977310/"/>
+      <tstamp>5D2B8F67</tstamp>
+    </comp>
+    <comp ref="TP6">
+      <value>TestPoint</value>
+      <footprint>TestPoint:TestPoint_Pad_2.0x2.0mm</footprint>
+      <datasheet>https://cdn.harwin.com/pdfs/S2751R.pdf</datasheet>
+      <fields>
+        <field name="Mfr. No:">S2751-46R</field>
+        <field name="Mfr:">Harwin</field>
+        <field name="MouserNo">855-S2751-46R</field>
+      </fields>
+      <libsource lib="Connector" part="TestPoint" description="test point"/>
+      <sheetpath names="/CurrentSink/" tstamps="/5C977310/"/>
+      <tstamp>5D18C03F</tstamp>
+    </comp>
+    <comp ref="TP5">
+      <value>TestPoint</value>
+      <footprint>TestPoint:TestPoint_Pad_2.0x2.0mm</footprint>
+      <datasheet>https://cdn.harwin.com/pdfs/S2751R.pdf</datasheet>
+      <fields>
+        <field name="Mfr. No:">S2751-46R</field>
+        <field name="Mfr:">Harwin</field>
+        <field name="MouserNo">855-S2751-46R</field>
+      </fields>
+      <libsource lib="Connector" part="TestPoint" description="test point"/>
+      <sheetpath names="/CurrentSink/" tstamps="/5C977310/"/>
+      <tstamp>5D1A86A5</tstamp>
+    </comp>
+  </components>
+  <libparts>
+    <libpart lib="Amplifier_Instrumentation" part="AD620">
+      <aliases>
+        <alias>AD623</alias>
+      </aliases>
+      <description>Low Cost, Low Power, Instrumentation Amplifier, DIP-8/SOIC-8</description>
+      <docs>https://www.analog.com/media/en/technical-documentation/data-sheets/AD620.pdf</docs>
+      <footprints>
+        <fp>SOIC*P1.27mm*</fp>
+        <fp>DIP*W7.62mm*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">AD620</field>
+      </fields>
+      <pins>
+        <pin num="1" name="Rg" type="passive"/>
+        <pin num="2" name="-" type="input"/>
+        <pin num="3" name="+" type="input"/>
+        <pin num="4" name="Vs-" type="power_in"/>
+        <pin num="5" name="Ref" type="passive"/>
+        <pin num="6" name="~" type="output"/>
+        <pin num="7" name="Vs+" type="power_in"/>
+        <pin num="8" name="Rg" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="Amplifier_Operational" part="LM2904">
+      <aliases>
+        <alias>LM358</alias>
+        <alias>AD8620</alias>
+        <alias>LMC6062</alias>
+        <alias>LMC6082</alias>
+        <alias>TL062</alias>
+        <alias>TL072</alias>
+        <alias>TL082</alias>
+        <alias>NE5532</alias>
+        <alias>SA5532</alias>
+        <alias>RC4558</alias>
+        <alias>RC4560</alias>
+        <alias>RC4580</alias>
+        <alias>LMV358</alias>
+        <alias>TS912</alias>
+        <alias>TSV912IDT</alias>
+        <alias>TSV912IST</alias>
+        <alias>TLC272</alias>
+        <alias>TLC277</alias>
+        <alias>MCP602</alias>
+        <alias>OPA2134</alias>
+        <alias>OPA2340</alias>
+        <alias>OPA2376xxD</alias>
+        <alias>OPA2376xxDGK</alias>
+        <alias>MC33078</alias>
+        <alias>MC33178</alias>
+        <alias>LM4562</alias>
+        <alias>OP249</alias>
+        <alias>OP275</alias>
+        <alias>ADA4075-2</alias>
+        <alias>MCP6002-xP</alias>
+        <alias>MCP6002-xSN</alias>
+        <alias>MCP6002-xMS</alias>
+        <alias>LM7332</alias>
+        <alias>OPA2333xxD</alias>
+        <alias>OPA2333xxDGK</alias>
+        <alias>LMC6482</alias>
+        <alias>LT1492</alias>
+        <alias>LTC6081xMS8</alias>
+        <alias>LM6172</alias>
+        <alias>MCP6L92</alias>
+        <alias>NJM2043</alias>
+        <alias>NJM2114</alias>
+        <alias>NJM4556A</alias>
+        <alias>NJM4558</alias>
+        <alias>NJM4559</alias>
+        <alias>NJM4560</alias>
+        <alias>NJM4580</alias>
+        <alias>NJM5532</alias>
+        <alias>ADA4807-2ARM</alias>
+        <alias>OPA2691</alias>
+        <alias>LT6234</alias>
+        <alias>OPA2356xxD</alias>
+        <alias>OPA2356xxDGK</alias>
+        <alias>OPA1612AxD</alias>
+        <alias>MC33172</alias>
+        <alias>OPA1602</alias>
+        <alias>TLV2372</alias>
+        <alias>LT6237</alias>
+      </aliases>
+      <description>Dual Operational Amplifiers, DIP-8/SOIC-8/TSSOP-8/VSSOP-8</description>
+      <docs>http://www.ti.com/lit/ds/symlink/lm358.pdf</docs>
+      <footprints>
+        <fp>SOIC*3.9x4.9mm*P1.27mm*</fp>
+        <fp>DIP*W7.62mm*</fp>
+        <fp>TO*99*</fp>
+        <fp>OnSemi*Micro8*</fp>
+        <fp>TSSOP*3x3mm*P0.65mm*</fp>
+        <fp>TSSOP*4.4x3mm*P0.65mm*</fp>
+        <fp>MSOP*3x3mm*P0.65mm*</fp>
+        <fp>SSOP*3.9x4.9mm*P0.635mm*</fp>
+        <fp>LFCSP*2x2mm*P0.5mm*</fp>
+        <fp>*SIP*</fp>
+        <fp>SOIC*5.3x6.2mm*P1.27mm*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">LM2904</field>
+      </fields>
+      <pins>
+        <pin num="1" name="~" type="output"/>
+        <pin num="2" name="-" type="input"/>
+        <pin num="3" name="+" type="input"/>
+        <pin num="4" name="V-" type="power_in"/>
+        <pin num="5" name="+" type="input"/>
+        <pin num="6" name="-" type="input"/>
+        <pin num="7" name="~" type="output"/>
+        <pin num="8" name="V+" type="power_in"/>
+      </pins>
+    </libpart>
+    <libpart lib="Amplifier_Operational" part="LM741">
+      <aliases>
+        <alias>AD8610</alias>
+        <alias>LF155</alias>
+        <alias>LF156</alias>
+        <alias>LF256</alias>
+        <alias>LF257</alias>
+        <alias>LF355</alias>
+        <alias>LF356</alias>
+        <alias>LF357</alias>
+        <alias>TL081</alias>
+        <alias>TL061</alias>
+        <alias>TL071</alias>
+      </aliases>
+      <description>Operational Amplifier, DIP-8/TO-99-8</description>
+      <docs>http://www.ti.com/lit/ds/symlink/lm741.pdf</docs>
+      <footprints>
+        <fp>SOIC*3.9x4.9mm*P1.27mm*</fp>
+        <fp>DIP*W7.62mm*</fp>
+        <fp>TSSOP*3x3mm*P0.65mm*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">LM741</field>
+      </fields>
+      <pins>
+        <pin num="1" name="NULL" type="input"/>
+        <pin num="2" name="-" type="input"/>
+        <pin num="3" name="+" type="input"/>
+        <pin num="4" name="V-" type="power_in"/>
+        <pin num="5" name="NULL" type="input"/>
+        <pin num="6" name="~" type="output"/>
+        <pin num="7" name="V+" type="power_in"/>
+        <pin num="8" name="NC" type="NotConnected"/>
+      </pins>
+    </libpart>
+    <libpart lib="Connector" part="Conn_Coaxial">
+      <description>coaxial connector (BNC, SMA, SMB, SMC, Cinch/RCA, ...)</description>
+      <docs> ~</docs>
+      <footprints>
+        <fp>*BNC*</fp>
+        <fp>*SMA*</fp>
+        <fp>*SMB*</fp>
+        <fp>*SMC*</fp>
+        <fp>*Cinch*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">J</field>
+        <field name="Value">Conn_Coaxial</field>
+      </fields>
+      <pins>
+        <pin num="1" name="In" type="passive"/>
+        <pin num="2" name="Ext" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="Connector" part="TestPoint">
+      <description>test point</description>
+      <docs>~</docs>
+      <footprints>
+        <fp>Pin*</fp>
+        <fp>Test*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">TP</field>
+        <field name="Value">TestPoint</field>
+      </fields>
+      <pins>
+        <pin num="1" name="1" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="Connector_Generic" part="Conn_01x02">
+      <description>Generic connector, single row, 01x02, script generated (kicad-library-utils/schlib/autogen/connector/)</description>
+      <docs>~</docs>
+      <footprints>
+        <fp>Connector*:*_1x??_*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">J</field>
+        <field name="Value">Conn_01x02</field>
+      </fields>
+      <pins>
+        <pin num="1" name="Pin_1" type="passive"/>
+        <pin num="2" name="Pin_2" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="Connector_Generic" part="Conn_01x03">
+      <description>Generic connector, single row, 01x03, script generated (kicad-library-utils/schlib/autogen/connector/)</description>
+      <docs>~</docs>
+      <footprints>
+        <fp>Connector*:*_1x??_*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">J</field>
+        <field name="Value">Conn_01x03</field>
+      </fields>
+      <pins>
+        <pin num="1" name="Pin_1" type="passive"/>
+        <pin num="2" name="Pin_2" type="passive"/>
+        <pin num="3" name="Pin_3" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="Connector_Generic" part="Conn_01x04">
+      <description>Generic connector, single row, 01x04, script generated (kicad-library-utils/schlib/autogen/connector/)</description>
+      <docs>~</docs>
+      <footprints>
+        <fp>Connector*:*_1x??_*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">J</field>
+        <field name="Value">Conn_01x04</field>
+      </fields>
+      <pins>
+        <pin num="1" name="Pin_1" type="passive"/>
+        <pin num="2" name="Pin_2" type="passive"/>
+        <pin num="3" name="Pin_3" type="passive"/>
+        <pin num="4" name="Pin_4" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="Device" part="C">
+      <description>Unpolarized capacitor</description>
+      <docs>~</docs>
+      <footprints>
+        <fp>C_*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">C</field>
+        <field name="Value">C</field>
+      </fields>
+      <pins>
+        <pin num="1" name="~" type="passive"/>
+        <pin num="2" name="~" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="Device" part="D_Schottky">
+      <description>Schottky diode</description>
+      <docs>~</docs>
+      <footprints>
+        <fp>TO-???*</fp>
+        <fp>*_Diode_*</fp>
+        <fp>*SingleDiode*</fp>
+        <fp>D_*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">D</field>
+        <field name="Value">D_Schottky</field>
+      </fields>
+      <pins>
+        <pin num="1" name="K" type="passive"/>
+        <pin num="2" name="A" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="Device" part="D_Zener">
+      <description>Zener diode</description>
+      <docs>~</docs>
+      <footprints>
+        <fp>TO-???*</fp>
+        <fp>*_Diode_*</fp>
+        <fp>*SingleDiode*</fp>
+        <fp>D_*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">D</field>
+        <field name="Value">D_Zener</field>
+      </fields>
+      <pins>
+        <pin num="1" name="K" type="passive"/>
+        <pin num="2" name="A" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="Device" part="Jumper_NC_Small">
+      <description>Jumper, normally closed, small symbol</description>
+      <docs>~</docs>
+      <footprints>
+        <fp>SolderJumper*Bridged*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">JP</field>
+        <field name="Value">Jumper_NC_Small</field>
+      </fields>
+      <pins>
+        <pin num="1" name="1" type="passive"/>
+        <pin num="2" name="2" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="Device" part="Jumper_NO_Small">
+      <description>Jumper, normally open, small symbol</description>
+      <docs>~</docs>
+      <footprints>
+        <fp>SolderJumper*Open*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">JP</field>
+        <field name="Value">Jumper_NO_Small</field>
+      </fields>
+      <pins>
+        <pin num="1" name="1" type="passive"/>
+        <pin num="2" name="2" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="Device" part="R">
+      <description>Resistor</description>
+      <docs>~</docs>
+      <footprints>
+        <fp>R_*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">R</field>
+        <field name="Value">R</field>
+      </fields>
+      <pins>
+        <pin num="1" name="~" type="passive"/>
+        <pin num="2" name="~" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="Mechanical" part="Heatsink">
+      <description>Heatsink</description>
+      <docs>~</docs>
+      <footprints>
+        <fp>Heatsink:*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">HS</field>
+        <field name="Value">Heatsink</field>
+      </fields>
+    </libpart>
+    <libpart lib="Transistor_FET" part="BUZ11">
+      <aliases>
+        <alias>IRF3205</alias>
+        <alias>IRF540N</alias>
+        <alias>IRF740</alias>
+        <alias>IRLB8721PBF</alias>
+        <alias>IRLZ34N</alias>
+        <alias>IRLZ44N</alias>
+      </aliases>
+      <description>30A Id, 50V Vds, N-Channel Power MOSFET, TO-220</description>
+      <docs>http://www.fairchildsemi.com/ds/BU/BUZ11.pdf</docs>
+      <footprints>
+        <fp>TO?220*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">Q</field>
+        <field name="Value">BUZ11</field>
+        <field name="Footprint">Package_TO_SOT_THT:TO-220-3_Vertical</field>
+      </fields>
+      <pins>
+        <pin num="1" name="G" type="input"/>
+        <pin num="2" name="D" type="passive"/>
+        <pin num="3" name="S" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="Transistor_FET" part="IRF9540N">
+      <aliases>
+        <alias>IRF4905</alias>
+      </aliases>
+      <description>-23A Id, -100V Vds, HEXFET P-Channel MOSFET, TO-220</description>
+      <docs>http://www.irf.com/product-info/datasheets/data/irf9540n.pdf</docs>
+      <footprints>
+        <fp>TO?220*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">Q</field>
+        <field name="Value">IRF9540N</field>
+        <field name="Footprint">Package_TO_SOT_THT:TO-220-3_Vertical</field>
+      </fields>
+      <pins>
+        <pin num="1" name="G" type="input"/>
+        <pin num="2" name="D" type="passive"/>
+        <pin num="3" name="S" type="passive"/>
+      </pins>
+    </libpart>
+  </libparts>
+  <libraries>
+    <library logical="Amplifier_Instrumentation">
+      <uri>/Library/Application Support/kicad/library/Amplifier_Instrumentation.lib</uri>
+    </library>
+    <library logical="Amplifier_Operational">
+      <uri>/Library/Application Support/kicad/library/Amplifier_Operational.lib</uri>
+    </library>
+    <library logical="Connector">
+      <uri>/Library/Application Support/kicad/library/Connector.lib</uri>
+    </library>
+    <library logical="Connector_Generic">
+      <uri>/Library/Application Support/kicad/library/Connector_Generic.lib</uri>
+    </library>
+    <library logical="Device">
+      <uri>/Library/Application Support/kicad/library/Device.lib</uri>
+    </library>
+    <library logical="Mechanical">
+      <uri>/Library/Application Support/kicad/library/Mechanical.lib</uri>
+    </library>
+    <library logical="Transistor_FET">
+      <uri>/Library/Application Support/kicad/library/Transistor_FET.lib</uri>
+    </library>
+  </libraries>
+  <nets>
+    <net code="1" name="/CurrentSink/ADCSIG2">
+      <node ref="U4" pin="6"/>
+      <node ref="R16" pin="2"/>
+      <node ref="JADC2" pin="1"/>
+      <node ref="TP14" pin="1"/>
+      <node ref="D4" pin="1"/>
+    </net>
+    <net code="2" name="/CurrentSink/ADCSIG1">
+      <node ref="D3" pin="1"/>
+      <node ref="TP13" pin="1"/>
+      <node ref="JADC1" pin="1"/>
+      <node ref="R23" pin="1"/>
+      <node ref="U3" pin="6"/>
+    </net>
+    <net code="3" name="/CurrentSink/DACSIG1">
+      <node ref="TP4" pin="1"/>
+      <node ref="R2" pin="2"/>
+      <node ref="JDAC1" pin="1"/>
+    </net>
+    <net code="4" name="/CurrentSink/DACSIG2">
+      <node ref="JDAC2" pin="1"/>
+      <node ref="TP3" pin="1"/>
+      <node ref="R1" pin="2"/>
+    </net>
+    <net code="5" name="/CurrentSink/DUT_POS">
+      <node ref="J_DUT1" pin="1"/>
+      <node ref="Q_POSMOS1" pin="2"/>
+    </net>
+    <net code="6" name="/CurrentSink/DUT_NEG">
+      <node ref="J_DUT1" pin="4"/>
+      <node ref="Q_NEGMOS1" pin="2"/>
+    </net>
+    <net code="7" name="+12V">
+      <node ref="U2" pin="8"/>
+      <node ref="D1" pin="1"/>
+      <node ref="U1" pin="8"/>
+      <node ref="U3" pin="7"/>
+      <node ref="U_NEGIA1" pin="7"/>
+      <node ref="TP2" pin="1"/>
+      <node ref="C29" pin="1"/>
+      <node ref="U4" pin="7"/>
+      <node ref="C27" pin="1"/>
+      <node ref="U_POSIA1" pin="7"/>
+      <node ref="JFAN1" pin="1"/>
+      <node ref="C19" pin="2"/>
+      <node ref="C7" pin="1"/>
+      <node ref="C23" pin="1"/>
+      <node ref="C5" pin="1"/>
+      <node ref="C11" pin="1"/>
+      <node ref="C21" pin="2"/>
+      <node ref="C9" pin="1"/>
+      <node ref="C25" pin="1"/>
+    </net>
+    <net code="8" name="Net-(D2-Pad1)">
+      <node ref="JPWR1" pin="3"/>
+      <node ref="D2" pin="1"/>
+    </net>
+    <net code="9" name="Net-(D1-Pad2)">
+      <node ref="JPWR1" pin="1"/>
+      <node ref="D1" pin="2"/>
+    </net>
+    <net code="10" name="-12V">
+      <node ref="C12" pin="1"/>
+      <node ref="C10" pin="1"/>
+      <node ref="U2" pin="4"/>
+      <node ref="C6" pin="1"/>
+      <node ref="C26" pin="1"/>
+      <node ref="U_NEGIA1" pin="4"/>
+      <node ref="C22" pin="2"/>
+      <node ref="C8" pin="1"/>
+      <node ref="U3" pin="4"/>
+      <node ref="U1" pin="4"/>
+      <node ref="C30" pin="1"/>
+      <node ref="U4" pin="4"/>
+      <node ref="TP1" pin="1"/>
+      <node ref="D2" pin="2"/>
+      <node ref="U_POSIA1" pin="4"/>
+      <node ref="C20" pin="2"/>
+      <node ref="C24" pin="1"/>
+      <node ref="C28" pin="1"/>
+    </net>
+    <net code="11" name="Net-(JDAC1-Pad2)">
+      <node ref="JP1" pin="1"/>
+      <node ref="JDAC1" pin="2"/>
+    </net>
+    <net code="12" name="Net-(JDAC2-Pad2)">
+      <node ref="JP2" pin="1"/>
+      <node ref="JDAC2" pin="2"/>
+    </net>
+    <net code="13" name="GNDS">
+      <node ref="GND11" pin="1"/>
+      <node ref="C14" pin="2"/>
+      <node ref="GND10" pin="1"/>
+      <node ref="C16" pin="2"/>
+      <node ref="R8" pin="1"/>
+      <node ref="R9" pin="2"/>
+      <node ref="C13" pin="2"/>
+      <node ref="GND8" pin="1"/>
+      <node ref="GND7" pin="1"/>
+      <node ref="C15" pin="2"/>
+      <node ref="C1" pin="2"/>
+      <node ref="U_POSIA1" pin="5"/>
+      <node ref="J_DUT1" pin="2"/>
+      <node ref="R6" pin="1"/>
+      <node ref="J_DUT1" pin="3"/>
+      <node ref="C30" pin="2"/>
+      <node ref="R15" pin="1"/>
+      <node ref="JFAN1" pin="2"/>
+      <node ref="R11" pin="2"/>
+      <node ref="C29" pin="2"/>
+      <node ref="R_SHUNTNEG1" pin="2"/>
+      <node ref="JPWR1" pin="2"/>
+      <node ref="R_SHUNTPOS1" pin="2"/>
+      <node ref="U_NEGIA1" pin="5"/>
+      <node ref="R22" pin="2"/>
+      <node ref="JP1" pin="2"/>
+      <node ref="C24" pin="2"/>
+      <node ref="C20" pin="1"/>
+      <node ref="JP2" pin="2"/>
+      <node ref="C27" pin="2"/>
+      <node ref="C19" pin="1"/>
+      <node ref="D4" pin="2"/>
+      <node ref="C23" pin="2"/>
+      <node ref="D3" pin="2"/>
+      <node ref="GND1" pin="1"/>
+      <node ref="GND2" pin="1"/>
+      <node ref="GND3" pin="1"/>
+      <node ref="GND4" pin="1"/>
+      <node ref="GND5" pin="1"/>
+      <node ref="GND6" pin="1"/>
+      <node ref="JP3" pin="1"/>
+      <node ref="C2" pin="2"/>
+      <node ref="C28" pin="2"/>
+      <node ref="C25" pin="2"/>
+      <node ref="C21" pin="1"/>
+      <node ref="JP4" pin="1"/>
+      <node ref="GND9" pin="1"/>
+      <node ref="C22" pin="1"/>
+      <node ref="C26" pin="2"/>
+      <node ref="C10" pin="2"/>
+      <node ref="C12" pin="2"/>
+      <node ref="C6" pin="2"/>
+      <node ref="C8" pin="2"/>
+      <node ref="C9" pin="2"/>
+      <node ref="C11" pin="2"/>
+      <node ref="C5" pin="2"/>
+      <node ref="C7" pin="2"/>
+    </net>
+    <net code="14" name="Net-(JADC1-Pad2)">
+      <node ref="JP3" pin="2"/>
+      <node ref="JADC1" pin="2"/>
+    </net>
+    <net code="15" name="Net-(JADC2-Pad2)">
+      <node ref="JP4" pin="2"/>
+      <node ref="JADC2" pin="2"/>
+    </net>
+    <net code="16" name="Net-(U_NEGIA1-Pad1)">
+      <node ref="U_NEGIA1" pin="1"/>
+    </net>
+    <net code="17" name="Net-(U_NEGIA1-Pad8)">
+      <node ref="U_NEGIA1" pin="8"/>
+    </net>
+    <net code="18" name="Net-(U_POSIA1-Pad1)">
+      <node ref="U_POSIA1" pin="1"/>
+    </net>
+    <net code="19" name="Net-(U_POSIA1-Pad8)">
+      <node ref="U_POSIA1" pin="8"/>
+    </net>
+    <net code="20" name="Net-(C16-Pad1)">
+      <node ref="R11" pin="1"/>
+      <node ref="TP9" pin="1"/>
+      <node ref="U_NEGIA1" pin="2"/>
+      <node ref="C18" pin="1"/>
+      <node ref="C16" pin="1"/>
+    </net>
+    <net code="21" name="Net-(C14-Pad1)">
+      <node ref="U_NEGIA1" pin="3"/>
+      <node ref="TP10" pin="1"/>
+      <node ref="C14" pin="1"/>
+      <node ref="R12" pin="2"/>
+      <node ref="C18" pin="2"/>
+    </net>
+    <net code="22" name="Net-(C15-Pad1)">
+      <node ref="C15" pin="1"/>
+      <node ref="U_POSIA1" pin="2"/>
+      <node ref="TP7" pin="1"/>
+      <node ref="C17" pin="1"/>
+      <node ref="R9" pin="1"/>
+    </net>
+    <net code="23" name="Net-(C13-Pad1)">
+      <node ref="C17" pin="2"/>
+      <node ref="U_POSIA1" pin="3"/>
+      <node ref="TP8" pin="1"/>
+      <node ref="C13" pin="1"/>
+      <node ref="R10" pin="2"/>
+    </net>
+    <net code="24" name="Net-(C4-Pad1)">
+      <node ref="U2" pin="1"/>
+      <node ref="JP6" pin="2"/>
+      <node ref="C4" pin="1"/>
+      <node ref="J2" pin="1"/>
+      <node ref="R7" pin="2"/>
+    </net>
+    <net code="25" name="Net-(J2-Pad2)">
+      <node ref="U2" pin="5"/>
+      <node ref="J2" pin="2"/>
+    </net>
+    <net code="26" name="Net-(J2-Pad3)">
+      <node ref="J2" pin="3"/>
+    </net>
+    <net code="27" name="Net-(J1-Pad3)">
+      <node ref="J1" pin="3"/>
+    </net>
+    <net code="28" name="Net-(R14-Pad2)">
+      <node ref="U_POSIA1" pin="6"/>
+      <node ref="R14" pin="2"/>
+      <node ref="TP11" pin="1"/>
+    </net>
+    <net code="29" name="Net-(R14-Pad1)">
+      <node ref="R15" pin="2"/>
+      <node ref="U3" pin="3"/>
+      <node ref="R14" pin="1"/>
+    </net>
+    <net code="30" name="Net-(R13-Pad2)">
+      <node ref="U_NEGIA1" pin="6"/>
+      <node ref="TP12" pin="1"/>
+      <node ref="R13" pin="2"/>
+    </net>
+    <net code="31" name="Net-(R13-Pad1)">
+      <node ref="R16" pin="1"/>
+      <node ref="R13" pin="1"/>
+      <node ref="U4" pin="2"/>
+    </net>
+    <net code="32" name="Net-(J1-Pad2)">
+      <node ref="U1" pin="6"/>
+      <node ref="J1" pin="2"/>
+    </net>
+    <net code="33" name="Net-(JP6-Pad1)">
+      <node ref="U2" pin="3"/>
+      <node ref="R18" pin="2"/>
+      <node ref="R4" pin="1"/>
+      <node ref="JP6" pin="1"/>
+    </net>
+    <net code="34" name="Net-(C4-Pad2)">
+      <node ref="R4" pin="2"/>
+      <node ref="R2" pin="1"/>
+      <node ref="C4" pin="2"/>
+    </net>
+    <net code="35" name="Net-(R20-Pad1)">
+      <node ref="R20" pin="1"/>
+      <node ref="R7" pin="1"/>
+      <node ref="R8" pin="2"/>
+    </net>
+    <net code="36" name="Net-(C3-Pad2)">
+      <node ref="C3" pin="2"/>
+      <node ref="R3" pin="2"/>
+      <node ref="R1" pin="1"/>
+    </net>
+    <net code="37" name="Net-(Q_POSMOS1-Pad3)">
+      <node ref="R10" pin="1"/>
+      <node ref="R24" pin="1"/>
+      <node ref="Q_POSMOS1" pin="3"/>
+      <node ref="R_SHUNTPOS1" pin="1"/>
+    </net>
+    <net code="38" name="Net-(R24-Pad2)">
+      <node ref="U2" pin="6"/>
+      <node ref="R24" pin="2"/>
+    </net>
+    <net code="39" name="Net-(Q_NEGMOS1-Pad3)">
+      <node ref="R_SHUNTNEG1" pin="1"/>
+      <node ref="Q_NEGMOS1" pin="3"/>
+      <node ref="R12" pin="1"/>
+      <node ref="R21" pin="1"/>
+    </net>
+    <net code="40" name="Net-(R21-Pad2)">
+      <node ref="U1" pin="5"/>
+      <node ref="R21" pin="2"/>
+    </net>
+    <net code="41" name="Net-(C3-Pad1)">
+      <node ref="U1" pin="1"/>
+      <node ref="J1" pin="1"/>
+      <node ref="JP5" pin="2"/>
+      <node ref="R5" pin="2"/>
+      <node ref="C3" pin="1"/>
+    </net>
+    <net code="42" name="Net-(R23-Pad2)">
+      <node ref="U3" pin="2"/>
+      <node ref="R23" pin="2"/>
+    </net>
+    <net code="43" name="Net-(R20-Pad2)">
+      <node ref="U2" pin="2"/>
+      <node ref="R20" pin="2"/>
+    </net>
+    <net code="44" name="Net-(R19-Pad1)">
+      <node ref="R5" pin="1"/>
+      <node ref="R6" pin="2"/>
+      <node ref="R19" pin="1"/>
+    </net>
+    <net code="45" name="Net-(R19-Pad2)">
+      <node ref="U1" pin="2"/>
+      <node ref="R19" pin="2"/>
+    </net>
+    <net code="46" name="Net-(C1-Pad1)">
+      <node ref="C1" pin="1"/>
+      <node ref="R17" pin="1"/>
+    </net>
+    <net code="47" name="Net-(JP5-Pad1)">
+      <node ref="R17" pin="2"/>
+      <node ref="JP5" pin="1"/>
+      <node ref="U1" pin="3"/>
+      <node ref="R3" pin="1"/>
+    </net>
+    <net code="48" name="Net-(C2-Pad1)">
+      <node ref="R18" pin="1"/>
+      <node ref="C2" pin="1"/>
+    </net>
+    <net code="49" name="Net-(U3-Pad1)">
+      <node ref="U3" pin="1"/>
+    </net>
+    <net code="50" name="Net-(U3-Pad5)">
+      <node ref="U3" pin="5"/>
+    </net>
+    <net code="51" name="Net-(U3-Pad8)">
+      <node ref="U3" pin="8"/>
+    </net>
+    <net code="52" name="Net-(U4-Pad1)">
+      <node ref="U4" pin="1"/>
+    </net>
+    <net code="53" name="Net-(R22-Pad1)">
+      <node ref="R22" pin="1"/>
+      <node ref="U4" pin="3"/>
+    </net>
+    <net code="54" name="Net-(U4-Pad5)">
+      <node ref="U4" pin="5"/>
+    </net>
+    <net code="55" name="Net-(U4-Pad8)">
+      <node ref="U4" pin="8"/>
+    </net>
+    <net code="56" name="Net-(Q_POSMOS1-Pad1)">
+      <node ref="Q_POSMOS1" pin="1"/>
+      <node ref="U2" pin="7"/>
+      <node ref="TP6" pin="1"/>
+    </net>
+    <net code="57" name="Net-(Q_NEGMOS1-Pad1)">
+      <node ref="Q_NEGMOS1" pin="1"/>
+      <node ref="U1" pin="7"/>
+      <node ref="TP5" pin="1"/>
+    </net>
+  </nets>
+</export>

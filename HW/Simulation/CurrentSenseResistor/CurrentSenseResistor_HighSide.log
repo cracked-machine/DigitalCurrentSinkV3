@@ -1,0 +1,135 @@
+Circuit: * F:\CIRCUITS\DIGITALCURRENTSINKV2\HW\SIMULATION\CURRENTSENSERESISTOR\CurrentSenseResistor_HighSide.ASC
+
+Direct Newton iteration failed to find .op point.  (Use ".option noopiter" to skip.)
+Starting Gmin stepping
+Gmin = 10
+Gmin = 1.07374
+vernier = 0.5
+vernier = 0.25
+vernier = 0.125
+Gmin = 1.02291
+vernier = 0.0625
+vernier = 0.03125
+vernier = 0.015625
+vernier = 0.0078125
+Gmin = 1.03252
+vernier = 0.00390625
+vernier = 0.00195313
+vernier = 0.00260417
+Gmin = 1.02733
+vernier = 0.00347222
+vernier = 0.00173611
+vernier = 0.000868055
+Gmin = 1.02355
+vernier = 0.00115741
+vernier = 0.00154321
+Gmin = 1.02071
+vernier = 0.000771604
+vernier = 0.000578703
+Gmin = 1.01919
+vernier = 0.000771604
+vernier = 0.00102881
+vernier = 0.000514403
+Gmin = 0
+Gmin stepping failed
+
+Starting source stepping with srcstepmethod=0
+Source Step = 3.0303%
+Source Step = 23.4848%
+Source Step = 29.1667%
+Source Step = 30.7292%
+Source Step = 31.2027%
+Source Step = 31.5578%
+Source Step = 31.6761%
+Source Step = 31.7945%
+Source Step = 31.9129%
+Source Step = 32.0313%
+vernier = 0.00585938
+Source Step = 32.1555%
+Source Step = 32.3331%
+Source Step = 32.5107%
+Source Step = 32.6882%
+Source Step = 32.8658%
+Source Step = 33.0433%
+vernier = 0.00878906
+Source Step = 33.3097%
+Source Step = 33.576%
+Source Step = 33.8423%
+Source Step = 34.1087%
+Source Step = 34.375%
+vernier = 0.0131836
+Source Step = 34.7612%
+Source Step = 35.1607%
+Source Step = 35.5602%
+Source Step = 35.9597%
+Source Step = 36.3592%
+vernier = 0.0197754
+Source Step = 36.9185%
+Source Step = 37.5178%
+Source Step = 38.117%
+Source Step = 38.7163%
+Source Step = 39.3155%
+vernier = 0.0296631
+Source Step = 40.1245%
+Source Step = 41.0234%
+Source Step = 41.9223%
+Source Step = 42.8212%
+Source Step = 43.72%
+vernier = 0.0444946
+Source Step = 44.8886%
+Source Step = 46.2369%
+Source Step = 47.5852%
+Source Step = 48.9335%
+Source Step = 50.2819%
+vernier = 0.0667419
+Source Step = 51.9673%
+Source Step = 53.9898%
+Source Step = 56.0122%
+Source Step = 58.0347%
+Source Step = 60.0572%
+vernier = 0.100113
+Source Step = 62.4842%
+Source Step = 65.5179%
+Source Step = 68.5516%
+Source Step = 71.5854%
+Source Step = 74.6191%
+vernier = 0.150169
+Source Step = 78.1079%
+Source Step = 82.6585%
+Source Step = 87.209%
+Source Step = 91.7596%
+Source Step = 96.3102%
+vernier = 0.225254
+Source stepping succeeded in finding the operating point.
+
+.step vin=0
+.step vin=0.5
+.step vin=1
+.step vin=1.5
+.step vin=2
+.step vin=2.5
+.step vin=3
+.step vin=3.5
+.step vin=4
+.step vin=4.5
+.step vin=5
+
+
+
+Date: Fri Jun 28 03:19:06 2019
+Total elapsed time: 28.628 seconds.
+
+tnom = 27
+temp = 27
+method = modified trap
+totiter = 8952
+traniter = 2088
+tranpoints = 1045
+accept = 1045
+rejected = 0
+matrix size = 269
+fillins = 559
+solver = Normal
+Matrix Compiler1: 26.73 KB object code size  8.3/4.0/[1.6]
+Matrix Compiler2: 29.92 KB object code size  4.7/7.4/[2.2]
+

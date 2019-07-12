@@ -1,0 +1,84 @@
+Circuit: * F:\CIRCUITS\DIGITALCURRENTSINKV2\HW\SIMULATION\LTC2058\SECONDORDERSK_LOWPASS\SecondOrderSK_LowPass.asc
+
+Direct Newton iteration failed to find .op point.  (Use ".option noopiter" to skip.)
+Starting Gmin stepping
+Gmin = 10
+Gmin = 1.07374
+Gmin = 0.115292
+Gmin = 0.0123794
+Gmin = 0.00132923
+Gmin = 0.000142725
+Gmin = 1.5325e-005
+Gmin = 1.6455e-006
+Gmin = 1.76685e-007
+vernier = 0.5
+vernier = 0.25
+vernier = 0.125
+Gmin = 8.04112e-008
+vernier = 0.0625
+vernier = 0.03125
+vernier = 0.015625
+vernier = 0.0078125
+vernier = 0.00390625
+Gmin = 8.04112e-008
+vernier = 0.00195313
+vernier = 0.00260417
+Gmin = 8.00326e-008
+vernier = 0.00347222
+Gmin = 7.94101e-008
+vernier = 0.00462963
+vernier = 0.00617283
+Gmin = 7.83759e-008
+vernier = 0.00823044
+vernier = 0.0109739
+Gmin = 7.67551e-008
+vernier = 0.0146319
+Gmin = 7.42734e-008
+vernier = 0.0195092
+vernier = 0.0260122
+Gmin = 7.02902e-008
+vernier = 0.034683
+vernier = 0.046244
+Gmin = 6.43849e-008
+vernier = 0.0616586
+Gmin = 5.6099e-008
+vernier = 0.0822114
+vernier = 0.109615
+Gmin = 4.45633e-008
+vernier = 0.146154
+vernier = 0.194871
+Gmin = 3.09503e-008
+vernier = 0.259828
+Gmin = 1.75403e-008
+vernier = 0.346438
+vernier = 0.461917
+Gmin = 6.88258e-009
+vernier = 0.615889
+vernier = 0.821185
+Gmin = 1.61238e-009
+vernier = 1
+Gmin = 2.00278e-010
+Gmin = 2.15047e-011
+Gmin = 2.30905e-012
+Gmin = 2.47932e-013
+Gmin = 0
+Gmin stepping succeeded in finding the operating point.
+
+
+Date: Wed Jun 26 11:46:09 2019
+Total elapsed time: 0.048 seconds.
+
+tnom = 27
+temp = 27
+method = trap
+totiter = 1713
+traniter = 0
+tranpoints = 0
+accept = 0
+rejected = 0
+matrix size = 30
+fillins = 23
+solver = Normal
+Matrix Compiler1:     127 opcodes
+Matrix Compiler2: off  [0.3]/0.4/0.5
+

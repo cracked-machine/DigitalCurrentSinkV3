@@ -1,0 +1,126 @@
+Circuit: * F:\CIRCUITS\DIGITALCURRENTSINKV2\HW\SIMULATION\LTC2058\DIFFERENTIALUNITYGAIN\DifferentialUnityGain.asc
+
+Direct Newton iteration failed to find .op point.  (Use ".option noopiter" to skip.)
+Starting Gmin stepping
+Gmin = 10
+Gmin = 1.07374
+Gmin = 0.115292
+Gmin = 0.0123794
+Gmin = 0.00132923
+Gmin = 0.000142725
+Gmin = 1.5325e-005
+Gmin = 1.6455e-006
+Gmin = 1.76685e-007
+vernier = 0.5
+vernier = 0.25
+vernier = 0.125
+Gmin = 9.46014e-008
+vernier = 0.0625
+vernier = 0.03125
+vernier = 0.015625
+vernier = 0.0078125
+vernier = 0.00390625
+vernier = 0.00195313
+vernier = 0.000976563
+vernier = 0.000488281
+Gmin = 9.45783e-008
+vernier = 0.000651042
+vernier = 0.000868055
+Gmin = 9.44309e-008
+vernier = 0.00115741
+Gmin = 9.41921e-008
+vernier = 0.00154321
+vernier = 0.00205761
+Gmin = 9.38024e-008
+vernier = 0.00274348
+vernier = 0.00365797
+Gmin = 9.31881e-008
+vernier = 0.0048773
+Gmin = 9.21996e-008
+vernier = 0.00650306
+vernier = 0.00867074
+Gmin = 9.06037e-008
+vernier = 0.011561
+vernier = 0.0154146
+Gmin = 8.81321e-008
+vernier = 0.0205529
+Gmin = 8.42661e-008
+vernier = 0.0274038
+vernier = 0.0365384
+Gmin = 7.83049e-008
+vernier = 0.0487178
+vernier = 0.0649571
+Gmin = 6.97269e-008
+vernier = 0.0866095
+Gmin = 5.77969e-008
+vernier = 0.115479
+vernier = 0.153972
+Gmin = 4.25822e-008
+vernier = 0.205296
+vernier = 0.273728
+Gmin = 2.63543e-008
+vernier = 0.364971
+Gmin = 1.22323e-008
+vernier = 0.486628
+vernier = 0.648837
+Gmin = 3.5857e-009
+vernier = 0.865116
+vernier = 1
+Gmin = 5.64433e-010
+Gmin = 6.06055e-011
+Gmin = 6.50746e-012
+Gmin = 6.98734e-013
+Gmin = 0
+Gmin stepping succeeded in finding the operating point.
+
+.step vsin=-3.3
+.step vsin=-3.2
+.step vsin=-3.1
+.step vsin=-3
+.step vsin=-2.9
+.step vsin=-2.8
+.step vsin=-2.7
+.step vsin=-2.6
+.step vsin=-2.5
+.step vsin=-2.4
+.step vsin=-2.3
+.step vsin=-2.2
+.step vsin=-2.1
+.step vsin=-2
+.step vsin=-1.9
+.step vsin=-1.8
+.step vsin=-1.7
+.step vsin=-1.6
+.step vsin=-1.5
+.step vsin=-1.4
+.step vsin=-1.3
+.step vsin=-1.2
+.step vsin=-1.1
+.step vsin=-1
+.step vsin=-0.9
+.step vsin=-0.8
+.step vsin=-0.7
+.step vsin=-0.6
+.step vsin=-0.5
+.step vsin=-0.4
+.step vsin=-0.3
+.step vsin=-0.2
+.step vsin=-0.1
+
+Date: Fri Jun 28 01:15:08 2019
+Total elapsed time: 1.084 seconds.
+
+tnom = 27
+temp = 27
+method = trap
+totiter = 1263
+traniter = 0
+tranpoints = 0
+accept = 0
+rejected = 0
+matrix size = 31
+fillins = 18
+solver = Normal
+Matrix Compiler1:     113 opcodes
+Matrix Compiler2: off  [0.3]/0.5/0.5
+

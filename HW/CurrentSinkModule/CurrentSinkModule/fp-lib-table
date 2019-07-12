@@ -1,0 +1,7 @@
+(fp_lib_table
+  (lib (name FischerElectronikFanHeatsink)(type KiCad)(uri ${KIPRJMOD}/lib/FischerElectronikFanHeatsink.pretty)(options "")(descr ""))
+  (lib (name 1458G4_OUTLINE)(type KiCad)(uri ${KIPRJMOD}/lib/1458G4_OUTLINE.pretty)(options "")(descr ""))
+  (lib (name DG141xEEN)(type KiCad)(uri ${KIPRJMOD}/lib/DG141xEEN.pretty)(options "")(descr ""))
+  (lib (name AlumHousedResistors)(type KiCad)(uri ${KIPRJMOD}/lib/AlumHousedResistors.pretty)(options "")(descr ""))
+  (lib (name Wurth_WP_THRBU_REDCUBE_TH)(type KiCad)(uri ${KIPRJMOD}/lib/Wurth_WP_THRBU_REDCUBE_TH.pretty)(options "")(descr ""))
+)

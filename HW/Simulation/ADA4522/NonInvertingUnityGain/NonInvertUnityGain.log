@@ -1,0 +1,88 @@
+Circuit: * F:\CIRCUITS\DIGITALCURRENTSINKV2\HW\SIMULATION\ADA4522\NONINVERTINGUNITYGAIN\NonInvertUnityGain.asc
+
+Direct Newton iteration failed to find .op point.  (Use ".option noopiter" to skip.)
+Starting Gmin stepping
+Gmin = 10
+Gmin = 1.07374
+vernier = 0.5
+vernier = 0.25
+vernier = 0.125
+vernier = 0.0625
+Gmin = 1.08884
+vernier = 0.03125
+vernier = 0.015625
+Gmin = 1.03122
+vernier = 0.0078125
+vernier = 0.0104167
+vernier = 0.00520833
+Gmin = 1.01988
+vernier = 0.00260417
+vernier = 0.00347222
+Gmin = 1.01305
+vernier = 0.00173611
+vernier = 0.00231481
+vernier = 0.00115741
+Gmin = 1.01085
+vernier = 0.00154321
+vernier = 0.000771604
+Gmin = 1.00871
+vernier = 0.00102881
+vernier = 0.000514403
+Gmin = 1.00715
+vernier = 0.00068587
+vernier = 0.000514403
+Gmin = 1.0059
+vernier = 0.00068587
+vernier = 0.000514402
+Gmin = 0
+Gmin stepping failed
+
+Starting source stepping with srcstepmethod=0
+Source Step = 3.0303%
+vernier = 0.25
+Source Step = 1.70455%
+Source Step = 3.59848%
+Source Step = 5.49242%
+Source Step = 7.38636%
+Source Step = 9.2803%
+vernier = 0.09375
+Source Step = 11.9318%
+Source Step = 14.7727%
+Source Step = 17.6136%
+Source Step = 20.4545%
+Source Step = 23.2955%
+vernier = 0.140625
+Source Step = 27.1307%
+Source Step = 31.392%
+Source Step = 35.6534%
+Source Step = 39.9148%
+Source Step = 44.1761%
+vernier = 0.210938
+Source Step = 49.7159%
+Source Step = 56.108%
+Source Step = 62.5%
+Source Step = 68.892%
+Source Step = 75.2841%
+vernier = 0.316406
+Source Step = 83.2741%
+Source Step = 92.8622%
+Source stepping succeeded in finding the operating point.
+
+
+Date: Sun Jun 23 00:13:11 2019
+Total elapsed time: 0.125 seconds.
+
+tnom = 27
+temp = 27
+method = trap
+totiter = 7305
+traniter = 0
+tranpoints = 0
+accept = 0
+rejected = 0
+matrix size = 22
+fillins = 17
+solver = Normal
+Matrix Compiler1:      96 opcodes
+Matrix Compiler2:     179 opcodes  0.3/[0.3]/0.4
+

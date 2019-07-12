@@ -1,0 +1,4 @@
+(sym_lib_table
+  (lib (name DCConverters)(type Legacy)(uri /Users/GB080220/workspace/circuits/ProgrammableSymmetricalCurrentSink/HW/IsolatedThreeOutputSMPS/OutputFilteredConverters/lib/DCConverters.lib)(options "")(descr ""))
+  (lib (name Murata_DC-DC_Converters)(type Legacy)(uri ${KIPRJMOD}/lib/Murata_DC-DC_Converters.lib)(options "")(descr ""))
+)
