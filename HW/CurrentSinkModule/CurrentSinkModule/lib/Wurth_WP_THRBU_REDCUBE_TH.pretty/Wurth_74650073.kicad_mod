@@ -1,8 +1,9 @@
-(module Wurth_74651173 (layer F.Cu) (tedit 5D26662F)
+(module Wurth_74650073 (layer F.Cu) (tedit 5D29C654)
+  (descr "M3 50A")
   (fp_text reference REF** (at 0 -7.62) (layer F.SilkS)
     (effects (font (size 1 1) (thickness 0.15)))
   )
-  (fp_text value Wurth_74651173 (at 0 -6.096) (layer F.Fab)
+  (fp_text value Wurth_74650073 (at 0 -6.096) (layer F.Fab)
     (effects (font (size 1 1) (thickness 0.15)))
   )
   (fp_line (start 0 -3.556) (end -3.556 -3.556) (layer F.SilkS) (width 0.15))
@@ -22,7 +23,7 @@
   (pad 1 thru_hole circle (at -2.921 2.921) (size 3.2 3.2) (drill 1.85) (layers *.Cu *.Mask))
   (pad 1 thru_hole circle (at 2.9464 2.9464) (size 3.2 3.2) (drill 1.85) (layers *.Cu *.Mask))
   (pad "" np_thru_hole circle (at 0 0) (size 4.5 4.5) (drill 1.85) (layers *.Cu *.Mask))
-  (model "${KIPRJMOD}/lib/3d/74651173 (rev1).stp"
+  (model "${KIPRJMOD}/lib/3d/74650073 (rev1).stp"
     (at (xyz 0 0 0))
     (scale (xyz 1 1 1))
     (rotate (xyz 0 0 0))

@@ -50,33 +50,6 @@ F 4 "595-INA128UA/2K5" H 20550 14200 50  0001 C CNN "MouserNo"
 	1    20550 14200
 	1    0    0    -1  
 $EndComp
-$Comp
-L Transistor_FET:IRF3205 Q_POSMOS1
-U 1 1 5C970D9A
-P 14300 4650
-F 0 "Q_POSMOS1" H 14506 4695 50  0000 L CNN
-F 1 "IRF3710" H 14506 4606 50  0000 L CNN
-F 2 "Package_TO_SOT_THT:TO-220-3_Vertical" H 14550 4575 50  0001 L CIN
-F 3 "https://www.mouser.co.uk/datasheet/2/196/irf3710pbf-1227029.pdf" H 14300 4650 50  0001 L CNN
-F 4 "942-IRF3710PBF" H 14300 4650 50  0001 C CNN "MouserNo"
-	1    14300 4650
-	1    0    0    -1  
-$EndComp
-$Comp
-L Transistor_FET:IRF4905 Q_NEGMOS1
-U 1 1 5C970DA3
-P 14300 15925
-F 0 "Q_NEGMOS1" H 14506 15970 50  0000 L CNN
-F 1 "IRF5210" H 14506 15881 50  0000 L CNN
-F 2 "Package_TO_SOT_THT:TO-220-3_Vertical" H 14500 15850 50  0001 L CIN
-F 3 "https://www.mouser.co.uk/datasheet/2/196/irf5210pbf-1228304.pdf" H 14300 15925 50  0001 L CNN
-F 4 "942-IRF5210PBF" H 14300 15925 50  0001 C CNN "MouserNo"
-F 5 "942-IRF4905PBF" H 14300 15925 50  0001 C CNN "Mfr. No:"
-	1    14300 15925
-	1    0    0    1   
-$EndComp
-Wire Wire Line
-	14400 3850 14400 4450
 Wire Wire Line
 	10400 4750 10400 5600
 Text HLabel 1400 20400 0    50   Input ~ 0
@@ -1387,8 +1360,6 @@ Wire Wire Line
 	5450 16050 5450 15400
 Wire Wire Line
 	5450 15400 5650 15400
-Wire Wire Line
-	14400 4850 14400 5600
 $Comp
 L Device:R R24
 U 1 1 5D3A74AC
@@ -1793,8 +1764,6 @@ F 6 "Harwin" H 13800 4000 50  0001 C CNN "Mfr:"
 $EndComp
 Wire Wire Line
 	13800 4000 13800 4650
-Wire Wire Line
-	13800 4650 14100 4650
 $Comp
 L Connector:TestPoint TP5
 U 1 1 5D1A86A5
@@ -1813,7 +1782,7 @@ Wire Wire Line
 	12800 16575 12800 15925
 Connection ~ 12800 15925
 Wire Wire Line
-	12800 15925 14100 15925
+	12800 15925 14400 15925
 Wire Wire Line
 	6600 6400 7600 6400
 Wire Wire Line
@@ -2792,10 +2761,10 @@ Wire Wire Line
 Wire Wire Line
 	14400 14400 14400 15325
 Wire Wire Line
-	14400 15325 14400 15725
+	14400 15325 14400 15825
 Connection ~ 14400 15325
 Wire Wire Line
-	14400 16125 14400 17200
+	14400 16025 14400 17200
 Wire Wire Line
 	3650 20300 3650 20400
 $Comp
@@ -2962,5 +2931,33 @@ F 2 "" H 3700 20625 50  0001 C CNN
 F 3 "~" H 3700 20625 50  0001 C CNN
 	1    3700 20625
 	0    1    1    0   
+$EndComp
+Wire Wire Line
+	13800 4650 14400 4650
+Wire Wire Line
+	14400 4750 14400 5600
+Wire Wire Line
+	14400 3850 14400 4550
+$Comp
+L MosfetSocket:MosfetSocketx3 J3
+U 1 1 5D3BDBA1
+P 14600 4650
+F 0 "J3" H 14680 4692 50  0000 L CNN
+F 1 "MosfetSocketx3" H 14680 4601 50  0000 L CNN
+F 2 "TerminalBlock_TE-Connectivity:TerminalBlock_TE_282834-3_1x03_P2.54mm_Horizontal" H 14600 4650 50  0001 C CNN
+F 3 "https://docs-emea.rs-online.com/webdocs/0130/0900766b8013040c.pdf" H 14600 4650 50  0001 C CNN
+	1    14600 4650
+	1    0    0    -1  
+$EndComp
+$Comp
+L MosfetSocket:MosfetSocketx3 J4
+U 1 1 5D4094FF
+P 14600 15925
+F 0 "J4" H 14518 15600 50  0000 C CNN
+F 1 "MosfetSocketx3" H 14518 15691 50  0000 C CNN
+F 2 "TerminalBlock_TE-Connectivity:TerminalBlock_TE_282834-3_1x03_P2.54mm_Horizontal" H 14600 15925 50  0001 C CNN
+F 3 "https://docs-emea.rs-online.com/webdocs/0130/0900766b8013040c.pdf" H 14600 15925 50  0001 C CNN
+	1    14600 15925
+	1    0    0    1   
 $EndComp
 $EndSCHEMATC
