@@ -1586,30 +1586,6 @@ Wire Wire Line
 	23150 14200 24500 14200
 Connection ~ 23150 14200
 $Comp
-L Amplifier_Operational:TL072 U2
-U 1 1 5E1E06F5
-P 5700 6400
-F 0 "U2" H 5700 6767 50  0000 C CNN
-F 1 "LTC2058" H 5700 6676 50  0000 C CNN
-F 2 "Package_SO:SOIC-8_3.9x4.9mm_P1.27mm" H 5700 6400 50  0001 C CNN
-F 3 "https://www.analog.com/media/en/technical-documentation/data-sheets/ADA4522-1_4522-2_4522-4.pdf" H 5700 6400 50  0001 C CNN
-F 4 "ADA4522-2ARZ-RL" H 5700 6400 50  0001 C CNN "MouserNo"
-	1    5700 6400
-	1    0    0    -1  
-$EndComp
-$Comp
-L Amplifier_Operational:TL072 U2
-U 2 1 5E1E086A
-P 8200 6500
-F 0 "U2" H 8200 6867 50  0000 C CNN
-F 1 "LTC2058" H 8200 6776 50  0000 C CNN
-F 2 "Package_SO:SOIC-8_3.9x4.9mm_P1.27mm" H 8200 6500 50  0001 C CNN
-F 3 "https://www.analog.com/media/en/technical-documentation/data-sheets/ADA4522-1_4522-2_4522-4.pdf" H 8200 6500 50  0001 C CNN
-F 4 "ADA4522-2ARZ-RL" H 8200 6500 50  0001 C CNN "MouserNo"
-	2    8200 6500
-	1    0    0    -1  
-$EndComp
-$Comp
 L Amplifier_Operational:TL072 U1
 U 3 1 5E1E138A
 P 13800 20100
@@ -1631,30 +1607,6 @@ F 2 "Package_SO:SOIC-8_3.9x4.9mm_P1.27mm" H 19075 20125 50  0001 C CNN
 F 3 "https://www.analog.com/media/en/technical-documentation/data-sheets/ADA4522-1_4522-2_4522-4.pdf" H 19075 20125 50  0001 C CNN
 F 4 "584-ADA4522-2ARMZ" H 19075 20125 50  0001 C CNN "MouserNo"
 	3    19075 20125
-	1    0    0    -1  
-$EndComp
-$Comp
-L Amplifier_Operational:TL072 U1
-U 1 1 5E1E25D3
-P 5950 15300
-F 0 "U1" H 5950 15667 50  0000 C CNN
-F 1 "LTC2058" H 5950 15576 50  0000 C CNN
-F 2 "Package_SO:SOIC-8_3.9x4.9mm_P1.27mm" H 5950 15300 50  0001 C CNN
-F 3 "https://www.analog.com/media/en/technical-documentation/data-sheets/ADA4522-1_4522-2_4522-4.pdf" H 5950 15300 50  0001 C CNN
-F 4 "ADA4522-2ARZ-RL" H 5950 15300 50  0001 C CNN "MouserNo"
-	1    5950 15300
-	1    0    0    -1  
-$EndComp
-$Comp
-L Amplifier_Operational:TL072 U4
-U 2 1 5E1E2914
-P 11750 15925
-F 0 "U4" H 11750 16292 50  0000 C CNN
-F 1 "LTC2058" H 11750 16201 50  0000 C CNN
-F 2 "Package_SO:SOIC-8_3.9x4.9mm_P1.27mm" H 11750 15925 50  0001 C CNN
-F 3 "https://www.analog.com/media/en/technical-documentation/data-sheets/ADA4522-1_4522-2_4522-4.pdf" H 11750 15925 50  0001 C CNN
-F 4 "ADA4522-2ARZ-RL" H 11750 15925 50  0001 C CNN "MouserNo"
-	2    11750 15925
 	1    0    0    -1  
 $EndComp
 $Comp
@@ -1879,18 +1831,6 @@ Wire Wire Line
 	7600 6400 7900 6400
 Wire Wire Line
 	10300 3900 10300 6500
-$Comp
-L Amplifier_Operational:TL072 U3
-U 1 1 5D881F19
-P 12250 4650
-F 0 "U3" H 12250 5017 50  0000 C CNN
-F 1 "LTC2058" H 12250 4926 50  0000 C CNN
-F 2 "Package_SO:SOIC-8_3.9x4.9mm_P1.27mm" H 12250 4650 50  0001 C CNN
-F 3 "https://www.analog.com/media/en/technical-documentation/data-sheets/ADA4522-1_4522-2_4522-4.pdf" H 12250 4650 50  0001 C CNN
-F 4 "ADA4522-2ARZ-RL" H 12250 4650 50  0001 C CNN "MouserNo"
-	1    12250 4650
-	1    0    0    -1  
-$EndComp
 Wire Wire Line
 	11950 4550 10400 4550
 Wire Wire Line
@@ -1912,8 +1852,8 @@ P 24800 14300
 F 0 "U4" H 24800 14667 50  0000 C CNN
 F 1 "LTC2058" H 24800 14576 50  0000 C CNN
 F 2 "Package_SO:SOIC-8_3.9x4.9mm_P1.27mm" H 24800 14300 50  0001 C CNN
-F 3 "https://www.analog.com/media/en/technical-documentation/data-sheets/ADA4522-1_4522-2_4522-4.pdf" H 24800 14300 50  0001 C CNN
-F 4 "ADA4522-2ARZ-RL" H 24800 14300 50  0001 C CNN "MouserNo"
+F 3 "https://www.analog.com/media/en/technical-documentation/data-sheets/LTC2058.pdf" H 24800 14300 50  0001 C CNN
+F 4 "LTC2058" H 24800 14300 50  0001 C CNN "MouserNo"
 	1    24800 14300
 	1    0    0    1   
 $EndComp
@@ -2021,18 +1961,6 @@ Wire Wire Line
 Wire Wire Line
 	25650 14300 25100 14300
 Connection ~ 25650 14300
-$Comp
-L Amplifier_Operational:TL072 U1
-U 2 1 5DB4E8F2
-P 7950 15400
-F 0 "U1" H 7950 15767 50  0000 C CNN
-F 1 "LTC2058" H 7950 15676 50  0000 C CNN
-F 2 "Package_SO:SOIC-8_3.9x4.9mm_P1.27mm" H 7950 15400 50  0001 C CNN
-F 3 "https://www.analog.com/media/en/technical-documentation/data-sheets/ADA4522-1_4522-2_4522-4.pdf" H 7950 15400 50  0001 C CNN
-F 4 "ADA4522-2ARZ-RL" H 7950 15400 50  0001 C CNN "MouserNo"
-	2    7950 15400
-	1    0    0    -1  
-$EndComp
 Wire Wire Line
 	6800 15300 7350 15300
 Wire Wire Line
@@ -2610,8 +2538,8 @@ P 24450 7250
 F 0 "U3" H 24450 7617 50  0000 C CNN
 F 1 "LTC2058" H 24450 7526 50  0000 C CNN
 F 2 "Package_SO:SOIC-8_3.9x4.9mm_P1.27mm" H 24450 7250 50  0001 C CNN
-F 3 "https://www.analog.com/media/en/technical-documentation/data-sheets/ADA4522-1_4522-2_4522-4.pdf" H 24450 7250 50  0001 C CNN
-F 4 "ADA4522-2ARZ-RL" H 24450 7250 50  0001 C CNN "MouserNo"
+F 3 "https://www.analog.com/media/en/technical-documentation/data-sheets/LTC2058.pdf" H 24450 7250 50  0001 C CNN
+F 4 "LTC2058" H 24450 7250 50  0001 C CNN "MouserNo"
 	2    24450 7250
 	1    0    0    -1  
 $EndComp
@@ -2944,7 +2872,7 @@ U 1 1 5D3BDBA1
 P 14600 4650
 F 0 "J3" H 14680 4692 50  0000 L CNN
 F 1 "MosfetSocketx3" H 14680 4601 50  0000 L CNN
-F 2 "TerminalBlock_TE-Connectivity:TerminalBlock_TE_282834-3_1x03_P2.54mm_Horizontal" H 14600 4650 50  0001 C CNN
+F 2 "TerminalBlock:TerminalBlock_bornier-3_P5.08mm" H 14600 4650 50  0001 C CNN
 F 3 "https://docs-emea.rs-online.com/webdocs/0130/0900766b8013040c.pdf" H 14600 4650 50  0001 C CNN
 	1    14600 4650
 	1    0    0    -1  
@@ -2955,9 +2883,81 @@ U 1 1 5D4094FF
 P 14600 15925
 F 0 "J4" H 14518 15600 50  0000 C CNN
 F 1 "MosfetSocketx3" H 14518 15691 50  0000 C CNN
-F 2 "TerminalBlock_TE-Connectivity:TerminalBlock_TE_282834-3_1x03_P2.54mm_Horizontal" H 14600 15925 50  0001 C CNN
+F 2 "TerminalBlock:TerminalBlock_bornier-3_P5.08mm" H 14600 15925 50  0001 C CNN
 F 3 "https://docs-emea.rs-online.com/webdocs/0130/0900766b8013040c.pdf" H 14600 15925 50  0001 C CNN
 	1    14600 15925
 	1    0    0    1   
+$EndComp
+$Comp
+L Amplifier_Operational:TL072 U3
+U 1 1 5D881F19
+P 12250 4650
+F 0 "U3" H 12250 5017 50  0000 C CNN
+F 1 "LTC2058" H 12250 4926 50  0000 C CNN
+F 2 "Package_SO:SOIC-8_3.9x4.9mm_P1.27mm" H 12250 4650 50  0001 C CNN
+F 3 "https://www.analog.com/media/en/technical-documentation/data-sheets/LTC2058.pdf" H 12250 4650 50  0001 C CNN
+F 4 "LTC2058" H 12250 4650 50  0001 C CNN "MouserNo"
+	1    12250 4650
+	1    0    0    -1  
+$EndComp
+$Comp
+L Amplifier_Operational:TL072 U2
+U 2 1 5E1E086A
+P 8200 6500
+F 0 "U2" H 8200 6867 50  0000 C CNN
+F 1 "LTC2058" H 8200 6776 50  0000 C CNN
+F 2 "Package_SO:SOIC-8_3.9x4.9mm_P1.27mm" H 8200 6500 50  0001 C CNN
+F 3 "https://www.analog.com/media/en/technical-documentation/data-sheets/LTC2058.pdf" H 8200 6500 50  0001 C CNN
+F 4 "LTC2058" H 8200 6500 50  0001 C CNN "MouserNo"
+	2    8200 6500
+	1    0    0    -1  
+$EndComp
+$Comp
+L Amplifier_Operational:TL072 U2
+U 1 1 5E1E06F5
+P 5700 6400
+F 0 "U2" H 5700 6767 50  0000 C CNN
+F 1 "LTC2058" H 5700 6676 50  0000 C CNN
+F 2 "Package_SO:SOIC-8_3.9x4.9mm_P1.27mm" H 5700 6400 50  0001 C CNN
+F 3 "https://www.analog.com/media/en/technical-documentation/data-sheets/LTC2058.pdf" H 5700 6400 50  0001 C CNN
+F 4 "LTC2058" H 5700 6400 50  0001 C CNN "MouserNo"
+	1    5700 6400
+	1    0    0    -1  
+$EndComp
+$Comp
+L Amplifier_Operational:TL072 U4
+U 2 1 5E1E2914
+P 11750 15925
+F 0 "U4" H 11750 16292 50  0000 C CNN
+F 1 "LTC2058" H 11750 16201 50  0000 C CNN
+F 2 "Package_SO:SOIC-8_3.9x4.9mm_P1.27mm" H 11750 15925 50  0001 C CNN
+F 3 "https://www.analog.com/media/en/technical-documentation/data-sheets/LTC2058.pdf" H 11750 15925 50  0001 C CNN
+F 4 "LTC2058" H 11750 15925 50  0001 C CNN "MouserNo"
+	2    11750 15925
+	1    0    0    1   
+$EndComp
+$Comp
+L Amplifier_Operational:TL072 U1
+U 2 1 5DB4E8F2
+P 7950 15400
+F 0 "U1" H 7950 15767 50  0000 C CNN
+F 1 "LTC2058" H 7950 15676 50  0000 C CNN
+F 2 "Package_SO:SOIC-8_3.9x4.9mm_P1.27mm" H 7950 15400 50  0001 C CNN
+F 3 "https://www.analog.com/media/en/technical-documentation/data-sheets/LTC2058.pdf" H 7950 15400 50  0001 C CNN
+F 4 "LTC2058" H 7950 15400 50  0001 C CNN "MouserNo"
+	2    7950 15400
+	1    0    0    -1  
+$EndComp
+$Comp
+L Amplifier_Operational:TL072 U1
+U 1 1 5E1E25D3
+P 5950 15300
+F 0 "U1" H 5950 15667 50  0000 C CNN
+F 1 "LTC2058" H 5950 15576 50  0000 C CNN
+F 2 "Package_SO:SOIC-8_3.9x4.9mm_P1.27mm" H 5950 15300 50  0001 C CNN
+F 3 "https://www.analog.com/media/en/technical-documentation/data-sheets/LTC2058.pdf" H 5950 15300 50  0001 C CNN
+F 4 "LTC2058" H 5950 15300 50  0001 C CNN "MouserNo"
+	1    5950 15300
+	1    0    0    -1  
 $EndComp
 $EndSCHEMATC

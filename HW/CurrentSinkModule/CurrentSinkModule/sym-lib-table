@@ -1,4 +1,5 @@
 (sym_lib_table
   (lib (name DG14_QuadSPST_CMOSAnalogSwitch)(type Legacy)(uri /Users/GB080220/workspace/circuits/ProgrammableSymmetricalCurrentSink/HW/CurrentSinkModule/CurrentSinkModule/lib/DG14_QuadSPST_CMOSAnalogSwitch.lib)(options "")(descr ""))
   (lib (name MosfetSocket)(type Legacy)(uri ${KIPRJMOD}/lib/MosfetSocket.lib)(options "")(descr ""))
+  (lib (name LT1677)(type Legacy)(uri ${KIPRJMOD}/lib/LT1677.lib)(options "")(descr ""))
 )
