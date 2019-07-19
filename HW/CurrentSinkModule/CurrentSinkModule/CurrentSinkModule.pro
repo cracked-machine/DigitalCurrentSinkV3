@@ -1,4 +1,4 @@
-update=Wednesday, 17 July 2019 at 17:13:17
+update=Friday, 19 July 2019 at 11:01:35
 version=1
 last_client=kicad
 [general]
@@ -26,7 +26,7 @@ ERC_TestSimilarLabels=1
 version=1
 PageLayoutDescrFile=
 LastNetListRead=CurrentSinkModule.net
-CopperLayerCount=2
+CopperLayerCount=4
 BoardThickness=1.6
 AllowMicroVias=0
 AllowBlindVias=0
@@ -45,10 +45,11 @@ TrackWidth4=0.5
 TrackWidth5=0.6
 TrackWidth6=1
 TrackWidth7=2
-TrackWidth8=5
-TrackWidth9=7
-TrackWidth10=10
-TrackWidth11=20
+TrackWidth8=3
+TrackWidth9=5
+TrackWidth10=7
+TrackWidth11=10
+TrackWidth12=20
 ViaDiameter1=0.8
 ViaDrill1=0.4
 ViaDiameter2=0.4
@@ -61,8 +62,8 @@ dPairWidth1=0.2
 dPairGap1=0.25
 dPairViaGap1=0.25
 SilkLineWidth=0.15
-SilkTextSizeV=0.7
-SilkTextSizeH=0.7
+SilkTextSizeV=0.7999999999999999
+SilkTextSizeH=0.7999999999999999
 SilkTextSizeThickness=0.15
 SilkTextItalic=0
 SilkTextUpright=1
@@ -91,11 +92,11 @@ Enabled=1
 [pcbnew/Layer.In1.Cu]
 Name=In1.Cu
 Type=0
-Enabled=0
+Enabled=1
 [pcbnew/Layer.In2.Cu]
 Name=In2.Cu
 Type=0
-Enabled=0
+Enabled=1
 [pcbnew/Layer.In3.Cu]
 Name=In3.Cu
 Type=0

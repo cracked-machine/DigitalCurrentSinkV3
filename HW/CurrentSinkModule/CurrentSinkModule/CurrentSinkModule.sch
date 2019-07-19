@@ -200,7 +200,7 @@ U 1 1 5D30EC8D
 P 5950 5350
 F 0 "JP1" H 5950 5562 50  0000 C CNN
 F 1 "Isolation" H 5950 5471 50  0000 C CNN
-F 2 "Jumper:SolderJumper-2_P1.3mm_Bridged_Pad1.0x1.5mm" H 5950 5350 50  0001 C CNN
+F 2 "Jumper:SolderJumper-2_P1.3mm_Open_Pad1.0x1.5mm" H 5950 5350 50  0001 C CNN
 F 3 "~" H 5950 5350 50  0001 C CNN
 	1    5950 5350
 	1    0    0    -1  
@@ -215,7 +215,7 @@ U 1 1 5D31137D
 P 5950 5950
 F 0 "JP2" H 5950 6162 50  0000 C CNN
 F 1 "Isolation" H 5950 6071 50  0000 C CNN
-F 2 "Jumper:SolderJumper-2_P1.3mm_Bridged_Pad1.0x1.5mm" H 5950 5950 50  0001 C CNN
+F 2 "Jumper:SolderJumper-2_P1.3mm_Open_Pad1.0x1.5mm" H 5950 5950 50  0001 C CNN
 F 3 "~" H 5950 5950 50  0001 C CNN
 	1    5950 5950
 	1    0    0    -1  
@@ -230,7 +230,7 @@ U 1 1 5D312C46
 P 8900 4000
 F 0 "JP3" H 8900 4212 50  0000 C CNN
 F 1 "Isolation" H 8900 4121 50  0000 C CNN
-F 2 "Jumper:SolderJumper-2_P1.3mm_Bridged_Pad1.0x1.5mm" H 8900 4000 50  0001 C CNN
+F 2 "Jumper:SolderJumper-2_P1.3mm_Open_Pad1.0x1.5mm" H 8900 4000 50  0001 C CNN
 F 3 "~" H 8900 4000 50  0001 C CNN
 	1    8900 4000
 	1    0    0    -1  
@@ -245,7 +245,7 @@ U 1 1 5D31438F
 P 8900 4600
 F 0 "JP4" H 8900 4812 50  0000 C CNN
 F 1 "Isolation" H 8900 4721 50  0000 C CNN
-F 2 "Jumper:SolderJumper-2_P1.3mm_Bridged_Pad1.0x1.5mm" H 8900 4600 50  0001 C CNN
+F 2 "Jumper:SolderJumper-2_P1.3mm_Open_Pad1.0x1.5mm" H 8900 4600 50  0001 C CNN
 F 3 "~" H 8900 4600 50  0001 C CNN
 	1    8900 4600
 	1    0    0    -1  
@@ -322,134 +322,7 @@ F10 "DACSIG1" I L 6650 5050 50
 F11 "DACSIG2" I L 6650 5650 50 
 F12 "DACGND1" I L 6650 5350 50 
 F13 "DACGND2" I L 6650 5950 50 
-F14 "+5V" I L 6650 3450 50 
-F15 "-5V" I L 6650 4050 50 
-F16 "+5VA" I L 6650 2200 50 
-F17 "-5VA" I L 6650 2800 50 
-F18 "GNDA" I L 6650 2500 50 
+F14 "+12V" I L 6650 3450 50 
+F15 "-12V" I L 6650 4050 50 
 $EndSheet
-Wire Wire Line
-	2800 2200 2800 2400
-$Comp
-L Connector_Generic:Conn_01x03 JPWR2
-U 1 1 5E00E9C0
-P 1650 2500
-F 0 "JPWR2" H 1450 2250 50  0000 L CNN
-F 1 "Conn_01x03" H 1250 2150 50  0000 L CNN
-F 2 "Connector_Molex:Molex_KK-254_AE-6410-03A_1x03_P2.54mm_Vertical" H 1650 2500 50  0001 C CNN
-F 3 "~" H 1650 2500 50  0001 C CNN
-	1    1650 2500
-	-1   0    0    -1  
-$EndComp
-Wire Notes Line
-	1450 2500 1300 2500
-Wire Notes Line
-	1300 2500 1300 2050
-Wire Notes Line
-	1250 2050 1350 2050
-Wire Notes Line
-	1450 2450 1450 2550
-Text Notes 1000 2000 0    50   ~ 0
-Ext. Power Cable
-$Comp
-L Device:D_Schottky D5
-U 1 1 5E00E9CF
-P 4350 2200
-F 0 "D5" H 4350 2350 50  0000 C CNN
-F 1 "D_Schottky" H 4350 2450 50  0000 C CNN
-F 2 "Diode_SMD:D_SOD-123" H 4350 2200 50  0001 C CNN
-F 3 "~" H 4350 2200 50  0001 C CNN
-	1    4350 2200
-	-1   0    0    1   
-$EndComp
-$Comp
-L Device:D_Schottky D6
-U 1 1 5E00E9D9
-P 4350 2800
-F 0 "D6" H 4350 3050 50  0000 C CNN
-F 1 "D_Schottky" H 4350 2950 50  0000 C CNN
-F 2 "Diode_SMD:D_SOD-123" H 4350 2800 50  0001 C CNN
-F 3 "~" H 4350 2800 50  0001 C CNN
-	1    4350 2800
-	1    0    0    -1  
-$EndComp
-Wire Wire Line
-	4200 2200 2800 2200
-Wire Wire Line
-	4500 2800 5100 2800
-Wire Wire Line
-	4500 2200 5400 2200
-Wire Wire Line
-	5100 2900 5100 2800
-$Comp
-L Connector:TestPoint TP?
-U 1 1 5E00E9EA
-P 5100 2900
-AR Path="/5C977310/5E00E9EA" Ref="TP?"  Part="1" 
-AR Path="/5E00E9EA" Ref="TP15"  Part="1" 
-F 0 "TP15" V 5100 3150 50  0000 C CNN
-F 1 "TestPoint" V 5204 2974 50  0001 C CNN
-F 2 "TestPoint:TestPoint_Pad_2.0x2.0mm" H 5300 2900 50  0001 C CNN
-F 3 "https://cdn.harwin.com/pdfs/S2751R.pdf" H 5300 2900 50  0001 C CNN
-F 4 "855-S2751-46R" H 5100 2900 50  0001 C CNN "MouserNo"
-F 5 "S2751-46R" H 5100 2900 50  0001 C CNN "Mfr. No:"
-F 6 "Harwin" H 5100 2900 50  0001 C CNN "Mfr:"
-	1    5100 2900
-	-1   0    0    1   
-$EndComp
-Wire Wire Line
-	5400 2900 5400 2200
-$Comp
-L Connector:TestPoint TP?
-U 1 1 5E00E9F8
-P 5400 2900
-AR Path="/5C977310/5E00E9F8" Ref="TP?"  Part="1" 
-AR Path="/5E00E9F8" Ref="TP16"  Part="1" 
-F 0 "TP16" V 5400 3150 50  0000 C CNN
-F 1 "TestPoint" V 5504 2974 50  0001 C CNN
-F 2 "TestPoint:TestPoint_Pad_2.0x2.0mm" H 5600 2900 50  0001 C CNN
-F 3 "https://cdn.harwin.com/pdfs/S2751R.pdf" H 5600 2900 50  0001 C CNN
-F 4 "855-S2751-46R" H 5400 2900 50  0001 C CNN "MouserNo"
-F 5 "S2751-46R" H 5400 2900 50  0001 C CNN "Mfr. No:"
-F 6 "Harwin" H 5400 2900 50  0001 C CNN "Mfr:"
-	1    5400 2900
-	-1   0    0    1   
-$EndComp
-Connection ~ 5400 2200
-Connection ~ 5100 2800
-Wire Wire Line
-	1850 2600 2800 2600
-Wire Wire Line
-	2800 2800 2800 2600
-Wire Wire Line
-	2800 2800 4200 2800
-Wire Wire Line
-	5800 2900 5800 2500
-$Comp
-L Connector:TestPoint GND?
-U 1 1 5E00EA0B
-P 5800 2900
-AR Path="/5C977310/5E00EA0B" Ref="GND?"  Part="1" 
-AR Path="/5E00EA0B" Ref="GND12"  Part="1" 
-F 0 "GND12" V 5800 3200 50  0000 C CNN
-F 1 "TestPoint" V 5904 2974 50  0001 C CNN
-F 2 "TestPoint:TestPoint_Pad_2.0x2.0mm" H 6000 2900 50  0001 C CNN
-F 3 "https://cdn.harwin.com/pdfs/S2751R.pdf" H 6000 2900 50  0001 C CNN
-F 4 "855-S2751-46R" H 5800 2900 50  0001 C CNN "MouserNo"
-F 5 "S2751-46R" H 5800 2900 50  0001 C CNN "Mfr. No:"
-F 6 "Harwin" H 5800 2900 50  0001 C CNN "Mfr:"
-	1    5800 2900
-	-1   0    0    1   
-$EndComp
-Connection ~ 5800 2500
-Wire Wire Line
-	1850 2500 5800 2500
-Wire Wire Line
-	2800 2400 1850 2400
-Wire Wire Line
-	5400 2200 6650 2200
-Wire Wire Line
-	5800 2500 6650 2500
-Wire Wire Line
-	5100 2800 6650 2800
 $EndSCHEMATC
