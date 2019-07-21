@@ -200,7 +200,7 @@ U 1 1 5D30EC8D
 P 5950 5350
 F 0 "JP1" H 5950 5562 50  0000 C CNN
 F 1 "Isolation" H 5950 5471 50  0000 C CNN
-F 2 "Jumper:SolderJumper-2_P1.3mm_Bridged_Pad1.0x1.5mm" H 5950 5350 50  0001 C CNN
+F 2 "Jumper:SolderJumper-2_P1.3mm_Open_Pad1.0x1.5mm" H 5950 5350 50  0001 C CNN
 F 3 "~" H 5950 5350 50  0001 C CNN
 	1    5950 5350
 	1    0    0    -1  
@@ -215,7 +215,7 @@ U 1 1 5D31137D
 P 5950 5950
 F 0 "JP2" H 5950 6162 50  0000 C CNN
 F 1 "Isolation" H 5950 6071 50  0000 C CNN
-F 2 "Jumper:SolderJumper-2_P1.3mm_Bridged_Pad1.0x1.5mm" H 5950 5950 50  0001 C CNN
+F 2 "Jumper:SolderJumper-2_P1.3mm_Open_Pad1.0x1.5mm" H 5950 5950 50  0001 C CNN
 F 3 "~" H 5950 5950 50  0001 C CNN
 	1    5950 5950
 	1    0    0    -1  
@@ -230,7 +230,7 @@ U 1 1 5D312C46
 P 8900 4000
 F 0 "JP3" H 8900 4212 50  0000 C CNN
 F 1 "Isolation" H 8900 4121 50  0000 C CNN
-F 2 "Jumper:SolderJumper-2_P1.3mm_Bridged_Pad1.0x1.5mm" H 8900 4000 50  0001 C CNN
+F 2 "Jumper:SolderJumper-2_P1.3mm_Open_Pad1.0x1.5mm" H 8900 4000 50  0001 C CNN
 F 3 "~" H 8900 4000 50  0001 C CNN
 	1    8900 4000
 	1    0    0    -1  
@@ -245,7 +245,7 @@ U 1 1 5D31438F
 P 8900 4600
 F 0 "JP4" H 8900 4812 50  0000 C CNN
 F 1 "Isolation" H 8900 4721 50  0000 C CNN
-F 2 "Jumper:SolderJumper-2_P1.3mm_Bridged_Pad1.0x1.5mm" H 8900 4600 50  0001 C CNN
+F 2 "Jumper:SolderJumper-2_P1.3mm_Open_Pad1.0x1.5mm" H 8900 4600 50  0001 C CNN
 F 3 "~" H 8900 4600 50  0001 C CNN
 	1    8900 4600
 	1    0    0    -1  

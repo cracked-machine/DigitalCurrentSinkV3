@@ -649,8 +649,6 @@ Wire Notes Line
 	7650 750  7650 15800
 Wire Notes Line
 	7650 11000 17050 11000
-Text Notes 7950 11850 0    197  ~ 0
-Power Supply Regulator 
 Text Notes 7950 1250 0    197  ~ 0
 Micro Controller
 Text Notes 1450 1250 0    197  ~ 0
@@ -1394,17 +1392,6 @@ Wire Wire Line
 	14050 2425 14050 2800
 Connection ~ 10300 1650
 $Comp
-L power:+3.3VA #PWR030
-U 1 1 5E90E944
-P 14550 1450
-F 0 "#PWR030" H 14550 1300 50  0001 C CNN
-F 1 "+3.3VA" H 14565 1621 50  0000 C CNN
-F 2 "" H 14550 1450 50  0001 C CNN
-F 3 "" H 14550 1450 50  0001 C CNN
-	1    14550 1450
-	1    0    0    -1  
-$EndComp
-$Comp
 L power:+3.3V #PWR012
 U 1 1 5E90E94A
 P 10300 1550
@@ -1415,8 +1402,6 @@ F 3 "" H 10300 1550 50  0001 C CNN
 	1    10300 1550
 	1    0    0    -1  
 $EndComp
-Text Label 14200 1825 0    50   ~ 0
-VDDA
 Wire Wire Line
 	13100 1825 14050 1825
 Wire Wire Line
@@ -2247,8 +2232,6 @@ $EndComp
 Wire Wire Line
 	14550 2475 14550 2800
 Wire Wire Line
-	14550 1450 14550 1825
-Wire Wire Line
 	10300 1550 10300 1650
 Wire Wire Line
 	12100 2850 12100 3000
@@ -2621,4 +2604,81 @@ Text Notes 2750 12000 0    50   ~ 0
 To be used with:\nFront-mounted keypad, non-shielded, non-backlit.\nGrayhill-96AB2-102-F\nhttp://www.grayhill.com/assets/1/7/Keypads_96.pdf
 Text Notes 2850 11500 0    47   ~ 0
 8-position connector with 1 position removed.
+Text Notes 7950 11850 0    197  ~ 0
+Voltage Regulator and Voltage Reference
+Wire Wire Line
+	14975 2475 14975 2800
+Text Label 14975 2800 0    50   ~ 0
+VSSA
+Wire Wire Line
+	14975 1825 14975 2175
+Wire Wire Line
+	15375 2475 15375 2800
+Text Label 15375 2800 0    50   ~ 0
+VSSA
+Wire Wire Line
+	15375 1825 15375 2175
+Wire Wire Line
+	15800 2475 15800 2800
+Text Label 15800 2800 0    50   ~ 0
+VSSA
+Wire Wire Line
+	15800 1825 15800 2175
+Wire Wire Line
+	14550 1825 14975 1825
+Connection ~ 14975 1825
+Wire Wire Line
+	14975 1825 15375 1825
+Connection ~ 15375 1825
+Wire Wire Line
+	15375 1825 15800 1825
+$Comp
+L Device:C C30
+U 1 1 5D5424B0
+P 15800 2325
+F 0 "C30" V 15750 2425 50  0000 L CNN
+F 1 "1uF" V 15750 2075 50  0000 L CNN
+F 2 "Capacitor_SMD:C_0402_1005Metric" H 15838 2175 50  0001 C CNN
+F 3 "~" H 15800 2325 50  0001 C CNN
+	1    15800 2325
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:C C29
+U 1 1 5D527759
+P 15375 2325
+F 0 "C29" V 15325 2425 50  0000 L CNN
+F 1 "1uF" V 15325 2075 50  0000 L CNN
+F 2 "Capacitor_SMD:C_0402_1005Metric" H 15413 2175 50  0001 C CNN
+F 3 "~" H 15375 2325 50  0001 C CNN
+	1    15375 2325
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:C C28
+U 1 1 5D50AF0D
+P 14975 2325
+F 0 "C28" V 14925 2425 50  0000 L CNN
+F 1 "1uF" V 14925 2075 50  0000 L CNN
+F 2 "Capacitor_SMD:C_0402_1005Metric" H 15013 2175 50  0001 C CNN
+F 3 "~" H 14975 2325 50  0001 C CNN
+	1    14975 2325
+	1    0    0    -1  
+$EndComp
+Text Label 14200 1825 0    50   ~ 0
+VDDA
+Wire Wire Line
+	15800 1450 15800 1825
+$Comp
+L power:+3.3VA #PWR030
+U 1 1 5E90E944
+P 15800 1450
+F 0 "#PWR030" H 15800 1300 50  0001 C CNN
+F 1 "+3.3VA" H 15815 1621 50  0000 C CNN
+F 2 "" H 15800 1450 50  0001 C CNN
+F 3 "" H 15800 1450 50  0001 C CNN
+	1    15800 1450
+	1    0    0    -1  
+$EndComp
+Connection ~ 15800 1825
 $EndSCHEMATC

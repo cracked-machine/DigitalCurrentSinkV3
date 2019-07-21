@@ -67,20 +67,6 @@ F 6 "5-1814832-1" H 2550 2800 50  0001 C CNN "Mfr. No:"
 $EndComp
 Wire Wire Line
 	2550 3000 2550 3100
-$Comp
-L Connector_Generic:Conn_01x03 JPWR1
-U 1 1 5CAE97C0
-P 2150 4950
-F 0 "JPWR1" H 2025 4725 50  0000 L CNN
-F 1 "KK254_01x03" H 1900 5175 50  0000 L CNN
-F 2 "Connector_Molex:Molex_KK-254_AE-6410-03A_1x03_P2.54mm_Vertical" H 2150 4950 50  0001 C CNN
-F 3 "~" H 2150 4950 50  0001 C CNN
-F 4 "WM4201-ND" H 2150 4950 50  0001 C CNN "DigikeyNo"
-	1    2150 4950
-	-1   0    0    1   
-$EndComp
-Wire Wire Line
-	2350 4850 2500 4850
 Wire Wire Line
 	7950 2800 9000 2800
 Wire Wire Line
@@ -242,15 +228,8 @@ Text Label 5100 6000 2    50   ~ 0
 PWR5V
 Text Label 5100 5050 2    50   ~ 0
 PWRGND
-Text Label 5100 4850 2    50   ~ 0
+Text Label 5100 4950 2    50   ~ 0
 PWR5V
-Wire Wire Line
-	2350 4950 2500 4950
-Wire Wire Line
-	2500 4950 2500 4850
-Connection ~ 2500 4850
-Wire Wire Line
-	2500 4850 5100 4850
 $Comp
 L Device:D_Schottky D?
 U 1 1 5D67C6A2
@@ -273,4 +252,17 @@ Wire Wire Line
 	2150 6000 5100 6000
 Wire Wire Line
 	2750 6500 4050 6500
+$Comp
+L Connector_Generic:Conn_01x02 JPWR1
+U 1 1 5D504877
+P 2150 5050
+F 0 "JPWR1" H 2475 4950 50  0000 C CNN
+F 1 "KK254_01x02" H 2500 5050 50  0000 C CNN
+F 2 "Connector_Molex:Molex_KK-254_AE-6410-02A_1x02_P2.54mm_Vertical" H 2150 5050 50  0001 C CNN
+F 3 "~" H 2150 5050 50  0001 C CNN
+	1    2150 5050
+	-1   0    0    1   
+$EndComp
+Wire Wire Line
+	2350 4950 5100 4950
 $EndSCHEMATC
