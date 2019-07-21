@@ -1,4 +1,4 @@
-# DigitalCurrentSinkV2
+# Digital Current Sink Ver3
 
 [Control Module Interactive BOM](https://cracked-machine.github.io/DigitalCurrentSinkV3/HW/ControlModule/doc/IBOM/ibom.html)
 
