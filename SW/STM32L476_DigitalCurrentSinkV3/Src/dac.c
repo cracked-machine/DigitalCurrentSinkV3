@@ -49,23 +49,11 @@ void MX_DAC1_Init(void)
   {
     Error_Handler();
   }
-  /** Configure Triangle wave generation on DAC OUT1 
-  */
-  if (HAL_DACEx_TriangleWaveGenerate(&hdac1, DAC_CHANNEL_1, DAC_TRIANGLEAMPLITUDE_4095) != HAL_OK)
-  {
-    Error_Handler();
-  }
   /** DAC channel OUT2 config 
   */
   sConfig.DAC_Trigger = DAC_TRIGGER_T7_TRGO;
   sConfig.DAC_ConnectOnChipPeripheral = DAC_CHIPCONNECT_DISABLE;
   if (HAL_DAC_ConfigChannel(&hdac1, &sConfig, DAC_CHANNEL_2) != HAL_OK)
-  {
-    Error_Handler();
-  }
-  /** Configure Triangle wave generation on DAC OUT2 
-  */
-  if (HAL_DACEx_TriangleWaveGenerate(&hdac1, DAC_CHANNEL_2, DAC_TRIANGLEAMPLITUDE_4095) != HAL_OK)
   {
     Error_Handler();
   }

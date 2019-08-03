@@ -16,6 +16,7 @@
 #include "ssd1306.h"
 #include <string.h>
 #include <stdarg.h>
+#include "dac_utils.h"
 
 void Utils_Init();
 int _write(int file, char *ptr, int len);

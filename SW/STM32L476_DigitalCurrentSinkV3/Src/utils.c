@@ -13,6 +13,7 @@
 #include "ssd1306_tests.h"
 
 
+
 void Utils_UpdateDisplay()
 {
 
@@ -50,16 +51,16 @@ void Utils_Init()
 	HAL_DAC_Start(&hdac1,DAC_CHANNEL_1);
 	HAL_DAC_Start(&hdac1,DAC_CHANNEL_2);
 
-	Utils_i2c_scan();
-	printf("Initialising Display...\n");
-	ssd1306_Init();
 
-	printf("Initialising Timers/DACs...\n");
+	//printf("Initialising Display...\n");
+	//Utils_i2c_scan();
+	//ssd1306_Init();
+	//HAL_TIM_Base_Start_IT(&htim5);
 
+	printf("Initialising DACs...\n");
 
-	HAL_TIM_Base_Start_IT(&htim5);
-
-
+	printf("DAC1 Mode: %d\n", getDACMode(DAC_CHANNEL_1));
+	printf("DAC2 Mode: %d\n", getDACMode(DAC_CHANNEL_2));
 
 }
 

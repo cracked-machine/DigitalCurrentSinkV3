@@ -62,7 +62,6 @@ extern DAC_HandleTypeDef hdac1;
 extern TIM_HandleTypeDef htim5;
 extern TIM_HandleTypeDef htim6;
 extern TIM_HandleTypeDef htim7;
-extern TIM_HandleTypeDef htim16;
 /* USER CODE BEGIN EV */
 
 /* USER CODE END EV */
@@ -260,41 +259,37 @@ void DMA1_Channel1_IRQHandler(void)
 }
 
 /**
-  * @brief This function handles TIM1 update interrupt and TIM16 global interrupt.
-  */
-void TIM1_UP_TIM16_IRQHandler(void)
-{
-  /* USER CODE BEGIN TIM1_UP_TIM16_IRQn 0 */
-
-  /* USER CODE END TIM1_UP_TIM16_IRQn 0 */
-  HAL_TIM_IRQHandler(&htim16);
-  /* USER CODE BEGIN TIM1_UP_TIM16_IRQn 1 */
-
-  /* USER CODE END TIM1_UP_TIM16_IRQn 1 */
-}
-
-/**
   * @brief This function handles EXTI line[15:10] interrupts.
   */
 void EXTI15_10_IRQHandler(void)
 {
   /* USER CODE BEGIN EXTI15_10_IRQn 0 */
+
 	if(HAL_GPIO_ReadPin(GPIOD, Btn1_EXT10_Pin) == GPIO_PIN_RESET)
 	{
 		printf("Button1\n");
+		cycleDACMode(DAC_CHANNEL_1);
+		printf("DAC1 Mode: %d\n", getDACMode(DAC_CHANNEL_1));
+
+
+
 	}
 	else if(HAL_GPIO_ReadPin(GPIOD, Btn2_EXT11_Pin) == GPIO_PIN_RESET)
 	{
 		printf("Button2\n");
+		cycleDACMode(DAC_CHANNEL_2);
+		printf("DAC2 Mode: %d\n", getDACMode(DAC_CHANNEL_2));
 	}
 
 	else if(HAL_GPIO_ReadPin(GPIOD, Btn3_EXT12_Pin) == GPIO_PIN_RESET)
 	{
 		printf("Button3\n");
+		increaseDAC(DAC_CHANNEL_1);
 	}
 	else if(HAL_GPIO_ReadPin(GPIOD, Btn4_EXT13_Pin) == GPIO_PIN_RESET)
 	{
 		printf("Button4\n");
+		increaseDAC(DAC_CHANNEL_2);
 	}
   /* USER CODE END EXTI15_10_IRQn 0 */
   HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_10);
