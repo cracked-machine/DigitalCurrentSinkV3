@@ -43,18 +43,22 @@ void Utils_UpdateDisplay()
 
 void Utils_Init()
 {
-	Utils_i2c_scan();
-	printf("Initialising Display...\n");
-	ssd1306_Init();
-	//ssd1306_TestAll();
-	printf("Initialising Timers/DACs...\n");
-	HAL_TIM_Base_Start_IT(&htim5);
 	HAL_TIM_Base_Start_IT(&htim6);
 	HAL_TIM_Base_Start_IT(&htim7);
 
 
 	HAL_DAC_Start(&hdac1,DAC_CHANNEL_1);
 	HAL_DAC_Start(&hdac1,DAC_CHANNEL_2);
+
+	Utils_i2c_scan();
+	printf("Initialising Display...\n");
+	ssd1306_Init();
+
+	printf("Initialising Timers/DACs...\n");
+
+
+	HAL_TIM_Base_Start_IT(&htim5);
+
 
 
 }

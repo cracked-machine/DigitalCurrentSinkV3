@@ -75,14 +75,18 @@ void Error_Handler(void);
 #define KP3_GPOUT_GPIO_Port GPIOE
 #define KP4_GPOUT_Pin GPIO_PIN_10
 #define KP4_GPOUT_GPIO_Port GPIOE
-#define BTN1_EXTI10_Pin GPIO_PIN_10
-#define BTN1_EXTI10_GPIO_Port GPIOD
-#define BTN2_EXTI11_Pin GPIO_PIN_11
-#define BTN2_EXTI11_GPIO_Port GPIOD
-#define BTN3_EXTI12_Pin GPIO_PIN_12
-#define BTN3_EXTI12_GPIO_Port GPIOD
-#define BTN4_EXTI13_Pin GPIO_PIN_13
-#define BTN4_EXTI13_GPIO_Port GPIOD
+#define Btn1_EXT10_Pin GPIO_PIN_10
+#define Btn1_EXT10_GPIO_Port GPIOD
+#define Btn1_EXT10_EXTI_IRQn EXTI15_10_IRQn
+#define Btn2_EXT11_Pin GPIO_PIN_11
+#define Btn2_EXT11_GPIO_Port GPIOD
+#define Btn2_EXT11_EXTI_IRQn EXTI15_10_IRQn
+#define Btn3_EXT12_Pin GPIO_PIN_12
+#define Btn3_EXT12_GPIO_Port GPIOD
+#define Btn3_EXT12_EXTI_IRQn EXTI15_10_IRQn
+#define Btn4_EXT13_Pin GPIO_PIN_13
+#define Btn4_EXT13_GPIO_Port GPIOD
+#define Btn4_EXT13_EXTI_IRQn EXTI15_10_IRQn
 /* USER CODE BEGIN Private defines */
 
 /* USER CODE END Private defines */
