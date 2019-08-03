@@ -49,11 +49,23 @@ void MX_DAC1_Init(void)
   {
     Error_Handler();
   }
+  /** Configure Triangle wave generation on DAC OUT1 
+  */
+  if (HAL_DACEx_TriangleWaveGenerate(&hdac1, DAC_CHANNEL_1, DAC_TRIANGLEAMPLITUDE_4095) != HAL_OK)
+  {
+    Error_Handler();
+  }
   /** DAC channel OUT2 config 
   */
   sConfig.DAC_Trigger = DAC_TRIGGER_T7_TRGO;
   sConfig.DAC_ConnectOnChipPeripheral = DAC_CHIPCONNECT_DISABLE;
   if (HAL_DAC_ConfigChannel(&hdac1, &sConfig, DAC_CHANNEL_2) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /** Configure Triangle wave generation on DAC OUT2 
+  */
+  if (HAL_DACEx_TriangleWaveGenerate(&hdac1, DAC_CHANNEL_2, DAC_TRIANGLEAMPLITUDE_4095) != HAL_OK)
   {
     Error_Handler();
   }
@@ -82,6 +94,9 @@ void HAL_DAC_MspInit(DAC_HandleTypeDef* dacHandle)
     GPIO_InitStruct.Pull = GPIO_NOPULL;
     HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
+    /* DAC1 interrupt Init */
+    HAL_NVIC_SetPriority(TIM6_DAC_IRQn, 0, 0);
+    HAL_NVIC_EnableIRQ(TIM6_DAC_IRQn);
   /* USER CODE BEGIN DAC1_MspInit 1 */
 
   /* USER CODE END DAC1_MspInit 1 */
@@ -104,6 +119,15 @@ void HAL_DAC_MspDeInit(DAC_HandleTypeDef* dacHandle)
     PA5     ------> DAC1_OUT2 
     */
     HAL_GPIO_DeInit(GPIOA, GPIO_PIN_4|GPIO_PIN_5);
+
+    /* DAC1 interrupt Deinit */
+  /* USER CODE BEGIN DAC1:TIM6_DAC_IRQn disable */
+    /**
+    * Uncomment the line below to disable the "TIM6_DAC_IRQn" interrupt
+    * Be aware, disabling shared interrupt may affect other IPs
+    */
+    /* HAL_NVIC_DisableIRQ(TIM6_DAC_IRQn); */
+  /* USER CODE END DAC1:TIM6_DAC_IRQn disable */
 
   /* USER CODE BEGIN DAC1_MspDeInit 1 */
 

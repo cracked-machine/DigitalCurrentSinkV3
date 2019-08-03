@@ -17,10 +17,10 @@
 #include <string.h>
 #include <stdarg.h>
 
-
+void Utils_Init();
 int _write(int file, char *ptr, int len);
-void i2c_scan();
-
+void Utils_i2c_scan();
+void Utils_UpdateDisplay();
 
 
 #endif /* UTILS_H_ */
