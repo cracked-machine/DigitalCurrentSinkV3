@@ -503,9 +503,11 @@ Wire Wire Line
 Wire Wire Line
 	19825 11300 19950 11300
 $Comp
-L Tactile_SPST-NO:Tactile_Switch_SPST-NO U_BTN3
+L ControlModule-rescue:Tactile_Switch_SPST-NO-Tactile_SPST-NO U_BTN3
 U 1 1 5CB3B653
 P 4600 13150
+AR Path="/5CB3B653" Ref="U_BTN3"  Part="1" 
+AR Path="/5D061C98/5CB3B653" Ref="U_BTN3"  Part="1" 
 F 0 "U_BTN3" H 4600 13550 50  0000 C CNN
 F 1 "Tactile_Switch_SPST-NO" H 4650 13450 50  0000 C CNN
 F 2 "12x12x7_3mmTactilePushButtonMomentary:12x12x7_3mmTactilePushButtonMomentary" H 4600 13150 50  0001 C CNN
@@ -524,9 +526,11 @@ Wire Wire Line
 NoConn ~ 5000 13050
 NoConn ~ 5000 13250
 $Comp
-L Tactile_SPST-NO:Tactile_Switch_SPST-NO U_BTN5
+L ControlModule-rescue:Tactile_Switch_SPST-NO-Tactile_SPST-NO U_BTN5
 U 1 1 5CBE308F
 P 5850 13150
+AR Path="/5CBE308F" Ref="U_BTN5"  Part="1" 
+AR Path="/5D061C98/5CBE308F" Ref="U_BTN5"  Part="1" 
 F 0 "U_BTN5" H 5850 13550 50  0000 C CNN
 F 1 "Tactile_Switch_SPST-NO" H 5900 13450 50  0000 C CNN
 F 2 "12x12x7_3mmTactilePushButtonMomentary:12x12x7_3mmTactilePushButtonMomentary" H 5850 13150 50  0001 C CNN
@@ -545,9 +549,11 @@ Wire Wire Line
 NoConn ~ 6250 13050
 NoConn ~ 6250 13250
 $Comp
-L Tactile_SPST-NO:Tactile_Switch_SPST-NO U_BTN2
+L ControlModule-rescue:Tactile_Switch_SPST-NO-Tactile_SPST-NO U_BTN2
 U 1 1 5CC20FAA
 P 2050 13150
+AR Path="/5CC20FAA" Ref="U_BTN2"  Part="1" 
+AR Path="/5D061C98/5CC20FAA" Ref="U_BTN2"  Part="1" 
 F 0 "U_BTN2" H 2050 13550 50  0000 C CNN
 F 1 "Tactile_Switch_SPST-NO" H 2100 13450 50  0000 C CNN
 F 2 "12x12x7_3mmTactilePushButtonMomentary:12x12x7_3mmTactilePushButtonMomentary" H 2050 13150 50  0001 C CNN
@@ -566,9 +572,11 @@ Wire Wire Line
 NoConn ~ 2450 13050
 NoConn ~ 2450 13250
 $Comp
-L Tactile_SPST-NO:Tactile_Switch_SPST-NO U_BTN1
+L ControlModule-rescue:Tactile_Switch_SPST-NO-Tactile_SPST-NO U_BTN1
 U 1 1 5CC42781
 P 3350 13150
+AR Path="/5CC42781" Ref="U_BTN1"  Part="1" 
+AR Path="/5D061C98/5CC42781" Ref="U_BTN1"  Part="1" 
 F 0 "U_BTN1" H 3350 13550 50  0000 C CNN
 F 1 "Tactile_Switch_SPST-NO" H 3400 13450 50  0000 C CNN
 F 2 "12x12x7_3mmTactilePushButtonMomentary:12x12x7_3mmTactilePushButtonMomentary" H 3350 13150 50  0001 C CNN

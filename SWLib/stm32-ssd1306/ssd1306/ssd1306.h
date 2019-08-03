@@ -24,8 +24,8 @@
 
 /* vvv I2C config vvv */
 
-//#define SSD1306_MIRROR_VERT
-//#define SSD1306_MIRROR_HORIZ
+#define SSD1306_MIRROR_VERT
+#define SSD1306_MIRROR_HORIZ
 
 #ifndef SSD1306_I2C_PORT
 #define SSD1306_I2C_PORT		hi2c1
