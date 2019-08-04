@@ -32,7 +32,7 @@
 #endif
 
 #ifndef SSD1306_I2C_ADDR
-#define SSD1306_I2C_ADDR        (0x3C << 1)
+#define SSD1306_I2C_ADDR        (0x3D << 1)
 #endif
 
 /* ^^^ I2C config ^^^ */

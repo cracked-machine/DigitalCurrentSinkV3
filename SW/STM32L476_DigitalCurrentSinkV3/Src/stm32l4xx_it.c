@@ -270,21 +270,18 @@ void EXTI15_10_IRQHandler(void)
 		printf("Button1\n");
 		cycleDACMode(DAC_CHANNEL_1);
 		printf("DAC1 Mode: %d\n", getDACMode(DAC_CHANNEL_1));
-
-
-
 	}
 	else if(HAL_GPIO_ReadPin(GPIOD, Btn2_EXT11_Pin) == GPIO_PIN_RESET)
 	{
 		printf("Button2\n");
-		cycleDACMode(DAC_CHANNEL_2);
-		printf("DAC2 Mode: %d\n", getDACMode(DAC_CHANNEL_2));
+		increaseDAC(DAC_CHANNEL_1);
 	}
 
 	else if(HAL_GPIO_ReadPin(GPIOD, Btn3_EXT12_Pin) == GPIO_PIN_RESET)
 	{
 		printf("Button3\n");
-		increaseDAC(DAC_CHANNEL_1);
+		cycleDACMode(DAC_CHANNEL_2);
+		printf("DAC2 Mode: %d\n", getDACMode(DAC_CHANNEL_2));
 	}
 	else if(HAL_GPIO_ReadPin(GPIOD, Btn4_EXT13_Pin) == GPIO_PIN_RESET)
 	{

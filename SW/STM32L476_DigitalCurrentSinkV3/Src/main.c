@@ -110,10 +110,6 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-	  //Utils_UpdateDisplay();
-	  //printf("Test\n");
-	  //HAL_DAC_SetValue(&hdac1, DAC_CHANNEL_1, DAC_ALIGN_8B_R, 0);
-	  //HAL_DAC_SetValue(&hdac1, DAC_CHANNEL_2, DAC_ALIGN_8B_R, 0);
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
