@@ -48,12 +48,16 @@ float calcDACVolts(uint16_t dor)
 	return result;
 }
 
-void increaseVoltage(uint32_t Channel)
+void changeVoltage(uint32_t Channel, int increase)
 {
 	if (Channel == DAC_CHANNEL_1)
 	{
-		chan1AmpCount += MAXAMPSTEP;
-		if(chan1AmpCount > MAXDVAL)
+		if(increase)
+			chan1AmpCount += MAXAMPSTEP;
+		else
+			chan1AmpCount -= MAXAMPSTEP;
+
+		if((chan1AmpCount < 1) | (chan1AmpCount > MAXDVAL))
 			chan1AmpCount = 0;
 
 		HAL_DAC_SetValue(&hdac1,DAC_CHANNEL_1, DAC_ALIGN_8B_R, chan1AmpCount);
@@ -64,8 +68,12 @@ void increaseVoltage(uint32_t Channel)
 	}
 	else if (Channel == DAC_CHANNEL_2)
 	{
-		chan2AmpCount += MAXAMPSTEP;
-		if(chan2AmpCount > MAXDVAL)
+		if(increase)
+			chan2AmpCount += MAXAMPSTEP;
+		else
+			chan2AmpCount -= MAXAMPSTEP;
+
+		if((chan2AmpCount < 1) | (chan2AmpCount > MAXDVAL))
 			chan2AmpCount = 0;
 
 		HAL_DAC_SetValue(&hdac1,DAC_CHANNEL_2, DAC_ALIGN_8B_R, chan2AmpCount);
@@ -113,12 +121,18 @@ void resetDACFreq(uint32_t Channel)
 
 }
 
-void increaseFreq(uint32_t Channel)
+void changeFreq(uint32_t Channel, int increase)
 {
 	if (Channel == DAC_CHANNEL_1)
 	{
 		chan1FreqCount = htim6.Instance->ARR;
-		chan1FreqCount -= MAXFREQSTEP;
+
+		// decrement cycle period to increase frequency
+		if(increase)
+			chan1FreqCount -= MAXFREQSTEP;
+		else
+			chan1FreqCount += MAXFREQSTEP;
+
 		if((chan1FreqCount < 1) | (chan1FreqCount > DACARR))
 			chan1FreqCount = DACARR;
 
@@ -130,8 +144,12 @@ void increaseFreq(uint32_t Channel)
 	}
 	else if (Channel == DAC_CHANNEL_2)
 	{
-		chan2FreqCount = htim7.Instance->ARR;
-		chan2FreqCount -= MAXFREQSTEP;
+		// decrement cycle period to increase frequency
+		if(increase)
+			chan2FreqCount -= MAXFREQSTEP;
+		else
+			chan2FreqCount += MAXFREQSTEP;
+
 		if((chan2FreqCount < 1) | (chan2FreqCount > DACARR))
 			chan2FreqCount = DACARR;
 
@@ -166,15 +184,32 @@ void increaseDAC(uint32_t Channel)
 	uint8_t currentDacMode = getDACMode(Channel);
 	if(currentDacMode == DAC_USER)
 	{
-		increaseVoltage(Channel);
+		changeVoltage(Channel, 1);
 	}
 	else if (currentDacMode == DAC_TRI)
 	{
-		increaseFreq(Channel);
+		changeFreq(Channel, 1);
 	}
 	else if (currentDacMode == DAC_NOISE)
 	{
-		increaseFreq(Channel);
+		changeFreq(Channel, 1);
+	}
+}
+
+void decreaseDAC(uint32_t Channel)
+{
+	uint8_t currentDacMode = getDACMode(Channel);
+	if(currentDacMode == DAC_USER)
+	{
+		changeVoltage(Channel, 0);
+	}
+	else if (currentDacMode == DAC_TRI)
+	{
+		changeFreq(Channel, 0);
+	}
+	else if (currentDacMode == DAC_NOISE)
+	{
+		changeFreq(Channel, 0);
 	}
 }
 

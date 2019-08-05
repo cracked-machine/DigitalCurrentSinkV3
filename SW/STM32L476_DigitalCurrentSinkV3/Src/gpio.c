@@ -49,7 +49,7 @@ void MX_GPIO_Init(void)
   __HAL_RCC_GPIOD_CLK_ENABLE();
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOE, KP1_GPOUT_Pin|KP2_GPOUT_Pin|KP3_GPOUT_Pin|KP4_GPOUT_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOE, KP1_GPOUT_Pin|KP2_GPOUT_Pin|KP3_GPOUT_Pin|KP4_GPOUT_Pin, GPIO_PIN_SET);
 
   /*Configure GPIO pins : PBPin PBPin PBPin */
   GPIO_InitStruct.Pin = KP5_EXTI0_Pin|KP6_EXTI1_Pin|KP7_EXTI2_Pin;
@@ -60,7 +60,7 @@ void MX_GPIO_Init(void)
   /*Configure GPIO pins : PEPin PEPin PEPin PEPin */
   GPIO_InitStruct.Pin = KP1_GPOUT_Pin|KP2_GPOUT_Pin|KP3_GPOUT_Pin|KP4_GPOUT_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
-  GPIO_InitStruct.Pull = GPIO_PULLDOWN;
+  GPIO_InitStruct.Pull = GPIO_PULLUP;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(GPIOE, &GPIO_InitStruct);
 

@@ -22,8 +22,10 @@ typedef enum dacmode
 dacmode_t getDACMode(uint32_t Channel);
 void setDACMode(uint32_t Channel, dacmode_t mode);
 void cycleDACMode(uint32_t Channel);
+
 void increaseDAC(uint32_t Channel);
-void resetDACVoltage(uint32_t Channel);
+void decreaseDAC(uint32_t Channel);
+
 float getDACVoltage(uint32_t Channel);
 float getDACFreq(uint32_t Channel);
 
