@@ -47,6 +47,7 @@ void dm_drawModeDisp();
 void dm_drawValueOverlay();
 void dm_drawValueDisp();
 
+void dm_toggleblink();
 
 
 #endif /* DISPLAYMANAGER_H_ */

@@ -39,6 +39,7 @@ void im_menuExtiHandler()
 			break;
 		case DISPVAL:
 			increaseDAC(dm_getSelectedDac());
+
 			break;
 		default:
 			break;
@@ -84,6 +85,7 @@ void im_menuExtiHandler()
 		case DISPMODE:
 			break;
 		case DISPVAL:
+
 			break;
 		default:
 			break;

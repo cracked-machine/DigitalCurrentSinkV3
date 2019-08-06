@@ -15,6 +15,19 @@
 
 selectedDacChan_t 	DACSELECT = DAC_CHANNEL_1;
 displayState_t 		DISPSTATE = DISPMAIN;
+uint8_t blink = 0;
+
+void dm_toggleblink()
+{
+	if(blink)
+	{
+		blink = 0;
+	}
+	else
+	{
+		blink = 1;
+	}
+}
 
 void dm_updateDisplay()
 {
@@ -134,12 +147,14 @@ void dm_drawValueDisp()
     case DAC_CHANNEL_1:
     	ssd1306_WriteString("Enter DAC1 Value:", Font_7x10, White, 0);
         ssd1306_SetCursor(8, 40);
-        dm_drawDac1Value();
+        if(blink)
+        	dm_drawDac1Value();
     	break;
     case DAC_CHANNEL_2:
     	ssd1306_WriteString("Enter DAC2 Value:", Font_7x10, White, 0);
         ssd1306_SetCursor(8, 40);
-        dm_drawDac2Value();
+        if(blink)
+        	dm_drawDac2Value();
     	break;
     default:
     	break;
