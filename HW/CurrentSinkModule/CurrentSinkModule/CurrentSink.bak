@@ -657,8 +657,6 @@ Wire Wire Line
 	23700 7350 23700 8000
 Wire Wire Line
 	25100 8000 25100 7250
-Wire Wire Line
-	25100 7250 25350 7250
 $Comp
 L Device:R R14
 U 1 1 5DD2778A
@@ -670,8 +668,6 @@ F 3 "~" H 23150 7150 50  0001 C CNN
 	1    23150 7150
 	0    1    1    0   
 $EndComp
-Wire Wire Line
-	23000 7150 22600 7150
 Connection ~ 21950 7150
 Wire Wire Line
 	21950 14300 21950 14200
@@ -688,8 +684,6 @@ F 3 "~" H 22650 14200 50  0001 C CNN
 	1    22650 14200
 	0    1    1    0   
 $EndComp
-Wire Wire Line
-	21950 14200 22225 14200
 Connection ~ 21950 14200
 Wire Wire Line
 	14400 17200 27900 17200
@@ -1213,8 +1207,6 @@ Text Label 2575 15200 0    50   ~ 0
 DACSIG2
 Text Label 2575 6300 0    50   ~ 0
 DACSIG1
-Wire Wire Line
-	6000 6400 6300 6400
 $Comp
 L Device:C C2
 U 1 1 5D76AB84
@@ -1292,8 +1284,6 @@ F 3 "" H 4850 16575 50  0001 C CNN
 	1    4850 16575
 	1    0    0    -1  
 $EndComp
-Wire Wire Line
-	6250 15300 6550 15300
 $Comp
 L Device:C C1
 U 1 1 5D8CA453
@@ -1394,56 +1384,6 @@ Wire Wire Line
 Wire Wire Line
 	13250 15325 14400 15325
 $Comp
-L Device:Jumper_NO_Small JP5
-U 1 1 5D41CFB9
-P 5975 14750
-F 0 "JP5" H 5975 14935 50  0000 C CNN
-F 1 "BYPASS" H 5975 14844 50  0000 C CNN
-F 2 "Jumper:SolderJumper-2_P1.3mm_Open_Pad1.0x1.5mm" H 5975 14750 50  0001 C CNN
-F 3 "~" H 5975 14750 50  0001 C CNN
-	1    5975 14750
-	1    0    0    -1  
-$EndComp
-Wire Wire Line
-	5875 14750 5300 14750
-Wire Wire Line
-	6075 14750 6550 14750
-Wire Wire Line
-	6550 14750 6550 15300
-Connection ~ 6550 15300
-Wire Wire Line
-	6550 15300 6800 15300
-Wire Wire Line
-	5300 15200 5300 14750
-Connection ~ 5300 15200
-Wire Wire Line
-	5300 15200 5650 15200
-$Comp
-L Device:Jumper_NO_Small JP6
-U 1 1 5D4EBEF2
-P 5725 5850
-F 0 "JP6" H 5725 6035 50  0000 C CNN
-F 1 "BYPASS" H 5725 5944 50  0000 C CNN
-F 2 "Jumper:SolderJumper-2_P1.3mm_Open_Pad1.0x1.5mm" H 5725 5850 50  0001 C CNN
-F 3 "~" H 5725 5850 50  0001 C CNN
-	1    5725 5850
-	1    0    0    -1  
-$EndComp
-Wire Wire Line
-	5625 5850 5050 5850
-Wire Wire Line
-	5825 5850 6300 5850
-Wire Wire Line
-	6300 5850 6300 6400
-Wire Wire Line
-	5050 6300 5050 5850
-Connection ~ 5050 6300
-Wire Wire Line
-	5050 6300 5400 6300
-Connection ~ 6300 6400
-Wire Wire Line
-	6300 6400 6600 6400
-$Comp
 L Connector:TestPoint TP3
 U 1 1 5D519E40
 P 3200 14550
@@ -1498,8 +1438,8 @@ Wire Wire Line
 	25100 8000 24300 8000
 Text Notes 24350 8275 2    50   ~ 0
 INPUT BIAS\nCOMPENSATION
-Text Notes 13225 5850 2    50   ~ 0
-INPUT BIAS\nCOMPENSATION
+Text Notes 12500 6000 0    50   ~ 0
+INPUT BIAS COMPENSATION.\nIF NOT USED MUST \nBE POPULATED WITH 0R RESISTOR
 Text Notes 13325 15600 2    50   ~ 0
 INPUT BIAS\nCOMPENSATION
 $Comp
@@ -1555,8 +1495,6 @@ Wire Wire Line
 	4850 15500 4850 15200
 Connection ~ 4850 15200
 Wire Wire Line
-	4850 15200 5300 15200
-Wire Wire Line
 	4850 15800 4850 15975
 $Comp
 L Device:R R18
@@ -1576,8 +1514,6 @@ Wire Wire Line
 Wire Wire Line
 	4750 6575 4750 6300
 Connection ~ 4750 6300
-Wire Wire Line
-	4750 6300 5050 6300
 Wire Wire Line
 	4750 6875 4750 7075
 Wire Wire Line
@@ -1802,25 +1738,6 @@ Wire Wire Line
 	9775 6500 10300 6500
 Wire Wire Line
 	6600 6400 6600 7150
-$Comp
-L Device:Jumper_NO_Small JP8
-U 1 1 5D792CA6
-P 9200 7825
-F 0 "JP8" H 9200 8010 50  0000 C CNN
-F 1 "BYPASS" H 9200 7919 50  0000 C CNN
-F 2 "Jumper:SolderJumper-2_P1.3mm_Open_Pad1.0x1.5mm" H 9200 7825 50  0001 C CNN
-F 3 "~" H 9200 7825 50  0001 C CNN
-	1    9200 7825
-	1    0    0    1   
-$EndComp
-Wire Wire Line
-	9100 7825 8375 7825
-Wire Wire Line
-	9300 7825 9775 7825
-Wire Wire Line
-	9775 7825 9775 7250
-Wire Wire Line
-	8375 7250 8375 7825
 Wire Wire Line
 	10300 3900 10300 6500
 Wire Wire Line
@@ -1937,8 +1854,6 @@ Wire Wire Line
 Text Label 27400 14300 2    50   ~ 0
 ADCSIG2
 Wire Wire Line
-	25650 14300 25875 14300
-Wire Wire Line
 	25650 14300 25100 14300
 Connection ~ 25650 14300
 Wire Wire Line
@@ -1996,25 +1911,6 @@ Wire Wire Line
 Connection ~ 9425 15400
 Wire Wire Line
 	9425 16025 10250 16025
-$Comp
-L Device:Jumper_NO_Small JP7
-U 1 1 5DB4E932
-P 8850 14850
-F 0 "JP7" H 8850 15035 50  0000 C CNN
-F 1 "BYPASS" H 8850 14944 50  0000 C CNN
-F 2 "Jumper:SolderJumper-2_P1.3mm_Open_Pad1.0x1.5mm" H 8850 14850 50  0001 C CNN
-F 3 "~" H 8850 14850 50  0001 C CNN
-	1    8850 14850
-	1    0    0    -1  
-$EndComp
-Wire Wire Line
-	8750 14850 8025 14850
-Wire Wire Line
-	8950 14850 9425 14850
-Wire Wire Line
-	9425 14850 9425 15400
-Wire Wire Line
-	8025 15300 8025 14850
 Connection ~ 8025 15300
 Wire Wire Line
 	8025 15300 8325 15300
@@ -2696,15 +2592,9 @@ Wire Wire Line
 Wire Wire Line
 	9425 15400 9425 16025
 Wire Wire Line
-	8025 14850 8025 14350
-Wire Wire Line
 	8025 14350 8600 14350
-Connection ~ 8025 14850
 Wire Wire Line
 	8900 14350 9425 14350
-Wire Wire Line
-	9425 14350 9425 14850
-Connection ~ 9425 14850
 Wire Wire Line
 	7625 6400 7950 6400
 Connection ~ 7950 6400
@@ -2712,8 +2602,6 @@ Wire Wire Line
 	9775 6500 9775 7250
 Wire Wire Line
 	7950 6400 8675 6400
-Connection ~ 9775 7250
-Connection ~ 8375 7250
 $Comp
 L power:+12V #PWR0107
 U 1 1 5D6386F8
@@ -2882,54 +2770,36 @@ F 3 "" H 20450 8650 50  0001 C CNN
 	1    20450 8650
 	-1   0    0    1   
 $EndComp
-$Comp
-L Device:Jumper_NO_Small JP?
-U 1 1 5D36180C
-P 24175 6275
-F 0 "JP?" H 24175 6460 50  0000 C CNN
-F 1 "BYPASS" H 24175 6369 50  0000 C CNN
-F 2 "Jumper:SolderJumper-2_P1.3mm_Open_Pad1.0x1.5mm" H 24175 6275 50  0001 C CNN
-F 3 "~" H 24175 6275 50  0001 C CNN
-	1    24175 6275
-	1    0    0    1   
-$EndComp
 Wire Wire Line
-	24075 6275 22600 6275
+	6000 6400 6600 6400
 Wire Wire Line
-	22600 6275 22600 7150
-Connection ~ 22600 7150
+	4750 6300 5400 6300
+Text Notes 3800 4450 0    100  ~ 0
+To bypass active filter populate:\nR2, R4 and R20 with 0R resistors,\nomit others
 Wire Wire Line
-	22600 7150 21950 7150
+	6250 15300 6800 15300
 Wire Wire Line
-	24275 6275 25350 6275
+	4850 15200 5650 15200
 Wire Wire Line
-	25350 6275 25350 7250
-Connection ~ 25350 7250
+	8025 14350 8025 15300
 Wire Wire Line
-	25350 7250 25600 7250
-$Comp
-L Device:Jumper_NO_Small JP?
-U 1 1 5D3A9422
-P 24075 13300
-F 0 "JP?" H 24075 13485 50  0000 C CNN
-F 1 "BYPASS" H 24075 13394 50  0000 C CNN
-F 2 "Jumper:SolderJumper-2_P1.3mm_Open_Pad1.0x1.5mm" H 24075 13300 50  0001 C CNN
-F 3 "~" H 24075 13300 50  0001 C CNN
-	1    24075 13300
-	1    0    0    1   
-$EndComp
+	9425 14350 9425 15400
+Text Notes 4000 13300 0    100  ~ 0
+To bypass active filter populate:\nR1, R3 and R19 with 0R resistors,\nomit others
+Text Notes 7500 13300 0    100  ~ 0
+To bypass inverting gain amp populate:\nR7 and R8 with 1K resistors, R5 with 0R resistor,\nomit others
+Text Notes 7050 4550 0    100  ~ 0
+To bypass non-inverting \ngain amp populate:\nR25 and R6 with 0R resistors\nomit others
+Text Notes 23400 5900 0    100  ~ 0
+To bypass active filter populate:\nR14 and R23 with 0R resistors,\nomit others
 Wire Wire Line
-	23975 13300 22225 13300
+	21950 7150 23000 7150
 Wire Wire Line
-	22225 13300 22225 14200
-Connection ~ 22225 14200
+	25100 7250 25600 7250
 Wire Wire Line
-	22225 14200 22500 14200
+	21950 14200 22500 14200
 Wire Wire Line
-	24175 13300 25875 13300
-Wire Wire Line
-	25875 13300 25875 14300
-Connection ~ 25875 14300
-Wire Wire Line
-	25875 14300 26150 14300
+	25650 14300 26150 14300
+Text Notes 23250 13650 0    100  ~ 0
+To bypass active filter populate:\nR13 and R22 with 0R resistors,\nomit others
 $EndSCHEMATC
