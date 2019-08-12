@@ -105,9 +105,13 @@ void dm_drawModeDisp()
     {
     case DAC_CHANNEL_1:
     	ssd1306_WriteString("Enter DAC1 mode:", Font_7x10, White, 0);
+    	ssd1306_SetCursor(10, 40);
+    	ssd1306_WriteString(getDACMode2String(DAC_CHANNEL_1), Font_7x10, White, 0);
     	break;
     case DAC_CHANNEL_2:
     	ssd1306_WriteString("Enter DAC2 Mode:", Font_7x10, White, 0);
+    	ssd1306_SetCursor(10, 40);
+    	ssd1306_WriteString(getDACMode2String(DAC_CHANNEL_2), Font_7x10, White, 0);
     	break;
     default:
     	break;

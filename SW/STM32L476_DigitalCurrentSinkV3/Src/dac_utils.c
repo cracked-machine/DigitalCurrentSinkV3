@@ -19,7 +19,7 @@
 #define CALCFREQ(PSC,ARR) (MASTERCLK/(PSC*ARR))
 
 #define VREF 3.3
-#define MAXDVAL 4096
+#define DACRES 4096
 #define MAXAMPSTEP 1
 
 // DAC Channel 1 variables
@@ -44,8 +44,31 @@ float chan2FreqHz = 0;
 
 float calcDACVolts(uint16_t dor)
 {
-	float result = (float)(VREF * ((float)dor/(float)MAXDVAL));
+	float result = (float)(VREF * ((float)dor/(float)DACRES));
 	return result;
+}
+
+uint16_t calcNewDOR(float volts)
+{
+	uint16_t result = ((uint16_t)volts * DACRES) / VREF;
+	return result;
+}
+
+void setVoltage(uint32_t Channel, float newVolts)
+{
+	if (Channel == DAC_CHANNEL_1)
+	{
+		chan1AmpCount = calcNewDOR(newVolts);
+		HAL_DAC_SetValue(&hdac1,DAC_CHANNEL_1, DAC_ALIGN_8B_R, chan1AmpCount);
+		chan1AmpMVolts = (float)calcDACVolts(hdac1.Instance->DOR1);
+	}
+
+	else if (Channel == DAC_CHANNEL_2)
+	{
+		chan2AmpCount = calcNewDOR(newVolts);
+		HAL_DAC_SetValue(&hdac1,DAC_CHANNEL_2, DAC_ALIGN_8B_R, chan2AmpCount);
+		chan2AmpMVolts = (float)calcDACVolts(hdac1.Instance->DOR2);
+	}
 }
 
 void changeVoltage(uint32_t Channel, int increase)
@@ -57,12 +80,12 @@ void changeVoltage(uint32_t Channel, int increase)
 		else
 			chan1AmpCount -= MAXAMPSTEP;
 
-		if((chan1AmpCount < 1) | (chan1AmpCount > MAXDVAL))
+		if((chan1AmpCount < 1) | (chan1AmpCount > DACRES))
 			chan1AmpCount = 0;
 
 		HAL_DAC_SetValue(&hdac1,DAC_CHANNEL_1, DAC_ALIGN_8B_R, chan1AmpCount);
 		// recalculate millvolts output
-		//chan1AmpMVolts = (VREF / MAXDVAL) * chan1AmpCount;
+		//chan1AmpMVolts = (VREF / DACRES) * chan1AmpCount;
 		chan1AmpMVolts = (float)calcDACVolts(hdac1.Instance->DOR1);
 
 	}
@@ -73,12 +96,12 @@ void changeVoltage(uint32_t Channel, int increase)
 		else
 			chan2AmpCount -= MAXAMPSTEP;
 
-		if((chan2AmpCount < 1) | (chan2AmpCount > MAXDVAL))
+		if((chan2AmpCount < 1) | (chan2AmpCount > DACRES))
 			chan2AmpCount = 0;
 
 		HAL_DAC_SetValue(&hdac1,DAC_CHANNEL_2, DAC_ALIGN_8B_R, chan2AmpCount);
 		// recalculate millvolts output
-		//chan2AmpMVolts = (VREF / MAXDVAL) * chan2AmpCount;
+		//chan2AmpMVolts = (VREF / DACRES) * chan2AmpCount;
 		chan2AmpMVolts = (float)calcDACVolts(hdac1.Instance->DOR2);
 	}
 }
@@ -90,14 +113,14 @@ void resetDACVoltage(uint32_t Channel)
 	{
 		chan1AmpCount = 0;
 		// recalculate millvolts output
-		//chan1AmpMVolts = (VREF / MAXDVAL) * chan1AmpCount;
+		//chan1AmpMVolts = (VREF / DACRES) * chan1AmpCount;
 		chan1AmpMVolts = (float)calcDACVolts(hdac1.Instance->DOR1);
 	}
 	else if (Channel == DAC_CHANNEL_2)
 	{
 		chan2AmpCount = 0;
 		// recalculate millvolts output
-		//chan1AmpMVolts = (VREF / MAXDVAL) * chan1AmpCount;
+		//chan1AmpMVolts = (VREF / DACRES) * chan1AmpCount;
 		chan2AmpMVolts = (float)calcDACVolts(hdac1.Instance->DOR2);
 	}
 
@@ -119,6 +142,24 @@ void resetDACFreq(uint32_t Channel)
 		chan2FreqHz = (float)MASTERCLK/(htim7.Instance->PSC * htim7.Instance->ARR);
 	}
 
+}
+
+void setFreq(uint32_t Channel, uint32_t newHertz)
+{
+	if (Channel == DAC_CHANNEL_1)
+	{
+		htim6.Instance->ARR = (uint32_t)(MASTERCLK/(htim6.Instance->PSC * newHertz));
+		printf("New Freq request: %lu\n", newHertz);
+		chan1FreqHz = (float)MASTERCLK/(htim6.Instance->PSC * htim6.Instance->ARR);
+		printf("Chan1 Freq: %2.4fHz (%u)\n", chan1FreqHz, chan1FreqCount);
+	}
+	else if (Channel == DAC_CHANNEL_2)
+	{
+		htim7.Instance->ARR = (uint32_t)(MASTERCLK/(htim7.Instance->PSC * newHertz));
+		printf("New Freq request: %lu\n", newHertz);
+		chan2FreqHz = (float)MASTERCLK/(htim7.Instance->PSC * htim7.Instance->ARR);
+		printf("Chan2 Freq: %2.4fHz (%u)\n", chan2FreqHz, chan2FreqCount);
+	}
 }
 
 void changeFreq(uint32_t Channel, int increase)
@@ -250,6 +291,47 @@ dacmode_t getDACMode(uint32_t Channel)
 	{
 		return DAC_ERROR;
 	}
+}
+
+
+char* getDACMode2String(uint32_t Channel)
+{
+	volatile uint32_t hdac_cr = hdac1.Instance->CR;
+	if (Channel == DAC_CHANNEL_1)
+	{
+		if	(hdac_cr & DAC_CR_WAVE1_0)
+		{
+			return "Random";
+		}
+		else if (hdac_cr & DAC_CR_WAVE1_1)
+		{
+			return "Auto";
+		}
+		else
+		{
+			return "User";
+		}
+	}
+	else if (Channel == DAC_CHANNEL_2)
+	{
+		if	(hdac_cr & DAC_CR_WAVE2_0)
+		{
+			return "Random";
+		}
+		else if (hdac_cr & DAC_CR_WAVE2_1)
+		{
+			return "Auto";
+		}
+		else
+		{
+			return "User";
+		}
+	}
+	else
+	{
+		return "Error";
+	}
+
 }
 
 void setDACMode(uint32_t Channel, dacmode_t mode)
