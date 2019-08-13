@@ -19,6 +19,7 @@
 // C LIB
 #include <string.h>
 #include <stdarg.h>
+#include <math.h>
 
 enum
 {
@@ -34,6 +35,8 @@ enum
 } muxSequence;
 
 int muxCount=0;
+uint8_t dpCount = 0;
+uint8_t placeCount = 1;
 
 #define KPDEBUG
 
@@ -56,6 +59,12 @@ uint32_t lastKeyPressed = 0;
 ///
 ////////////////////////////////////////////////
 
+
+uint8_t getPlaceCount()
+{
+	return placeCount;
+}
+
 void setKeypadDebounceCounter(uint16_t pValue)
 {
 	keypadDebounceCounter += pValue;
@@ -67,7 +76,7 @@ uint32_t getKeypadDebounceCounter()
 }
 
 
-void setKeypadBuffer(uint32_t pValue)
+void setKeypadBuffer(double pValue)
 {
 
 		keypadBuffer = pValue;
@@ -116,10 +125,22 @@ uint32_t getKeypadBufferMax()
 	}
 }*/
 
-uint32_t concatenate(uint32_t x, uint32_t y) {
+double concatenate(double x, double y) {
+	double nextCalculatedValue = 0;
 	lastKeyPressed = y;
-    uint32_t pow = 10;
-    uint32_t nextCalculatedValue = (x * pow + y);
+    double exp = 10;
+    if(dpCount > 0)
+    {
+    	y = y / (pow(exp,dpCount));
+    	dpCount++;
+    	nextCalculatedValue = (x + y);
+    	placeCount++;
+    }
+    else
+    {
+    	nextCalculatedValue = (x * exp + y);
+    }
+
     if(nextCalculatedValue >= keypadBufferMax)
     {
     	setKeypadBuffer(x);						// set display using previous entered value
@@ -131,6 +152,7 @@ uint32_t concatenate(uint32_t x, uint32_t y) {
     	//setKeypadBuffer(0);
     	return 0;
     }
+
     return nextCalculatedValue;
 }
 
@@ -193,6 +215,11 @@ void readKey5()
 			if(dm_getState() == DISPVAL)
 			{
 				dm_setBlinkTimer(1);
+				if(dpCount > 0)
+				{
+					printf("Increment DP Count: %d\n", dpCount);
+
+				}
 				setKeypadBuffer(concatenate(keypadBuffer, 1));
 			}
 			printf("Key1 Pressed = %2.2f\n", keypadBuffer);
@@ -205,6 +232,11 @@ void readKey5()
 			if(dm_getState() == DISPVAL)
 			{
 				dm_setBlinkTimer(1);
+				if(dpCount > 0)
+				{
+					printf("Increment DP Count: %d\n", dpCount);
+
+				}
 				setKeypadBuffer(concatenate(keypadBuffer, 4));
 			}
 			printf("Key4 Pressed = %2.2f\n", keypadBuffer);
@@ -217,6 +249,11 @@ void readKey5()
 			if(dm_getState() == DISPVAL)
 			{
 				dm_setBlinkTimer(1);
+				if(dpCount > 0)
+				{
+					printf("Increment DP Count: %d\n", dpCount);
+
+				}
 				setKeypadBuffer(concatenate(keypadBuffer, 7));
 			}
 			printf("Key7 Pressed = %2.2f\n", keypadBuffer);
@@ -231,6 +268,19 @@ void readKey5()
 				dm_setBlinkTimer(1);
 			}
 			printf("Key * Pressed = %2.2f\n", keypadBuffer);
+
+			// enable decimal point count (incremented further by other digit presses)
+			if(!dpCount)
+			{
+				printf("Enabled DP Count\n");
+				dpCount=1;
+			}
+/*			else
+			{
+				printf("Disabled DP Count");
+				dpCount=0;		// disable decimal point count if pressed again
+			}
+*/
 		}
 
 		lastKeypadDelay = newKeypadDelay;
@@ -255,6 +305,11 @@ void readKey6()
 			if(dm_getState() == DISPVAL)
 			{
 				dm_setBlinkTimer(1);
+				if(dpCount > 0)
+				{
+					printf("Increment DP Count: %d\n", dpCount);
+
+				}
 				setKeypadBuffer(concatenate(keypadBuffer, 2));
 			}
 			printf("Key2 Pressed = %2.2f\n", keypadBuffer);
@@ -267,6 +322,11 @@ void readKey6()
 			if(dm_getState() == DISPVAL)
 			{
 				dm_setBlinkTimer(1);
+				if(dpCount > 0)
+				{
+					printf("Increment DP Count: %d\n", dpCount);
+
+				}
 				setKeypadBuffer(concatenate(keypadBuffer, 5));
 			}
 			printf("Key5 Pressed = %2.2f\n", keypadBuffer);
@@ -278,6 +338,11 @@ void readKey6()
 			if(dm_getState() == DISPVAL)
 			{
 				dm_setBlinkTimer(1);
+				if(dpCount > 0)
+				{
+					printf("Increment DP Count: %d\n", dpCount);
+
+				}
 				setKeypadBuffer(concatenate(keypadBuffer, 8));
 			}
 			printf("Key8 Pressed = %2.2f\n", keypadBuffer);
@@ -290,6 +355,11 @@ void readKey6()
 			if(dm_getState() == DISPVAL)
 			{
 				dm_setBlinkTimer(1);
+				if(dpCount > 0)
+				{
+					printf("Increment DP Count: %d\n", dpCount);
+
+				}
 				setKeypadBuffer(concatenate(keypadBuffer, 0));
 			}
 			printf("Key0 Pressed = %2.2f\n", keypadBuffer);
@@ -317,6 +387,11 @@ void readKey7()
 			if(dm_getState() == DISPVAL)
 			{
 				dm_setBlinkTimer(1);
+				if(dpCount > 0)
+				{
+					printf("Increment DP Count: %d\n", dpCount);
+
+				}
 				setKeypadBuffer(concatenate(keypadBuffer, 3));
 			}
 			printf("Key3 Pressed = %2.2f\n", keypadBuffer);
@@ -341,6 +416,11 @@ void readKey7()
 			if(dm_getState() == DISPVAL)
 			{
 				dm_setBlinkTimer(1);
+				if(dpCount > 0)
+				{
+					printf("Increment DP Count: %d\n", dpCount);
+
+				}
 				setKeypadBuffer(concatenate(keypadBuffer, 9));
 			}
 			printf("Key9 Pressed = %2.2f\n", keypadBuffer);
@@ -377,108 +457,114 @@ void im_menuExtiHandler()
 
 	if(HAL_GPIO_ReadPin(GPIOD, Btn1_EXT10_Pin) == GPIO_PIN_RESET)
 	{
-		//printf("Button1\n");
-		//cycleDACMode(DAC_CHANNEL_1);
+		// MENU BUTTON 1
 
 		displayState_t theDisplayState = dm_getState();
 		switch(theDisplayState)
 		{
-		// GO FROM MAIN SCREEN TO DAC1 MODE SET SCREEN
-		case DISPMAIN:
-			dm_setBlinkTimer(1);
-			dm_setState(DAC_CHANNEL_1, DISPMODE);
-			break;
-		case DISPMODE:
-			break;
-		case DISPVAL:
-			increaseDAC(dm_getSelectedDac());
-
-			break;
-		default:
-			break;
+			case DISPMAIN:	// GO FROM MAIN SCREEN TO DAC1 MODE SET SCREEN
+				dm_setBlinkTimer(1);
+				dm_setState(DAC_CHANNEL_1, DISPMODE);
+				placeCount=4;
+				break;
+			case DISPMODE:	// NO ACTION
+				break;
+			case DISPVAL:	// "SET VALUE" SCREEN; NUDGE VALUE
+				increaseDAC(dm_getSelectedDac());
+				placeCount=4;
+				break;
+			default:
+				break;
 		}
 
 	}
 	else if(HAL_GPIO_ReadPin(GPIOD, Btn2_EXT11_Pin) == GPIO_PIN_RESET)
 	{
-		//printf("Button2\n");
+		// MENU BUTTON 2
 
 		displayState_t theDisplayState = dm_getState();
 		switch(theDisplayState)
 		{
-		// GO FROM MAIN SCREEN TO DAC1 VALUE SET SCREEN
-		case DISPMAIN:
-			dm_setBlinkTimer(1);
-			dm_setState(DAC_CHANNEL_1, DISPVAL);
-			break;
-		case DISPMODE:
-			break;
-		case DISPVAL:
-			decreaseDAC(dm_getSelectedDac());
-			break;
-		default:
-			break;
+			case DISPMAIN:			// GO FROM MAIN SCREEN TO DAC1 VALUE SET SCREEN
+				dm_setBlinkTimer(1);
+				dm_setState(DAC_CHANNEL_1, DISPVAL);
+				placeCount=4;
+				break;
+			case DISPMODE:			// NO ACTION
+				break;
+			case DISPVAL:			// "SET VALUE" SCREEN; NUDGE VALUE
+				decreaseDAC(dm_getSelectedDac());
+				placeCount=4;
+				break;
+			default:
+				break;
 		}
 	}
 	else if(HAL_GPIO_ReadPin(GPIOD, Btn3_EXT12_Pin) == GPIO_PIN_RESET)
 	{
-		//printf("Button3\n");
-
-		//cycleDACMode(DAC_CHANNEL_2);
+		// MENU BUTTON 3
 
 		displayState_t theDisplayState = dm_getState();
 		switch(theDisplayState)
 		{
-		case DISPMAIN:
-			// GO FROM MAIN SCREEN TO DAC2 MODE SET SCREEN
+			case DISPMAIN:	// GO FROM MAIN SCREEN TO DAC2 MODE SET SCREEN
+				dm_setState(DAC_CHANNEL_2, DISPMODE);
+				break;
+			case DISPMODE:	// NO OPTION
 
-			dm_setState(DAC_CHANNEL_2, DISPMODE);
-			break;
-		case DISPMODE:
-			// NO OPTION
-			break;
-		case DISPVAL:
-			// APPLY VALUE SET PREVIEW
-			dm_setBlinkTimer(0);
-			if(getDACMode(dm_getSelectedDac()) == DAC_USER)
-				setVoltage(dm_getSelectedDac());
-			if(getDACMode(dm_getSelectedDac()) != DAC_USER)
-				setFreq(dm_getSelectedDac());
-			clearKeypadBuffer();
-			break;
-		default:
-			break;
+				break;
+			case DISPVAL:	// APPLY VALUE SET PREVIEW
+
+				dm_setBlinkTimer(0);
+				if(getDACMode(dm_getSelectedDac()) == DAC_USER)
+					setVoltage(dm_getSelectedDac());
+				if(getDACMode(dm_getSelectedDac()) != DAC_USER)
+					setFreq(dm_getSelectedDac());
+
+				clearKeypadBuffer();
+				dpCount=0;			// reset the decimal point counter
+				//placeCount=1;
+				break;
+			default:
+				break;
 		}
 
 	}
 	else if(HAL_GPIO_ReadPin(GPIOD, Btn4_EXT13_Pin) == GPIO_PIN_RESET)
 	{
-		//printf("Button4\n");
+		// MENU BUTTON 4
 
 		displayState_t theDisplayState = dm_getState();
 		switch(theDisplayState)
 		{
-		case DISPMAIN:
-			// GO FROM MAIN SCREEN TO DAC1 VALUE SET SCREEN
-			dm_setState(DAC_CHANNEL_2, DISPVAL);
-			break;
-		case DISPMODE:
-			// EXIT "MODE SET" SCREEN
-			dm_setState(DAC_CHANNEL_2, DISPMAIN);
-			printf("DAC1 Mode: %s\n", getDACMode2String(DAC_CHANNEL_1));
-			printf("DAC2 Mode: %s\n", getDACMode2String(DAC_CHANNEL_2));
-			break;
-		case DISPVAL:
-			// EXIT "VALUE SET" SCREEN (CLEAR VALUE PREVIEW)
-			if(getDACMode(dm_getSelectedDac()) == DAC_USER)
-				clearVoltagePreview();
-			if(getDACMode(dm_getSelectedDac()) != DAC_USER)
-				clearFreqPreview();
-			clearKeypadBuffer();
-			dm_setState(DAC_CHANNEL_2, DISPMAIN);
-			break;
-		default:
-			break;
+			case DISPMAIN:	// GO FROM MAIN SCREEN TO DAC1 VALUE SET SCREEN
+				dm_setBlinkTimer(1);
+				dm_setState(DAC_CHANNEL_2, DISPVAL);
+				placeCount=4;
+				break;
+			case DISPMODE:	// EXIT "MODE SET" SCREEN
+
+				dm_setState(DAC_CHANNEL_2, DISPMAIN);
+
+				printf("DAC1 Mode: %s\n", getDACMode2String(DAC_CHANNEL_1));
+				printf("DAC2 Mode: %s\n", getDACMode2String(DAC_CHANNEL_2));
+
+				break;
+			case DISPVAL:	// EXIT "VALUE SET" SCREEN (CLEAR VALUE PREVIEW)
+/*
+				if(getDACMode(dm_getSelectedDac()) == DAC_USER)
+					clearVoltagePreview();
+				if(getDACMode(dm_getSelectedDac()) != DAC_USER)
+					resetFreqPreview();
+*/
+				clearKeypadBuffer();
+				dpCount=0;					// reset the decimal point counter
+				placeCount=4;
+				dm_setState(DAC_CHANNEL_2, DISPMAIN);
+
+				break;
+			default:
+				break;
 		}
 	}
 

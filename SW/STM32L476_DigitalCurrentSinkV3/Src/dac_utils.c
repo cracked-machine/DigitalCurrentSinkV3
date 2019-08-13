@@ -34,8 +34,8 @@ uint8_t chan1Mode = DAC_USER;
 uint32_t chan1AmpCountPreview = 0;
 
 
-uint16_t chan1FreqCount = 0;
-uint32_t chan1FreqCountPreview = 0;
+//uint16_t chan1FreqCount = 0;
+uint32_t chan1FreqCountPreview = TIMRES;	// default to slowest period at this prescaler
 float chan1FreqHz = 0;
 
 // DAC Channel 2 variables
@@ -45,8 +45,8 @@ uint8_t chan2Mode = DAC_USER;
 
 uint32_t chan2AmpCountPreview = 0;
 
-uint16_t chan2FreqCount = 0;
-uint32_t chan2FreqCountPreview = 0;
+//uint16_t chan2FreqCount = 0;
+uint32_t chan2FreqCountPreview = TIMRES;	// default to slowest period at this prescaler
 float chan2FreqHz = 0;
 
 
@@ -73,7 +73,7 @@ float calcDACVolts(uint32_t Channel, uint8_t preview)
 
 uint32_t calcNewDOR(float volts)
 {
-	uint32_t result = ((uint32_t)volts * DACRES) / VREF;
+	uint32_t result = (volts * DACRES) / VREF;
 	return result;
 }
 
@@ -101,9 +101,10 @@ uint16_t calcNewARR(uint16_t Channel, float hertz)
 {
 	uint32_t result = 0;
 	if(Channel == DAC_CHANNEL_1)
-		result = (MASTERCLK / (uint16_t)hertz) / htim6.Instance->PSC;
+		result = (MASTERCLK / hertz) / htim6.Instance->PSC;
 	if(Channel == DAC_CHANNEL_2)
-		result = (MASTERCLK / (uint16_t)hertz) / htim7.Instance->PSC;
+		result = (MASTERCLK / hertz) / htim7.Instance->PSC;
+	// clamp new ARR max to timer resolution, increase the PSC to get a lower ARR ceiling
 	if(result > TIMRES)
 		result = TIMRES;
 	return result;
@@ -140,7 +141,15 @@ void setVoltage(uint32_t Channel)
 	if (Channel == DAC_CHANNEL_1)
 	{
 		// update register from the preview variable
-		hdac1.Instance->DHR12R1 = chan1AmpCountPreview;
+		if(chan1AmpCountPreview > (DACRES-1))
+		{
+			hdac1.Instance->DHR12R1 = (DACRES-1);
+			chan1AmpCountPreview = (DACRES-1);
+		}
+		else
+		{
+			hdac1.Instance->DHR12R1 = chan1AmpCountPreview;
+		}
 		// calc voltage from the new register value (0)
 		//printf("New DAC_CHANNEL_1 Volt Setting: %2.2fV\n", calcDACVolts(DAC_CHANNEL_1, 0 ));
 
@@ -150,7 +159,15 @@ void setVoltage(uint32_t Channel)
 	else if (Channel == DAC_CHANNEL_2)
 	{
 		// update register from the preview variable
-		hdac1.Instance->DHR12R2 = chan2AmpCountPreview;
+		if(chan2AmpCountPreview > (DACRES-1))
+		{
+			hdac1.Instance->DHR12R2 = (DACRES-1);
+			chan2AmpCountPreview = (DACRES-1);
+		}
+		else
+		{
+			hdac1.Instance->DHR12R2 = chan2AmpCountPreview;
+		}
 		// calc voltage from the new register value (0)
 		//printf("New DAC_CHANNEL_2 Volt Setting: %2.2fV\n", calcDACVolts(DAC_CHANNEL_2, 0 ));
 
@@ -176,7 +193,7 @@ void changeVoltage(uint32_t Channel, int increase)
 		if((chan1AmpCountPreview < 1) | (chan1AmpCountPreview > DACRES))
 			chan1AmpCountPreview = 0;
 
-		//HAL_DAC_SetValue(&hdac1,DAC_CHANNEL_1, DAC_ALIGN_8B_R, chan1AmpCountPreview);
+		//hdac1.Instance->DHR12R1 = chan1AmpCountPreview;
 	}
 	else if (Channel == DAC_CHANNEL_2)
 	{
@@ -188,7 +205,7 @@ void changeVoltage(uint32_t Channel, int increase)
 		if((chan2AmpCountPreview < 1) | (chan2AmpCountPreview > DACRES))
 			chan2AmpCountPreview = 0;
 
-		//HAL_DAC_SetValue(&hdac1,DAC_CHANNEL_2, DAC_ALIGN_8B_R, chan2AmpCountPreview);
+		//hdac1.Instance->DHR12R2 = chan2AmpCountPreview;
 	}
 }
 
@@ -211,20 +228,20 @@ void resetDACFreq(uint32_t Channel)
 	HAL_DAC_SetValue(&hdac1,Channel, DAC_ALIGN_8B_R, 0);
 	if (Channel == DAC_CHANNEL_1)
 	{
-		chan1FreqCount = 0;
+		//chan1FreqCount = 0;
 		// recalculate freq (hertz) output
 		chan1FreqHz = (float)MASTERCLK/(htim6.Instance->PSC * htim6.Instance->ARR);
 	}
 	else if (Channel == DAC_CHANNEL_2)
 	{
-		chan2FreqCount = 0;
+		//chan2FreqCount = 0;
 		// recalculate freq (hertz) output
 		chan2FreqHz = (float)MASTERCLK/(htim7.Instance->PSC * htim7.Instance->ARR);
 	}
 
 }
 
-void setFreqPreview(uint32_t Channel, uint32_t newHertz)
+void setFreqPreview(uint32_t Channel, float newHertz)
 {
 	if (Channel == DAC_CHANNEL_1)
 	{
@@ -273,14 +290,20 @@ void setFreq(uint32_t Channel)
 void clearFreqPreview()
 {
 	chan1FreqCountPreview = 0;
-	chan2FreqCountPreview = 0;
+	chan2FreqCountPreview = 0; 	// default to slowest period at this prescaler;
+}
+
+void resetFreqPreview()
+{
+	chan1FreqCountPreview = TIMRES;
+	chan2FreqCountPreview = TIMRES; 	// default to slowest period at this prescaler;
 }
 
 void changeFreq(uint32_t Channel, int increase)
 {
 	if (Channel == DAC_CHANNEL_1)
 	{
-		chan1FreqCount = htim6.Instance->ARR;
+
 
 		// decrement cycle period to increase frequency
 		if(increase)
@@ -291,7 +314,7 @@ void changeFreq(uint32_t Channel, int increase)
 		if((chan1FreqCountPreview < 1) | (chan1FreqCountPreview > TIMRES))
 			chan1FreqCountPreview = TIMRES;
 
-		//htim6.Instance->ARR = (chan1FreqCount);
+		//htim6.Instance->ARR = (chan1FreqCountPreview);
 
 		//chan1FreqHz = (float)MASTERCLK/(htim6.Instance->PSC * htim6.Instance->ARR);
 		// recalculate freq (hertz) output
@@ -308,7 +331,7 @@ void changeFreq(uint32_t Channel, int increase)
 		if((chan2FreqCountPreview < 1) | (chan2FreqCountPreview > TIMRES))
 			chan2FreqCountPreview = TIMRES;
 
-		//htim7.Instance->ARR = (chan2FreqCount);
+		//htim7.Instance->ARR = (chan2FreqCountPreview);
 
 		//chan2FreqHz = (float)MASTERCLK/(htim7.Instance->PSC * htim7.Instance->ARR);
 		// recalculate freq (hertz) output
@@ -511,10 +534,10 @@ void DAC_CompleteCallback(uint32_t Channel)
 	}
 	if(Channel == DAC_CHANNEL_2)
 	{
-		if(getDACMode(DAC_CHANNEL_1) == DAC_USER)
-			printf("New DAC_CHANNEL_1 Volt Setting: %2.2fV\n", calcDACVolts(DAC_CHANNEL_1, 0 ));
+		if(getDACMode(DAC_CHANNEL_2) == DAC_USER)
+			printf("New DAC_CHANNEL_2 Volt Setting: %2.2fV\n", calcDACVolts(DAC_CHANNEL_2, 0 ));
 		else
-			printf("New DAC_CHANNEL_1 Freq Setting: %2.2fHz\n", (float)calcDACFreq(DAC_CHANNEL_1, 0 ));
+			printf("New DAC_CHANNEL_2 Freq Setting: %2.2fHz\n", (float)calcDACFreq(DAC_CHANNEL_2, 0 ));
 	}
 
 }

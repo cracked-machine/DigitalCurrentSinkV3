@@ -34,9 +34,10 @@ void setVoltage(uint32_t Channel);
 void clearVoltagePreview();
 
 
-void setFreqPreview(uint32_t Channel, uint32_t newHertz);
+void setFreqPreview(uint32_t Channel, float newHertz);
 void setFreq(uint32_t Channel);
 void clearFreqPreview();
+void resetFreqPreview();
 
 float calcDACVolts(uint32_t Channel, uint8_t preview);
 float calcDACFreq(uint32_t Channel, uint8_t preview);
