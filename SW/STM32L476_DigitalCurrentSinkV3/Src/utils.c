@@ -39,6 +39,9 @@ void Utils_Init()
 	// display blink counter
 	HAL_TIM_Base_Start_IT(&htim16);
 
+	// debounce counter
+	HAL_TIM_Base_Start_IT(&htim17);
+
 }
 
 

@@ -29,6 +29,21 @@ void dm_toggleblink()
 	}
 }
 
+void dm_setBlinkTimer(uint8_t pBlink)
+{
+	if(pBlink)
+	{
+		HAL_TIM_Base_Start_IT(&htim16);
+	}
+	else
+	{
+		HAL_TIM_Base_Stop_IT(&htim16);
+		blink = 0;
+	}
+}
+
+
+
 void dm_updateDisplay()
 {
 
@@ -138,7 +153,9 @@ void dm_drawValueOverlay()
 	ssd1306_WriteString("+", Font_5x7, White, 1);
 	ssd1306_SetCursor(45,3);
 	ssd1306_WriteString("-", Font_5x7, White, 1);
-	ssd1306_SetCursor(97,3);
+	ssd1306_SetCursor(70,3);
+	ssd1306_WriteString("SET", Font_5x7, White, 1);
+	ssd1306_SetCursor(99,3);
 	ssd1306_WriteString("EXIT", Font_5x7, White, 1);
 }
 
@@ -151,14 +168,14 @@ void dm_drawValueDisp()
     case DAC_CHANNEL_1:
     	ssd1306_WriteString("Enter DAC1 Value:", Font_7x10, White, 0);
         ssd1306_SetCursor(8, 40);
-        if(blink)
-        	dm_drawDac1Value();
+        if(!blink)
+        	dm_drawDac1Value(1);
     	break;
     case DAC_CHANNEL_2:
     	ssd1306_WriteString("Enter DAC2 Value:", Font_7x10, White, 0);
         ssd1306_SetCursor(8, 40);
-        if(blink)
-        	dm_drawDac2Value();
+        if(!blink)
+        	dm_drawDac2Value(1);
     	break;
     default:
     	break;
@@ -166,33 +183,33 @@ void dm_drawValueDisp()
 
 }
 
-void dm_drawDac1Value()
+void dm_drawDac1Value(uint8_t preview)
 {
     char dac1cnt[32];
 
     if(getDACMode(DAC_CHANNEL_1) != 1)
     {
-    	snprintf(dac1cnt, sizeof(dac1cnt), "DAC1: %2.2fHz", getDACFreq(DAC_CHANNEL_1));
+    	snprintf(dac1cnt, sizeof(dac1cnt), "DAC1: %2.2fHz", calcDACFreq(DAC_CHANNEL_1, preview));
     	ssd1306_WriteString(dac1cnt, Font_7x10, White, 0);
     }
     else
     {
-    	snprintf(dac1cnt, sizeof(dac1cnt), "DAC1: %2.3fV", getDACVoltage(DAC_CHANNEL_1));
+    	snprintf(dac1cnt, sizeof(dac1cnt), "DAC1: %2.3fV", calcDACVolts(DAC_CHANNEL_1, preview));
     	ssd1306_WriteString(dac1cnt, Font_7x10, White, 0);
     }
 }
 
-void dm_drawDac2Value()
+void dm_drawDac2Value(uint8_t preview)
 {
     char dac2cnt[32];
     if(getDACMode(DAC_CHANNEL_2) != 1)
     {
-    	snprintf(dac2cnt, sizeof(dac2cnt), "DAC2: %2.2fHz", getDACFreq(DAC_CHANNEL_2));
+    	snprintf(dac2cnt, sizeof(dac2cnt), "DAC2: %2.2fHz", calcDACFreq(DAC_CHANNEL_2, preview));
     	ssd1306_WriteString(dac2cnt, Font_7x10, White, 0);
     }
     else
     {
-    	snprintf(dac2cnt, sizeof(dac2cnt), "DAC2: %2.3fV", getDACVoltage(DAC_CHANNEL_2));
+    	snprintf(dac2cnt, sizeof(dac2cnt), "DAC2: %2.3fV", calcDACVolts(DAC_CHANNEL_2, preview));
     	ssd1306_WriteString(dac2cnt, Font_7x10, White, 0);
     }
 
@@ -201,10 +218,10 @@ void dm_drawDac2Value()
 void dm_drawMainDisp()
 {
     ssd1306_SetCursor(8, 20);
-    dm_drawDac1Value();
+    dm_drawDac1Value(0);
 
     ssd1306_SetCursor(8, 35);
-    dm_drawDac2Value();
+    dm_drawDac2Value(0);
 
     // bottom status
 	ssd1306_SetCursor(2, 50);

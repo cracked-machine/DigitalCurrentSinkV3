@@ -42,7 +42,7 @@ uint32_t newKeypadDelay = 0;
 uint32_t lastKeypadDelay = 0;
 
 // increase delay to decrease bouncing
-uint32_t minKeypadBounceDelay = 1;
+uint32_t minKeypadBounceDelay = 250;
 
 uint32_t keypadBuffer = 0;
 uint32_t keypadBufferMax = 5001;
@@ -71,6 +71,10 @@ void setKeypadBuffer(uint32_t pValue)
 {
 
 		keypadBuffer = pValue;
+		if(getDACMode(dm_getSelectedDac()) == DAC_USER)
+			setVoltagePreview(dm_getSelectedDac(), (float)keypadBuffer);
+		if(getDACMode(dm_getSelectedDac()) != DAC_USER)
+			setFreqPreview(dm_getSelectedDac(), (float)keypadBuffer);
 
 }
 
@@ -80,19 +84,23 @@ uint32_t getKeypadBuffer()
 	return keypadBuffer;
 }
 
+void clearKeypadBuffer()
+{
+	keypadBuffer = 0;
+}
 
 uint32_t getKeypadBufferMax()
 {
 	return keypadBufferMax;
 }
 
-void commitKeypadBuffer()
+/*void commitKeypadBuffer()
 {
 	uint8_t currentMode = getDACMode(dm_getSelectedDac());
 	switch(currentMode)
 	{
 	case DAC_USER:
-		setVoltage(dm_getSelectedDac(),(float)keypadBuffer);
+		setVoltagePreview(dm_getSelectedDac(),(float)keypadBuffer);
 		break;
 	case DAC_TRI:
 		setFreq(dm_getSelectedDac(),keypadBuffer);
@@ -106,7 +114,7 @@ void commitKeypadBuffer()
 		break;
 
 	}
-}
+}*/
 
 uint32_t concatenate(uint32_t x, uint32_t y) {
 	lastKeyPressed = y;
@@ -117,7 +125,7 @@ uint32_t concatenate(uint32_t x, uint32_t y) {
     	setKeypadBuffer(x);						// set display using previous entered value
 
     	//setKeypadBuffer(keypadBufferMax);		// set display using entered value round down to keypadBufferMax
-    	commitKeypadBuffer();
+    	//commitKeypadBuffer();
 
     	// reset buffer
     	//setKeypadBuffer(0);
@@ -172,44 +180,57 @@ void readKey5()
 	newKeypadDelay = getKeypadDebounceCounter();
 	if(newKeypadDelay - lastKeypadDelay > minKeypadBounceDelay)
 	{
+		// BUTTON 1
 		if(HAL_GPIO_ReadPin(GPIOE, KP1_GPOUT_Pin))
 		{
 
-			printf("Key1 Pressed = %lu\n", keypadBuffer);
 			if(dm_getState() == DISPMODE)
 			{
-				// change the mode
+
 				setDACMode(dm_getSelectedDac(), DAC_USER);
 				dm_setState(dm_getSelectedDac(), dm_getState());
 			}
 			if(dm_getState() == DISPVAL)
 			{
+				dm_setBlinkTimer(1);
 				setKeypadBuffer(concatenate(keypadBuffer, 1));
 			}
+			printf("Key1 Pressed = %lu\n", keypadBuffer);
 		}
+
+		// BUTTON 4
 		if(HAL_GPIO_ReadPin(GPIOE, KP2_GPOUT_Pin))
 		{
-			printf("Key4 Pressed = %lu\n", keypadBuffer);
+
 			if(dm_getState() == DISPVAL)
 			{
+				dm_setBlinkTimer(1);
 				setKeypadBuffer(concatenate(keypadBuffer, 4));
 			}
+			printf("Key4 Pressed = %lu\n", keypadBuffer);
 		}
+
+		// BUTTON 7
 		if(HAL_GPIO_ReadPin(GPIOE, KP3_GPOUT_Pin))
 		{
-			printf("Key7 Pressed = %lu\n", keypadBuffer);
+
 			if(dm_getState() == DISPVAL)
 			{
+				dm_setBlinkTimer(1);
 				setKeypadBuffer(concatenate(keypadBuffer, 7));
 			}
+			printf("Key7 Pressed = %lu\n", keypadBuffer);
 		}
+
+		// BUTTON *
 		if(HAL_GPIO_ReadPin(GPIOE, KP4_GPOUT_Pin))
 		{
-			printf("Key * Pressed = %lu\n", keypadBuffer);
+
 			if(dm_getState() == DISPVAL)
 			{
-
+				dm_setBlinkTimer(1);
 			}
+			printf("Key * Pressed = %lu\n", keypadBuffer);
 		}
 
 		lastKeypadDelay = newKeypadDelay;
@@ -222,10 +243,9 @@ void readKey6()
 	newKeypadDelay = getKeypadDebounceCounter();
 	if(newKeypadDelay - lastKeypadDelay > minKeypadBounceDelay)
 	{
+		// BUTTON 2
 		if(HAL_GPIO_ReadPin(GPIOE, KP1_GPOUT_Pin))
 		{
-			printf("Key2 Pressed = %lu\n", keypadBuffer);
-
 			if(dm_getState() == DISPMODE)
 			{
 				// change the mode
@@ -234,34 +254,45 @@ void readKey6()
 			}
 			if(dm_getState() == DISPVAL)
 			{
+				dm_setBlinkTimer(1);
 				setKeypadBuffer(concatenate(keypadBuffer, 2));
 			}
+			printf("Key2 Pressed = %lu\n", keypadBuffer);
+
 		}
+
+		// BUTTON 5
 		if(HAL_GPIO_ReadPin(GPIOE, KP2_GPOUT_Pin))
 		{
-			printf("Key5 Pressed = %lu\n", keypadBuffer);
 			if(dm_getState() == DISPVAL)
 			{
+				dm_setBlinkTimer(1);
 				setKeypadBuffer(concatenate(keypadBuffer, 5));
 			}
+			printf("Key5 Pressed = %lu\n", keypadBuffer);
 		}
+
+		// BUTTON 8
 		if(HAL_GPIO_ReadPin(GPIOE, KP3_GPOUT_Pin))
 		{
-			printf("Key8 Pressed = %lu\n", keypadBuffer);
-
 			if(dm_getState() == DISPVAL)
 			{
+				dm_setBlinkTimer(1);
 				setKeypadBuffer(concatenate(keypadBuffer, 8));
 			}
+			printf("Key8 Pressed = %lu\n", keypadBuffer);
 		}
+
+		// BUTTON 0
 		if(HAL_GPIO_ReadPin(GPIOE, KP4_GPOUT_Pin))
 		{
-			printf("Key0 Pressed = %lu\n", keypadBuffer);
 
 			if(dm_getState() == DISPVAL)
 			{
+				dm_setBlinkTimer(1);
 				setKeypadBuffer(concatenate(keypadBuffer, 0));
 			}
+			printf("Key0 Pressed = %lu\n", keypadBuffer);
 		}
 
 		lastKeypadDelay = newKeypadDelay;
@@ -274,10 +305,9 @@ void readKey7()
 	newKeypadDelay = getKeypadDebounceCounter();
 	if(newKeypadDelay - lastKeypadDelay > minKeypadBounceDelay)
 	{
+		// BUTTON 3
 		if(HAL_GPIO_ReadPin(GPIOE, KP1_GPOUT_Pin))
 		{
-			printf("Key3 Pressed = %lu\n", keypadBuffer);
-
 			if(dm_getState() == DISPMODE)
 			{
 				// change the mode
@@ -286,38 +316,50 @@ void readKey7()
 			}
 			if(dm_getState() == DISPVAL)
 			{
+				dm_setBlinkTimer(1);
 				setKeypadBuffer(concatenate(keypadBuffer, 3));
 			}
+			printf("Key3 Pressed = %lu\n", keypadBuffer);
+
 		}
+
+		// BUTTON 6
 		if(HAL_GPIO_ReadPin(GPIOE, KP2_GPOUT_Pin))
 		{
-			printf("Key6 Pressed = %lu\n", keypadBuffer);
-
 			if(dm_getState() == DISPVAL)
 			{
+				dm_setBlinkTimer(1);
 				setKeypadBuffer(concatenate(keypadBuffer, 6));
 			}
+			printf("Key6 Pressed = %lu\n", keypadBuffer);
 		}
+
+		// BUTTON 9
 		if(HAL_GPIO_ReadPin(GPIOE, KP3_GPOUT_Pin))
 		{
-			printf("Key9 Pressed = %lu\n", keypadBuffer);
 
 			if(dm_getState() == DISPVAL)
 			{
+				dm_setBlinkTimer(1);
 				setKeypadBuffer(concatenate(keypadBuffer, 9));
 			}
+			printf("Key9 Pressed = %lu\n", keypadBuffer);
 		}
+
+		// BUTTON #
 		if(HAL_GPIO_ReadPin(GPIOE, KP4_GPOUT_Pin))
 		{
 			// # is the "enter" key
-			commitKeypadBuffer();
+			//commitKeypadBuffer();
 			setKeypadBuffer(0);
-			printf("Key # Pressed\n");
+
 
 			if(dm_getState() == DISPVAL)
 			{
-
+				dm_setBlinkTimer(1);
 			}
+
+			printf("Key # Pressed\n");
 		}
 
 		lastKeypadDelay = newKeypadDelay;
@@ -341,7 +383,9 @@ void im_menuExtiHandler()
 		displayState_t theDisplayState = dm_getState();
 		switch(theDisplayState)
 		{
+		// GO FROM MAIN SCREEN TO DAC1 MODE SET SCREEN
 		case DISPMAIN:
+			dm_setBlinkTimer(1);
 			dm_setState(DAC_CHANNEL_1, DISPMODE);
 			break;
 		case DISPMODE:
@@ -362,7 +406,9 @@ void im_menuExtiHandler()
 		displayState_t theDisplayState = dm_getState();
 		switch(theDisplayState)
 		{
+		// GO FROM MAIN SCREEN TO DAC1 VALUE SET SCREEN
 		case DISPMAIN:
+			dm_setBlinkTimer(1);
 			dm_setState(DAC_CHANNEL_1, DISPVAL);
 			break;
 		case DISPMODE:
@@ -384,12 +430,20 @@ void im_menuExtiHandler()
 		switch(theDisplayState)
 		{
 		case DISPMAIN:
+			// GO FROM MAIN SCREEN TO DAC2 MODE SET SCREEN
 			dm_setState(DAC_CHANNEL_2, DISPMODE);
 			break;
 		case DISPMODE:
+			// NO OPTION
 			break;
 		case DISPVAL:
-
+			// APPLY VALUE SET PREVIEW
+			dm_setBlinkTimer(0);
+			if(getDACMode(dm_getSelectedDac()) == DAC_USER)
+				setVoltage(dm_getSelectedDac());
+			if(getDACMode(dm_getSelectedDac()) != DAC_USER)
+				setFreq(dm_getSelectedDac());
+			clearKeypadBuffer();
 			break;
 		default:
 			break;
@@ -404,12 +458,20 @@ void im_menuExtiHandler()
 		switch(theDisplayState)
 		{
 		case DISPMAIN:
+			// GO FROM MAIN SCREEN TO DAC1 VALUE SET SCREEN
 			dm_setState(DAC_CHANNEL_2, DISPVAL);
 			break;
 		case DISPMODE:
+			// EXIT "MODE SET" SCREEN
 			dm_setState(DAC_CHANNEL_2, DISPMAIN);
 			break;
 		case DISPVAL:
+			// EXIT "VALUE SET" SCREEN (CLEAR VALUE PREVIEW)
+			if(getDACMode(dm_getSelectedDac()) == DAC_USER)
+				clearVoltagePreview();
+			if(getDACMode(dm_getSelectedDac()) != DAC_USER)
+				clearFreqPreview();
+			clearKeypadBuffer();
 			dm_setState(DAC_CHANNEL_2, DISPMAIN);
 			break;
 		default:

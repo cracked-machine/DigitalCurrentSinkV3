@@ -16,6 +16,7 @@ void readKey6();
 void readKey7();
 
 void setKeypadBuffer(uint32_t pValue);
+void clearKeypadBuffer();
 uint32_t getKeypadBuffer();
 uint32_t getKeypadBufferMax();
 void setKeypadDebounceCounter(uint16_t pValue);

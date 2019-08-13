@@ -23,19 +23,23 @@ dacmode_t getDACMode(uint32_t Channel);
 char* getDACMode2String(uint32_t Channel);
 void setDACMode(uint32_t Channel, dacmode_t mode);
 
-uint16_t getChan1AmpCountTemp();
-uint16_t getChan1FreqCountTemp();
-uint16_t getChan2AmpCountTemp();
-uint16_t getChan2FreqCountTemp();
+
 
 void cycleDACMode(uint32_t Channel);
 
 void increaseDAC(uint32_t Channel);
 void decreaseDAC(uint32_t Channel);
-void setVoltage(uint32_t Channel, float newVolts);
-void setFreq(uint32_t Channel, uint32_t newHertz);
+void setVoltagePreview(uint32_t Channel, float newVolts);
+void setVoltage(uint32_t Channel);
+void clearVoltagePreview();
 
-float getDACVoltage(uint32_t Channel);
+
+void setFreqPreview(uint32_t Channel, uint32_t newHertz);
+void setFreq(uint32_t Channel);
+void clearFreqPreview();
+
+float calcDACVolts(uint32_t Channel, uint8_t preview);
+float calcDACFreq(uint32_t Channel, uint8_t preview);
 float getDACFreq(uint32_t Channel);
 
 #endif /* DAC_UTILS_H_ */

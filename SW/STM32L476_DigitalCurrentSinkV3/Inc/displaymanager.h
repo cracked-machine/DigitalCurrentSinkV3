@@ -35,8 +35,8 @@ displayState_t dm_getState();
 selectedDacChan_t dm_getSelectedDac();
 
 void dm_updateDisplay();
-void dm_drawDac1Value();
-void dm_drawDac2Value();
+void dm_drawDac1Value(uint8_t preview);
+void dm_drawDac2Value(uint8_t preview);
 
 void dm_drawMainOverlay();
 void dm_drawMainDisp();
@@ -48,6 +48,7 @@ void dm_drawValueOverlay();
 void dm_drawValueDisp();
 
 void dm_toggleblink();
+void dm_setBlinkTimer(uint8_t pBlink);
 
 
 #endif /* DISPLAYMANAGER_H_ */
