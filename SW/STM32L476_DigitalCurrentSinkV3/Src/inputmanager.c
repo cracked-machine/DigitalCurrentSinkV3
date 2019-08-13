@@ -44,7 +44,7 @@ uint32_t lastKeypadDelay = 0;
 // increase delay to decrease bouncing
 uint32_t minKeypadBounceDelay = 250;
 
-uint32_t keypadBuffer = 0;
+float keypadBuffer = 0;
 uint32_t keypadBufferMax = 5001;
 
 
@@ -195,7 +195,7 @@ void readKey5()
 				dm_setBlinkTimer(1);
 				setKeypadBuffer(concatenate(keypadBuffer, 1));
 			}
-			printf("Key1 Pressed = %lu\n", keypadBuffer);
+			printf("Key1 Pressed = %2.2f\n", keypadBuffer);
 		}
 
 		// BUTTON 4
@@ -207,7 +207,7 @@ void readKey5()
 				dm_setBlinkTimer(1);
 				setKeypadBuffer(concatenate(keypadBuffer, 4));
 			}
-			printf("Key4 Pressed = %lu\n", keypadBuffer);
+			printf("Key4 Pressed = %2.2f\n", keypadBuffer);
 		}
 
 		// BUTTON 7
@@ -219,7 +219,7 @@ void readKey5()
 				dm_setBlinkTimer(1);
 				setKeypadBuffer(concatenate(keypadBuffer, 7));
 			}
-			printf("Key7 Pressed = %lu\n", keypadBuffer);
+			printf("Key7 Pressed = %2.2f\n", keypadBuffer);
 		}
 
 		// BUTTON *
@@ -230,7 +230,7 @@ void readKey5()
 			{
 				dm_setBlinkTimer(1);
 			}
-			printf("Key * Pressed = %lu\n", keypadBuffer);
+			printf("Key * Pressed = %2.2f\n", keypadBuffer);
 		}
 
 		lastKeypadDelay = newKeypadDelay;
@@ -257,7 +257,7 @@ void readKey6()
 				dm_setBlinkTimer(1);
 				setKeypadBuffer(concatenate(keypadBuffer, 2));
 			}
-			printf("Key2 Pressed = %lu\n", keypadBuffer);
+			printf("Key2 Pressed = %2.2f\n", keypadBuffer);
 
 		}
 
@@ -269,7 +269,7 @@ void readKey6()
 				dm_setBlinkTimer(1);
 				setKeypadBuffer(concatenate(keypadBuffer, 5));
 			}
-			printf("Key5 Pressed = %lu\n", keypadBuffer);
+			printf("Key5 Pressed = %2.2f\n", keypadBuffer);
 		}
 
 		// BUTTON 8
@@ -280,7 +280,7 @@ void readKey6()
 				dm_setBlinkTimer(1);
 				setKeypadBuffer(concatenate(keypadBuffer, 8));
 			}
-			printf("Key8 Pressed = %lu\n", keypadBuffer);
+			printf("Key8 Pressed = %2.2f\n", keypadBuffer);
 		}
 
 		// BUTTON 0
@@ -292,7 +292,7 @@ void readKey6()
 				dm_setBlinkTimer(1);
 				setKeypadBuffer(concatenate(keypadBuffer, 0));
 			}
-			printf("Key0 Pressed = %lu\n", keypadBuffer);
+			printf("Key0 Pressed = %2.2f\n", keypadBuffer);
 		}
 
 		lastKeypadDelay = newKeypadDelay;
@@ -319,7 +319,7 @@ void readKey7()
 				dm_setBlinkTimer(1);
 				setKeypadBuffer(concatenate(keypadBuffer, 3));
 			}
-			printf("Key3 Pressed = %lu\n", keypadBuffer);
+			printf("Key3 Pressed = %2.2f\n", keypadBuffer);
 
 		}
 
@@ -331,7 +331,7 @@ void readKey7()
 				dm_setBlinkTimer(1);
 				setKeypadBuffer(concatenate(keypadBuffer, 6));
 			}
-			printf("Key6 Pressed = %lu\n", keypadBuffer);
+			printf("Key6 Pressed = %2.2f\n", keypadBuffer);
 		}
 
 		// BUTTON 9
@@ -343,7 +343,7 @@ void readKey7()
 				dm_setBlinkTimer(1);
 				setKeypadBuffer(concatenate(keypadBuffer, 9));
 			}
-			printf("Key9 Pressed = %lu\n", keypadBuffer);
+			printf("Key9 Pressed = %2.2f\n", keypadBuffer);
 		}
 
 		// BUTTON #
@@ -377,7 +377,7 @@ void im_menuExtiHandler()
 
 	if(HAL_GPIO_ReadPin(GPIOD, Btn1_EXT10_Pin) == GPIO_PIN_RESET)
 	{
-		printf("Button1\n");
+		//printf("Button1\n");
 		//cycleDACMode(DAC_CHANNEL_1);
 
 		displayState_t theDisplayState = dm_getState();
@@ -397,11 +397,11 @@ void im_menuExtiHandler()
 		default:
 			break;
 		}
-		printf("DAC1 Mode: %d\n", getDACMode(DAC_CHANNEL_1));
+
 	}
 	else if(HAL_GPIO_ReadPin(GPIOD, Btn2_EXT11_Pin) == GPIO_PIN_RESET)
 	{
-		printf("Button2\n");
+		//printf("Button2\n");
 
 		displayState_t theDisplayState = dm_getState();
 		switch(theDisplayState)
@@ -422,7 +422,7 @@ void im_menuExtiHandler()
 	}
 	else if(HAL_GPIO_ReadPin(GPIOD, Btn3_EXT12_Pin) == GPIO_PIN_RESET)
 	{
-		printf("Button3\n");
+		//printf("Button3\n");
 
 		//cycleDACMode(DAC_CHANNEL_2);
 
@@ -431,6 +431,7 @@ void im_menuExtiHandler()
 		{
 		case DISPMAIN:
 			// GO FROM MAIN SCREEN TO DAC2 MODE SET SCREEN
+
 			dm_setState(DAC_CHANNEL_2, DISPMODE);
 			break;
 		case DISPMODE:
@@ -448,11 +449,11 @@ void im_menuExtiHandler()
 		default:
 			break;
 		}
-		printf("DAC2 Mode: %d\n", getDACMode(DAC_CHANNEL_2));
+
 	}
 	else if(HAL_GPIO_ReadPin(GPIOD, Btn4_EXT13_Pin) == GPIO_PIN_RESET)
 	{
-		printf("Button4\n");
+		//printf("Button4\n");
 
 		displayState_t theDisplayState = dm_getState();
 		switch(theDisplayState)
@@ -464,6 +465,8 @@ void im_menuExtiHandler()
 		case DISPMODE:
 			// EXIT "MODE SET" SCREEN
 			dm_setState(DAC_CHANNEL_2, DISPMAIN);
+			printf("DAC1 Mode: %s\n", getDACMode2String(DAC_CHANNEL_1));
+			printf("DAC2 Mode: %s\n", getDACMode2String(DAC_CHANNEL_2));
 			break;
 		case DISPVAL:
 			// EXIT "VALUE SET" SCREEN (CLEAR VALUE PREVIEW)
@@ -478,4 +481,6 @@ void im_menuExtiHandler()
 			break;
 		}
 	}
+
+
 }

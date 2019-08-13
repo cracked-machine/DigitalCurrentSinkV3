@@ -42,4 +42,6 @@ float calcDACVolts(uint32_t Channel, uint8_t preview);
 float calcDACFreq(uint32_t Channel, uint8_t preview);
 float getDACFreq(uint32_t Channel);
 
+void DAC_CompleteCallback(uint32_t Channel);
+
 #endif /* DAC_UTILS_H_ */

@@ -7,6 +7,7 @@
 
 #include "dac_utils.h"
 #include "displaymanager.h"
+#include "stm32l4xx_hal.h"
 
 #include "dac.h"
 #include "tim.h"
@@ -131,12 +132,17 @@ void setVoltagePreview(uint32_t Channel, float newVolts)
 
 void setVoltage(uint32_t Channel)
 {
+	// start debug counter (DAC requires 1-3 cycles before completing conversion)
+	__HAL_TIM_CLEAR_FLAG(&htim15, TIM_FLAG_UPDATE);
+	HAL_TIM_Base_Start_IT(&htim15);
+
+
 	if (Channel == DAC_CHANNEL_1)
 	{
 		// update register from the preview variable
 		hdac1.Instance->DHR12R1 = chan1AmpCountPreview;
 		// calc voltage from the new register value (0)
-		printf("New DAC_CHANNEL_1 Volt Setting: %2.2fV\n", calcDACVolts(DAC_CHANNEL_1, 0 ));
+		//printf("New DAC_CHANNEL_1 Volt Setting: %2.2fV\n", calcDACVolts(DAC_CHANNEL_1, 0 ));
 
 
 	}
@@ -146,7 +152,7 @@ void setVoltage(uint32_t Channel)
 		// update register from the preview variable
 		hdac1.Instance->DHR12R2 = chan2AmpCountPreview;
 		// calc voltage from the new register value (0)
-		printf("New DAC_CHANNEL_2 Volt Setting: %2.2fV\n", calcDACVolts(DAC_CHANNEL_2, 0 ));
+		//printf("New DAC_CHANNEL_2 Volt Setting: %2.2fV\n", calcDACVolts(DAC_CHANNEL_2, 0 ));
 
 
 	}
@@ -242,17 +248,23 @@ void setFreqPreview(uint32_t Channel, uint32_t newHertz)
 }
 void setFreq(uint32_t Channel)
 {
+
+	// start debug counter (DAC requires 1-3 cycles before completing conversion)
+	__HAL_TIM_CLEAR_FLAG(&htim15, TIM_FLAG_UPDATE);
+	HAL_TIM_Base_Start_IT(&htim15);
+
+
 	if (Channel == DAC_CHANNEL_1)
 	{
 		htim6.Instance->ARR = chan1FreqCountPreview;
-		printf("New DAC_CHANNEL_1 Freq Setting: %2.2fHz\n", (float)calcDACFreq(DAC_CHANNEL_1, 0 ));
+		//printf("New DAC_CHANNEL_1 Freq Setting: %2.2fHz\n", (float)calcDACFreq(DAC_CHANNEL_1, 0 ));
 		//chan1FreqHz = (float)MASTERCLK/(htim6.Instance->PSC * htim6.Instance->ARR);
 		//printf("Chan1 Freq: %2.4fHz (%u)\n", chan1FreqHz, chan1FreqCount);
 	}
 	else if (Channel == DAC_CHANNEL_2)
 	{
 		htim7.Instance->ARR = chan2FreqCountPreview;
-		printf("New DAC_CHANNEL_2 Freq Setting: %2.2fHz\n", (float)calcDACFreq(DAC_CHANNEL_2, 0 ));
+		//printf("New DAC_CHANNEL_2 Freq Setting: %2.2fHz\n", (float)calcDACFreq(DAC_CHANNEL_2, 0 ));
 		//chan2FreqHz = (float)MASTERCLK/(htim7.Instance->PSC * htim7.Instance->ARR);
 		//printf("Chan2 Freq: %2.4fHz (%u)\n", chan2FreqHz, chan2FreqCount);
 	}
@@ -488,6 +500,24 @@ void setDACMode(uint32_t Channel, dacmode_t mode)
 }
 
 
+void DAC_CompleteCallback(uint32_t Channel)
+{
+	if(Channel == DAC_CHANNEL_1)
+	{
+		if(getDACMode(DAC_CHANNEL_1) == DAC_USER)
+			printf("New DAC_CHANNEL_1 Volt Setting: %2.2fV\n", calcDACVolts(DAC_CHANNEL_1, 0 ));
+		else
+			printf("New DAC_CHANNEL_1 Freq Setting: %2.2fHz\n", (float)calcDACFreq(DAC_CHANNEL_1, 0 ));
+	}
+	if(Channel == DAC_CHANNEL_2)
+	{
+		if(getDACMode(DAC_CHANNEL_1) == DAC_USER)
+			printf("New DAC_CHANNEL_1 Volt Setting: %2.2fV\n", calcDACVolts(DAC_CHANNEL_1, 0 ));
+		else
+			printf("New DAC_CHANNEL_1 Freq Setting: %2.2fHz\n", (float)calcDACFreq(DAC_CHANNEL_1, 0 ));
+	}
+
+}
 
 
 float getDACFreq(uint32_t Channel)

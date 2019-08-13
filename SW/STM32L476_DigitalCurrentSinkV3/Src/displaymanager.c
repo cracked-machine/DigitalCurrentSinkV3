@@ -27,6 +27,8 @@ void dm_toggleblink()
 	{
 		blink = 1;
 	}
+
+
 }
 
 void dm_setBlinkTimer(uint8_t pBlink)

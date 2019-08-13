@@ -64,6 +64,7 @@ extern DAC_HandleTypeDef hdac1;
 extern TIM_HandleTypeDef htim5;
 extern TIM_HandleTypeDef htim6;
 extern TIM_HandleTypeDef htim7;
+extern TIM_HandleTypeDef htim15;
 extern TIM_HandleTypeDef htim16;
 extern TIM_HandleTypeDef htim17;
 /* USER CODE BEGIN EV */
@@ -260,6 +261,22 @@ void DMA1_Channel1_IRQHandler(void)
   /* USER CODE BEGIN DMA1_Channel1_IRQn 1 */
 
   /* USER CODE END DMA1_Channel1_IRQn 1 */
+}
+
+/**
+  * @brief This function handles TIM1 break interrupt and TIM15 global interrupt.
+  */
+void TIM1_BRK_TIM15_IRQHandler(void)
+{
+  /* USER CODE BEGIN TIM1_BRK_TIM15_IRQn 0 */
+	DAC_CompleteCallback(dm_getSelectedDac());
+  /* USER CODE END TIM1_BRK_TIM15_IRQn 0 */
+  HAL_TIM_IRQHandler(&htim15);
+  /* USER CODE BEGIN TIM1_BRK_TIM15_IRQn 1 */
+
+  	  // debug counter (DAC requires 1-3 cycles before completing conversion)
+		HAL_TIM_Base_Stop_IT(&htim15);
+  /* USER CODE END TIM1_BRK_TIM15_IRQn 1 */
 }
 
 /**
