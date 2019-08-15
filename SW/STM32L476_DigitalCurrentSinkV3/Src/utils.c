@@ -11,7 +11,9 @@
 #include "stm32l4xx_hal.h"
 #include "dac.h"
 #include "ssd1306_tests.h"
+#include "adc.h"
 
+uint32_t test[2] = {};
 
 ////////////////////////////////////////////////////////
 ///
@@ -23,6 +25,8 @@
 
 void Utils_Init()
 {
+
+
 	// start DAC and associated timers
 	HAL_TIM_Base_Start_IT(&htim6);
 	HAL_TIM_Base_Start_IT(&htim7);
@@ -42,7 +46,7 @@ void Utils_Init()
 	// debounce counter
 	HAL_TIM_Base_Start_IT(&htim17);
 
-
+HAL_ADC_Start_DMA(&hadc1, test, 2);
 }
 
 

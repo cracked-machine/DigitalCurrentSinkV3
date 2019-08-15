@@ -18,6 +18,8 @@
 #include <stdarg.h>
 #include <DacUtilities.h>
 
+uint32_t test[2];
+
 void Utils_Init();
 int _write(int file, char *ptr, int len);
 void Utils_i2c_scan();

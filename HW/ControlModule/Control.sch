@@ -943,8 +943,6 @@ F 3 "~" H 4100 3500 50  0001 C CNN
 $EndComp
 Wire Wire Line
 	4100 3350 4100 3150
-Wire Wire Line
-	4100 3150 4400 3150
 $Comp
 L Device:R R2
 U 1 1 5D72295B
@@ -1021,54 +1019,8 @@ Wire Wire Line
 	4100 6150 4100 5950
 Connection ~ 4100 5950
 Wire Wire Line
-	4100 5950 4400 5950
-Wire Wire Line
 	4100 6450 4100 7700
 Connection ~ 4100 7700
-$Comp
-L Device:Jumper_NO_Small JP5
-U 1 1 5D9A48A0
-P 5300 4450
-F 0 "JP5" H 5300 4550 50  0000 C CNN
-F 1 "BYPASS" H 5300 4350 50  0000 C CNN
-F 2 "Jumper:SolderJumper-2_P1.3mm_Open_Pad1.0x1.5mm" H 5300 4450 50  0001 C CNN
-F 3 "~" H 5300 4450 50  0001 C CNN
-	1    5300 4450
-	1    0    0    -1  
-$EndComp
-Wire Wire Line
-	5200 4450 4400 4450
-Wire Wire Line
-	4400 4450 4400 3150
-Connection ~ 4400 3150
-Wire Wire Line
-	4400 3150 5000 3150
-Wire Wire Line
-	5400 4450 5900 4450
-Wire Wire Line
-	5900 4450 5900 3250
-$Comp
-L Device:Jumper_NO_Small JP6
-U 1 1 5DA126C3
-P 5300 7300
-F 0 "JP6" H 5300 7375 50  0000 C CNN
-F 1 "BYPASS" H 5300 7225 50  0000 C CNN
-F 2 "Jumper:SolderJumper-2_P1.3mm_Open_Pad1.0x1.5mm" H 5300 7300 50  0001 C CNN
-F 3 "~" H 5300 7300 50  0001 C CNN
-	1    5300 7300
-	1    0    0    -1  
-$EndComp
-Wire Wire Line
-	5200 7300 4400 7300
-Wire Wire Line
-	4400 7300 4400 5950
-Connection ~ 4400 5950
-Wire Wire Line
-	4400 5950 4950 5950
-Wire Wire Line
-	5400 7300 5900 7300
-Wire Wire Line
-	5900 7300 5900 6050
 $Bitmap
 Pos 2300 3700
 Scale 1.000000
@@ -2805,4 +2757,8 @@ Wire Wire Line
 Connection ~ 2800 13050
 Wire Wire Line
 	2800 13050 2600 13050
+Wire Wire Line
+	4100 3150 5000 3150
+Wire Wire Line
+	4100 5950 4950 5950
 $EndSCHEMATC

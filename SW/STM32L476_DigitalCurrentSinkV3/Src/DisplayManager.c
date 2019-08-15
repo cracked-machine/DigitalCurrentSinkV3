@@ -12,6 +12,7 @@
 #include "stm32l4xx_hal.h"
 #include "ssd1306.h"
 #include "ssd1306_tests.h"
+#include "utils.h"
 
 
 /*  DAC channel context set from user menu button selection. See IM_MenuEXTIHandler() */
@@ -491,6 +492,8 @@ void DM_UpdateDisplay()
 	}
 
 	ssd1306_UpdateScreen();
+
+	printf("%lu - %lu\n", test[0], test[1]);
 }
 
 /**
