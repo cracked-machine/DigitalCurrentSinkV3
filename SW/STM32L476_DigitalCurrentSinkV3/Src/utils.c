@@ -30,8 +30,17 @@ void Utils_Init()
 	// start DAC and associated timers
 	HAL_TIM_Base_Start_IT(&htim6);
 	HAL_TIM_Base_Start_IT(&htim7);
+
+	DAC_ChannelConfTypeDef sConfig = {0};
+	HAL_DACEx_SelfCalibrate(&hdac1, &sConfig, DAC_CHANNEL_1);
+	HAL_DACEx_SelfCalibrate(&hdac1, &sConfig, DAC_CHANNEL_2);
 	HAL_DAC_Start(&hdac1,DAC_CHANNEL_1);
 	HAL_DAC_Start(&hdac1,DAC_CHANNEL_2);
+
+	DU_SetVoltagePreview(DAC_CHANNEL_1, 0.0f);
+	DU_SetVoltage(DAC_CHANNEL_1);
+	DU_SetVoltagePreview(DAC_CHANNEL_2, 0.0f);
+	DU_SetVoltage(DAC_CHANNEL_2);
 
 	printf("Initialising Display...\n");
 	Utils_i2c_scan();
@@ -46,7 +55,8 @@ void Utils_Init()
 	// debounce counter
 	HAL_TIM_Base_Start_IT(&htim17);
 
-HAL_ADC_Start_DMA(&hadc1, test, 2);
+	HAL_ADCEx_Calibration_Start(&hadc1, ADC_SINGLE_ENDED);
+	HAL_ADC_Start_DMA(&hadc1, test, 2);
 }
 
 

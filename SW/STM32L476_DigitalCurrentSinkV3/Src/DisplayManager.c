@@ -130,77 +130,47 @@ void _DrawMainOverlay()
 void _DrawDac1Value(uint8_t preview)
 {
     char dac1cnt[32];
+    float new_dac_value;
 
-    if(DU_GetDACMode(DAC_CHANNEL_1) == DAC_USER)
-    {
-    	if(preview)
-    	{
-    		uint8_t digit_length = IM_GetDigitLength();
-			switch(digit_length)
-			{
-				case 0:
-					snprintf(dac1cnt, sizeof(dac1cnt), "DAC1: %luV", (uint32_t)DU_CalcDACVolts(DAC_CHANNEL_1, preview));
-					break;
-				case 1:
-					snprintf(dac1cnt, sizeof(dac1cnt), "DAC1: %2.0fV", DU_CalcDACVolts(DAC_CHANNEL_1, preview));
-					break;
-				case 2:
-					snprintf(dac1cnt, sizeof(dac1cnt), "DAC1: %2.1fV", DU_CalcDACVolts(DAC_CHANNEL_1, preview));
-					break;
-				case 3:
-					snprintf(dac1cnt, sizeof(dac1cnt), "DAC1: %2.2fV", DU_CalcDACVolts(DAC_CHANNEL_1, preview));
-					break;
-				case 4:
-					snprintf(dac1cnt, sizeof(dac1cnt), "DAC1: %2.3fV", DU_CalcDACVolts(DAC_CHANNEL_1, preview));
-					break;
-				default:
-					snprintf(dac1cnt, sizeof(dac1cnt), "DAC1: %2.3fV", DU_CalcDACVolts(DAC_CHANNEL_1, preview));
-					break;
-			}
+	if(DU_GetDACMode(DAC_CHANNEL_1) == DAC_USER)
+	{
+		new_dac_value = DU_CalcDACVolts(DAC_CHANNEL_1, preview);
+	}
+	else
+	{
+		new_dac_value = DU_CalcDACFreq(DAC_CHANNEL_1, preview);
+	}
+
+	if(preview)
+	{
+		uint8_t digit_length = IM_GetDigitLength();
+		switch(digit_length)
+		{
+			case 0:
+				snprintf(dac1cnt, sizeof(dac1cnt), "DAC1: %luV", (uint32_t)new_dac_value);
+				break;
+			case 1:
+				snprintf(dac1cnt, sizeof(dac1cnt), "DAC1: %2.0fV", new_dac_value);
+				break;
+			case 2:
+				snprintf(dac1cnt, sizeof(dac1cnt), "DAC1: %2.1fV", new_dac_value);
+				break;
+			case 3:
+				snprintf(dac1cnt, sizeof(dac1cnt), "DAC1: %2.2fV", new_dac_value);
+				break;
+			case 4:
+				snprintf(dac1cnt, sizeof(dac1cnt), "DAC1: %2.3fV", new_dac_value);
+				break;
+			default:
+				snprintf(dac1cnt, sizeof(dac1cnt), "DAC1: %2.3fV", new_dac_value);
+				break;
     	}
-    	else
-    	{
-    		snprintf(dac1cnt, sizeof(dac1cnt), "DAC1: %2.3fV", DU_CalcDACVolts(DAC_CHANNEL_1, preview));
-    	}
-
-
-        ssd1306_WriteString(dac1cnt, Font_7x10, White, 0);
-    }
-    else
-    {
-    	if(preview)
-    	{
-    		uint8_t digit_length = IM_GetDigitLength();
-			switch(digit_length)
-			{
-				case 0:
-					snprintf(dac1cnt, sizeof(dac1cnt), "DAC1: %luHz", (uint32_t)DU_CalcDACFreq(DAC_CHANNEL_1, preview));
-					break;
-				case 1:
-					snprintf(dac1cnt, sizeof(dac1cnt), "DAC1: %2.0fHz", DU_CalcDACFreq(DAC_CHANNEL_1, preview));
-					break;
-				case 2:
-					snprintf(dac1cnt, sizeof(dac1cnt), "DAC1: %2.1fHz", DU_CalcDACFreq(DAC_CHANNEL_1, preview));
-					break;
-				case 3:
-					snprintf(dac1cnt, sizeof(dac1cnt), "DAC1: %2.2fHz", DU_CalcDACFreq(DAC_CHANNEL_1, preview));
-					break;
-				case 4:
-					snprintf(dac1cnt, sizeof(dac1cnt), "DAC1: %2.3fHz", DU_CalcDACFreq(DAC_CHANNEL_1, preview));
-					break;
-				default:
-					snprintf(dac1cnt, sizeof(dac1cnt), "DAC1: %2.3fHz", DU_CalcDACFreq(DAC_CHANNEL_1, preview));
-					break;
-			}
-
-    	}
-    	else
-    	{
-    		snprintf(dac1cnt, sizeof(dac1cnt), "DAC1: %2.2fHz", DU_CalcDACFreq(DAC_CHANNEL_1, preview));
-    	}
-
-    	ssd1306_WriteString(dac1cnt, Font_7x10, White, 0);
-    }
+	}
+	else
+	{
+		snprintf(dac1cnt, sizeof(dac1cnt), "DAC1: %2.3fV", new_dac_value);
+	}
+	ssd1306_WriteString(dac1cnt, Font_7x10, White, 0);
 }
 
 /**
@@ -217,76 +187,47 @@ void _DrawDac2Value(uint8_t preview)
 {
     char dac2cnt[32];
 
-    if(DU_GetDACMode(DAC_CHANNEL_2) == DAC_USER)
+    float new_dac_value;
+
+	if(DU_GetDACMode(DAC_CHANNEL_2) == DAC_USER)
+	{
+		new_dac_value = DU_CalcDACVolts(DAC_CHANNEL_2, preview);
+	}
+	else
+	{
+		new_dac_value = DU_CalcDACFreq(DAC_CHANNEL_2, preview);
+	}
+
+	if(preview)
     {
-    	if(preview)
-    	{
-    		uint8_t placeCount = IM_GetDigitLength();
-			switch(placeCount)
-			{
-				case 0:
-					snprintf(dac2cnt, sizeof(dac2cnt), "DAC2: %luV", (uint32_t)DU_CalcDACVolts(DAC_CHANNEL_2, preview));
-					break;
-				case 1:
-					snprintf(dac2cnt, sizeof(dac2cnt), "DAC2: %2.0fV", DU_CalcDACVolts(DAC_CHANNEL_2, preview));
-					break;
-				case 2:
-					snprintf(dac2cnt, sizeof(dac2cnt), "DAC2: %2.1fV", DU_CalcDACVolts(DAC_CHANNEL_2, preview));
-					break;
-				case 3:
-					snprintf(dac2cnt, sizeof(dac2cnt), "DAC2: %2.2fV", DU_CalcDACVolts(DAC_CHANNEL_2, preview));
-					break;
-				case 4:
-					snprintf(dac2cnt, sizeof(dac2cnt), "DAC2: %2.3fV", DU_CalcDACVolts(DAC_CHANNEL_2, preview));
-					break;
-				default:
-					snprintf(dac2cnt, sizeof(dac2cnt), "DAC2: %2.3fV", DU_CalcDACVolts(DAC_CHANNEL_2, preview));
-					break;
-			}
-    	}
-    	else
-    	{
-    		snprintf(dac2cnt, sizeof(dac2cnt), "DAC2: %2.3fV", DU_CalcDACVolts(DAC_CHANNEL_2, preview));
-    	}
-
-
-        ssd1306_WriteString(dac2cnt, Font_7x10, White, 0);
-    }
-    else
-    {
-    	if(preview)
-    	{
-    		uint8_t placeCount = IM_GetDigitLength();
-			switch(placeCount)
-			{
-				case 0:
-					snprintf(dac2cnt, sizeof(dac2cnt), "DAC2: %luHz", (uint32_t)DU_CalcDACFreq(DAC_CHANNEL_2, preview));
-					break;
-				case 1:
-					snprintf(dac2cnt, sizeof(dac2cnt), "DAC2: %2.0fHz", DU_CalcDACFreq(DAC_CHANNEL_2, preview));
-					break;
-				case 2:
-					snprintf(dac2cnt, sizeof(dac2cnt), "DAC2: %2.1fHz", DU_CalcDACFreq(DAC_CHANNEL_2, preview));
-					break;
-				case 3:
-					snprintf(dac2cnt, sizeof(dac2cnt), "DAC2: %2.2fHz", DU_CalcDACFreq(DAC_CHANNEL_2, preview));
-					break;
-				case 4:
-					snprintf(dac2cnt, sizeof(dac2cnt), "DAC2: %2.3fHz", DU_CalcDACFreq(DAC_CHANNEL_2, preview));
-					break;
-				default:
-					snprintf(dac2cnt, sizeof(dac2cnt), "DAC2: %2.3fHz", DU_CalcDACFreq(DAC_CHANNEL_2, preview));
-					break;
-			}
-
-    	}
-    	else
-    	{
-    		snprintf(dac2cnt, sizeof(dac2cnt), "DAC2: %2.2fHz", DU_CalcDACFreq(DAC_CHANNEL_2, preview));
-    	}
-
-    	ssd1306_WriteString(dac2cnt, Font_7x10, White, 0);
-    }
+		uint8_t placeCount = IM_GetDigitLength();
+		switch(placeCount)
+		{
+			case 0:
+				snprintf(dac2cnt, sizeof(dac2cnt), "DAC2: %luV", (uint32_t)new_dac_value);
+				break;
+			case 1:
+				snprintf(dac2cnt, sizeof(dac2cnt), "DAC2: %2.0fV", new_dac_value);
+				break;
+			case 2:
+				snprintf(dac2cnt, sizeof(dac2cnt), "DAC2: %2.1fV", new_dac_value);
+				break;
+			case 3:
+				snprintf(dac2cnt, sizeof(dac2cnt), "DAC2: %2.2fV", new_dac_value);
+				break;
+			case 4:
+				snprintf(dac2cnt, sizeof(dac2cnt), "DAC2: %2.3fV", new_dac_value);
+				break;
+			default:
+				snprintf(dac2cnt, sizeof(dac2cnt), "DAC2: %2.3fV", new_dac_value);
+				break;
+		}
+	}
+	else
+	{
+		snprintf(dac2cnt, sizeof(dac2cnt), "DAC2: %2.3fV", new_dac_value);
+	}
+	ssd1306_WriteString(dac2cnt, Font_7x10, White, 0);
 }
 
 /**
