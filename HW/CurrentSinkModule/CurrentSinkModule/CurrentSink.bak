@@ -815,12 +815,12 @@ Text HLabel 9225 20400 0    50   Input ~ 0
 DUT_NEG
 Text Label 28900 8650 2    50   ~ 0
 DUT_POS
-Text Notes 14500 6150 0    50   ~ 0
-Power Mosfet
+Text Notes 14650 5050 0    50   ~ 0
+N-Channel\nPower Mosfet
 Text Notes 13675 7225 0    50   ~ 0
 Power Resistor\nArcol HS100 \n1ohm 100W
-Text Notes 14475 15175 0    50   ~ 0
-Power Mosfet
+Text Notes 14750 15650 0    50   ~ 0
+P-Channel\nPower Mosfet
 Text Notes 19700 6750 0    50   ~ 0
 InstGain: 14dB
 Text Notes 19725 13825 0    50   ~ 0
@@ -2504,8 +2504,8 @@ $Comp
 L MosfetSocket:MosfetSocketx3 J4
 U 1 1 5D4094FF
 P 14600 15925
-F 0 "J4" H 14518 15600 50  0000 C CNN
-F 1 "MosfetSocketx3" H 14518 15691 50  0000 C CNN
+F 0 "J4" H 14800 15850 50  0000 C CNN
+F 1 "MosfetSocketx3" H 15000 16000 50  0000 C CNN
 F 2 "TerminalBlock:TerminalBlock_bornier-3_P5.08mm" H 14600 15925 50  0001 C CNN
 F 3 "https://docs-emea.rs-online.com/webdocs/0130/0900766b8013040c.pdf" H 14600 15925 50  0001 C CNN
 	1    14600 15925
@@ -2791,7 +2791,7 @@ To bypass inverting gain amp populate:\nR7 and R8 with 1K resistors, R5 with 0R 
 Text Notes 7050 4550 0    100  ~ 0
 To bypass non-inverting \ngain amp populate:\nR25 and R6 with 0R resistors\nomit others
 Text Notes 23400 5900 0    100  ~ 0
-To bypass active filter populate:\nR14 and R23 with 0R resistors,\nomit others
+To bypass non-inverting opamp populate:\nR14 and R23 with 0R resistors,\nomit others
 Wire Wire Line
 	21950 7150 23000 7150
 Wire Wire Line
@@ -2801,5 +2801,9 @@ Wire Wire Line
 Wire Wire Line
 	25650 14300 26150 14300
 Text Notes 23250 13650 0    100  ~ 0
-To bypass active filter populate:\nR13 and R22 with 0R resistors,\nomit others
+To bypass inverting opamp populate:\nR13 and R16 with 1K resistors, R22 0R,\nomit others
+Text Notes 16000 16200 0    50   ~ 0
+Expect increasing negative voltage on TP10 as U4A output voltage increases. \nTP9 should remain at GND (some offset normal)
+Text Notes 15950 6250 0    50   ~ 0
+Expect increasing positive voltage on TP8 as U3A output voltage increases. \nTP7 should remain at GND (some offset normal).
 $EndSCHEMATC

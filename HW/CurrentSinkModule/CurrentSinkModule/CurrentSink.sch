@@ -345,7 +345,7 @@ Wire Wire Line
 	20200 14850 20450 14850
 Connection ~ 20450 14850
 Wire Wire Line
-	20450 14850 20450 16100
+	20450 14850 20450 15450
 Wire Wire Line
 	20450 14850 20700 14850
 Connection ~ 20450 12700
@@ -815,12 +815,12 @@ Text HLabel 9225 20400 0    50   Input ~ 0
 DUT_NEG
 Text Label 28900 8650 2    50   ~ 0
 DUT_POS
-Text Notes 14500 6150 0    50   ~ 0
-Power Mosfet
+Text Notes 14650 5050 0    50   ~ 0
+N-Channel\nPower Mosfet
 Text Notes 13675 7225 0    50   ~ 0
 Power Resistor\nArcol HS100 \n1ohm 100W
-Text Notes 14475 15175 0    50   ~ 0
-Power Mosfet
+Text Notes 14750 15650 0    50   ~ 0
+P-Channel\nPower Mosfet
 Text Notes 19700 6750 0    50   ~ 0
 InstGain: 14dB
 Text Notes 19725 13825 0    50   ~ 0
@@ -2504,8 +2504,8 @@ $Comp
 L MosfetSocket:MosfetSocketx3 J4
 U 1 1 5D4094FF
 P 14600 15925
-F 0 "J4" H 14518 15600 50  0000 C CNN
-F 1 "MosfetSocketx3" H 14518 15691 50  0000 C CNN
+F 0 "J4" H 14800 15850 50  0000 C CNN
+F 1 "MosfetSocketx3" H 15000 16000 50  0000 C CNN
 F 2 "TerminalBlock:TerminalBlock_bornier-3_P5.08mm" H 14600 15925 50  0001 C CNN
 F 3 "https://docs-emea.rs-online.com/webdocs/0130/0900766b8013040c.pdf" H 14600 15925 50  0001 C CNN
 	1    14600 15925
@@ -2740,12 +2740,12 @@ $EndComp
 $Comp
 L power:-12V #PWR0117
 U 1 1 5D72B6A4
-P 20450 16100
-F 0 "#PWR0117" H 20450 16200 50  0001 C CNN
-F 1 "-12V" H 20465 16271 50  0000 C CNN
-F 2 "" H 20450 16100 50  0001 C CNN
-F 3 "" H 20450 16100 50  0001 C CNN
-	1    20450 16100
+P 20450 15450
+F 0 "#PWR0117" H 20450 15550 50  0001 C CNN
+F 1 "-12V" H 20465 15621 50  0000 C CNN
+F 2 "" H 20450 15450 50  0001 C CNN
+F 3 "" H 20450 15450 50  0001 C CNN
+	1    20450 15450
 	-1   0    0    1   
 $EndComp
 $Comp
@@ -2802,4 +2802,8 @@ Wire Wire Line
 	25650 14300 26150 14300
 Text Notes 23250 13650 0    100  ~ 0
 To bypass inverting opamp populate:\nR13 and R16 with 1K resistors, R22 0R,\nomit others
+Text Notes 18050 16250 0    100  ~ 0
+Expect increasing negative voltage on TP10 and TP12 as U4A output voltage increases. \nTP9 should remain at GND (some offset normal).\nThe output is inverted by U4B so TP14 should increase inversely proportional to TP10 and TP12.
+Text Notes 17400 9500 0    100  ~ 0
+Expect increasing positive voltage on TP8 and TP11 as U3A output voltage increases. \nTP7 should remain at GND (some offset normal).
 $EndSCHEMATC
