@@ -75,7 +75,7 @@ float chan2_freq_hertz = 0;
   * @retval none
   */
 
-void DU_SetDACModeActualPreview(uint32_t Channel, dacmode_t pNewMode)
+void DU_SetDACModePreview(uint32_t Channel, dacmode_t pNewMode)
 {
 	if(Channel == DAC_CHANNEL_1)
 		channel1_dacmode_preview = pNewMode;
@@ -96,7 +96,7 @@ void DU_SetDACModeActualPreview(uint32_t Channel, dacmode_t pNewMode)
   *					DAC_NOISE	= 	0x03
   */
 
-dacmode_t DU_GetDACModeActualPreview(uint32_t Channel)
+dacmode_t DU_GetDACModePreview(uint32_t Channel)
 {
 	if(Channel == DAC_CHANNEL_1)
 		return channel1_dacmode_preview;
@@ -106,7 +106,7 @@ dacmode_t DU_GetDACModeActualPreview(uint32_t Channel)
 
 
 
-char* DU_GetDACModeActualPreview2String(uint32_t Channel)
+char* DU_GetDACModePreview2String(uint32_t Channel)
 {
 	if(Channel == DAC_CHANNEL_1)
 	{
@@ -306,8 +306,7 @@ void DU_SetVoltage(uint32_t Channel)
 	__HAL_TIM_CLEAR_FLAG(&htim15, TIM_FLAG_UPDATE);
 	HAL_TIM_Base_Start_IT(&htim15);
 
-
-	if (Channel == DAC_CHANNEL_1)
+	if(DU_isDualChannelMode())
 	{
 		// update register from the preview variable
 		if(chan1_amp_count_preview > (DACRES-1))
@@ -319,11 +318,6 @@ void DU_SetVoltage(uint32_t Channel)
 		{
 			hdac1.Instance->DHR12R1 = chan1_amp_count_preview;
 		}
-
-	}
-
-	else if (Channel == DAC_CHANNEL_2)
-	{
 		// update register from the preview variable
 		if(chan2_amp_count_preview > (DACRES-1))
 		{
@@ -334,8 +328,40 @@ void DU_SetVoltage(uint32_t Channel)
 		{
 			hdac1.Instance->DHR12R2 = chan2_amp_count_preview;
 		}
-
 	}
+	else
+	{
+		if (Channel == DAC_CHANNEL_1)
+		{
+			// update register from the preview variable
+			if(chan1_amp_count_preview > (DACRES-1))
+			{
+				hdac1.Instance->DHR12R1 = (DACRES-1);
+				chan1_amp_count_preview = (DACRES-1);
+			}
+			else
+			{
+				hdac1.Instance->DHR12R1 = chan1_amp_count_preview;
+			}
+
+		}
+
+		else if (Channel == DAC_CHANNEL_2)
+		{
+			// update register from the preview variable
+			if(chan2_amp_count_preview > (DACRES-1))
+			{
+				hdac1.Instance->DHR12R2 = (DACRES-1);
+				chan2_amp_count_preview = (DACRES-1);
+			}
+			else
+			{
+				hdac1.Instance->DHR12R2 = chan2_amp_count_preview;
+			}
+
+		}
+	}
+
 }
 
 /**
@@ -762,7 +788,7 @@ char* DU_GetDACModeActual2String(uint32_t Channel)
 }
 
 /**
-  * @brief Set the DAC mode
+  * @brief Set the DAC mode, resets the preview values
   *
   * @param  Channel The selected DAC channel.
   *         This parameter can be one of the following values:
@@ -787,19 +813,19 @@ void DU_SetDACModeActual(uint32_t Channel, dacmode_t mode)
 		{
 			htim6.Instance->PSC = 255;
 			hdac1.Instance->CR &= ~(DAC_CR_WAVE1_0 | DAC_CR_WAVE1_1);
-			_ResetDACVoltage(DAC_CHANNEL_1);
+			//_ResetDACVoltage(DAC_CHANNEL_1);
 		}
 		else if (mode == DAC_NOISE)
 		{
 			htim6.Instance->PSC = 4096;
 			hdac1.Instance->CR |= (DAC_CR_WAVE1_0 | DAC_LFSRUNMASK_BITS11_0);
-			_ResetDACFreq(DAC_CHANNEL_1);
+			//_ResetDACFreq(DAC_CHANNEL_1);
 		}
 		else if (mode == DAC_TRI)
 		{
 			htim6.Instance->PSC = 255;
 			hdac1.Instance->CR |= (DAC_CR_WAVE1_1 | DAC_TRIANGLEAMPLITUDE_4095);
-			_ResetDACFreq(DAC_CHANNEL_1);
+			//_ResetDACFreq(DAC_CHANNEL_1);
 		}
 	}
 	else if (Channel == DAC_CHANNEL_2)
@@ -809,19 +835,19 @@ void DU_SetDACModeActual(uint32_t Channel, dacmode_t mode)
 		{
 			htim7.Instance->PSC = 255;
 			hdac1.Instance->CR &= ~(DAC_CR_WAVE2_0 | DAC_CR_WAVE2_1);
-			_ResetDACVoltage(DAC_CHANNEL_2);
+			//_ResetDACVoltage(DAC_CHANNEL_2);
 		}
 		else if (mode == DAC_NOISE)
 		{
 			htim7.Instance->PSC = 4096;
 			hdac1.Instance->CR |= (DAC_CR_WAVE2_0 | (DAC_LFSRUNMASK_BITS11_0 << (Channel & 0x10UL)));
-			_ResetDACFreq(DAC_CHANNEL_2);
+			//_ResetDACFreq(DAC_CHANNEL_2);
 		}
 		else if (mode == DAC_TRI)
 		{
 			htim7.Instance->PSC = 255;
 			hdac1.Instance->CR |= (DAC_CR_WAVE2_1 | (DAC_TRIANGLEAMPLITUDE_4095 << (Channel & 0x10UL)));
-			_ResetDACFreq(DAC_CHANNEL_2);
+			//_ResetDACFreq(DAC_CHANNEL_2);
 		}
 	}
 
@@ -903,9 +929,9 @@ uint32_t DU_getActiveDACChannel()
 char* DU_getActiveDACChannel2String()
 {
 	if(selected_dac_channel == DAC_CHANNEL_1)
-		return "CHANNEL 1";
+		return "CH1";
 	else
-		return "CHANNEL 2";
+		return "CH2";
 }
 
 /**

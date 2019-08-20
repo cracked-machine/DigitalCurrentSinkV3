@@ -23,9 +23,9 @@ dacmode_t DU_GetDACModeActual(uint32_t Channel);
 char* DU_GetDACModeActual2String(uint32_t Channel);
 void DU_SetDACModeActual(uint32_t Channel, dacmode_t mode);
 
-void DU_SetDACModeActualPreview(uint32_t Channel, dacmode_t pNewMode);
-dacmode_t DU_GetDACModeActualPreview(uint32_t Channel);
-char* DU_GetDACModeActualPreview2String(uint32_t Channel);
+void DU_SetDACModePreview(uint32_t Channel, dacmode_t pNewMode);
+dacmode_t DU_GetDACModePreview(uint32_t Channel);
+char* DU_GetDACModePreview2String(uint32_t Channel);
 
 void DU_IncreaseDAC(uint32_t Channel);
 void DU_DecreaseDAC(uint32_t Channel);

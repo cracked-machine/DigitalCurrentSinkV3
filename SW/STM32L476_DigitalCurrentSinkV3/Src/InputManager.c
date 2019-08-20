@@ -134,10 +134,28 @@ void _SetKeypadBuffer(double pValue)
 {
 
 		keypad_buffer = pValue;
-		if(DU_GetDACModeActual(DU_getActiveDACChannel()) == DAC_USER)
-			DU_SetVoltagePreview(DU_getActiveDACChannel(), (float)keypad_buffer);
-		if(DU_GetDACModeActual(DU_getActiveDACChannel()) != DAC_USER)
-			DU_SetFreqPreview(DU_getActiveDACChannel(), (float)keypad_buffer);
+		if(DU_isDualChannelMode())
+		{
+			if(DU_GetDACModePreview(DU_getActiveDACChannel()) == DAC_USER)
+			{
+				DU_SetVoltagePreview(DAC_CHANNEL_1, (float)keypad_buffer);
+				DU_SetVoltagePreview(DAC_CHANNEL_2, (float)keypad_buffer);
+			}
+			if(DU_GetDACModePreview(DU_getActiveDACChannel()) != DAC_USER)
+			{
+				DU_SetFreqPreview(DAC_CHANNEL_1, (float)keypad_buffer);
+				DU_SetFreqPreview(DAC_CHANNEL_2, (float)keypad_buffer);
+			}
+
+		}
+		else
+		{
+			if(DU_GetDACModePreview(DU_getActiveDACChannel()) == DAC_USER)
+				DU_SetVoltagePreview(DU_getActiveDACChannel(), (float)keypad_buffer);
+			if(DU_GetDACModePreview(DU_getActiveDACChannel()) != DAC_USER)
+				DU_SetFreqPreview(DU_getActiveDACChannel(), (float)keypad_buffer);
+		}
+
 
 }
 
@@ -169,8 +187,11 @@ double _Concatenate(double _buffer, double _newDigit) {
     double exp = 10;
     if(decimal_point_count > 0)
     {
+
+
     	_newDigit = _newDigit / (pow(exp,decimal_point_count));
     	decimal_point_count++;
+    	printf("Increment DP Count: %d\n", decimal_point_count);
     	next_calculated_value = (_buffer + _newDigit);
     	digit_length++;
     }
@@ -245,114 +266,111 @@ void IM_ReadKeyCol0()
 	uint32_t new_keypad_delay = _GetKeypadDebounceCounter();
 	if(new_keypad_delay - last_keypad_delay > min_keypad_bounce_delay)
 	{
+		displayState_t mode = DM_GetState();
 		// BUTTON 1
 		if(HAL_GPIO_ReadPin(GPIOE, KP1_GPOUT_Pin))
 		{
 
 
-			displayState_t mode = DM_GetState();
+
 			switch(mode)
 			{
 				case PROGSEL_DISP:
 					if(DU_isDualChannelMode())
 					{
-						DU_SetDACModeActualPreview(DAC_CHANNEL_1, DAC_USER);
-						DU_SetDACModeActualPreview(DAC_CHANNEL_2, DAC_USER);
+						DU_SetDACModePreview(DAC_CHANNEL_1, DAC_USER);
+						DU_SetDACModePreview(DAC_CHANNEL_2, DAC_USER);
 
 					}
 					else
 					{
-						DU_SetDACModeActualPreview(DU_getActiveDACChannel(), DAC_USER);
+						DU_SetDACModePreview(DU_getActiveDACChannel(), DAC_USER);
 					}
 
+					DM_SetBlinkTimer(1);
 					DM_ChangeScreen(PARAMS_DISP);
+					break;
+				case PARAMS_DISP:
+					_SetKeypadBuffer(_Concatenate(keypad_buffer, 1));
 					break;
 				case CHANSEL_DISP:
 				case HOME_DISP:
-				case PARAMS_DISP:
 				case DISPMAIN:
 				case DISPMODE:
 				case DISPVAL:
 				default:
 					break;
 			}
-		// DEPRECATED
-				if(DM_GetState() == DISPMODE)
-				{
 
-					DU_SetDACModeActual(DU_getActiveDACChannel(), DAC_USER);
-					DM_SetState(DU_getActiveDACChannel(), DM_GetState());
-				}
-				if(DM_GetState() == DISPVAL)
-				{
-					DM_SetBlinkTimer(1);
-					if(decimal_point_count > 0)
-					{
-						printf("Increment DP Count: %d\n", decimal_point_count);
-
-					}
-					_SetKeypadBuffer(_Concatenate(keypad_buffer, 1));
-				}
-		///
 			printf("Key1 Pressed = %2.2f\n", keypad_buffer);
 		}
 
 		// BUTTON 4
 		if(HAL_GPIO_ReadPin(GPIOE, KP2_GPOUT_Pin))
 		{
-
-			if(DM_GetState() == DISPVAL)
+			switch(mode)
 			{
-				DM_SetBlinkTimer(1);
-				if(decimal_point_count > 0)
-				{
-					printf("Increment DP Count: %d\n", decimal_point_count);
-
-				}
-				_SetKeypadBuffer(_Concatenate(keypad_buffer, 4));
+				case PARAMS_DISP:
+					_SetKeypadBuffer(_Concatenate(keypad_buffer, 4));
+					break;
+				case PROGSEL_DISP:
+				case CHANSEL_DISP:
+				case HOME_DISP:
+				case DISPMAIN:
+				case DISPMODE:
+				case DISPVAL:
+				default:
+					break;
 			}
+
 			printf("Key4 Pressed = %2.2f\n", keypad_buffer);
 		}
 
 		// BUTTON 7
 		if(HAL_GPIO_ReadPin(GPIOE, KP3_GPOUT_Pin))
 		{
-
-			if(DM_GetState() == DISPVAL)
+			switch(mode)
 			{
-				DM_SetBlinkTimer(1);
-				if(decimal_point_count > 0)
-				{
-					printf("Increment DP Count: %d\n", decimal_point_count);
-
-				}
-				_SetKeypadBuffer(_Concatenate(keypad_buffer, 7));
+				case PARAMS_DISP:
+					_SetKeypadBuffer(_Concatenate(keypad_buffer, 7));
+					break;
+				case PROGSEL_DISP:
+				case CHANSEL_DISP:
+				case HOME_DISP:
+				case DISPMAIN:
+				case DISPMODE:
+				case DISPVAL:
+				default:
+					break;
 			}
+
 			printf("Key7 Pressed = %2.2f\n", keypad_buffer);
 		}
 
 		// BUTTON *
 		if(HAL_GPIO_ReadPin(GPIOE, KP4_GPOUT_Pin))
 		{
-
-			if(DM_GetState() == DISPVAL)
+			switch(mode)
 			{
-				DM_SetBlinkTimer(1);
+				case PARAMS_DISP:
+					// enable decimal point count (incremented further by other digit presses)
+					if(!decimal_point_count)
+					{
+						printf("Enabled DP Count\n");
+						decimal_point_count=1;
+					}
+					break;
+				case PROGSEL_DISP:
+				case CHANSEL_DISP:
+				case HOME_DISP:
+				case DISPMAIN:
+				case DISPMODE:
+				case DISPVAL:
+				default:
+					break;
 			}
+
 			printf("Key * Pressed = %2.2f\n", keypad_buffer);
-
-			// enable decimal point count (incremented further by other digit presses)
-			if(!decimal_point_count)
-			{
-				printf("Enabled DP Count\n");
-				decimal_point_count=1;
-			}
-/*			else
-			{
-				printf("Disabled DP Count");
-				decimal_point_count=0;		// disable decimal point count if pressed again
-			}
-*/
 		}
 
 		last_keypad_delay = new_keypad_delay;
@@ -371,29 +389,31 @@ void IM_ReadKeyCol1()
 	uint32_t new_keypad_delay = _GetKeypadDebounceCounter();
 	if(new_keypad_delay - last_keypad_delay > min_keypad_bounce_delay)
 	{
+		displayState_t mode = DM_GetState();
 		// BUTTON 2
 		if(HAL_GPIO_ReadPin(GPIOE, KP1_GPOUT_Pin))
 		{
-
-			displayState_t mode = DM_GetState();
 			switch(mode)
 			{
 				case PROGSEL_DISP:
 					if(DU_isDualChannelMode())
 					{
-						DU_SetDACModeActualPreview(DAC_CHANNEL_1, DAC_TRI);
-						DU_SetDACModeActualPreview(DAC_CHANNEL_2, DAC_TRI);
+						DU_SetDACModePreview(DAC_CHANNEL_1, DAC_TRI);
+						DU_SetDACModePreview(DAC_CHANNEL_2, DAC_TRI);
 					}
 					else
 					{
-						DU_SetDACModeActualPreview(DU_getActiveDACChannel(), DAC_TRI);
+						DU_SetDACModePreview(DU_getActiveDACChannel(), DAC_TRI);
 					}
 
+					DM_SetBlinkTimer(1);
 					DM_ChangeScreen(PARAMS_DISP);
+					break;
+				case PARAMS_DISP:
+					_SetKeypadBuffer(_Concatenate(keypad_buffer, 2));
 					break;
 				case CHANSEL_DISP:
 				case HOME_DISP:
-				case PARAMS_DISP:
 				case DISPMAIN:
 				case DISPMODE:
 				case DISPVAL:
@@ -401,40 +421,25 @@ void IM_ReadKeyCol1()
 					break;
 			}
 
-		// DEPRECATED
-				if(DM_GetState() == DISPMODE)
-				{
-					// change the mode
-					DU_SetDACModeActual(DU_getActiveDACChannel(), DAC_TRI);
-					DM_SetState(DU_getActiveDACChannel(), DM_GetState());
-				}
-				if(DM_GetState() == DISPVAL)
-				{
-					DM_SetBlinkTimer(1);
-					if(decimal_point_count > 0)
-					{
-						printf("Increment DP Count: %d\n", decimal_point_count);
-
-					}
-					_SetKeypadBuffer(_Concatenate(keypad_buffer, 2));
-				}
-		///
 			printf("Key2 Pressed = %2.2f\n", keypad_buffer);
-
 		}
 
 		// BUTTON 5
 		if(HAL_GPIO_ReadPin(GPIOE, KP2_GPOUT_Pin))
 		{
-			if(DM_GetState() == DISPVAL)
+			switch(mode)
 			{
-				DM_SetBlinkTimer(1);
-				if(decimal_point_count > 0)
-				{
-					printf("Increment DP Count: %d\n", decimal_point_count);
-
-				}
-				_SetKeypadBuffer(_Concatenate(keypad_buffer, 5));
+				case PARAMS_DISP:
+					_SetKeypadBuffer(_Concatenate(keypad_buffer, 5));
+					break;
+				case PROGSEL_DISP:
+				case CHANSEL_DISP:
+				case HOME_DISP:
+				case DISPMAIN:
+				case DISPMODE:
+				case DISPVAL:
+				default:
+					break;
 			}
 			printf("Key5 Pressed = %2.2f\n", keypad_buffer);
 		}
@@ -442,15 +447,19 @@ void IM_ReadKeyCol1()
 		// BUTTON 8
 		if(HAL_GPIO_ReadPin(GPIOE, KP3_GPOUT_Pin))
 		{
-			if(DM_GetState() == DISPVAL)
+			switch(mode)
 			{
-				DM_SetBlinkTimer(1);
-				if(decimal_point_count > 0)
-				{
-					printf("Increment DP Count: %d\n", decimal_point_count);
-
-				}
-				_SetKeypadBuffer(_Concatenate(keypad_buffer, 8));
+				case PARAMS_DISP:
+					_SetKeypadBuffer(_Concatenate(keypad_buffer, 8));
+					break;
+				case PROGSEL_DISP:
+				case CHANSEL_DISP:
+				case HOME_DISP:
+				case DISPMAIN:
+				case DISPMODE:
+				case DISPVAL:
+				default:
+					break;
 			}
 			printf("Key8 Pressed = %2.2f\n", keypad_buffer);
 		}
@@ -458,16 +467,19 @@ void IM_ReadKeyCol1()
 		// BUTTON 0
 		if(HAL_GPIO_ReadPin(GPIOE, KP4_GPOUT_Pin))
 		{
-
-			if(DM_GetState() == DISPVAL)
+			switch(mode)
 			{
-				DM_SetBlinkTimer(1);
-				if(decimal_point_count > 0)
-				{
-					printf("Increment DP Count: %d\n", decimal_point_count);
-
-				}
-				_SetKeypadBuffer(_Concatenate(keypad_buffer, 0));
+				case PARAMS_DISP:
+					_SetKeypadBuffer(_Concatenate(keypad_buffer, 0));
+					break;
+				case PROGSEL_DISP:
+				case CHANSEL_DISP:
+				case HOME_DISP:
+				case DISPMAIN:
+				case DISPMODE:
+				case DISPVAL:
+				default:
+					break;
 			}
 			printf("Key0 Pressed = %2.2f\n", keypad_buffer);
 		}
@@ -488,53 +500,38 @@ void IM_ReadKeyCol2()
 	uint32_t new_keypad_delay = _GetKeypadDebounceCounter();
 	if(new_keypad_delay - last_keypad_delay > min_keypad_bounce_delay)
 	{
+		displayState_t mode = DM_GetState();
 		// BUTTON 3
 		if(HAL_GPIO_ReadPin(GPIOE, KP1_GPOUT_Pin))
 		{
-			displayState_t mode = DM_GetState();
+
 			switch(mode)
 			{
 				case PROGSEL_DISP:
 					if(DU_isDualChannelMode())
 					{
-						DU_SetDACModeActualPreview(DAC_CHANNEL_1, DAC_NOISE);
-						DU_SetDACModeActualPreview(DAC_CHANNEL_2, DAC_NOISE);
+						DU_SetDACModePreview(DAC_CHANNEL_1, DAC_NOISE);
+						DU_SetDACModePreview(DAC_CHANNEL_2, DAC_NOISE);
 					}
 					else
 					{
-						DU_SetDACModeActualPreview(DU_getActiveDACChannel(), DAC_NOISE);
+						DU_SetDACModePreview(DU_getActiveDACChannel(), DAC_NOISE);
 					}
 
+					DM_SetBlinkTimer(1);
 					DM_ChangeScreen(PARAMS_DISP);
+					break;
+				case PARAMS_DISP:
+					_SetKeypadBuffer(_Concatenate(keypad_buffer, 3));
 					break;
 				case CHANSEL_DISP:
 				case HOME_DISP:
-				case PARAMS_DISP:
 				case DISPMAIN:
 				case DISPMODE:
 				case DISPVAL:
 				default:
 					break;
 			}
-
-	// DEPRECATED
-			if(DM_GetState() == DISPMODE)
-			{
-				// change the mode
-				DU_SetDACModeActual(DU_getActiveDACChannel(), DAC_NOISE);
-				DM_SetState(DU_getActiveDACChannel(), DM_GetState());
-			}
-			if(DM_GetState() == DISPVAL)
-			{
-				DM_SetBlinkTimer(1);
-				if(decimal_point_count > 0)
-				{
-					printf("Increment DP Count: %d\n", decimal_point_count);
-
-				}
-				_SetKeypadBuffer(_Concatenate(keypad_buffer, 3));
-			}
-	///
 			printf("Key3 Pressed = %2.2f\n", keypad_buffer);
 
 		}
@@ -542,10 +539,19 @@ void IM_ReadKeyCol2()
 		// BUTTON 6
 		if(HAL_GPIO_ReadPin(GPIOE, KP2_GPOUT_Pin))
 		{
-			if(DM_GetState() == DISPVAL)
+			switch(mode)
 			{
-				DM_SetBlinkTimer(1);
-				_SetKeypadBuffer(_Concatenate(keypad_buffer, 6));
+				case PARAMS_DISP:
+					_SetKeypadBuffer(_Concatenate(keypad_buffer, 6));
+					break;
+				case PROGSEL_DISP:
+				case CHANSEL_DISP:
+				case HOME_DISP:
+				case DISPMAIN:
+				case DISPMODE:
+				case DISPVAL:
+				default:
+					break;
 			}
 			printf("Key6 Pressed = %2.2f\n", keypad_buffer);
 		}
@@ -553,16 +559,19 @@ void IM_ReadKeyCol2()
 		// BUTTON 9
 		if(HAL_GPIO_ReadPin(GPIOE, KP3_GPOUT_Pin))
 		{
-
-			if(DM_GetState() == DISPVAL)
+			switch(mode)
 			{
-				DM_SetBlinkTimer(1);
-				if(decimal_point_count > 0)
-				{
-					printf("Increment DP Count: %d\n", decimal_point_count);
-
-				}
-				_SetKeypadBuffer(_Concatenate(keypad_buffer, 9));
+				case PARAMS_DISP:
+					_SetKeypadBuffer(_Concatenate(keypad_buffer, 9));
+					break;
+				case PROGSEL_DISP:
+				case CHANSEL_DISP:
+				case HOME_DISP:
+				case DISPMAIN:
+				case DISPMODE:
+				case DISPVAL:
+				default:
+					break;
 			}
 			printf("Key9 Pressed = %2.2f\n", keypad_buffer);
 		}
@@ -570,15 +579,7 @@ void IM_ReadKeyCol2()
 		// BUTTON #
 		if(HAL_GPIO_ReadPin(GPIOE, KP4_GPOUT_Pin))
 		{
-			// # is the "enter" key
-			//commitKeypadBuffer();
-			_SetKeypadBuffer(0);
-
-
-			if(DM_GetState() == DISPVAL)
-			{
-				DM_SetBlinkTimer(1);
-			}
+			// NO FUNCTION
 
 			printf("Key # Pressed\n");
 		}
@@ -636,17 +637,29 @@ void IM_MenuEXTIHandler()
 			case PARAMS_DISP:
 				// TODO: APPLY PARAM SETTINGS
 
+				// apply voltage/freq values to actual register
+				if(DU_GetDACModePreview(DU_getActiveDACChannel()) == DAC_USER)
+					DU_SetVoltage(DU_getActiveDACChannel());
+				if(DU_GetDACModePreview(DU_getActiveDACChannel()) != DAC_USER)
+					DU_SetFreq(DU_getActiveDACChannel());
+
+
 				// Apply DAC Mode preview to actual DAC mode register
 				if(DU_isDualChannelMode())
 				{
-					DU_SetDACModeActual(DAC_CHANNEL_1, DU_GetDACModeActualPreview(DAC_CHANNEL_1));
-					DU_SetDACModeActual(DAC_CHANNEL_2, DU_GetDACModeActualPreview(DAC_CHANNEL_2));
+					DU_SetDACModeActual(DAC_CHANNEL_1, DU_GetDACModePreview(DAC_CHANNEL_1));
+					DU_SetDACModeActual(DAC_CHANNEL_2, DU_GetDACModePreview(DAC_CHANNEL_2));
 
 				}
 				else
 				{
-					DU_SetDACModeActual(DU_getActiveDACChannel(), DU_GetDACModeActualPreview(DU_getActiveDACChannel()));
+					DU_SetDACModeActual(DU_getActiveDACChannel(), DU_GetDACModePreview(DU_getActiveDACChannel()));
 				}
+
+
+
+				_ClearKeypadBuffer();
+				decimal_point_count=0;			// reset the decimal point counter
 
 				DM_ChangeScreen(HOME_DISP);
 				break;
@@ -694,20 +707,28 @@ void IM_MenuEXTIHandler()
 
 			case PARAMS_DISP:
 				// TODO: APPLY PARAM SETTINGS
+				DM_SetBlinkTimer(0);
+
+				// apply voltage/freq values to actual register
+				if(DU_GetDACModePreview(DU_getActiveDACChannel()) == DAC_USER)
+					DU_SetVoltage(DU_getActiveDACChannel());
+				if(DU_GetDACModePreview(DU_getActiveDACChannel()) != DAC_USER)
+					DU_SetFreq(DU_getActiveDACChannel());
 
 				// Apply DAC Mode preview to actual DAC mode register
 				if(DU_isDualChannelMode())
 				{
-					DU_SetDACModeActual(DAC_CHANNEL_1, DU_GetDACModeActualPreview(DAC_CHANNEL_1));
-					DU_SetDACModeActual(DAC_CHANNEL_2, DU_GetDACModeActualPreview(DAC_CHANNEL_2));
+					DU_SetDACModeActual(DAC_CHANNEL_1, DU_GetDACModePreview(DAC_CHANNEL_1));
+					DU_SetDACModeActual(DAC_CHANNEL_2, DU_GetDACModePreview(DAC_CHANNEL_2));
 
 				}
 				else
 				{
-					DU_SetDACModeActual(DU_getActiveDACChannel(), DU_GetDACModeActualPreview(DU_getActiveDACChannel()));
+					DU_SetDACModeActual(DU_getActiveDACChannel(), DU_GetDACModePreview(DU_getActiveDACChannel()));
 				}
 
-
+				_ClearKeypadBuffer();
+				decimal_point_count=0;			// reset the decimal point counter
 				DM_ChangeScreen(HOME_DISP);
 				break;
 			default:
@@ -756,11 +777,15 @@ void IM_MenuEXTIHandler()
 
 			case PROGSEL_DISP:
 				// GO BACK TO PREVIOUS
+
 				DM_ChangeScreen(CHANSEL_DISP);
 				break;
 
 			case PARAMS_DISP:
-				// TODO:  CANCEL ALL PREVIEW SETTINGS
+				// CANCEL ALL PREVIEW SETTINGS
+				_ClearKeypadBuffer();
+				DU_ClearVoltagePreview();
+				DU_ClearFreqPreview();
 				DM_ChangeScreen(PROGSEL_DISP);
 				break;
 			default:
@@ -821,7 +846,10 @@ void IM_MenuEXTIHandler()
 				break;
 
 			case PARAMS_DISP:
-				// TODO:  CANCEL ALL PREVIEW SETTINGS
+				// CANCEL ALL PREVIEW SETTINGS
+				_ClearKeypadBuffer();
+				DU_ClearVoltagePreview();
+				DU_ClearFreqPreview();
 				DM_ChangeScreen(HOME_DISP);
 				break;
 			default:

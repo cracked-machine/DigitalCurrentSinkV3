@@ -146,30 +146,30 @@ void _DrawDac1Value(uint8_t preview)
 		switch(digit_length)
 		{
 			case 0:
-				snprintf(dac1cnt, sizeof(dac1cnt), "DAC1: %luV", (uint32_t)new_dac_value);
+				snprintf(dac1cnt, sizeof(dac1cnt), " %luV", (uint32_t)new_dac_value);
 				break;
 			case 1:
-				snprintf(dac1cnt, sizeof(dac1cnt), "DAC1: %2.0fV", new_dac_value);
+				snprintf(dac1cnt, sizeof(dac1cnt), "%2.0fV", new_dac_value);
 				break;
 			case 2:
-				snprintf(dac1cnt, sizeof(dac1cnt), "DAC1: %2.1fV", new_dac_value);
+				snprintf(dac1cnt, sizeof(dac1cnt), "%2.1fV", new_dac_value);
 				break;
 			case 3:
-				snprintf(dac1cnt, sizeof(dac1cnt), "DAC1: %2.2fV", new_dac_value);
+				snprintf(dac1cnt, sizeof(dac1cnt), "%2.2fV", new_dac_value);
 				break;
 			case 4:
-				snprintf(dac1cnt, sizeof(dac1cnt), "DAC1: %2.3fV", new_dac_value);
+				snprintf(dac1cnt, sizeof(dac1cnt), "%2.3fV", new_dac_value);
 				break;
 			default:
-				snprintf(dac1cnt, sizeof(dac1cnt), "DAC1: %2.3fV", new_dac_value);
+				snprintf(dac1cnt, sizeof(dac1cnt), "%2.3fV", new_dac_value);
 				break;
     	}
 	}
 	else
 	{
-		snprintf(dac1cnt, sizeof(dac1cnt), "DAC1: %2.3fV", new_dac_value);
+		snprintf(dac1cnt, sizeof(dac1cnt), "%2.3fV", new_dac_value);
 	}
-	ssd1306_WriteString(dac1cnt, Font_7x10, White, 0);
+	ssd1306_WriteString(dac1cnt, Font_5x7, White, 1);
 }
 
 /**
@@ -203,30 +203,30 @@ void _DrawDac2Value(uint8_t preview)
 		switch(placeCount)
 		{
 			case 0:
-				snprintf(dac2cnt, sizeof(dac2cnt), "DAC2: %luV", (uint32_t)new_dac_value);
+				snprintf(dac2cnt, sizeof(dac2cnt), "%luV", (uint32_t)new_dac_value);
 				break;
 			case 1:
-				snprintf(dac2cnt, sizeof(dac2cnt), "DAC2: %2.0fV", new_dac_value);
+				snprintf(dac2cnt, sizeof(dac2cnt), "%2.0fV", new_dac_value);
 				break;
 			case 2:
-				snprintf(dac2cnt, sizeof(dac2cnt), "DAC2: %2.1fV", new_dac_value);
+				snprintf(dac2cnt, sizeof(dac2cnt), "%2.1fV", new_dac_value);
 				break;
 			case 3:
-				snprintf(dac2cnt, sizeof(dac2cnt), "DAC2: %2.2fV", new_dac_value);
+				snprintf(dac2cnt, sizeof(dac2cnt), "%2.2fV", new_dac_value);
 				break;
 			case 4:
-				snprintf(dac2cnt, sizeof(dac2cnt), "DAC2: %2.3fV", new_dac_value);
+				snprintf(dac2cnt, sizeof(dac2cnt), "%2.3fV", new_dac_value);
 				break;
 			default:
-				snprintf(dac2cnt, sizeof(dac2cnt), "DAC2: %2.3fV", new_dac_value);
+				snprintf(dac2cnt, sizeof(dac2cnt), "%2.3fV", new_dac_value);
 				break;
 		}
 	}
 	else
 	{
-		snprintf(dac2cnt, sizeof(dac2cnt), "DAC2: %2.3fV", new_dac_value);
+		snprintf(dac2cnt, sizeof(dac2cnt), "%2.3fV", new_dac_value);
 	}
-	ssd1306_WriteString(dac2cnt, Font_7x10, White, 0);
+	ssd1306_WriteString(dac2cnt, Font_5x7, White, 1);
 }
 
 /**
@@ -444,8 +444,8 @@ void _DrawChanSelOverlay()
 
 void _DrawChanSelDisp()
 {
-    ssd1306_SetCursor(0, 20);
-    ssd1306_WriteString("CHANNEL SELECT", Font_7x10, White, 0);
+    ssd1306_SetCursor(0, 26);
+    ssd1306_WriteString("SELECT CHANNEL", Font_7x10, White, 0);
 }
 
 
@@ -494,26 +494,26 @@ void _DrawProgSelOverlay()
 void _DrawProgSelDisp()
 {
 	// display mode status
-	ssd1306_SetCursor(4, 14);
+	ssd1306_SetCursor(4, 15);
 
 	char mode[32] = "";
     if(DU_isDualChannelMode())
-    	sprintf(mode,"DUAL CHANNEL MODE");
+    	sprintf(mode,"[DUAL CHAN MODE]");
     else
-    	snprintf(mode, sizeof(mode), " %s MODE", DU_getActiveDACChannel2String());
+    	snprintf(mode, sizeof(mode), "   [%s MODE]", DU_getActiveDACChannel2String());
     ssd1306_WriteString(mode, Font_5x7, White, 1);
 
     // display program options
-    ssd1306_SetCursor(10, 24);
-    ssd1306_WriteString("SELECT PROGRAM:", Font_5x7, White, 1);
+    ssd1306_SetCursor(10, 28);
+    ssd1306_WriteString("PROGRAMS:", Font_7x10, White, 0);
 
-    ssd1306_SetCursor(10, 34);
+    ssd1306_SetCursor(10, 40);
     ssd1306_WriteString("1.USER", Font_5x7, White, 1);
 
-    ssd1306_SetCursor(10, 42);
-    ssd1306_WriteString("2.AUTO:", Font_5x7, White, 1);
+    ssd1306_SetCursor(10, 48);
+    ssd1306_WriteString("2.AUTO", Font_5x7, White, 1);
 
-    ssd1306_SetCursor(10, 50);
+    ssd1306_SetCursor(10, 56);
     ssd1306_WriteString("3.RAND", Font_5x7, White, 1);
 }
 
@@ -562,21 +562,79 @@ void _DrawParamSelOverlay()
 
 void _DrawParamSelDisp()
 {
-    ssd1306_SetCursor(0, 20);
+	dacmode_t dacmode;
+
+    ssd1306_SetCursor(0, 15);
 
     if(DU_isDualChannelMode())
     {
     	char mode[32] = "";
     	// both channels should be set to same mode, so either channel can be used as ref
-    	sprintf(mode, "CH1+2: %s", DU_GetDACModeActualPreview2String(DU_getActiveDACChannel()));
-    	ssd1306_WriteString(mode, Font_7x10, White, 0);
+    	sprintf(mode, "[CH1+2 MODE: %s]", DU_GetDACModePreview2String(DU_getActiveDACChannel()));
+    	ssd1306_WriteString(mode, Font_5x7, White, 1);
+    	dacmode = DU_GetDACModePreview(DAC_CHANNEL_1);
     }
     else
     {
     	char mode[32] = "";
     	// get the mode for this specific channel
-    	sprintf(mode, "%s:%s", DU_getActiveDACChannel2String(), DU_GetDACModeActualPreview2String(DU_getActiveDACChannel()));
-    	ssd1306_WriteString(mode, Font_7x10, White, 0);
+    	sprintf(mode, " [%s MODE: %s]", DU_getActiveDACChannel2String(), DU_GetDACModePreview2String(DU_getActiveDACChannel()));
+    	ssd1306_WriteString(mode, Font_5x7, White, 1);
+    	dacmode = DU_GetDACModePreview(DU_getActiveDACChannel());
+    }
+
+    switch(dacmode)
+    {
+		case DAC_USER:
+		    	if(DU_isDualChannelMode())
+		    	{
+		    		// show BOTH DAC 1 and DAC 2 params
+		    		ssd1306_SetCursor(2, 30);
+					ssd1306_WriteString("CH1:", Font_5x7, White, 1);
+					ssd1306_SetCursor(27, 30);
+					if(!blink_display_text)
+						_DrawDac1Value(1);
+
+					ssd1306_SetCursor(2, 50);
+					ssd1306_WriteString("CH2:", Font_5x7, White, 1);
+					ssd1306_SetCursor(27, 50);
+					if(!blink_display_text)
+						_DrawDac2Value(1);
+
+		    	}
+		    	else
+		    	{
+		    		// show DAC 1 OR DAC 2 params
+		    		switch(DU_getActiveDACChannel())
+					{
+						case DAC_CHANNEL_1:
+							ssd1306_SetCursor(2, 30);
+							ssd1306_WriteString("CH1:", Font_5x7, White, 1);
+							ssd1306_SetCursor(27, 30);
+							if(!blink_display_text)
+								_DrawDac1Value(1);
+							break;
+						case DAC_CHANNEL_2:
+							ssd1306_SetCursor(2, 30);
+							ssd1306_WriteString("CH2:", Font_5x7, White, 1);
+							ssd1306_SetCursor(27, 30);
+							if(!blink_display_text)
+								_DrawDac2Value(1);
+							break;
+						default:
+							break;
+					}
+		    	}
+
+
+			break;
+		case DAC_NOISE:
+			break;
+		case DAC_TRI:
+
+			break;
+		default:
+			break;
     }
 
 
@@ -635,7 +693,7 @@ void DM_UpdateDisplay()
 
 	ssd1306_UpdateScreen();
 
-	printf("%lu - %lu\n", test[0], test[1]);
+	//printf("%lu - %lu\n", test[0], test[1]);
 }
 
 /**
