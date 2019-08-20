@@ -40,4 +40,7 @@ float DU_CalcDACFreq(uint32_t Channel, uint8_t preview);
 
 void DU_CompleteCallback(uint32_t Channel);
 
+void DU_setActiveDACChannel(uint32_t Channel);
+uint32_t DU_getActiveDACChannel();
+
 #endif /* DAC_UTILS_H_ */

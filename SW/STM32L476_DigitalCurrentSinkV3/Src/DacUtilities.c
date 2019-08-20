@@ -31,6 +31,9 @@
 #define MAXFREQSTEP 		32
 #define MAXAMPSTEP 			1
 
+/*  DAC channel context set from user menu button selection. See IM_MenuEXTIHandler() */
+uint32_t 	selected_dac_channel = DAC_CHANNEL_1;
+
 /* 	Preview of DAC_CHANNEL_1 output register stored as 2^12 decimal number */
 uint32_t chan1_amp_count_preview = 0;
 
@@ -758,5 +761,13 @@ void DU_CompleteCallback(uint32_t Channel)
 
 }
 
+void DU_setActiveDACChannel(uint32_t Channel)
+{
+	selected_dac_channel = Channel;
+}
 
+uint32_t DU_getActiveDACChannel()
+{
+	return selected_dac_channel;
+}
 

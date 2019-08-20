@@ -123,10 +123,10 @@ void _SetKeypadBuffer(double pValue)
 {
 
 		keypad_buffer = pValue;
-		if(DU_GetDACMode(DM_GetSelectedDac()) == DAC_USER)
-			DU_SetVoltagePreview(DM_GetSelectedDac(), (float)keypad_buffer);
-		if(DU_GetDACMode(DM_GetSelectedDac()) != DAC_USER)
-			DU_SetFreqPreview(DM_GetSelectedDac(), (float)keypad_buffer);
+		if(DU_GetDACMode(DU_getActiveDACChannel()) == DAC_USER)
+			DU_SetVoltagePreview(DU_getActiveDACChannel(), (float)keypad_buffer);
+		if(DU_GetDACMode(DU_getActiveDACChannel()) != DAC_USER)
+			DU_SetFreqPreview(DU_getActiveDACChannel(), (float)keypad_buffer);
 
 }
 
@@ -241,8 +241,8 @@ void IM_ReadKeyCol0()
 			if(DM_GetState() == DISPMODE)
 			{
 
-				DU_SetDACMode(DM_GetSelectedDac(), DAC_USER);
-				DM_SetState(DM_GetSelectedDac(), DM_GetState());
+				DU_SetDACMode(DU_getActiveDACChannel(), DAC_USER);
+				DM_SetState(DU_getActiveDACChannel(), DM_GetState());
 			}
 			if(DM_GetState() == DISPVAL)
 			{
@@ -337,8 +337,8 @@ void IM_ReadKeyCol1()
 			if(DM_GetState() == DISPMODE)
 			{
 				// change the mode
-				DU_SetDACMode(DM_GetSelectedDac(), DAC_TRI);
-				DM_SetState(DM_GetSelectedDac(), DM_GetState());
+				DU_SetDACMode(DU_getActiveDACChannel(), DAC_TRI);
+				DM_SetState(DU_getActiveDACChannel(), DM_GetState());
 			}
 			if(DM_GetState() == DISPVAL)
 			{
@@ -425,8 +425,8 @@ void IM_ReadKeyCol2()
 			if(DM_GetState() == DISPMODE)
 			{
 				// change the mode
-				DU_SetDACMode(DM_GetSelectedDac(), DAC_NOISE);
-				DM_SetState(DM_GetSelectedDac(), DM_GetState());
+				DU_SetDACMode(DU_getActiveDACChannel(), DAC_NOISE);
+				DM_SetState(DU_getActiveDACChannel(), DM_GetState());
 			}
 			if(DM_GetState() == DISPVAL)
 			{
@@ -491,7 +491,7 @@ void IM_ReadKeyCol2()
 }
 
 /**
-  * @brief	State-machine for menu buttons
+  * @brief	State-machine for OLED display and menu buttons
   * 		Each button has different action depending on the current state
   *
   * @retval none
@@ -515,7 +515,7 @@ void IM_MenuEXTIHandler()
 			case DISPMODE:	// NO ACTION
 				break;
 			case DISPVAL:	// "SET VALUE" SCREEN; NUDGE VALUE
-				DU_IncreaseDAC(DM_GetSelectedDac());
+				DU_IncreaseDAC(DU_getActiveDACChannel());
 				digit_length=4;
 				break;
 			default:
@@ -538,7 +538,7 @@ void IM_MenuEXTIHandler()
 			case DISPMODE:			// NO ACTION
 				break;
 			case DISPVAL:			// "SET VALUE" SCREEN; NUDGE VALUE
-				DU_DecreaseDAC(DM_GetSelectedDac());
+				DU_DecreaseDAC(DU_getActiveDACChannel());
 				digit_length=4;
 				break;
 			default:
@@ -561,10 +561,10 @@ void IM_MenuEXTIHandler()
 			case DISPVAL:	// APPLY VALUE SET PREVIEW
 
 				DM_SetBlinkTimer(0);
-				if(DU_GetDACMode(DM_GetSelectedDac()) == DAC_USER)
-					DU_SetVoltage(DM_GetSelectedDac());
-				if(DU_GetDACMode(DM_GetSelectedDac()) != DAC_USER)
-					DU_SetFreq(DM_GetSelectedDac());
+				if(DU_GetDACMode(DU_getActiveDACChannel()) == DAC_USER)
+					DU_SetVoltage(DU_getActiveDACChannel());
+				if(DU_GetDACMode(DU_getActiveDACChannel()) != DAC_USER)
+					DU_SetFreq(DU_getActiveDACChannel());
 
 				_ClearKeypadBuffer();
 				decimal_point_count=0;			// reset the decimal point counter

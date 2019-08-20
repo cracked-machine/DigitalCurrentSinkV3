@@ -270,7 +270,7 @@ void DMA1_Channel1_IRQHandler(void)
 void TIM1_BRK_TIM15_IRQHandler(void)
 {
   /* USER CODE BEGIN TIM1_BRK_TIM15_IRQn 0 */
-	DU_CompleteCallback(DM_GetSelectedDac());
+	DU_CompleteCallback(DU_getActiveDACChannel());
   /* USER CODE END TIM1_BRK_TIM15_IRQn 0 */
   HAL_TIM_IRQHandler(&htim15);
   /* USER CODE BEGIN TIM1_BRK_TIM15_IRQn 1 */

@@ -15,8 +15,7 @@
 #include "utils.h"
 
 
-/*  DAC channel context set from user menu button selection. See IM_MenuEXTIHandler() */
-uint32_t 	selected_dac_channel = DAC_CHANNEL_1;
+
 
 /*	Current display state set from user menu button selection. See IM_MenuEXTIHandler() */
 displayState_t 		current_display_state = DISPMAIN;
@@ -90,17 +89,17 @@ void _DrawMainOverlay()
 		ssd1306_DrawPixel(96, y, White);
 	}
 	// top menu
-	ssd1306_SetCursor(2,3);
-	ssd1306_WriteString("DAC1", Font_5x7, White, 1);
+	ssd1306_SetCursor(4,3);
+	ssd1306_WriteString("SET", Font_5x7, White, 1);
 
-	ssd1306_SetCursor(34,3);
-	ssd1306_WriteString("INCR", Font_5x7, White, 1);
+	ssd1306_SetCursor(40,3);
+	ssd1306_WriteString("ON", Font_5x7, White, 1);
 
-	ssd1306_SetCursor(66,3);
-	ssd1306_WriteString("DAC2", Font_5x7, White, 1);
+	ssd1306_SetCursor(76,3);
+	ssd1306_WriteString("+", Font_5x7, White, 1);
 
-	ssd1306_SetCursor(97,3);
-	ssd1306_WriteString("INCR", Font_5x7, White, 1);
+	ssd1306_SetCursor(107,3);
+	ssd1306_WriteString("-", Font_5x7, White, 1);
 
 	for(int x=0; x < SSD1306_WIDTH; x++)
 	{
@@ -319,7 +318,7 @@ void _DrawModeDisp()
 {
     ssd1306_SetCursor(0, 20);
 
-    switch(selected_dac_channel)
+    switch(DU_getActiveDACChannel())
     {
     case DAC_CHANNEL_1:
     	ssd1306_WriteString("Enter DAC1 mode:", Font_7x10, White, 0);
@@ -382,7 +381,7 @@ void _DrawValueDisp()
 {
     ssd1306_SetCursor(0, 20);
 
-    switch(selected_dac_channel)
+    switch(DU_getActiveDACChannel())
     {
     case DAC_CHANNEL_1:
     	ssd1306_WriteString("Enter DAC1 Value:", Font_7x10, White, 0);
@@ -462,7 +461,7 @@ void DM_SetState(uint32_t Channel, displayState_t State)
 		current_display_state = State;
 	}
 
-	selected_dac_channel = Channel;
+	DU_setActiveDACChannel(Channel);
 
 }
 
@@ -487,7 +486,9 @@ displayState_t DM_GetState()
   */
 
 
-uint32_t DM_GetSelectedDac()
+// moved to DU_getActiveDACChannel()
+/*uint32_t DM_GetSelectedDac()
 {
 	return selected_dac_channel;
 }
+*/

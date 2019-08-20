@@ -13,9 +13,14 @@
 
 typedef enum displayState
 {
-	DISPMAIN	=	0x00,
-	DISPMODE	=	0x01,
-	DISPVAL		=	0x02,
+	DISPMAIN,
+	DISPMODE,
+	DISPVAL,
+	HOME_DISP,
+	CHANSEL_DISP,
+	PROGSEL_DISP,
+	PARAMS_DISP,
+
 	numStates
 
 } displayState_t;
