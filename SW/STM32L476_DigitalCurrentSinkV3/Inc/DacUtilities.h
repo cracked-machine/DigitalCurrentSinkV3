@@ -14,8 +14,8 @@ typedef enum dacmode
 {
 	DAC_ERROR 	= 	0x00,	// illegal channel request
 	DAC_USER 	=	0x01,
-	DAC_TRI		= 	0x02,
-	DAC_NOISE	= 	0x03
+	DAC_AUTO	= 	0x02,
+	DAC_RAND	= 	0x03
 
 } dacmode_t;
 
@@ -31,12 +31,12 @@ void DU_IncreaseDAC(uint32_t Channel);
 void DU_DecreaseDAC(uint32_t Channel);
 void DU_SetVoltagePreview(uint32_t Channel, float newVolts);
 void DU_SetVoltage(uint32_t Channel);
-void DU_ClearVoltagePreview();
+void DU_ClearVoltagePreview(uint32_t Channel);
 
 
 void DU_SetFreqPreview(uint32_t Channel, float newHertz);
 void DU_SetFreq(uint32_t Channel);
-void DU_ClearFreqPreview();
+void DU_ClearFreqPreview(uint32_t Channel);
 
 
 float DU_CalcDACVolts(uint32_t Channel, uint8_t preview);

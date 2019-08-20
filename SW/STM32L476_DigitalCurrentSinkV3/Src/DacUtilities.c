@@ -46,7 +46,8 @@ dacmode_t channel2_dacmode_preview = DAC_USER;
 uint32_t chan1_amp_count_preview = 0;
 
 /* 	Preview of Timer6 count register stored as 2^12 decimal number.
-	Default to slowest count period (TIMRES) prevents reset to zero/infinity */
+	Default to slowest count period (TIMRES) prevents reset to zero/infinity
+	NOTE: Zero value is illegal for timer ARR!	*/
 uint32_t chan1_freq_count_preview = TIMRES;
 
 /* Hertz conversion of chan1_freq_count_preview for display */
@@ -69,8 +70,8 @@ float chan2_freq_hertz = 0;
   *         This parameter can be one of the following values:
   *            		DAC_ERROR 	= 	0x00,	// illegal channel request
   *					DAC_USER 	=	0x01,
-  *					DAC_TRI		= 	0x02,
-  *					DAC_NOISE	= 	0x03
+  *					DAC_AUTO		= 	0x02,
+  *					DAC_RAND	= 	0x03
   *
   * @retval none
   */
@@ -92,8 +93,8 @@ void DU_SetDACModePreview(uint32_t Channel, dacmode_t pNewMode)
   *         This parameter can be one of the following values:
   *            		DAC_ERROR 	= 	0x00,	// illegal channel request
   *					DAC_USER 	=	0x01,
-  *					DAC_TRI		= 	0x02,
-  *					DAC_NOISE	= 	0x03
+  *					DAC_AUTO		= 	0x02,
+  *					DAC_RAND	= 	0x03
   */
 
 dacmode_t DU_GetDACModePreview(uint32_t Channel)
@@ -115,10 +116,10 @@ char* DU_GetDACModePreview2String(uint32_t Channel)
 			case DAC_USER:
 				return "USER";
 				break;
-			case DAC_NOISE:
+			case DAC_RAND:
 				return "RAND";
 				break;
-			case DAC_TRI:
+			case DAC_AUTO:
 				return "AUTO";
 				break;
 			default:
@@ -132,10 +133,10 @@ char* DU_GetDACModePreview2String(uint32_t Channel)
 			case DAC_USER:
 				return "USER";
 				break;
-			case DAC_NOISE:
+			case DAC_RAND:
 				return "RAND";
 				break;
-			case DAC_TRI:
+			case DAC_AUTO:
 				return "AUTO";
 				break;
 			default:
@@ -370,10 +371,12 @@ void DU_SetVoltage(uint32_t Channel)
   * @retval none
   */
 
-void DU_ClearVoltagePreview()
+void DU_ClearVoltagePreview(uint32_t Channel)
 {
-	chan1_amp_count_preview = 0;
-	chan2_amp_count_preview = 0;
+	if(Channel == DAC_CHANNEL_1)
+		chan1_amp_count_preview = 0;
+	else
+		chan2_amp_count_preview = 0;
 }
 
 /**
@@ -514,10 +517,13 @@ void DU_SetFreq(uint32_t Channel)
   * @retval none
   */
 
-void DU_ClearFreqPreview()
+void DU_ClearFreqPreview(uint32_t Channel)
 {
-	chan1_freq_count_preview = 0;
-	chan2_freq_count_preview = 0; 	// default to slowest period at this prescaler;
+
+	if(Channel == DAC_CHANNEL_1)
+		chan1_freq_count_preview = TIMRES;
+	else
+		chan2_freq_count_preview = TIMRES;
 }
 
 /**
@@ -611,13 +617,13 @@ void _CycleDACMode(uint32_t Channel)
 	uint8_t currentDacMode = DU_GetDACModeActual(Channel);
 	if(currentDacMode == DAC_USER)
 	{
-		DU_SetDACModeActual(Channel, DAC_TRI);
+		DU_SetDACModeActual(Channel, DAC_AUTO);
 	}
-	else if (currentDacMode == DAC_TRI)
+	else if (currentDacMode == DAC_AUTO)
 	{
-		DU_SetDACModeActual(Channel, DAC_NOISE);
+		DU_SetDACModeActual(Channel, DAC_RAND);
 	}
-	else if (currentDacMode == DAC_NOISE)
+	else if (currentDacMode == DAC_RAND)
 	{
 		DU_SetDACModeActual(Channel, DAC_USER);
 	}
@@ -642,11 +648,11 @@ void DU_IncreaseDAC(uint32_t Channel)
 	{
 		_ChangeVoltage(Channel, 1);
 	}
-	else if (currentDacMode == DAC_TRI)
+	else if (currentDacMode == DAC_AUTO)
 	{
 		_ChangeFreq(Channel, 1);
 	}
-	else if (currentDacMode == DAC_NOISE)
+	else if (currentDacMode == DAC_RAND)
 	{
 		_ChangeFreq(Channel, 1);
 	}
@@ -671,11 +677,11 @@ void DU_DecreaseDAC(uint32_t Channel)
 	{
 		_ChangeVoltage(Channel, 0);
 	}
-	else if (currentDacMode == DAC_TRI)
+	else if (currentDacMode == DAC_AUTO)
 	{
 		_ChangeFreq(Channel, 0);
 	}
-	else if (currentDacMode == DAC_NOISE)
+	else if (currentDacMode == DAC_RAND)
 	{
 		_ChangeFreq(Channel, 0);
 	}
@@ -692,8 +698,8 @@ void DU_DecreaseDAC(uint32_t Channel)
   * @retval  The DAC mode
   * 		@arg	DAC_ERROR: 	illegal mode request
   *			@arg 	DAC_USER:	Normal mode
-  *			@arg 	DAC_TRI:	Auto mode
-  *			@arg 	DAC_NOISE:	Random mode
+  *			@arg 	DAC_AUTO:	Auto mode
+  *			@arg 	DAC_RAND:	Random mode
   */
 
 dacmode_t DU_GetDACModeActual(uint32_t Channel)
@@ -703,11 +709,11 @@ dacmode_t DU_GetDACModeActual(uint32_t Channel)
 	{
 		if	(hdac_cr & DAC_CR_WAVE1_0)
 		{
-			return DAC_NOISE;
+			return DAC_RAND;
 		}
 		else if (hdac_cr & DAC_CR_WAVE1_1)
 		{
-			return DAC_TRI;
+			return DAC_AUTO;
 		}
 		else
 		{
@@ -718,11 +724,11 @@ dacmode_t DU_GetDACModeActual(uint32_t Channel)
 	{
 		if	(hdac_cr & DAC_CR_WAVE2_0)
 		{
-			return DAC_NOISE;
+			return DAC_RAND;
 		}
 		else if (hdac_cr & DAC_CR_WAVE2_1)
 		{
-			return DAC_TRI;
+			return DAC_AUTO;
 		}
 		else
 		{
@@ -754,30 +760,30 @@ char* DU_GetDACModeActual2String(uint32_t Channel)
 	{
 		if	(hdac_cr & DAC_CR_WAVE1_0)
 		{
-			return "Random";
+			return "RAND";
 		}
 		else if (hdac_cr & DAC_CR_WAVE1_1)
 		{
-			return "Auto";
+			return "AUTO";
 		}
 		else
 		{
-			return "User";
+			return "USER";
 		}
 	}
 	else if (Channel == DAC_CHANNEL_2)
 	{
 		if	(hdac_cr & DAC_CR_WAVE2_0)
 		{
-			return "Random";
+			return "RAND";
 		}
 		else if (hdac_cr & DAC_CR_WAVE2_1)
 		{
-			return "Auto";
+			return "AUTO";
 		}
 		else
 		{
-			return "User";
+			return "USER";
 		}
 	}
 	else
@@ -797,8 +803,8 @@ char* DU_GetDACModeActual2String(uint32_t Channel)
   * @param	mode The selected DAC mode
   * 			@arg 	DAC_ERROR: 	illegal mode request
   *				@arg 	DAC_USER:	Normal mode
-  *				@arg 	DAC_TRI:	Auto mode
-  *				@arg 	DAC_NOISE:	Random mode
+  *				@arg 	DAC_AUTO:	Auto mode
+  *				@arg 	DAC_RAND:	Random mode
   *
   * @retval none
   */
@@ -815,13 +821,13 @@ void DU_SetDACModeActual(uint32_t Channel, dacmode_t mode)
 			hdac1.Instance->CR &= ~(DAC_CR_WAVE1_0 | DAC_CR_WAVE1_1);
 			//_ResetDACVoltage(DAC_CHANNEL_1);
 		}
-		else if (mode == DAC_NOISE)
+		else if (mode == DAC_RAND)
 		{
 			htim6.Instance->PSC = 4096;
 			hdac1.Instance->CR |= (DAC_CR_WAVE1_0 | DAC_LFSRUNMASK_BITS11_0);
 			//_ResetDACFreq(DAC_CHANNEL_1);
 		}
-		else if (mode == DAC_TRI)
+		else if (mode == DAC_AUTO)
 		{
 			htim6.Instance->PSC = 255;
 			hdac1.Instance->CR |= (DAC_CR_WAVE1_1 | DAC_TRIANGLEAMPLITUDE_4095);
@@ -837,13 +843,13 @@ void DU_SetDACModeActual(uint32_t Channel, dacmode_t mode)
 			hdac1.Instance->CR &= ~(DAC_CR_WAVE2_0 | DAC_CR_WAVE2_1);
 			//_ResetDACVoltage(DAC_CHANNEL_2);
 		}
-		else if (mode == DAC_NOISE)
+		else if (mode == DAC_RAND)
 		{
 			htim7.Instance->PSC = 4096;
 			hdac1.Instance->CR |= (DAC_CR_WAVE2_0 | (DAC_LFSRUNMASK_BITS11_0 << (Channel & 0x10UL)));
 			//_ResetDACFreq(DAC_CHANNEL_2);
 		}
-		else if (mode == DAC_TRI)
+		else if (mode == DAC_AUTO)
 		{
 			htim7.Instance->PSC = 255;
 			hdac1.Instance->CR |= (DAC_CR_WAVE2_1 | (DAC_TRIANGLEAMPLITUDE_4095 << (Channel & 0x10UL)));

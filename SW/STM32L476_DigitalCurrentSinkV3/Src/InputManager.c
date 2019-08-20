@@ -270,9 +270,6 @@ void IM_ReadKeyCol0()
 		// BUTTON 1
 		if(HAL_GPIO_ReadPin(GPIOE, KP1_GPOUT_Pin))
 		{
-
-
-
 			switch(mode)
 			{
 				case PROGSEL_DISP:
@@ -360,9 +357,16 @@ void IM_ReadKeyCol0()
 						decimal_point_count=1;
 					}
 					break;
+				case HOME_DISP:
+					DU_ClearVoltagePreview(DAC_CHANNEL_1);
+					DU_SetVoltage(DAC_CHANNEL_1);
+					DU_ClearFreqPreview(DAC_CHANNEL_1);
+					DU_SetFreq(DAC_CHANNEL_1);
+					DU_SetDACModeActual(DAC_CHANNEL_1,DAC_USER);
+
+					break;
 				case PROGSEL_DISP:
 				case CHANSEL_DISP:
-				case HOME_DISP:
 				case DISPMAIN:
 				case DISPMODE:
 				case DISPVAL:
@@ -398,12 +402,12 @@ void IM_ReadKeyCol1()
 				case PROGSEL_DISP:
 					if(DU_isDualChannelMode())
 					{
-						DU_SetDACModePreview(DAC_CHANNEL_1, DAC_TRI);
-						DU_SetDACModePreview(DAC_CHANNEL_2, DAC_TRI);
+						DU_SetDACModePreview(DAC_CHANNEL_1, DAC_AUTO);
+						DU_SetDACModePreview(DAC_CHANNEL_2, DAC_AUTO);
 					}
 					else
 					{
-						DU_SetDACModePreview(DU_getActiveDACChannel(), DAC_TRI);
+						DU_SetDACModePreview(DU_getActiveDACChannel(), DAC_AUTO);
 					}
 
 					DM_SetBlinkTimer(1);
@@ -510,12 +514,12 @@ void IM_ReadKeyCol2()
 				case PROGSEL_DISP:
 					if(DU_isDualChannelMode())
 					{
-						DU_SetDACModePreview(DAC_CHANNEL_1, DAC_NOISE);
-						DU_SetDACModePreview(DAC_CHANNEL_2, DAC_NOISE);
+						DU_SetDACModePreview(DAC_CHANNEL_1, DAC_RAND);
+						DU_SetDACModePreview(DAC_CHANNEL_2, DAC_RAND);
 					}
 					else
 					{
-						DU_SetDACModePreview(DU_getActiveDACChannel(), DAC_NOISE);
+						DU_SetDACModePreview(DU_getActiveDACChannel(), DAC_RAND);
 					}
 
 					DM_SetBlinkTimer(1);
@@ -579,7 +583,27 @@ void IM_ReadKeyCol2()
 		// BUTTON #
 		if(HAL_GPIO_ReadPin(GPIOE, KP4_GPOUT_Pin))
 		{
-			// NO FUNCTION
+			// RESET DAC CHANNEL 2
+			switch(mode)
+			{
+				case HOME_DISP:
+					DU_ClearVoltagePreview(DAC_CHANNEL_2);
+					DU_SetVoltage(DAC_CHANNEL_2);
+					DU_ClearFreqPreview(DAC_CHANNEL_2);
+					DU_SetFreq(DAC_CHANNEL_2);
+					DU_SetDACModeActual(DAC_CHANNEL_2,DAC_USER);
+
+					break;
+				case PARAMS_DISP:
+				case PROGSEL_DISP:
+				case CHANSEL_DISP:
+				case DISPMAIN:
+				case DISPMODE:
+				case DISPVAL:
+				default:
+					break;
+			}
+
 
 			printf("Key # Pressed\n");
 		}
@@ -657,10 +681,9 @@ void IM_MenuEXTIHandler()
 				}
 
 
-
 				_ClearKeypadBuffer();
 				decimal_point_count=0;			// reset the decimal point counter
-
+				digit_length=1;
 				DM_ChangeScreen(HOME_DISP);
 				break;
 
@@ -729,6 +752,7 @@ void IM_MenuEXTIHandler()
 
 				_ClearKeypadBuffer();
 				decimal_point_count=0;			// reset the decimal point counter
+				digit_length=1;
 				DM_ChangeScreen(HOME_DISP);
 				break;
 			default:
@@ -760,7 +784,7 @@ void IM_MenuEXTIHandler()
 
 				_ClearKeypadBuffer();
 				decimal_point_count=0;			// reset the decimal point counter
-				//digit_length=1;
+				digit_length=1;
 				break;
 
 	//
@@ -777,15 +801,18 @@ void IM_MenuEXTIHandler()
 
 			case PROGSEL_DISP:
 				// GO BACK TO PREVIOUS
-
 				DM_ChangeScreen(CHANSEL_DISP);
 				break;
 
 			case PARAMS_DISP:
 				// CANCEL ALL PREVIEW SETTINGS
 				_ClearKeypadBuffer();
-				DU_ClearVoltagePreview();
-				DU_ClearFreqPreview();
+				decimal_point_count=0;
+				digit_length=1;
+				DU_ClearVoltagePreview(DAC_CHANNEL_1);
+				DU_ClearVoltagePreview(DAC_CHANNEL_2);
+				DU_ClearFreqPreview(DAC_CHANNEL_1);
+				DU_ClearFreqPreview(DAC_CHANNEL_2);
 				DM_ChangeScreen(PROGSEL_DISP);
 				break;
 			default:
@@ -824,7 +851,7 @@ void IM_MenuEXTIHandler()
 */
 				_ClearKeypadBuffer();
 				decimal_point_count=0;					// reset the decimal point counter
-				digit_length=4;
+				digit_length=1;
 				DM_SetState(DAC_CHANNEL_2, DISPMAIN);
 
 				break;
@@ -848,8 +875,10 @@ void IM_MenuEXTIHandler()
 			case PARAMS_DISP:
 				// CANCEL ALL PREVIEW SETTINGS
 				_ClearKeypadBuffer();
-				DU_ClearVoltagePreview();
-				DU_ClearFreqPreview();
+				DU_ClearVoltagePreview(DAC_CHANNEL_1);
+				DU_ClearVoltagePreview(DAC_CHANNEL_2);
+				DU_ClearFreqPreview(DAC_CHANNEL_1);
+				DU_ClearFreqPreview(DAC_CHANNEL_2);
 				DM_ChangeScreen(HOME_DISP);
 				break;
 			default:

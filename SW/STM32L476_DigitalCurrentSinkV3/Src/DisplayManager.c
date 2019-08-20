@@ -116,6 +116,20 @@ void _DrawMainOverlay()
 	}
 }
 
+void _DrawADC1Value()
+{
+	char value[8];
+	sprintf(value, "%lu", test[0]);
+	ssd1306_WriteString(value, Font_5x7, White, 1);
+}
+
+void _DrawADC2Value()
+{
+	char value[8];
+	snprintf(value, sizeof(value), "%lu", test[1]);
+	ssd1306_WriteString(value, Font_5x7, White, 1);
+}
+
 /**
   * @brief	Draw data values for DAC_CHANNEL_1
   * 		Called by _DrawMainDisp() and _DrawValueDisp()
@@ -126,48 +140,64 @@ void _DrawMainOverlay()
   */
 
 
-void _DrawDac1Value(uint8_t preview)
+void _DrawDAC1Value(uint8_t preview)
 {
     char dac1cnt[32];
     float new_dac_value;
+    char* units;
 
-	if(DU_GetDACModeActual(DAC_CHANNEL_1) == DAC_USER)
-	{
-		new_dac_value = DU_CalcDACVolts(DAC_CHANNEL_1, preview);
-	}
-	else
-	{
-		new_dac_value = DU_CalcDACFreq(DAC_CHANNEL_1, preview);
-	}
 
+    // "preview view"expands number length as digits are typed
 	if(preview)
 	{
+		if(DU_GetDACModePreview(DAC_CHANNEL_1) == DAC_USER)
+		{
+			new_dac_value = DU_CalcDACVolts(DAC_CHANNEL_1, preview);
+			units = "V";
+		}
+		else
+		{
+			new_dac_value = DU_CalcDACFreq(DAC_CHANNEL_1, preview);
+			units = "Hz";
+		}
+
 		uint8_t digit_length = IM_GetDigitLength();
 		switch(digit_length)
 		{
 			case 0:
-				snprintf(dac1cnt, sizeof(dac1cnt), " %luV", (uint32_t)new_dac_value);
+				snprintf(dac1cnt, sizeof(dac1cnt), "%lu%s", (uint32_t)new_dac_value, units);
 				break;
 			case 1:
-				snprintf(dac1cnt, sizeof(dac1cnt), "%2.0fV", new_dac_value);
+				snprintf(dac1cnt, sizeof(dac1cnt), "%2.0f%s", new_dac_value, units);
 				break;
 			case 2:
-				snprintf(dac1cnt, sizeof(dac1cnt), "%2.1fV", new_dac_value);
+				snprintf(dac1cnt, sizeof(dac1cnt), "%2.1f%s", new_dac_value, units);
 				break;
 			case 3:
-				snprintf(dac1cnt, sizeof(dac1cnt), "%2.2fV", new_dac_value);
+				snprintf(dac1cnt, sizeof(dac1cnt), "%2.2f%s", new_dac_value, units);
 				break;
 			case 4:
-				snprintf(dac1cnt, sizeof(dac1cnt), "%2.3fV", new_dac_value);
+				snprintf(dac1cnt, sizeof(dac1cnt), "%2.3f%s", new_dac_value, units);
 				break;
 			default:
-				snprintf(dac1cnt, sizeof(dac1cnt), "%2.3fV", new_dac_value);
+				snprintf(dac1cnt, sizeof(dac1cnt), "%2.3f%s", new_dac_value, units);
 				break;
     	}
 	}
+	// "actual view" shows fixed number length
 	else
 	{
-		snprintf(dac1cnt, sizeof(dac1cnt), "%2.3fV", new_dac_value);
+		if(DU_GetDACModeActual(DAC_CHANNEL_1) == DAC_USER)
+		{
+			new_dac_value = DU_CalcDACVolts(DAC_CHANNEL_1, preview);
+			units = "V";
+		}
+		else
+		{
+			new_dac_value = DU_CalcDACFreq(DAC_CHANNEL_1, preview);
+			units = "Hz";
+		}
+		snprintf(dac1cnt, sizeof(dac1cnt), "%2.3f%s", new_dac_value, units);
 	}
 	ssd1306_WriteString(dac1cnt, Font_5x7, White, 1);
 }
@@ -182,49 +212,65 @@ void _DrawDac1Value(uint8_t preview)
   */
 
 
-void _DrawDac2Value(uint8_t preview)
+void _DrawDAC2Value(uint8_t preview)
 {
     char dac2cnt[32];
-
+    char* units;
     float new_dac_value;
 
-	if(DU_GetDACModeActual(DAC_CHANNEL_2) == DAC_USER)
-	{
-		new_dac_value = DU_CalcDACVolts(DAC_CHANNEL_2, preview);
-	}
-	else
-	{
-		new_dac_value = DU_CalcDACFreq(DAC_CHANNEL_2, preview);
-	}
 
+
+    // "preview view"expands number length as digits are typed
 	if(preview)
     {
+		if(DU_GetDACModePreview(DAC_CHANNEL_2) == DAC_USER)
+		{
+			new_dac_value = DU_CalcDACVolts(DAC_CHANNEL_2, preview);
+			units = "V";
+		}
+		else
+		{
+			new_dac_value = DU_CalcDACFreq(DAC_CHANNEL_2, preview);
+			units = "Hz";
+		}
+
 		uint8_t placeCount = IM_GetDigitLength();
 		switch(placeCount)
 		{
 			case 0:
-				snprintf(dac2cnt, sizeof(dac2cnt), "%luV", (uint32_t)new_dac_value);
+				snprintf(dac2cnt, sizeof(dac2cnt), "%lu%s", (uint32_t)new_dac_value, units);
 				break;
 			case 1:
-				snprintf(dac2cnt, sizeof(dac2cnt), "%2.0fV", new_dac_value);
+				snprintf(dac2cnt, sizeof(dac2cnt), "%2.0f%s", new_dac_value, units);
 				break;
 			case 2:
-				snprintf(dac2cnt, sizeof(dac2cnt), "%2.1fV", new_dac_value);
+				snprintf(dac2cnt, sizeof(dac2cnt), "%2.1f%s", new_dac_value, units);
 				break;
 			case 3:
-				snprintf(dac2cnt, sizeof(dac2cnt), "%2.2fV", new_dac_value);
+				snprintf(dac2cnt, sizeof(dac2cnt), "%2.2f%s", new_dac_value, units);
 				break;
 			case 4:
-				snprintf(dac2cnt, sizeof(dac2cnt), "%2.3fV", new_dac_value);
+				snprintf(dac2cnt, sizeof(dac2cnt), "%2.3f%s", new_dac_value, units);
 				break;
 			default:
-				snprintf(dac2cnt, sizeof(dac2cnt), "%2.3fV", new_dac_value);
+				snprintf(dac2cnt, sizeof(dac2cnt), "%2.3f%s", new_dac_value, units);
 				break;
 		}
 	}
+	// "actual view" shows fixed number length
 	else
 	{
-		snprintf(dac2cnt, sizeof(dac2cnt), "%2.3fV", new_dac_value);
+		if(DU_GetDACModeActual(DAC_CHANNEL_2) == DAC_USER)
+		{
+			new_dac_value = DU_CalcDACVolts(DAC_CHANNEL_2, preview);
+			units = "V";
+		}
+		else
+		{
+			new_dac_value = DU_CalcDACFreq(DAC_CHANNEL_2, preview);
+			units = "Hz";
+		}
+		snprintf(dac2cnt, sizeof(dac2cnt), "%2.3f%s", new_dac_value, units);
 	}
 	ssd1306_WriteString(dac2cnt, Font_5x7, White, 1);
 }
@@ -240,41 +286,29 @@ void _DrawDac2Value(uint8_t preview)
 void _DrawMainDisp()
 {
     ssd1306_SetCursor(8, 20);
-    _DrawDac1Value(0);
+    _DrawDAC1Value(0);
 
     ssd1306_SetCursor(8, 35);
-    _DrawDac2Value(0);
+    _DrawDAC2Value(0);
+
+    ssd1306_SetCursor(70, 20);
+    _DrawADC1Value();
+
+    ssd1306_SetCursor(70, 35);
+    _DrawADC2Value();
 
     // bottom status
-	ssd1306_SetCursor(2, 50);
-	uint8_t mode = DU_GetDACModeActual(DAC_CHANNEL_1);
-	switch(mode)
-	{
-	case 1:
-		ssd1306_WriteString("1:USER", Font_5x7, White, 1);
-		break;
-	case 2:
-		ssd1306_WriteString("1:AUTO", Font_5x7, White, 1);
-		break;
-	case 3:
-		ssd1306_WriteString("1:RAND", Font_5x7, White, 1);
-		break;
-	}
+	ssd1306_SetCursor(8, 55);
 
-	ssd1306_SetCursor(65, 50);
-	mode = DU_GetDACModeActual(DAC_CHANNEL_2);
-	switch(mode)
-	{
-	case 1:
-		ssd1306_WriteString("2:USER", Font_5x7, White, 1);
-		break;
-	case 2:
-		ssd1306_WriteString("2:AUTO", Font_5x7, White, 1);
-		break;
-	case 3:
-		ssd1306_WriteString("2:RAND", Font_5x7, White, 1);
-		break;
-	}
+	char dac1mode[16];
+	snprintf(dac1mode, sizeof(dac1mode), "1:%s",DU_GetDACModeActual2String(DAC_CHANNEL_1));
+	ssd1306_WriteString(dac1mode, Font_5x7, White, 1);
+
+
+	ssd1306_SetCursor(78, 55);
+	char dac2mode[16];
+	snprintf(dac2mode, sizeof(dac2mode), "2:%s",DU_GetDACModeActual2String(DAC_CHANNEL_2));
+	ssd1306_WriteString(dac2mode, Font_5x7, White, 1);
 
 }
 
@@ -387,13 +421,13 @@ void _DrawValueDisp()
     	ssd1306_WriteString("Enter DAC1 Value:", Font_7x10, White, 0);
         ssd1306_SetCursor(8, 40);
         if(!blink_display_text)
-        	_DrawDac1Value(1);
+        	_DrawDAC1Value(1);
     	break;
     case DAC_CHANNEL_2:
     	ssd1306_WriteString("Enter DAC2 Value:", Font_7x10, White, 0);
         ssd1306_SetCursor(8, 40);
         if(!blink_display_text)
-        	_DrawDac2Value(1);
+        	_DrawDAC2Value(1);
     	break;
     default:
     	break;
@@ -444,8 +478,8 @@ void _DrawChanSelOverlay()
 
 void _DrawChanSelDisp()
 {
-    ssd1306_SetCursor(0, 26);
-    ssd1306_WriteString("SELECT CHANNEL", Font_7x10, White, 0);
+    ssd1306_SetCursor(15, 26);
+    ssd1306_WriteString("SELECT CHANNEL", Font_5x7, White, 1);
 }
 
 
@@ -593,13 +627,13 @@ void _DrawParamSelDisp()
 					ssd1306_WriteString("CH1:", Font_5x7, White, 1);
 					ssd1306_SetCursor(27, 30);
 					if(!blink_display_text)
-						_DrawDac1Value(1);
+						_DrawDAC1Value(1);
 
 					ssd1306_SetCursor(2, 50);
 					ssd1306_WriteString("CH2:", Font_5x7, White, 1);
 					ssd1306_SetCursor(27, 50);
 					if(!blink_display_text)
-						_DrawDac2Value(1);
+						_DrawDAC2Value(1);
 
 		    	}
 		    	else
@@ -612,14 +646,14 @@ void _DrawParamSelDisp()
 							ssd1306_WriteString("CH1:", Font_5x7, White, 1);
 							ssd1306_SetCursor(27, 30);
 							if(!blink_display_text)
-								_DrawDac1Value(1);
+								_DrawDAC1Value(1);
 							break;
 						case DAC_CHANNEL_2:
 							ssd1306_SetCursor(2, 30);
 							ssd1306_WriteString("CH2:", Font_5x7, White, 1);
 							ssd1306_SetCursor(27, 30);
 							if(!blink_display_text)
-								_DrawDac2Value(1);
+								_DrawDAC2Value(1);
 							break;
 						default:
 							break;
@@ -628,9 +662,9 @@ void _DrawParamSelDisp()
 
 
 			break;
-		case DAC_NOISE:
+		case DAC_RAND:
 			break;
-		case DAC_TRI:
+		case DAC_AUTO:
 
 			break;
 		default:
