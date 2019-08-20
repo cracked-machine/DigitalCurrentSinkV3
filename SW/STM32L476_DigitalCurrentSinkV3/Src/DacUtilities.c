@@ -2,7 +2,7 @@
  * dac_utils.c
  *
  *  Created on: Aug 3, 2019
- *      Author: chris
+ *      Author: Chris Sutton
  */
 
 #include <DacUtilities.h>
@@ -34,6 +34,14 @@
 /*  DAC channel context set from user menu button selection. See IM_MenuEXTIHandler() */
 uint32_t 	selected_dac_channel = DAC_CHANNEL_1;
 
+/* Should settings be applied independently (0) in parallel (1) */
+uint8_t dual_channel_mode = 0;
+
+/* preview variables for DAC mode. These values are applied to registers
+ * when user has confirmed settings in menu screens */
+dacmode_t channel1_dacmode_preview = DAC_USER;
+dacmode_t channel2_dacmode_preview = DAC_USER;
+
 /* 	Preview of DAC_CHANNEL_1 output register stored as 2^12 decimal number */
 uint32_t chan1_amp_count_preview = 0;
 
@@ -53,6 +61,95 @@ uint32_t chan2_amp_count_preview = 0;
 
  /* Hertz conversion of chan2_freq_count_preview for display */
 float chan2_freq_hertz = 0;
+
+/**
+  * @brief 	set temporary DAC mode (to be applied later on confirmation)
+  *
+  * @param  pNewMode The new DAC mode
+  *         This parameter can be one of the following values:
+  *            		DAC_ERROR 	= 	0x00,	// illegal channel request
+  *					DAC_USER 	=	0x01,
+  *					DAC_TRI		= 	0x02,
+  *					DAC_NOISE	= 	0x03
+  *
+  * @retval none
+  */
+
+void DU_SetDACModeActualPreview(uint32_t Channel, dacmode_t pNewMode)
+{
+	if(Channel == DAC_CHANNEL_1)
+		channel1_dacmode_preview = pNewMode;
+	else
+		channel2_dacmode_preview = pNewMode;
+
+}
+
+/**
+  * @brief 	get the temporary DAC mode
+  *
+  *
+  * @retval DAC mode
+  *         This parameter can be one of the following values:
+  *            		DAC_ERROR 	= 	0x00,	// illegal channel request
+  *					DAC_USER 	=	0x01,
+  *					DAC_TRI		= 	0x02,
+  *					DAC_NOISE	= 	0x03
+  */
+
+dacmode_t DU_GetDACModeActualPreview(uint32_t Channel)
+{
+	if(Channel == DAC_CHANNEL_1)
+		return channel1_dacmode_preview;
+	else
+		return channel2_dacmode_preview;
+}
+
+
+
+char* DU_GetDACModeActualPreview2String(uint32_t Channel)
+{
+	if(Channel == DAC_CHANNEL_1)
+	{
+		switch(channel1_dacmode_preview)
+		{
+			case DAC_USER:
+				return "USER";
+				break;
+			case DAC_NOISE:
+				return "RAND";
+				break;
+			case DAC_TRI:
+				return "AUTO";
+				break;
+			default:
+				break;
+		}
+	}
+	else
+	{
+		switch(channel2_dacmode_preview)
+		{
+			case DAC_USER:
+				return "USER";
+				break;
+			case DAC_NOISE:
+				return "RAND";
+				break;
+			case DAC_TRI:
+				return "AUTO";
+				break;
+			default:
+				break;
+
+		}
+	}
+
+	// something went wrong
+	return "ERR:DU146";
+
+}
+
+
 
 /**
   * @brief 	Calculate the DAC channel output voltage based
@@ -485,18 +582,18 @@ void _ChangeFreq(uint32_t Channel, int increase)
 
 void _CycleDACMode(uint32_t Channel)
 {
-	uint8_t currentDacMode = DU_GetDACMode(Channel);
+	uint8_t currentDacMode = DU_GetDACModeActual(Channel);
 	if(currentDacMode == DAC_USER)
 	{
-		DU_SetDACMode(Channel, DAC_TRI);
+		DU_SetDACModeActual(Channel, DAC_TRI);
 	}
 	else if (currentDacMode == DAC_TRI)
 	{
-		DU_SetDACMode(Channel, DAC_NOISE);
+		DU_SetDACModeActual(Channel, DAC_NOISE);
 	}
 	else if (currentDacMode == DAC_NOISE)
 	{
-		DU_SetDACMode(Channel, DAC_USER);
+		DU_SetDACModeActual(Channel, DAC_USER);
 	}
 }
 
@@ -514,7 +611,7 @@ void _CycleDACMode(uint32_t Channel)
 void DU_IncreaseDAC(uint32_t Channel)
 {
 	DM_SetBlinkTimer(1);
-	uint8_t currentDacMode = DU_GetDACMode(Channel);
+	uint8_t currentDacMode = DU_GetDACModeActual(Channel);
 	if(currentDacMode == DAC_USER)
 	{
 		_ChangeVoltage(Channel, 1);
@@ -543,7 +640,7 @@ void DU_IncreaseDAC(uint32_t Channel)
 void DU_DecreaseDAC(uint32_t Channel)
 {
 	DM_SetBlinkTimer(1);
-	uint8_t currentDacMode = DU_GetDACMode(Channel);
+	uint8_t currentDacMode = DU_GetDACModeActual(Channel);
 	if(currentDacMode == DAC_USER)
 	{
 		_ChangeVoltage(Channel, 0);
@@ -573,7 +670,7 @@ void DU_DecreaseDAC(uint32_t Channel)
   *			@arg 	DAC_NOISE:	Random mode
   */
 
-dacmode_t DU_GetDACMode(uint32_t Channel)
+dacmode_t DU_GetDACModeActual(uint32_t Channel)
 {
 	volatile uint32_t hdac_cr = hdac1.Instance->CR;
 	if (Channel == DAC_CHANNEL_1)
@@ -624,7 +721,7 @@ dacmode_t DU_GetDACMode(uint32_t Channel)
   *
   */
 
-char* DU_GetDACMode2String(uint32_t Channel)
+char* DU_GetDACModeActual2String(uint32_t Channel)
 {
 	volatile uint32_t hdac_cr = hdac1.Instance->CR;
 	if (Channel == DAC_CHANNEL_1)
@@ -680,7 +777,7 @@ char* DU_GetDACMode2String(uint32_t Channel)
   * @retval none
   */
 
-void DU_SetDACMode(uint32_t Channel, dacmode_t mode)
+void DU_SetDACModeActual(uint32_t Channel, dacmode_t mode)
 {
 
 	if (Channel == DAC_CHANNEL_1)
@@ -746,14 +843,14 @@ void DU_CompleteCallback(uint32_t Channel)
 {
 	if(Channel == DAC_CHANNEL_1)
 	{
-		if(DU_GetDACMode(DAC_CHANNEL_1) == DAC_USER)
+		if(DU_GetDACModeActual(DAC_CHANNEL_1) == DAC_USER)
 			printf("New DAC_CHANNEL_1 Volt Setting: %2.2fV\n", DU_CalcDACVolts(DAC_CHANNEL_1, 0 ));
 		else
 			printf("New DAC_CHANNEL_1 Freq Setting: %2.2fHz\n", (float)DU_CalcDACFreq(DAC_CHANNEL_1, 0 ));
 	}
 	if(Channel == DAC_CHANNEL_2)
 	{
-		if(DU_GetDACMode(DAC_CHANNEL_2) == DAC_USER)
+		if(DU_GetDACModeActual(DAC_CHANNEL_2) == DAC_USER)
 			printf("New DAC_CHANNEL_2 Volt Setting: %2.2fV\n", DU_CalcDACVolts(DAC_CHANNEL_2, 0 ));
 		else
 			printf("New DAC_CHANNEL_2 Freq Setting: %2.2fHz\n", (float)DU_CalcDACFreq(DAC_CHANNEL_2, 0 ));
@@ -761,13 +858,79 @@ void DU_CompleteCallback(uint32_t Channel)
 
 }
 
+
+/**
+  * @brief	Set the active DAC channel
+  *
+  * @param The active DAC channel.
+  *         One of the following values:
+  *            	@arg DAC_CHANNEL_1: DAC Channel1 selected
+  *            	@arg DAC_CHANNEL_2: DAC Channel2 selected
+  *
+  *  @retval None
+  */
+
 void DU_setActiveDACChannel(uint32_t Channel)
 {
 	selected_dac_channel = Channel;
 }
 
+/**
+  * @brief	Get the active DAC channel
+  *
+  * @retval The active DAC channel.
+  *         One of the following values:
+  *            	@arg DAC_CHANNEL_1: DAC Channel1 selected
+  *            	@arg DAC_CHANNEL_2: DAC Channel2 selected
+  *
+  */
+
 uint32_t DU_getActiveDACChannel()
 {
 	return selected_dac_channel;
+}
+
+/**
+  * @brief	Get the active DAC channel
+  *
+  * @retval The active DAC channel.
+  *         One of the following values:
+  *            	@arg "CHANNEL 1"
+  *            	@arg "CHANNEL 2"
+  *
+  */
+
+char* DU_getActiveDACChannel2String()
+{
+	if(selected_dac_channel == DAC_CHANNEL_1)
+		return "CHANNEL 1";
+	else
+		return "CHANNEL 2";
+}
+
+/**
+  * @brief	Set the DAC dual mode status
+  *
+  * @param enable: 1=Dual Mode enabled, 0=Dual Mode disabled
+  *
+  * @retval None
+  */
+
+void DU_setDualChannelMode(uint8_t enable)
+{
+	dual_channel_mode = enable;
+}
+
+
+/**
+  * @brief	Get the DAC dual mode status
+  *
+  * @retval boolean: 1=Dual Mode enabled, 0=Dual Mode disabled
+  *
+  */
+
+uint8_t DU_isDualChannelMode()
+{
+	return dual_channel_mode;
 }
 

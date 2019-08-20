@@ -2,7 +2,7 @@
  * dac_utils.h
  *
  *  Created on: Aug 3, 2019
- *      Author: chris
+ *      Author: Chris Sutton
  */
 
 #ifndef DAC_UTILS_H_
@@ -19,9 +19,13 @@ typedef enum dacmode
 
 } dacmode_t;
 
-dacmode_t DU_GetDACMode(uint32_t Channel);
-char* DU_GetDACMode2String(uint32_t Channel);
-void DU_SetDACMode(uint32_t Channel, dacmode_t mode);
+dacmode_t DU_GetDACModeActual(uint32_t Channel);
+char* DU_GetDACModeActual2String(uint32_t Channel);
+void DU_SetDACModeActual(uint32_t Channel, dacmode_t mode);
+
+void DU_SetDACModeActualPreview(uint32_t Channel, dacmode_t pNewMode);
+dacmode_t DU_GetDACModeActualPreview(uint32_t Channel);
+char* DU_GetDACModeActualPreview2String(uint32_t Channel);
 
 void DU_IncreaseDAC(uint32_t Channel);
 void DU_DecreaseDAC(uint32_t Channel);
@@ -42,5 +46,8 @@ void DU_CompleteCallback(uint32_t Channel);
 
 void DU_setActiveDACChannel(uint32_t Channel);
 uint32_t DU_getActiveDACChannel();
+char* DU_getActiveDACChannel2String();
+void DU_setDualChannelMode(uint8_t enable);
+uint8_t DU_isDualChannelMode();
 
 #endif /* DAC_UTILS_H_ */

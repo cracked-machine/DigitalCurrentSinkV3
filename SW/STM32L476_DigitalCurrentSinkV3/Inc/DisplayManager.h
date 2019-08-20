@@ -2,7 +2,7 @@
  * displaymanager.h
  *
  *  Created on: Aug 5, 2019
- *      Author: chris
+ *      Author: Chris Sutton
  */
 
 #include "stdint.h"
@@ -40,6 +40,7 @@ void DM_ToggleBlink();
 
 void DM_SetBlinkTimer(uint8_t pBlink);
 
+void DM_ChangeScreen(displayState_t State);
 
 
 #endif /* DISPLAYMANAGER_H_ */
