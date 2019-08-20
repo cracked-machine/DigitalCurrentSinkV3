@@ -290,8 +290,11 @@ void IM_ReadKeyCol0()
 				case PARAMS_DISP:
 					_SetKeypadBuffer(_Concatenate(keypad_buffer, 1));
 					break;
-				case CHANSEL_DISP:
 				case HOME_DISP:
+					DU_setActiveDACChannel(DAC_CHANNEL_1);
+					DU_setDualChannelMode(0);
+					break;
+				case CHANSEL_DISP:
 				case DISPMAIN:
 				case DISPMODE:
 				case DISPVAL:
@@ -416,8 +419,11 @@ void IM_ReadKeyCol1()
 				case PARAMS_DISP:
 					_SetKeypadBuffer(_Concatenate(keypad_buffer, 2));
 					break;
-				case CHANSEL_DISP:
 				case HOME_DISP:
+					DU_setActiveDACChannel(DAC_CHANNEL_2);
+					DU_setDualChannelMode(0);
+					break;
+				case CHANSEL_DISP:
 				case DISPMAIN:
 				case DISPMODE:
 				case DISPVAL:
@@ -528,8 +534,10 @@ void IM_ReadKeyCol2()
 				case PARAMS_DISP:
 					_SetKeypadBuffer(_Concatenate(keypad_buffer, 3));
 					break;
-				case CHANSEL_DISP:
 				case HOME_DISP:
+					DU_setDualChannelMode(1);
+					break;
+				case CHANSEL_DISP:
 				case DISPMAIN:
 				case DISPMODE:
 				case DISPVAL:
@@ -714,7 +722,18 @@ void IM_MenuEXTIHandler()
 	//
 
 			case HOME_DISP:
-				// TODO: ENABLE/DISABLE SINK DEVICE
+				// RESET
+				DU_ClearVoltagePreview(DAC_CHANNEL_1);
+				DU_SetVoltage(DAC_CHANNEL_1);
+				DU_ClearFreqPreview(DAC_CHANNEL_1);
+				DU_SetFreq(DAC_CHANNEL_1);
+				DU_SetDACModeActual(DAC_CHANNEL_1,DAC_USER);
+
+				DU_ClearVoltagePreview(DAC_CHANNEL_2);
+				DU_SetVoltage(DAC_CHANNEL_2);
+				DU_ClearFreqPreview(DAC_CHANNEL_2);
+				DU_SetFreq(DAC_CHANNEL_2);
+				DU_SetDACModeActual(DAC_CHANNEL_2,DAC_USER);
 				break;
 
 			case CHANSEL_DISP:
@@ -791,6 +810,16 @@ void IM_MenuEXTIHandler()
 
 			case HOME_DISP:
 				// TODO: NUDGE (INCREASE) VOLTAGE/FREQ
+				if(DU_isDualChannelMode())
+				{
+					DU_IncreaseDAC(DAC_CHANNEL_1);
+					DU_IncreaseDAC(DAC_CHANNEL_2);
+				}
+				else
+				{
+					DU_IncreaseDAC(DU_getActiveDACChannel());
+				}
+
 				break;
 
 			case CHANSEL_DISP:
@@ -859,7 +888,17 @@ void IM_MenuEXTIHandler()
 	//
 
 			case HOME_DISP:
-				// TODO: NUDGE (DECREASE) VOLTAGE/FREQ
+
+				if(DU_isDualChannelMode())
+				{
+					DU_DecreaseDAC(DAC_CHANNEL_1);
+					DU_DecreaseDAC(DAC_CHANNEL_2);
+				}
+				else
+				{
+					DU_DecreaseDAC(DU_getActiveDACChannel());
+				}
+
 				break;
 
 			case CHANSEL_DISP:

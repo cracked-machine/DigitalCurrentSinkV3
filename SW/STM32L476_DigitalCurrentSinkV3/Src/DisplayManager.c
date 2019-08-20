@@ -74,10 +74,13 @@ void DM_SetBlinkTimer(uint8_t pblink_display_text)
 
 void _DrawMainOverlay()
 {
+	// TOP BORDER
+/*
 	for(int x=0; x < SSD1306_WIDTH; x++)
 	{
 		ssd1306_DrawPixel(x, 0, White);
 	}
+*/
 	for(int x=0; x < SSD1306_WIDTH; x++)
 	{
 		ssd1306_DrawPixel(x, 12, White);
@@ -92,8 +95,8 @@ void _DrawMainOverlay()
 	ssd1306_SetCursor(4,3);
 	ssd1306_WriteString("SET", Font_5x7, White, 1);
 
-	ssd1306_SetCursor(40,3);
-	ssd1306_WriteString("ON", Font_5x7, White, 1);
+	ssd1306_SetCursor(38,3);
+	ssd1306_WriteString("RST", Font_5x7, White, 1);
 
 	ssd1306_SetCursor(76,3);
 	ssd1306_WriteString("+", Font_5x7, White, 1);
@@ -101,19 +104,22 @@ void _DrawMainOverlay()
 	ssd1306_SetCursor(107,3);
 	ssd1306_WriteString("-", Font_5x7, White, 1);
 
-	for(int x=0; x < SSD1306_WIDTH; x++)
-	{
-		ssd1306_DrawPixel(x, 48, White);
-	}
-	for(int x=0; x < SSD1306_WIDTH; x++)
-	{
-		ssd1306_DrawPixel(x, 64, White);
-	}
+	// BOTTOM BORDER
 
-	for(int y=48; y <64 ; y++)
+	for(int x=0; x < SSD1306_WIDTH; x++)
 	{
-		ssd1306_DrawPixel(64, y, White);
+		ssd1306_DrawPixel(x, 52, White);
 	}
+		// VERTICAL BARS
+		for(int y=52; y <63 ; y++)
+		{
+			ssd1306_DrawPixel(39, y, White);
+		}
+		for(int y=52; y <63 ; y++)
+		{
+			ssd1306_DrawPixel(80, y, White);
+		}
+
 }
 
 void _DrawADC1Value()
@@ -298,17 +304,36 @@ void _DrawMainDisp()
     _DrawADC2Value();
 
     // bottom status
-	ssd1306_SetCursor(8, 55);
-
+    // DAC_CHANNEL_1 mode status
+	ssd1306_SetCursor(2, 55);
+	ssd1306_WriteString("1", Font_5x7, White, 0);
+	ssd1306_SetCursor(6, 55);
+	ssd1306_WriteString(":", Font_5x7, White, 0);
 	char dac1mode[16];
-	snprintf(dac1mode, sizeof(dac1mode), "1:%s",DU_GetDACModeActual2String(DAC_CHANNEL_1));
+	snprintf(dac1mode, sizeof(dac1mode), "%s",DU_GetDACModeActual2String(DAC_CHANNEL_1));
+	ssd1306_SetCursor(10, 55);
 	ssd1306_WriteString(dac1mode, Font_5x7, White, 1);
 
-
-	ssd1306_SetCursor(78, 55);
+	// DAC_CHANNEL_2 mode status
+	ssd1306_SetCursor(42, 55);
+	ssd1306_WriteString("2:", Font_5x7, White, 0);
 	char dac2mode[16];
-	snprintf(dac2mode, sizeof(dac2mode), "2:%s",DU_GetDACModeActual2String(DAC_CHANNEL_2));
+	snprintf(dac2mode, sizeof(dac2mode), "%s",DU_GetDACModeActual2String(DAC_CHANNEL_2));
+	ssd1306_SetCursor(51, 55);
 	ssd1306_WriteString(dac2mode, Font_5x7, White, 1);
+
+	// adjustment channel status
+	ssd1306_SetCursor(82, 55);
+	ssd1306_WriteString("ADJ", Font_5x7, White, 1);
+	ssd1306_SetCursor(101, 55);
+	ssd1306_WriteString(":", Font_5x7, White, 0);
+	char dac_adjust[16];
+	// set string to active dac channel CH1 or CH2; OR set to "1+2" for dual mode
+	snprintf(dac_adjust, sizeof(dac_adjust), "%s",DU_getActiveDACChannel2String());
+	if(DU_isDualChannelMode())
+		snprintf(dac_adjust, sizeof(dac_adjust), "1+2");
+	ssd1306_SetCursor(105, 55);
+	ssd1306_WriteString(dac_adjust, Font_5x7, White, 1);
 
 }
 
@@ -663,8 +688,49 @@ void _DrawParamSelDisp()
 
 			break;
 		case DAC_RAND:
-			break;
 		case DAC_AUTO:
+
+	    	if(DU_isDualChannelMode())
+	    	{
+	    		// show BOTH DAC 1 and DAC 2 params
+	    		ssd1306_SetCursor(2, 30);
+				ssd1306_WriteString("CH1:", Font_5x7, White, 1);
+				ssd1306_SetCursor(27, 30);
+				if(!blink_display_text)
+					_DrawDAC1Value(1);
+
+				ssd1306_SetCursor(2, 50);
+				ssd1306_WriteString("CH2:", Font_5x7, White, 1);
+				ssd1306_SetCursor(27, 50);
+				if(!blink_display_text)
+					_DrawDAC2Value(1);
+
+	    	}
+	    	else
+	    	{
+	    		// show DAC 1 OR DAC 2 params
+	    		switch(DU_getActiveDACChannel())
+				{
+					case DAC_CHANNEL_1:
+						ssd1306_SetCursor(2, 30);
+						ssd1306_WriteString("CH1:", Font_5x7, White, 1);
+						ssd1306_SetCursor(27, 30);
+						if(!blink_display_text)
+							_DrawDAC1Value(1);
+						break;
+					case DAC_CHANNEL_2:
+						ssd1306_SetCursor(2, 30);
+						ssd1306_WriteString("CH2:", Font_5x7, White, 1);
+						ssd1306_SetCursor(27, 30);
+						if(!blink_display_text)
+							_DrawDAC2Value(1);
+						break;
+					default:
+						break;
+				}
+	    	}
+
+
 
 			break;
 		default:

@@ -647,14 +647,17 @@ void DU_IncreaseDAC(uint32_t Channel)
 	if(currentDacMode == DAC_USER)
 	{
 		_ChangeVoltage(Channel, 1);
+		DU_SetVoltage(Channel);
 	}
 	else if (currentDacMode == DAC_AUTO)
 	{
 		_ChangeFreq(Channel, 1);
+		DU_SetFreq(Channel);
 	}
 	else if (currentDacMode == DAC_RAND)
 	{
 		_ChangeFreq(Channel, 1);
+		DU_SetFreq(Channel);
 	}
 }
 
@@ -676,14 +679,17 @@ void DU_DecreaseDAC(uint32_t Channel)
 	if(currentDacMode == DAC_USER)
 	{
 		_ChangeVoltage(Channel, 0);
+		DU_SetVoltage(Channel);
 	}
 	else if (currentDacMode == DAC_AUTO)
 	{
 		_ChangeFreq(Channel, 0);
+		DU_SetFreq(Channel);
 	}
 	else if (currentDacMode == DAC_RAND)
 	{
 		_ChangeFreq(Channel, 0);
+		DU_SetFreq(Channel);
 	}
 }
 
@@ -905,6 +911,7 @@ void DU_CompleteCallback(uint32_t Channel)
 void DU_setActiveDACChannel(uint32_t Channel)
 {
 	selected_dac_channel = Channel;
+	printf("Active DAC Channel = %s", DU_getActiveDACChannel2String());
 }
 
 /**
