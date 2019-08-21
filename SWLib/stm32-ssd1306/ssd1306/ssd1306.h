@@ -15,6 +15,8 @@
 #include "stm32f4xx_hal.h"
 #elif defined(STM32L476xx)
 #include "stm32l4xx_hal.h"
+#elif defined(STM32L496xx)
+#include "stm32l4xx_hal.h"
 #else
 #error "SSD1306 library was tested only on STM32F1 and STM32F4 MCU families. Please modify ssd1306.h if you know what you are doing. Also please send a pull request if it turns out the library works on other MCU's as well!"
 #endif

@@ -2662,4 +2662,15 @@ Wire Wire Line
 	5900 7400 5900 6050
 Text Notes 1550 4400 0    50   ~ 0
 TO BYPASS:\n1) Remove U1\n2) Solder JP5, JP6, R1 and R2\n3) Populate R3, R4 with 100R\nand C1, C2 with 100nF for FC=15KHz
+$Comp
+L MCU_ST_STM32L4:STM32L496VETx U?
+U 1 1 5D6151A4
+P 26700 6900
+F 0 "U?" H 26700 4013 50  0000 C CNN
+F 1 "STM32L496VETx" H 26700 3924 50  0000 C CNN
+F 2 "Package_QFP:LQFP-100_14x14mm_P0.5mm" H 26000 4300 50  0001 R CNN
+F 3 "http://www.st.com/st-web-ui/static/active/en/resource/technical/document/datasheet/DM00284211.pdf" H 26700 6900 50  0001 C CNN
+	1    26700 6900
+	1    0    0    -1  
+$EndComp
 $EndSCHEMATC

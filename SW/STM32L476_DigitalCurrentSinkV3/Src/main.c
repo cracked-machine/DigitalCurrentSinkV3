@@ -107,7 +107,7 @@ int main(void)
   MX_TIM15_Init();
   /* USER CODE BEGIN 2 */
 
-  HAL_Delay(200);	// I2C needs to delay before initializing the display
+  HAL_Delay(1000);	// I2C needs to delay before initializing the display
   Utils_Init();
 
   /* USER CODE END 2 */
