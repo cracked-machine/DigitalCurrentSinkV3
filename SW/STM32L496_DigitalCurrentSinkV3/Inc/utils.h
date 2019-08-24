@@ -18,8 +18,8 @@
 #include <stdarg.h>
 #include <DacUtilities.h>
 
-uint32_t test[2];
-int32_t dfsdm_out[2];
+uint32_t adc_out[2];
+
 
 
 
