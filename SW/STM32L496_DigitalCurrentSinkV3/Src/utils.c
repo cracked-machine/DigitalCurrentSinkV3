@@ -12,8 +12,19 @@
 #include "dac.h"
 #include "ssd1306_tests.h"
 #include "adc.h"
+#include "dfsdm.h"
 
 uint32_t test[2] = {};
+int32_t dfsdm_out[2];
+
+typedef enum adc_chan
+{
+	ADC1CH0,
+	ADC1CH1
+} adc_chan_t;
+
+adc_chan_t ADC1CHANNEL = ADC1CH0;
+
 
 ////////////////////////////////////////////////////////
 ///
@@ -57,8 +68,16 @@ void Utils_Init()
 	// debounce counter
 	HAL_TIM_Base_Start_IT(&htim17);
 
+
+	hadc1.Instance->CFGR |= ADC_CFGR_DFSDMCFG;
+	hadc1.Instance->OFR1 |= ADC_OFR1_OFFSET1_EN;
+	hadc1.Instance->OFR1 |= ADC_OFR1_OFFSET1_11;
+	//HAL_ADC_RegisterCallback(&hadc1, HAL_ADC_CONVERSION_COMPLETE_CB_ID, &HAL_ADC_ConvCpltCallback);
 	HAL_ADCEx_Calibration_Start(&hadc1, ADC_SINGLE_ENDED);
-	HAL_ADC_Start_DMA(&hadc1, test, 2);
+	HAL_ADC_Start_IT(&hadc1);
+
+	HAL_DFSDM_FilterRegularStart_DMA(&hdfsdm1_filter0, dfsdm_out, 2);
+
 }
 
 

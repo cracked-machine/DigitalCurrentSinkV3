@@ -19,6 +19,9 @@
 #include <DacUtilities.h>
 
 uint32_t test[2];
+int32_t dfsdm_out[2];
+
+
 
 void Utils_Init();
 int _write(int file, char *ptr, int len);

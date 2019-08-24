@@ -125,14 +125,14 @@ void _DrawMainOverlay()
 void _DrawADC1Value()
 {
 	char value[8];
-	sprintf(value, "%lu", test[0]);
+	sprintf(value, "%lu", dfsdm_out[0] >> 8);
 	ssd1306_WriteString(value, Font_5x7, White, 1);
 }
 
 void _DrawADC2Value()
 {
 	char value[8];
-	snprintf(value, sizeof(value), "%lu", test[1]);
+	snprintf(value, sizeof(value), "%lu", dfsdm_out[1] >> 8);
 	ssd1306_WriteString(value, Font_5x7, White, 1);
 }
 
