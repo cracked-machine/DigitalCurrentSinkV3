@@ -14,22 +14,8 @@
 #include <stdio.h>
 #include <math.h>
 
+#include "SystemConstants.h"
 
-/* Max resolution for 16-bit timer */
-#define TIMRES 				65535
-
-/* MCU clock speed in hertz */
-#define MASTERCLK 			80000000
-
-/* DAC VREF */
-#define VREF 				3.3
-
-/* DAC resolution */
-#define DACRES 				4096
-
-/* increment amounts for nudging voltage/frequency values */
-#define MAXFREQSTEP 		32
-#define MAXAMPSTEP 			1
 
 /*  DAC channel context set from user menu button selection. See IM_MenuEXTIHandler() */
 uint32_t 	selected_dac_channel = DAC_CHANNEL_1;
@@ -77,6 +63,91 @@ void _CycleDACMode(uint32_t Channel);
 void _ChangeFreq(uint32_t Channel, int increase);
 uint16_t _CalcNewARR(uint16_t Channel, float hertz);
 uint32_t _CalcNewDOR(float volts);
+
+/**
+  * @brief 	get the DAC channel Data Output Register value
+  *
+  * @param  Channel The selected DAC channel.
+  *         This parameter can be one of the following values:
+  *            	@arg DAC_CHANNEL_1: DAC Channel1 selected
+  *            	@arg DAC_CHANNEL_2: DAC Channel2 selected (Whenever present)
+  *
+  * @retval DAC channel x data output register
+  */
+
+uint32_t DU_GetDATDOR(uint32_t Channel)
+{
+	uint32_t result=0;
+	switch(Channel)
+	{
+		default:
+		case DAC_CHANNEL_1:
+			result = hdac1.Instance->DOR1;
+			break;
+		case DAC_CHANNEL_2:
+			result = hdac1.Instance->DOR2;
+			break;
+	}
+	return result;
+}
+
+/**
+  * @brief 	get DAC output Amperage across the power resistor
+  *
+  * @param  Channel The selected DAC channel.
+  *         This parameter can be one of the following values:
+  *            	@arg DAC_CHANNEL_1: DAC Channel1 selected
+  *            	@arg DAC_CHANNEL_2: DAC Channel2 selected (Whenever present)
+  *
+  * @retval Amperage
+  */
+
+float DU_CalcCurrentFromOhmsLaw(uint32_t Channel, int preview)
+{
+	float result=0;
+	switch(Channel)
+	{
+		default:
+		case DAC_CHANNEL_1:
+			result = (DU_CalcVoltsFromBits(DAC_CHANNEL_1,preview) / CH0_PWR_RESISTOR);
+			break;
+		case DAC_CHANNEL_2:
+			result = (DU_CalcVoltsFromBits(DAC_CHANNEL_2,preview) / CH1_PWR_RESISTOR);
+			break;
+
+	}
+	return result;
+}
+
+/**
+  * @brief 	calc the DAC output voltage required to produce the requested Amperage
+  *
+  * @param  Channel The selected DAC channel.
+  *         This parameter can be one of the following values:
+  *            	@arg DAC_CHANNEL_1: DAC Channel1 selected
+  *            	@arg DAC_CHANNEL_2: DAC Channel2 selected (Whenever present)
+  * @param	requestedCurrent
+  *
+  * @retval proposed new DAC output voltage
+  */
+
+float DU_CalcVoltageFromOhmsLaw(uint32_t Channel, float reqAmps)
+{
+	float result=0;
+	switch(Channel)
+	{
+		default:
+		case DAC_CHANNEL_1:
+			result = (reqAmps * CH0_PWR_RESISTOR);
+			break;
+		case DAC_CHANNEL_2:
+			result = (reqAmps * CH1_PWR_RESISTOR);
+			break;
+
+	}
+	return result;
+}
+
 
 /**
   * @brief 	get triangle amplitude for DAC channel
@@ -331,7 +402,7 @@ char* DU_GetDACModePreview2String(uint32_t Channel)
   * @retval DAC channel output voltage
   */
 
-float DU_CalcDACVolts(uint32_t Channel, uint8_t preview)
+float DU_CalcVoltsFromBits(uint32_t Channel, uint8_t preview)
 {
 	float result = 0;
 	if(Channel == DAC_CHANNEL_1)
@@ -366,7 +437,7 @@ float DU_CalcDACVolts(uint32_t Channel, uint8_t preview)
   * @retval The calculated frequency of the timer
   */
 
-float DU_CalcDACFreq(uint32_t Channel, uint8_t preview)
+float DU_CalcFreqFromBits(uint32_t Channel, uint8_t preview)
 {
 	float result = 0;
 	if(Channel == DAC_CHANNEL_1)
@@ -405,13 +476,13 @@ void DU_SetVoltagePreview(uint32_t Channel, float new_volts)
 	if (Channel == DAC_CHANNEL_1)
 	{
 		chan1_amp_count_preview = _CalcNewDOR(new_volts);
-		printf("New DAC_CHANNEL_1 Volt Request: %2.4fV\n", (float)DU_CalcDACVolts(DAC_CHANNEL_1, 1));
+		printf("New DAC_CHANNEL_1 Volt Request: %2.4fV\n", (float)DU_CalcVoltsFromBits(DAC_CHANNEL_1, 1));
 	}
 
 	else if (Channel == DAC_CHANNEL_2)
 	{
 		chan2_amp_count_preview = _CalcNewDOR(new_volts);
-		printf("New DAC_CHANNEL_2 Volt Request: %2.4fV\n", (float)DU_CalcDACVolts(DAC_CHANNEL_2,1));
+		printf("New DAC_CHANNEL_2 Volt Request: %2.4fV\n", (float)DU_CalcVoltsFromBits(DAC_CHANNEL_2,1));
 	}
 }
 
@@ -527,14 +598,14 @@ void DU_SetFreq(uint32_t Channel)
 	if (Channel == DAC_CHANNEL_1)
 	{
 		htim6.Instance->ARR = chan1_freq_count_preview;
-		//printf("New DAC_CHANNEL_1 Freq Setting: %2.2fHz\n", (float)DU_CalcDACFreq(DAC_CHANNEL_1, 0 ));
+		//printf("New DAC_CHANNEL_1 Freq Setting: %2.2fHz\n", (float)DU_CalcFreqFromBits(DAC_CHANNEL_1, 0 ));
 		//chan1_freq_hertz = (float)MASTERCLK/(htim6.Instance->PSC * htim6.Instance->ARR);
 		//printf("Chan1 Freq: %2.4fHz (%u)\n", chan1_freq_hertz, chan1FreqCount);
 	}
 	else if (Channel == DAC_CHANNEL_2)
 	{
 		htim7.Instance->ARR = chan2_freq_count_preview;
-		//printf("New DAC_CHANNEL_2 Freq Setting: %2.2fHz\n", (float)DU_CalcDACFreq(DAC_CHANNEL_2, 0 ));
+		//printf("New DAC_CHANNEL_2 Freq Setting: %2.2fHz\n", (float)DU_CalcFreqFromBits(DAC_CHANNEL_2, 0 ));
 		//chan2_freq_hertz = (float)MASTERCLK/(htim7.Instance->PSC * htim7.Instance->ARR);
 		//printf("Chan2 Freq: %2.4fHz (%u)\n", chan2_freq_hertz, chan2FreqCount);
 	}
@@ -572,7 +643,7 @@ void DU_SetFreqPreview(uint32_t Channel, float new_hertz)
 	if (Channel == DAC_CHANNEL_1)
 	{
 		chan1_freq_count_preview = _CalcNewARR(DAC_CHANNEL_1, new_hertz);
-		printf("New DAC_CHANNEL_1 Freq Request: %2.4fHz\n", (float)DU_CalcDACFreq(DAC_CHANNEL_1,1));
+		printf("New DAC_CHANNEL_1 Freq Request: %2.4fHz\n", (float)DU_CalcFreqFromBits(DAC_CHANNEL_1,1));
 		//htim6.Instance->ARR = (uint32_t)(MASTERCLK/(htim6.Instance->PSC * newHertz));
 		//printf("New Freq request: %lu\n", newHertz);
 		//chan1FreqHz = (float)MASTERCLK/(htim6.Instance->PSC * htim6.Instance->ARR);
@@ -581,7 +652,7 @@ void DU_SetFreqPreview(uint32_t Channel, float new_hertz)
 	else if (Channel == DAC_CHANNEL_2)
 	{
 		chan2_freq_count_preview = _CalcNewARR(DAC_CHANNEL_2, new_hertz);
-		printf("New DAC_CHANNEL_2 Freq Request: %2.4fHz\n", (float)DU_CalcDACFreq(DAC_CHANNEL_2,1));
+		printf("New DAC_CHANNEL_2 Freq Request: %2.4fHz\n", (float)DU_CalcFreqFromBits(DAC_CHANNEL_2,1));
 		/*htim7.Instance->ARR = (uint32_t)(MASTERCLK/(htim7.Instance->PSC * newHertz));
 		printf("New Freq request: %lu\n", newHertz);
 		chan2FreqHz = (float)MASTERCLK/(htim7.Instance->PSC * htim7.Instance->ARR);
@@ -862,14 +933,14 @@ void DU_CompleteCallback(uint32_t Channel)
 	if(DU_isDualChannelMode())
 	{
 		if(DU_GetDACModeActual(DAC_CHANNEL_1) == DAC_USER)
-			printf("New DAC_CHANNEL_1 Volt Setting: %2.4fV\n", DU_CalcDACVolts(DAC_CHANNEL_1, 0 ));
+			printf("New DAC_CHANNEL_1 Volt Setting: %2.4fV\n", DU_CalcVoltsFromBits(DAC_CHANNEL_1, 0 ));
 		else
-			printf("New DAC_CHANNEL_1 Freq Setting: %2.4fHz\n", (float)DU_CalcDACFreq(DAC_CHANNEL_1, 0 ));
+			printf("New DAC_CHANNEL_1 Freq Setting: %2.4fHz\n", (float)DU_CalcFreqFromBits(DAC_CHANNEL_1, 0 ));
 
 		if(DU_GetDACModeActual(DAC_CHANNEL_2) == DAC_USER)
-			printf("New DAC_CHANNEL_2 Volt Setting: %2.4fV\n", DU_CalcDACVolts(DAC_CHANNEL_2, 0 ));
+			printf("New DAC_CHANNEL_2 Volt Setting: %2.4fV\n", DU_CalcVoltsFromBits(DAC_CHANNEL_2, 0 ));
 		else
-			printf("New DAC_CHANNEL_2 Freq Setting: %2.4fHz\n", (float)DU_CalcDACFreq(DAC_CHANNEL_2, 0 ));
+			printf("New DAC_CHANNEL_2 Freq Setting: %2.4fHz\n", (float)DU_CalcFreqFromBits(DAC_CHANNEL_2, 0 ));
 
 	}
 	else
@@ -877,16 +948,16 @@ void DU_CompleteCallback(uint32_t Channel)
 		if(Channel == DAC_CHANNEL_1)
 		{
 			if(DU_GetDACModeActual(DAC_CHANNEL_1) == DAC_USER)
-				printf("New DAC_CHANNEL_1 Volt Setting: %2.4fV\n", DU_CalcDACVolts(DAC_CHANNEL_1, 0 ));
+				printf("New DAC_CHANNEL_1 Volt Setting: %2.4fV\n", DU_CalcVoltsFromBits(DAC_CHANNEL_1, 0 ));
 			else
-				printf("New DAC_CHANNEL_1 Freq Setting: %2.4fHz\n", (float)DU_CalcDACFreq(DAC_CHANNEL_1, 0 ));
+				printf("New DAC_CHANNEL_1 Freq Setting: %2.4fHz\n", (float)DU_CalcFreqFromBits(DAC_CHANNEL_1, 0 ));
 		}
 		if(Channel == DAC_CHANNEL_2)
 		{
 			if(DU_GetDACModeActual(DAC_CHANNEL_2) == DAC_USER)
-				printf("New DAC_CHANNEL_2 Volt Setting: %2.4fV\n", DU_CalcDACVolts(DAC_CHANNEL_2, 0 ));
+				printf("New DAC_CHANNEL_2 Volt Setting: %2.4fV\n", DU_CalcVoltsFromBits(DAC_CHANNEL_2, 0 ));
 			else
-				printf("New DAC_CHANNEL_2 Freq Setting: %2.4fHz\n", (float)DU_CalcDACFreq(DAC_CHANNEL_2, 0 ));
+				printf("New DAC_CHANNEL_2 Freq Setting: %2.4fHz\n", (float)DU_CalcFreqFromBits(DAC_CHANNEL_2, 0 ));
 		}
 	}
 
@@ -1165,14 +1236,14 @@ void _ResetDACFreq(uint32_t Channel)
 	{
 		//chan1FreqCount = 0;
 		// recalculate freq (hertz) output
-		chan1_freq_hertz = DU_CalcDACFreq(Channel, 0);
+		chan1_freq_hertz = DU_CalcFreqFromBits(Channel, 0);
 		//chan1_freq_hertz = (float)MASTERCLK/(htim6.Instance->PSC * htim6.Instance->ARR);
 	}
 	else if (Channel == DAC_CHANNEL_2)
 	{
 		//chan2FreqCount = 0;
 		// recalculate freq (hertz) output
-		chan2_freq_hertz = DU_CalcDACFreq(Channel, 0);
+		chan2_freq_hertz = DU_CalcFreqFromBits(Channel, 0);
 		//chan2_freq_hertz = (float)MASTERCLK/(htim7.Instance->PSC * htim7.Instance->ARR);
 	}
 

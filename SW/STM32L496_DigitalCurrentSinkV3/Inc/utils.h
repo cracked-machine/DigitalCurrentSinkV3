@@ -17,8 +17,8 @@
 #include <string.h>
 #include <stdarg.h>
 #include <DacUtilities.h>
-
-uint32_t adc_out[2];
+#include "ADCUtilities.h"
+//uint32_t adc_out[2];
 
 
 

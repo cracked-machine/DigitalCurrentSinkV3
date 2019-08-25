@@ -14,7 +14,7 @@
 #include "adc.h"
 
 
-uint32_t adc_out[2] = {};
+//uint32_t adc_out[2] = {};
 
 
 
@@ -61,7 +61,7 @@ void Utils_Init()
 	HAL_TIM_Base_Start_IT(&htim17);
 
 	HAL_ADCEx_Calibration_Start(&hadc1, ADC_SINGLE_ENDED);
-	HAL_ADC_Start_DMA(&hadc1, adc_out, 2);
+	HAL_ADC_Start_DMA(&hadc1, AU_GetADCOut(), 2);
 
 
 

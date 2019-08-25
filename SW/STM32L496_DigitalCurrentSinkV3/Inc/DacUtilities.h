@@ -43,8 +43,11 @@ void DU_SetFreq(uint32_t Channel);
 void DU_ClearFreqPreview(uint32_t Channel);
 
 
-float DU_CalcDACVolts(uint32_t Channel, uint8_t preview);
-float DU_CalcDACFreq(uint32_t Channel, uint8_t preview);
+float DU_CalcVoltsFromBits(uint32_t Channel, uint8_t preview);
+float DU_CalcFreqFromBits(uint32_t Channel, uint8_t preview);
+float DU_CalcCurrentFromOhmsLaw(uint32_t Channel, int preview);
+float DU_CalcVoltageFromOhmsLaw(uint32_t Channel, float reqAmps);
+uint32_t DU_GetDATDOR(uint32_t Channel);
 
 void DU_CompleteCallback(uint32_t Channel);
 

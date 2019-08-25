@@ -13,18 +13,36 @@
 #include "ssd1306.h"
 #include "ssd1306_tests.h"
 #include "utils.h"
+#include "ADCUtilities.h"
+#include "SystemConstants.h"
 
 
+/* the unit (volts/amps/hertz) to draw to the display. Set by InputManager IMReadKeyCol0/1/2 functions */
+unitmode_t 		current_unit_mode	= SHOWCURR;
 
-
-/*	Current display state set from user menu button selection. See IM_MenuEXTIHandler() */
+/*	Current display state set from user menu button selection. Set by InputManager IM_MenuEXTIHandler() */
 displayState_t 		current_display_state = HOME_DISP;
 
-/* Boolean state for blink_display_texting display text */
+/* Boolean state for blink_display_texting display text. Don't draw to OLED when 1. Set by TIM1_UP_TIM16_IRQHandler.  */
 uint8_t blink_display_text = 0;
+
 
 // private function declarations
 void _DrawDACAmplitudeValue(uint32_t Channel);
+
+
+
+void DM_SetUnitMode(unitmode_t mode)
+{
+	printf("Changing Unit display mode to %i\n", mode);
+	current_unit_mode = mode;
+}
+
+unitmode_t DM_GetUnitMode()
+{
+	return current_unit_mode;
+}
+
 
 /**
   * @brief	Toggles the blink_display_text flag used by DisplayManager.
@@ -126,23 +144,70 @@ void _DrawMainOverlay()
 
 void _DrawADC1Value()
 {
-	char value[8];
-	sprintf(value, "%lu", adc_out[0]);
-	ssd1306_WriteString(value, Font_5x7, White, 1);
+	unitmode_t unitmode = DM_GetUnitMode();
+	char voltvalue[8];
+	char currvalue[8];
+	char bitvalue[8];
+
+
+	switch(unitmode)
+	{
+		default:
+		case SHOWCURR:
+
+			snprintf(currvalue, sizeof(currvalue), "%2.4fA", AU_CalcCurrent(ADC_CH0));
+			ssd1306_WriteString(currvalue, Font_5x7, White, 1);
+			break;
+
+		case SHOWBITS:
+			snprintf(bitvalue, sizeof(bitvalue), "%lu", AU_GetADCOutChannel(ADC_CH0));
+			ssd1306_WriteString(bitvalue, Font_5x7, White, 1);
+			break;
+
+		case SHOWVOLT:
+			snprintf(voltvalue, sizeof(voltvalue), "%2.4fV", AU_CalcVoltage(ADC_CH0));
+			ssd1306_WriteString(voltvalue, Font_5x7, White, 1);
+			break;
+
+	}
+
 }
 
 void _DrawADC2Value()
 {
-	char value[8];
-	snprintf(value, sizeof(value), "%lu", adc_out[1]);
-	ssd1306_WriteString(value, Font_5x7, White, 1);
+	unitmode_t unitmode = DM_GetUnitMode();
+	char voltvalue[8];
+	char currvalue[8];
+	char bitvalue[8];
+
+	switch(unitmode)
+	{
+		default:
+		case SHOWCURR:
+
+			snprintf(currvalue, sizeof(currvalue), "%2.4fA", AU_CalcCurrent(ADC_CH1));
+			ssd1306_WriteString(currvalue, Font_5x7, White, 1);
+			break;
+
+		case SHOWBITS:
+			snprintf(bitvalue, sizeof(bitvalue), "%lu", AU_GetADCOutChannel(ADC_CH1));
+			ssd1306_WriteString(bitvalue, Font_5x7, White, 1);
+			break;
+
+		case SHOWVOLT:
+
+			snprintf(voltvalue, sizeof(voltvalue), "%2.4fV", AU_CalcVoltage(ADC_CH1));
+			ssd1306_WriteString(voltvalue, Font_5x7, White, 1);
+			break;
+	}
+
 }
 
 /**
   * @brief	Draw data values for DAC_CHANNEL_1
   * 		Called by _DrawMainDisp() and _DrawValueDisp()
   *
-  * @param	preview Passed to DU_CalcDACVolts/DU_CalcDACFreq to select register or preview variable
+  * @param	preview Passed to DU_CalcVoltsFromBits/DU_CalcFreqFromBits to select register or preview variable
   *
   * @retval None
   */
@@ -152,6 +217,7 @@ void _DrawDAC1Value(uint8_t preview)
 {
     char dac1cnt[32];
     float new_dac_value;
+
     char* units;
 
 
@@ -160,12 +226,14 @@ void _DrawDAC1Value(uint8_t preview)
 	{
 		if(DU_GetDACModePreview(DAC_CHANNEL_1) == DAC_USER)
 		{
-			new_dac_value = DU_CalcDACVolts(DAC_CHANNEL_1, preview);
-			units = "V";
+			//new_dac_value = DU_CalcVoltsFromBits(DAC_CHANNEL_1, preview);
+			// convert DAC output voltage back to Amps to show on OLED
+			new_dac_value = DU_CalcCurrentFromOhmsLaw(DAC_CHANNEL_1, preview);
+			units = "A";
 		}
 		else
 		{
-			new_dac_value = DU_CalcDACFreq(DAC_CHANNEL_1, preview);
+			new_dac_value = DU_CalcFreqFromBits(DAC_CHANNEL_1, preview);
 			units = "Hz";
 		}
 
@@ -191,30 +259,37 @@ void _DrawDAC1Value(uint8_t preview)
 				snprintf(dac1cnt, sizeof(dac1cnt), "%2.3f%s", new_dac_value, units);
 				break;
     	}
+
+
 	}
 	// "actual view" shows fixed number length
 	else
 	{
-		if(DU_GetDACModeActual(DAC_CHANNEL_1) == DAC_USER)
+		unitmode_t mode = DM_GetUnitMode();
+		switch(mode)
 		{
-			new_dac_value = DU_CalcDACVolts(DAC_CHANNEL_1, preview);
-			units = "V";
+			default:
+			case SHOWCURR:
+				snprintf(dac1cnt, sizeof(dac1cnt), "%2.3fA", DU_CalcCurrentFromOhmsLaw(DAC_CHANNEL_1, 0));
+				break;
+			case SHOWVOLT:
+				snprintf(dac1cnt, sizeof(dac1cnt), "%2.3fV", DU_CalcVoltsFromBits(DAC_CHANNEL_1, 0));
+				break;
+			case SHOWBITS:
+				snprintf(dac1cnt, sizeof(dac1cnt), "%lu", DU_GetDATDOR(DAC_CHANNEL_1));
+				break;
 		}
-		else
-		{
-			new_dac_value = DU_CalcDACFreq(DAC_CHANNEL_1, preview);
-			units = "Hz";
-		}
-		snprintf(dac1cnt, sizeof(dac1cnt), "%2.3f%s", new_dac_value, units);
 	}
+
 	ssd1306_WriteString(dac1cnt, Font_5x7, White, 1);
+
 }
 
 /**
   * @brief	Draw data values for DAC_CHANNEL_2
   * 		Called by _DrawMainDisp() and _DrawValueDisp()
   *
-  * @param	preview Passed to DU_CalcDACVolts/DU_CalcDACFreq to select register or preview variable
+  * @param	preview Passed to DU_CalcVoltsFromBits/DU_CalcFreqFromBits to select register or preview variable
   *
   * @retval None
   */
@@ -233,12 +308,14 @@ void _DrawDAC2Value(uint8_t preview)
     {
 		if(DU_GetDACModePreview(DAC_CHANNEL_2) == DAC_USER)
 		{
-			new_dac_value = DU_CalcDACVolts(DAC_CHANNEL_2, preview);
-			units = "V";
+			//new_dac_value = DU_CalcVoltsFromBits(DAC_CHANNEL_2, preview);
+			// convert DAC output voltage back to Amps to show on OLED
+			new_dac_value = DU_CalcCurrentFromOhmsLaw(DAC_CHANNEL_2, preview);
+			units = "A";
 		}
 		else
 		{
-			new_dac_value = DU_CalcDACFreq(DAC_CHANNEL_2, preview);
+			new_dac_value = DU_CalcFreqFromBits(DAC_CHANNEL_2, preview);
 			units = "Hz";
 		}
 
@@ -264,21 +341,28 @@ void _DrawDAC2Value(uint8_t preview)
 				snprintf(dac2cnt, sizeof(dac2cnt), "%2.3f%s", new_dac_value, units);
 				break;
 		}
+
+
 	}
 	// "actual view" shows fixed number length
 	else
 	{
-		if(DU_GetDACModeActual(DAC_CHANNEL_2) == DAC_USER)
+		unitmode_t mode = DM_GetUnitMode();
+		switch(mode)
 		{
-			new_dac_value = DU_CalcDACVolts(DAC_CHANNEL_2, preview);
-			units = "V";
+			default:
+			case SHOWCURR:
+				snprintf(dac2cnt, sizeof(dac2cnt), "%2.3fA", DU_CalcCurrentFromOhmsLaw(DAC_CHANNEL_2, 0));
+				break;
+			case SHOWVOLT:
+				snprintf(dac2cnt, sizeof(dac2cnt), "%2.3fV", DU_CalcVoltsFromBits(DAC_CHANNEL_2, 0));
+				break;
+			case SHOWBITS:
+				snprintf(dac2cnt, sizeof(dac2cnt), "%lu", DU_GetDATDOR(DAC_CHANNEL_2));
+				break;
 		}
-		else
-		{
-			new_dac_value = DU_CalcDACFreq(DAC_CHANNEL_2, preview);
-			units = "Hz";
-		}
-		snprintf(dac2cnt, sizeof(dac2cnt), "%2.3f%s", new_dac_value, units);
+
+
 	}
 	ssd1306_WriteString(dac2cnt, Font_5x7, White, 1);
 }

@@ -23,8 +23,18 @@ typedef enum displayState
 
 } displayState_t;
 
-// DAC_CHANNEL_1, DAC_CHANNEL2 defined in STM32L4xx_HAL_DAC.h
 
+typedef enum
+{
+	SHOWBITS,
+	SHOWVOLT,
+	SHOWCURR
+} unitmode_t;
+
+
+
+void DM_SetUnitMode(unitmode_t mode);
+unitmode_t DM_GetUnitMode();
 
 void DM_SetState(uint32_t Channel, displayState_t State);
 

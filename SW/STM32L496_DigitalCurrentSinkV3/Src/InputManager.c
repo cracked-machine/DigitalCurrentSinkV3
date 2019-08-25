@@ -180,7 +180,6 @@ void IM_ReadKeyCol0()
 					{
 						DU_SetDACModePreview(DAC_CHANNEL_1, DAC_USER);
 						DU_SetDACModePreview(DAC_CHANNEL_2, DAC_USER);
-
 					}
 					else
 					{
@@ -238,9 +237,11 @@ void IM_ReadKeyCol0()
 						DU_setAmplitudeSetting(DU_getActiveDACChannel(), DAC_TRIANGLEAMPLITUDE_127);
 					}
 					break;
+				case HOME_DISP:
+					DM_SetUnitMode(SHOWCURR);
+					break;
 				case PROGSEL_DISP:
 				case CHANSEL_DISP:
-				case HOME_DISP:
 				default:
 					break;
 			}
@@ -391,9 +392,12 @@ void IM_ReadKeyCol1()
 						DU_setAmplitudeSetting(DU_getActiveDACChannel(), DAC_TRIANGLEAMPLITUDE_255);
 					}
 					break;
+				case HOME_DISP:
+					DM_SetUnitMode(SHOWVOLT);
+					break;
 				case PROGSEL_DISP:
 				case CHANSEL_DISP:
-				case HOME_DISP:
+
 				default:
 					break;
 			}
@@ -541,9 +545,11 @@ void IM_ReadKeyCol2()
 						DU_setAmplitudeSetting(DU_getActiveDACChannel(), DAC_TRIANGLEAMPLITUDE_511);
 					}
 					break;
+				case HOME_DISP:
+					DM_SetUnitMode(SHOWBITS);
+					break;
 				case PROGSEL_DISP:
 				case CHANSEL_DISP:
-				case HOME_DISP:
 				default:
 					break;
 			}
@@ -907,8 +913,11 @@ void _SetKeypadBuffer(double pValue)
 		{
 			if(DU_GetDACModePreview(DU_getActiveDACChannel()) == DAC_USER)
 			{
-				DU_SetVoltagePreview(DAC_CHANNEL_1, (float)keypad_buffer);
-				DU_SetVoltagePreview(DAC_CHANNEL_2, (float)keypad_buffer);
+				// user has entered a new Amperage value, convert to DAC output voltage
+				float newCurrent = DU_CalcVoltageFromOhmsLaw(DAC_CHANNEL_1, (float)keypad_buffer);
+				DU_SetVoltagePreview(DAC_CHANNEL_1, newCurrent);
+				newCurrent = DU_CalcVoltageFromOhmsLaw(DAC_CHANNEL_2, (float)keypad_buffer);
+				DU_SetVoltagePreview(DAC_CHANNEL_2, newCurrent);
 			}
 			if(DU_GetDACModePreview(DU_getActiveDACChannel()) != DAC_USER)
 			{
@@ -920,9 +929,17 @@ void _SetKeypadBuffer(double pValue)
 		else
 		{
 			if(DU_GetDACModePreview(DU_getActiveDACChannel()) == DAC_USER)
-				DU_SetVoltagePreview(DU_getActiveDACChannel(), (float)keypad_buffer);
+			{
+				// user has entered a new Amperage value, convert to DAC output voltage
+				float newCurrent = DU_CalcVoltageFromOhmsLaw(DU_getActiveDACChannel(), (float)keypad_buffer);
+				DU_SetVoltagePreview(DU_getActiveDACChannel(), newCurrent);
+			}
+
 			if(DU_GetDACModePreview(DU_getActiveDACChannel()) != DAC_USER)
+			{
 				DU_SetFreqPreview(DU_getActiveDACChannel(), (float)keypad_buffer);
+			}
+
 		}
 
 
