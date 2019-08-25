@@ -226,6 +226,7 @@ char* DU_getAmplitudeSetting2String(uint32_t Channel)
 				return "DAC_AMP_4095";
 				break;
 		}
+
 	}
 	else
 	{
