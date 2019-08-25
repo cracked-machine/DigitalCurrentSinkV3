@@ -21,6 +21,7 @@
 #include <DisplayManager.h>
 #include <InputManager.h>
 #include "stm32l4xx_hal.h"
+#include "tim.h"
 
 // project dependencies
 #include "ssd1306.h"
@@ -66,6 +67,13 @@ float keypad_buffer = 0;
 /* Buffer limit. See _Concatenate() */
 uint32_t keypadBufferMax = 5001;
 
+// private function declarations
+void _ApplyParameterSettings();
+uint32_t _GetKeypadDebounceCounter();
+void _SetKeypadBuffer(double pValue);
+void _ClearKeypadBuffer();
+double _Concatenate(double _buffer, double _newDigit);
+
 
 /**
   * @brief Get digit_length variable
@@ -103,111 +111,6 @@ void IM_SetKeypadDebounceCounter(uint16_t pValue)
 	keypad_debounce_counter += pValue;
 }
 
-/**
-  * @brief get keypad_debounce_counter
-  *
-  *
-  * @param
-  * 		@arg @ref
-  * @param
-  * 		@arg @ref
-  *
-  *
-  * @retval keypad_debounce_counter
-  */
-
-uint32_t _GetKeypadDebounceCounter()
-{
-	return keypad_debounce_counter;
-}
-
-/**
-  * @brief Update the buffer and set the voltage/frequency preview variable
-  *
-  *
-  * @param value The new value to update
-  *
-  * @retval none
-  */
-
-void _SetKeypadBuffer(double pValue)
-{
-
-		keypad_buffer = pValue;
-		if(DU_isDualChannelMode())
-		{
-			if(DU_GetDACModePreview(DU_getActiveDACChannel()) == DAC_USER)
-			{
-				DU_SetVoltagePreview(DAC_CHANNEL_1, (float)keypad_buffer);
-				DU_SetVoltagePreview(DAC_CHANNEL_2, (float)keypad_buffer);
-			}
-			if(DU_GetDACModePreview(DU_getActiveDACChannel()) != DAC_USER)
-			{
-				DU_SetFreqPreview(DAC_CHANNEL_1, (float)keypad_buffer);
-				DU_SetFreqPreview(DAC_CHANNEL_2, (float)keypad_buffer);
-			}
-
-		}
-		else
-		{
-			if(DU_GetDACModePreview(DU_getActiveDACChannel()) == DAC_USER)
-				DU_SetVoltagePreview(DU_getActiveDACChannel(), (float)keypad_buffer);
-			if(DU_GetDACModePreview(DU_getActiveDACChannel()) != DAC_USER)
-				DU_SetFreqPreview(DU_getActiveDACChannel(), (float)keypad_buffer);
-		}
-
-
-}
-
-/**
-  * @brief Zero the keypad_buffer
-  *
-  *
-  * @retval none
-  */
-
-void _ClearKeypadBuffer()
-{
-	keypad_buffer = 0;
-}
-
-/**
-  * @brief	Process integer or fractional positioning for appending new digit to keypad_buffer.
-  * 		Integer parts: 		_buffer * exp + _newDigit
-  *			Fractional parts:	_buffer + ( _newDigit / ( pow( exp,decimal_point_count ) )
-  *
-  * @param	_buffer The existing keypad buffer contents
-  * @param	_newDigit The new digit to add to the keypad buffer
-  *
-  * @retval The new keypad buffer value
-  */
-
-double _Concatenate(double _buffer, double _newDigit) {
-	double next_calculated_value = 0;
-    double exp = 10;
-    if(decimal_point_count > 0)
-    {
-
-
-    	_newDigit = _newDigit / (pow(exp,decimal_point_count));
-    	decimal_point_count++;
-    	printf("Increment DP Count: %d\n", decimal_point_count);
-    	next_calculated_value = (_buffer + _newDigit);
-    	digit_length++;
-    }
-    else
-    {
-    	next_calculated_value = (_buffer * exp + _newDigit);
-    }
-
-    if(next_calculated_value >= keypadBufferMax)
-    {
-    	_SetKeypadBuffer(_buffer);						// set display using previous entered value
-    	return 0;
-    }
-
-    return next_calculated_value;
-}
 
 /**
   * @brief	Set current row (keypad_row_mux_count) to logic high or low
@@ -295,9 +198,19 @@ void IM_ReadKeyCol0()
 					DU_setDualChannelMode(0);
 					break;
 				case CHANSEL_DISP:
-				case DISPMAIN:
-				case DISPMODE:
-				case DISPVAL:
+					break;
+				case AMPLITUDE_DISP:
+					if(DU_isDualChannelMode())
+					{
+						DU_setAmplitudeSetting(DAC_CHANNEL_1, DAC_TRIANGLEAMPLITUDE_15);
+						DU_setAmplitudeSetting(DAC_CHANNEL_2, DAC_TRIANGLEAMPLITUDE_15);
+
+					}
+					else
+					{
+						DU_setAmplitudeSetting(DU_getActiveDACChannel(), DAC_TRIANGLEAMPLITUDE_15);
+					}
+					break;
 				default:
 					break;
 			}
@@ -313,12 +226,21 @@ void IM_ReadKeyCol0()
 				case PARAMS_DISP:
 					_SetKeypadBuffer(_Concatenate(keypad_buffer, 4));
 					break;
+				case AMPLITUDE_DISP:
+					if(DU_isDualChannelMode())
+					{
+						DU_setAmplitudeSetting(DAC_CHANNEL_1, DAC_TRIANGLEAMPLITUDE_127);
+						DU_setAmplitudeSetting(DAC_CHANNEL_2, DAC_TRIANGLEAMPLITUDE_127);
+
+					}
+					else
+					{
+						DU_setAmplitudeSetting(DU_getActiveDACChannel(), DAC_TRIANGLEAMPLITUDE_127);
+					}
+					break;
 				case PROGSEL_DISP:
 				case CHANSEL_DISP:
 				case HOME_DISP:
-				case DISPMAIN:
-				case DISPMODE:
-				case DISPVAL:
 				default:
 					break;
 			}
@@ -334,12 +256,21 @@ void IM_ReadKeyCol0()
 				case PARAMS_DISP:
 					_SetKeypadBuffer(_Concatenate(keypad_buffer, 7));
 					break;
+				case AMPLITUDE_DISP:
+					if(DU_isDualChannelMode())
+					{
+						DU_setAmplitudeSetting(DAC_CHANNEL_1, DAC_TRIANGLEAMPLITUDE_1023);
+						DU_setAmplitudeSetting(DAC_CHANNEL_2, DAC_TRIANGLEAMPLITUDE_1023);
+
+					}
+					else
+					{
+						DU_setAmplitudeSetting(DU_getActiveDACChannel(), DAC_TRIANGLEAMPLITUDE_1023);
+					}
+					break;
 				case PROGSEL_DISP:
 				case CHANSEL_DISP:
 				case HOME_DISP:
-				case DISPMAIN:
-				case DISPMODE:
-				case DISPVAL:
 				default:
 					break;
 			}
@@ -370,9 +301,6 @@ void IM_ReadKeyCol0()
 					break;
 				case PROGSEL_DISP:
 				case CHANSEL_DISP:
-				case DISPMAIN:
-				case DISPMODE:
-				case DISPVAL:
 				default:
 					break;
 			}
@@ -423,10 +351,19 @@ void IM_ReadKeyCol1()
 					DU_setActiveDACChannel(DAC_CHANNEL_2);
 					DU_setDualChannelMode(0);
 					break;
+				case AMPLITUDE_DISP:
+					if(DU_isDualChannelMode())
+					{
+						DU_setAmplitudeSetting(DAC_CHANNEL_1, DAC_TRIANGLEAMPLITUDE_31);
+						DU_setAmplitudeSetting(DAC_CHANNEL_2, DAC_TRIANGLEAMPLITUDE_31);
+
+					}
+					else
+					{
+						DU_setAmplitudeSetting(DU_getActiveDACChannel(), DAC_TRIANGLEAMPLITUDE_31);
+					}
+					break;
 				case CHANSEL_DISP:
-				case DISPMAIN:
-				case DISPMODE:
-				case DISPVAL:
 				default:
 					break;
 			}
@@ -442,12 +379,21 @@ void IM_ReadKeyCol1()
 				case PARAMS_DISP:
 					_SetKeypadBuffer(_Concatenate(keypad_buffer, 5));
 					break;
+				case AMPLITUDE_DISP:
+					if(DU_isDualChannelMode())
+					{
+						DU_setAmplitudeSetting(DAC_CHANNEL_1, DAC_TRIANGLEAMPLITUDE_255);
+						DU_setAmplitudeSetting(DAC_CHANNEL_2, DAC_TRIANGLEAMPLITUDE_255);
+
+					}
+					else
+					{
+						DU_setAmplitudeSetting(DU_getActiveDACChannel(), DAC_TRIANGLEAMPLITUDE_255);
+					}
+					break;
 				case PROGSEL_DISP:
 				case CHANSEL_DISP:
 				case HOME_DISP:
-				case DISPMAIN:
-				case DISPMODE:
-				case DISPVAL:
 				default:
 					break;
 			}
@@ -462,12 +408,21 @@ void IM_ReadKeyCol1()
 				case PARAMS_DISP:
 					_SetKeypadBuffer(_Concatenate(keypad_buffer, 8));
 					break;
+				case AMPLITUDE_DISP:
+					if(DU_isDualChannelMode())
+					{
+						DU_setAmplitudeSetting(DAC_CHANNEL_1, DAC_TRIANGLEAMPLITUDE_2047);
+						DU_setAmplitudeSetting(DAC_CHANNEL_2, DAC_TRIANGLEAMPLITUDE_2047);
+
+					}
+					else
+					{
+						DU_setAmplitudeSetting(DU_getActiveDACChannel(), DAC_TRIANGLEAMPLITUDE_2047);
+					}
+					break;
 				case PROGSEL_DISP:
 				case CHANSEL_DISP:
 				case HOME_DISP:
-				case DISPMAIN:
-				case DISPMODE:
-				case DISPVAL:
 				default:
 					break;
 			}
@@ -482,12 +437,21 @@ void IM_ReadKeyCol1()
 				case PARAMS_DISP:
 					_SetKeypadBuffer(_Concatenate(keypad_buffer, 0));
 					break;
+				case AMPLITUDE_DISP:
+					if(DU_isDualChannelMode())
+					{
+						DU_setAmplitudeSetting(DAC_CHANNEL_1, DAC_TRIANGLEAMPLITUDE_7);
+						DU_setAmplitudeSetting(DAC_CHANNEL_2, DAC_TRIANGLEAMPLITUDE_7);
+
+					}
+					else
+					{
+						DU_setAmplitudeSetting(DU_getActiveDACChannel(), DAC_TRIANGLEAMPLITUDE_7);
+					}
+					break;
 				case PROGSEL_DISP:
 				case CHANSEL_DISP:
 				case HOME_DISP:
-				case DISPMAIN:
-				case DISPMODE:
-				case DISPVAL:
 				default:
 					break;
 			}
@@ -537,10 +501,19 @@ void IM_ReadKeyCol2()
 				case HOME_DISP:
 					DU_setDualChannelMode(1);
 					break;
+				case AMPLITUDE_DISP:
+					if(DU_isDualChannelMode())
+					{
+						DU_setAmplitudeSetting(DAC_CHANNEL_1, DAC_TRIANGLEAMPLITUDE_63);
+						DU_setAmplitudeSetting(DAC_CHANNEL_2, DAC_TRIANGLEAMPLITUDE_63);
+
+					}
+					else
+					{
+						DU_setAmplitudeSetting(DU_getActiveDACChannel(), DAC_TRIANGLEAMPLITUDE_63);
+					}
+					break;
 				case CHANSEL_DISP:
-				case DISPMAIN:
-				case DISPMODE:
-				case DISPVAL:
 				default:
 					break;
 			}
@@ -556,12 +529,21 @@ void IM_ReadKeyCol2()
 				case PARAMS_DISP:
 					_SetKeypadBuffer(_Concatenate(keypad_buffer, 6));
 					break;
+				case AMPLITUDE_DISP:
+					if(DU_isDualChannelMode())
+					{
+						DU_setAmplitudeSetting(DAC_CHANNEL_1, DAC_TRIANGLEAMPLITUDE_511);
+						DU_setAmplitudeSetting(DAC_CHANNEL_2, DAC_TRIANGLEAMPLITUDE_511);
+
+					}
+					else
+					{
+						DU_setAmplitudeSetting(DU_getActiveDACChannel(), DAC_TRIANGLEAMPLITUDE_511);
+					}
+					break;
 				case PROGSEL_DISP:
 				case CHANSEL_DISP:
 				case HOME_DISP:
-				case DISPMAIN:
-				case DISPMODE:
-				case DISPVAL:
 				default:
 					break;
 			}
@@ -576,12 +558,21 @@ void IM_ReadKeyCol2()
 				case PARAMS_DISP:
 					_SetKeypadBuffer(_Concatenate(keypad_buffer, 9));
 					break;
+				case AMPLITUDE_DISP:
+					if(DU_isDualChannelMode())
+					{
+						DU_setAmplitudeSetting(DAC_CHANNEL_1, DAC_TRIANGLEAMPLITUDE_4095);
+						DU_setAmplitudeSetting(DAC_CHANNEL_2, DAC_TRIANGLEAMPLITUDE_4095);
+
+					}
+					else
+					{
+						DU_setAmplitudeSetting(DU_getActiveDACChannel(), DAC_TRIANGLEAMPLITUDE_4095);
+					}
+					break;
 				case PROGSEL_DISP:
 				case CHANSEL_DISP:
 				case HOME_DISP:
-				case DISPMAIN:
-				case DISPMODE:
-				case DISPVAL:
 				default:
 					break;
 			}
@@ -605,9 +596,6 @@ void IM_ReadKeyCol2()
 				case PARAMS_DISP:
 				case PROGSEL_DISP:
 				case CHANSEL_DISP:
-				case DISPMAIN:
-				case DISPMODE:
-				case DISPVAL:
 				default:
 					break;
 			}
@@ -637,21 +625,6 @@ void IM_MenuEXTIHandler()
 		displayState_t theDisplayState = DM_GetState();
 		switch(theDisplayState)
 		{
-
-	// DEPRECATED
-			case DISPMAIN:	// GO FROM MAIN SCREEN TO DAC1 MODE SET SCREEN
-				DM_SetBlinkTimer(1);
-				DM_SetState(DAC_CHANNEL_1, DISPMODE);
-				digit_length=4;
-				break;
-			case DISPMODE:	// NO ACTION
-				break;
-			case DISPVAL:	// "SET VALUE" SCREEN; NUDGE VALUE
-				DU_IncreaseDAC(DU_getActiveDACChannel());
-				digit_length=4;
-				break;
-	//
-
 			case HOME_DISP:
 				DM_ChangeScreen(CHANSEL_DISP);
 				break;
@@ -667,31 +640,12 @@ void IM_MenuEXTIHandler()
 				break;
 
 			case PARAMS_DISP:
-				// TODO: APPLY PARAM SETTINGS
 
-				// apply voltage/freq values to actual register
-				if(DU_GetDACModePreview(DU_getActiveDACChannel()) == DAC_USER)
-					DU_SetVoltage(DU_getActiveDACChannel());
-				if(DU_GetDACModePreview(DU_getActiveDACChannel()) != DAC_USER)
-					DU_SetFreq(DU_getActiveDACChannel());
+				DM_ChangeScreen(AMPLITUDE_DISP);
+				break;
 
-
-				// Apply DAC Mode preview to actual DAC mode register
-				if(DU_isDualChannelMode())
-				{
-					DU_SetDACModeActual(DAC_CHANNEL_1, DU_GetDACModePreview(DAC_CHANNEL_1));
-					DU_SetDACModeActual(DAC_CHANNEL_2, DU_GetDACModePreview(DAC_CHANNEL_2));
-
-				}
-				else
-				{
-					DU_SetDACModeActual(DU_getActiveDACChannel(), DU_GetDACModePreview(DU_getActiveDACChannel()));
-				}
-
-
-				_ClearKeypadBuffer();
-				decimal_point_count=0;			// reset the decimal point counter
-				digit_length=1;
+			case AMPLITUDE_DISP:
+				_ApplyParameterSettings();
 				DM_ChangeScreen(HOME_DISP);
 				break;
 
@@ -703,37 +657,23 @@ void IM_MenuEXTIHandler()
 	else if(HAL_GPIO_ReadPin(GPIOD, Btn2_EXT11_Pin) == GPIO_PIN_RESET)
 	{
 		// MENU BUTTON 2
-
-	// DEPRECATED
 		displayState_t theDisplayState = DM_GetState();
 		switch(theDisplayState)
 		{
-			case DISPMAIN:			// GO FROM MAIN SCREEN TO DAC1 VALUE SET SCREEN
-				DM_SetBlinkTimer(1);
-				DM_SetState(DAC_CHANNEL_1, DISPVAL);
-				digit_length=4;
-				break;
-			case DISPMODE:			// NO ACTION
-				break;
-			case DISPVAL:			// "SET VALUE" SCREEN; NUDGE VALUE
-				DU_DecreaseDAC(DU_getActiveDACChannel());
-				digit_length=4;
-				break;
-	//
-
 			case HOME_DISP:
 				// RESET
 				DU_ClearVoltagePreview(DAC_CHANNEL_1);
 				DU_SetVoltage(DAC_CHANNEL_1);
 				DU_ClearFreqPreview(DAC_CHANNEL_1);
 				DU_SetFreq(DAC_CHANNEL_1);
-				DU_SetDACModeActual(DAC_CHANNEL_1,DAC_USER);
+
 
 				DU_ClearVoltagePreview(DAC_CHANNEL_2);
 				DU_SetVoltage(DAC_CHANNEL_2);
 				DU_ClearFreqPreview(DAC_CHANNEL_2);
 				DU_SetFreq(DAC_CHANNEL_2);
-				DU_SetDACModeActual(DAC_CHANNEL_2,DAC_USER);
+
+				DU_SetDualDACModeActual(DAC_USER);
 				break;
 
 			case CHANSEL_DISP:
@@ -748,32 +688,15 @@ void IM_MenuEXTIHandler()
 				break;
 
 			case PARAMS_DISP:
-				// TODO: APPLY PARAM SETTINGS
-				DM_SetBlinkTimer(0);
 
-				// apply voltage/freq values to actual register
-				if(DU_GetDACModePreview(DU_getActiveDACChannel()) == DAC_USER)
-					DU_SetVoltage(DU_getActiveDACChannel());
-				if(DU_GetDACModePreview(DU_getActiveDACChannel()) != DAC_USER)
-					DU_SetFreq(DU_getActiveDACChannel());
+				DM_ChangeScreen(AMPLITUDE_DISP);
+				break;
 
-				// Apply DAC Mode preview to actual DAC mode register
-				if(DU_isDualChannelMode())
-				{
-					DU_SetDACModeActual(DAC_CHANNEL_1, DU_GetDACModePreview(DAC_CHANNEL_1));
-					DU_SetDACModeActual(DAC_CHANNEL_2, DU_GetDACModePreview(DAC_CHANNEL_2));
-
-				}
-				else
-				{
-					DU_SetDACModeActual(DU_getActiveDACChannel(), DU_GetDACModePreview(DU_getActiveDACChannel()));
-				}
-
-				_ClearKeypadBuffer();
-				decimal_point_count=0;			// reset the decimal point counter
-				digit_length=1;
+			case AMPLITUDE_DISP:
+				_ApplyParameterSettings();
 				DM_ChangeScreen(HOME_DISP);
 				break;
+
 			default:
 				break;
 		}
@@ -785,29 +708,6 @@ void IM_MenuEXTIHandler()
 		displayState_t theDisplayState = DM_GetState();
 		switch(theDisplayState)
 		{
-
-	// DEPRECATED
-			case DISPMAIN:	// GO FROM MAIN SCREEN TO DAC2 MODE SET SCREEN
-				DM_SetState(DAC_CHANNEL_2, DISPMODE);
-				break;
-			case DISPMODE:	// NO OPTION
-
-				break;
-			case DISPVAL:	// APPLY VALUE SET PREVIEW
-
-				DM_SetBlinkTimer(0);
-				if(DU_GetDACModeActual(DU_getActiveDACChannel()) == DAC_USER)
-					DU_SetVoltage(DU_getActiveDACChannel());
-				if(DU_GetDACModeActual(DU_getActiveDACChannel()) != DAC_USER)
-					DU_SetFreq(DU_getActiveDACChannel());
-
-				_ClearKeypadBuffer();
-				decimal_point_count=0;			// reset the decimal point counter
-				digit_length=1;
-				break;
-
-	//
-
 			case HOME_DISP:
 				// TODO: NUDGE (INCREASE) VOLTAGE/FREQ
 				if(DU_isDualChannelMode())
@@ -844,6 +744,19 @@ void IM_MenuEXTIHandler()
 				DU_ClearFreqPreview(DAC_CHANNEL_2);
 				DM_ChangeScreen(PROGSEL_DISP);
 				break;
+
+			case AMPLITUDE_DISP:
+				// CANCEL ALL PREVIEW SETTINGS
+				_ClearKeypadBuffer();
+				decimal_point_count=0;
+				digit_length=1;
+				DU_ClearVoltagePreview(DAC_CHANNEL_1);
+				DU_ClearVoltagePreview(DAC_CHANNEL_2);
+				DU_ClearFreqPreview(DAC_CHANNEL_1);
+				DU_ClearFreqPreview(DAC_CHANNEL_2);
+				DM_ChangeScreen(PARAMS_DISP);
+				break;
+
 			default:
 				break;
 		}
@@ -856,37 +769,6 @@ void IM_MenuEXTIHandler()
 		displayState_t theDisplayState = DM_GetState();
 		switch(theDisplayState)
 		{
-
-	//DEPRECATED
-			case DISPMAIN:	// GO FROM MAIN SCREEN TO DAC1 VALUE SET SCREEN
-				DM_SetBlinkTimer(1);
-				DM_SetState(DAC_CHANNEL_2, DISPVAL);
-				digit_length=4;
-				break;
-			case DISPMODE:	// EXIT "MODE SET" SCREEN
-
-				DM_SetState(DAC_CHANNEL_2, DISPMAIN);
-
-				printf("DAC1 Mode: %s\n", DU_GetDACModeActual2String(DAC_CHANNEL_1));
-				printf("DAC2 Mode: %s\n", DU_GetDACModeActual2String(DAC_CHANNEL_2));
-
-				break;
-			case DISPVAL:	// EXIT "VALUE SET" SCREEN (CLEAR VALUE PREVIEW)
-/*
-				if(DU_GetDACModeActual(DM_GetSelectedDac()) == DAC_USER)
-					clearVoltagePreview();
-				if(DU_GetDACModeActual(DM_GetSelectedDac()) != DAC_USER)
-					reDU_DU_SetFreqPreview();
-*/
-				_ClearKeypadBuffer();
-				decimal_point_count=0;					// reset the decimal point counter
-				digit_length=1;
-				DM_SetState(DAC_CHANNEL_2, DISPMAIN);
-
-				break;
-
-	//
-
 			case HOME_DISP:
 
 				if(DU_isDualChannelMode())
@@ -920,9 +802,179 @@ void IM_MenuEXTIHandler()
 				DU_ClearFreqPreview(DAC_CHANNEL_2);
 				DM_ChangeScreen(HOME_DISP);
 				break;
+
+			case AMPLITUDE_DISP:
+				// CANCEL ALL PREVIEW SETTINGS
+				_ClearKeypadBuffer();
+				DU_ClearVoltagePreview(DAC_CHANNEL_1);
+				DU_ClearVoltagePreview(DAC_CHANNEL_2);
+				DU_ClearFreqPreview(DAC_CHANNEL_1);
+				DU_ClearFreqPreview(DAC_CHANNEL_2);
+				DM_ChangeScreen(HOME_DISP);
+				break;
+
 			default:
 				break;
 
 		}
 	}
+}
+
+/**
+  * @brief Apply the preview settings set by user
+  *
+  *
+  * @retval none
+  */
+
+void _ApplyParameterSettings()
+{
+	// apply voltage/freq values to actual register
+	if(DU_GetDACModePreview(DU_getActiveDACChannel()) == DAC_USER)
+	{
+		if(DU_isDualChannelMode())
+		{
+			DU_SetVoltage(DAC_CHANNEL_1);
+			DU_SetVoltage(DAC_CHANNEL_2);
+		}
+		else
+		{
+			DU_SetVoltage(DU_getActiveDACChannel());
+		}
+	}
+	if(DU_GetDACModePreview(DU_getActiveDACChannel()) != DAC_USER)
+	{
+		if(DU_isDualChannelMode())
+		{
+			DU_SetFreq(DAC_CHANNEL_1);
+			DU_SetFreq(DAC_CHANNEL_2);
+		}
+		else
+		{
+			DU_SetFreq(DU_getActiveDACChannel());
+		}
+	}
+
+
+	// Apply DAC Mode preview to actual DAC mode register
+	if(DU_isDualChannelMode())
+	{
+		DU_SetDualDACModeActual(DU_GetDACModePreview(DAC_CHANNEL_1));
+	}
+	else
+	{
+		DU_SetDACModeActual(DU_getActiveDACChannel(), DU_GetDACModePreview(DU_getActiveDACChannel()));
+	}
+
+
+	_ClearKeypadBuffer();
+	decimal_point_count=0;			// reset the decimal point counter
+	digit_length=1;
+}
+
+/**
+  * @brief get keypad_debounce_counter
+  *
+  *
+  * @param
+  * 		@arg @ref
+  * @param
+  * 		@arg @ref
+  *
+  *
+  * @retval keypad_debounce_counter
+  */
+
+uint32_t _GetKeypadDebounceCounter()
+{
+	return keypad_debounce_counter;
+}
+
+/**
+  * @brief Update the buffer and set the voltage/frequency preview variable
+  *
+  *
+  * @param value The new value to update
+  *
+  * @retval none
+  */
+
+void _SetKeypadBuffer(double pValue)
+{
+
+		keypad_buffer = pValue;
+		if(DU_isDualChannelMode())
+		{
+			if(DU_GetDACModePreview(DU_getActiveDACChannel()) == DAC_USER)
+			{
+				DU_SetVoltagePreview(DAC_CHANNEL_1, (float)keypad_buffer);
+				DU_SetVoltagePreview(DAC_CHANNEL_2, (float)keypad_buffer);
+			}
+			if(DU_GetDACModePreview(DU_getActiveDACChannel()) != DAC_USER)
+			{
+				DU_SetFreqPreview(DAC_CHANNEL_1, (float)keypad_buffer);
+				DU_SetFreqPreview(DAC_CHANNEL_2, (float)keypad_buffer);
+			}
+
+		}
+		else
+		{
+			if(DU_GetDACModePreview(DU_getActiveDACChannel()) == DAC_USER)
+				DU_SetVoltagePreview(DU_getActiveDACChannel(), (float)keypad_buffer);
+			if(DU_GetDACModePreview(DU_getActiveDACChannel()) != DAC_USER)
+				DU_SetFreqPreview(DU_getActiveDACChannel(), (float)keypad_buffer);
+		}
+
+
+}
+
+/**
+  * @brief Zero the keypad_buffer
+  *
+  *
+  * @retval none
+  */
+
+void _ClearKeypadBuffer()
+{
+	keypad_buffer = 0;
+}
+
+/**
+  * @brief	Process integer or fractional positioning for appending new digit to keypad_buffer.
+  * 		Integer parts: 		_buffer * exp + _newDigit
+  *			Fractional parts:	_buffer + ( _newDigit / ( pow( exp,decimal_point_count ) )
+  *
+  * @param	_buffer The existing keypad buffer contents
+  * @param	_newDigit The new digit to add to the keypad buffer
+  *
+  * @retval The new keypad buffer value
+  */
+
+double _Concatenate(double _buffer, double _newDigit)
+{
+	double next_calculated_value = 0;
+    double exp = 10;
+    if(decimal_point_count > 0)
+    {
+
+
+    	_newDigit = _newDigit / (pow(exp,decimal_point_count));
+    	decimal_point_count++;
+    	printf("Increment DP Count: %d\n", decimal_point_count);
+    	next_calculated_value = (_buffer + _newDigit);
+    	digit_length++;
+    }
+    else
+    {
+    	next_calculated_value = (_buffer * exp + _newDigit);
+    }
+
+    if(next_calculated_value >= keypadBufferMax)
+    {
+    	_SetKeypadBuffer(_buffer);						// set display using previous entered value
+    	return 0;
+    }
+
+    return next_calculated_value;
 }

@@ -23,6 +23,8 @@ displayState_t 		current_display_state = HOME_DISP;
 /* Boolean state for blink_display_texting display text */
 uint8_t blink_display_text = 0;
 
+// private function declarations
+void _DrawDACAmplitudeValue(uint32_t Channel);
 
 /**
   * @brief	Toggles the blink_display_text flag used by DisplayManager.
@@ -337,128 +339,6 @@ void _DrawMainDisp()
 
 }
 
-/** // DEPRECATED
-  * @brief	Draw mode screen overlay (no data)
-  * 		Called by DM_UpdateDisplay()
-  *
-  * @retval None
-  */
-
-
-void _DrawModeOverlay()
-{
-	for(int x=0; x < SSD1306_WIDTH; x++)
-	{
-		ssd1306_DrawPixel(x, 0, White);
-	}
-	for(int x=0; x < SSD1306_WIDTH; x++)
-	{
-		ssd1306_DrawPixel(x, 12, White);
-	}
-	for(int y=0; y < 12; y++)
-	{
-		ssd1306_DrawPixel(32, y, White);
-		ssd1306_DrawPixel(64, y, White);
-		ssd1306_DrawPixel(96, y, White);
-	}
-	ssd1306_SetCursor(97,3);
-	ssd1306_WriteString("EXIT", Font_5x7, White, 1);
-}
-
-/**	// DEPRECATED
-  * @brief 	Draw mode screen data
-  *			Called by DM_UpdateDisplay()
-  *
-  * @retval None
-  */
-
-
-void _DrawModeDisp()
-{
-    ssd1306_SetCursor(0, 20);
-
-    switch(DU_getActiveDACChannel())
-    {
-    case DAC_CHANNEL_1:
-    	ssd1306_WriteString("Enter DAC1 mode:", Font_7x10, White, 0);
-    	ssd1306_SetCursor(10, 40);
-    	ssd1306_WriteString(DU_GetDACModeActual2String(DAC_CHANNEL_1), Font_7x10, White, 0);
-    	break;
-    case DAC_CHANNEL_2:
-    	ssd1306_WriteString("Enter DAC2 Mode:", Font_7x10, White, 0);
-    	ssd1306_SetCursor(10, 40);
-    	ssd1306_WriteString(DU_GetDACModeActual2String(DAC_CHANNEL_2), Font_7x10, White, 0);
-    	break;
-    default:
-    	break;
-    }
-}
-
-/** // DEPRECATED
-  * @brief 	Draw Value Set screen overlay (no data)
-  * 		Called by DM_UpdateDisplay()
-  *
-  * @retval None
-  */
-
-
-void _DrawValueOverlay()
-{
-	for(int x=0; x < SSD1306_WIDTH; x++)
-	{
-		ssd1306_DrawPixel(x, 0, White);
-	}
-	for(int x=0; x < SSD1306_WIDTH; x++)
-	{
-		ssd1306_DrawPixel(x, 12, White);
-	}
-	for(int y=0; y < 12; y++)
-	{
-		ssd1306_DrawPixel(32, y, White);
-		ssd1306_DrawPixel(64, y, White);
-		ssd1306_DrawPixel(96, y, White);
-	}
-	ssd1306_SetCursor(12,3);
-	ssd1306_WriteString("+", Font_5x7, White, 1);
-	ssd1306_SetCursor(45,3);
-	ssd1306_WriteString("-", Font_5x7, White, 1);
-	ssd1306_SetCursor(70,3);
-	ssd1306_WriteString("SET", Font_5x7, White, 1);
-	ssd1306_SetCursor(99,3);
-	ssd1306_WriteString("EXIT", Font_5x7, White, 1);
-}
-
-/** // DEPRECATED
-  * @brief 	Draw Value Set screen data
-  * 		Called by DM_UpdateDisplay()
-  *
-  * @retval None
-  */
-
-
-void _DrawValueDisp()
-{
-    ssd1306_SetCursor(0, 20);
-
-    switch(DU_getActiveDACChannel())
-    {
-    case DAC_CHANNEL_1:
-    	ssd1306_WriteString("Enter DAC1 Value:", Font_7x10, White, 0);
-        ssd1306_SetCursor(8, 40);
-        if(!blink_display_text)
-        	_DrawDAC1Value(1);
-    	break;
-    case DAC_CHANNEL_2:
-    	ssd1306_WriteString("Enter DAC2 Value:", Font_7x10, White, 0);
-        ssd1306_SetCursor(8, 40);
-        if(!blink_display_text)
-        	_DrawDAC2Value(1);
-    	break;
-    default:
-    	break;
-    }
-
-}
 
 /**
   * @brief 	Draw DAC Channel Select screen overlay (no data)
@@ -537,7 +417,7 @@ void _DrawProgSelOverlay()
 	ssd1306_SetCursor(45,3);
 	ssd1306_WriteString("", Font_5x7, White, 1);
 	ssd1306_SetCursor(66,3);
-	ssd1306_WriteString("BACK", Font_5x7, White, 1);
+	ssd1306_WriteString("PREV", Font_5x7, White, 1);
 	ssd1306_SetCursor(99,3);
 	ssd1306_WriteString("EXIT", Font_5x7, White, 1);
 }
@@ -602,11 +482,11 @@ void _DrawParamSelOverlay()
 		ssd1306_DrawPixel(96, y, White);
 	}
 	ssd1306_SetCursor(15,3);
-	ssd1306_WriteString("APPLY", Font_5x7, White, 1);
+	ssd1306_WriteString("NEXT", Font_5x7, White, 1);
 	ssd1306_SetCursor(45,3);
 	ssd1306_WriteString("", Font_5x7, White, 1);
 	ssd1306_SetCursor(66,3);
-	ssd1306_WriteString("BACK", Font_5x7, White, 1);
+	ssd1306_WriteString("PREV", Font_5x7, White, 1);
 	ssd1306_SetCursor(99,3);
 	ssd1306_WriteString("EXIT", Font_5x7, White, 1);
 }
@@ -629,7 +509,7 @@ void _DrawParamSelDisp()
     {
     	char mode[32] = "";
     	// both channels should be set to same mode, so either channel can be used as ref
-    	sprintf(mode, "[CH1+2 MODE: %s]", DU_GetDACModePreview2String(DU_getActiveDACChannel()));
+    	sprintf(mode, "[DUAL MODE: %s]", DU_GetDACModePreview2String(DU_getActiveDACChannel()));
     	ssd1306_WriteString(mode, Font_5x7, White, 1);
     	dacmode = DU_GetDACModePreview(DAC_CHANNEL_1);
     }
@@ -742,6 +622,114 @@ void _DrawParamSelDisp()
 }
 
 /**
+  * @brief 	Draw DAC Parameter Select screen overlay (no data)
+  * 		Called by DM_UpdateDisplay()
+  *
+  * @retval None
+  */
+
+void _DrawAmplitudeSelOverlay()
+{
+	// TOP HORIZ LINE
+	for(int x=0; x < SSD1306_WIDTH; x++)
+	{
+		ssd1306_DrawPixel(x, 0, White);
+	}
+	for(int x=0; x < SSD1306_WIDTH; x++)
+	{
+		ssd1306_DrawPixel(x, 12, White);
+	}
+	for(int y=0; y < 12; y++)
+	{
+		//ssd1306_DrawPixel(32, y, White);
+		ssd1306_DrawPixel(64, y, White);
+		ssd1306_DrawPixel(96, y, White);
+	}
+	ssd1306_SetCursor(15,3);
+	ssd1306_WriteString("APPLY", Font_5x7, White, 1);
+	ssd1306_SetCursor(45,3);
+	ssd1306_WriteString("", Font_5x7, White, 1);
+	ssd1306_SetCursor(66,3);
+	ssd1306_WriteString("PREV", Font_5x7, White, 1);
+	ssd1306_SetCursor(99,3);
+	ssd1306_WriteString("EXIT", Font_5x7, White, 1);
+}
+
+
+/**
+  * @brief 	Draw DAC Parameter Select screen data
+  * 		Called by DM_UpdateDisplay()
+  *
+  * @retval None
+  */
+
+void _DrawAmplitudeSelDisp()
+{
+	dacmode_t dacmode;
+
+    ssd1306_SetCursor(0, 15);
+
+    if(DU_isDualChannelMode())
+    {
+    	char mode[32] = "";
+    	// both channels should be set to same mode, so either channel can be used as ref
+    	sprintf(mode, "[DUAL MODE: %s]", DU_GetDACModePreview2String(DU_getActiveDACChannel()));
+    	ssd1306_WriteString(mode, Font_5x7, White, 1);
+    	dacmode = DU_GetDACModePreview(DAC_CHANNEL_1);
+    }
+    else
+    {
+    	char mode[32] = "";
+    	// get the mode for this specific channel
+    	sprintf(mode, " [%s MODE: %s]", DU_getActiveDACChannel2String(), DU_GetDACModePreview2String(DU_getActiveDACChannel()));
+    	ssd1306_WriteString(mode, Font_5x7, White, 1);
+    	dacmode = DU_GetDACModePreview(DU_getActiveDACChannel());
+    }
+
+    switch(dacmode)
+    {
+		case DAC_USER:
+			// not applicable for setting triangle amplitude
+			break;
+		case DAC_RAND:
+		case DAC_AUTO:
+
+	    	if(DU_isDualChannelMode())
+	    	{
+	    		// show BOTH DAC 1 and DAC 2 params
+	    		_DrawDACAmplitudeValue(DAC_CHANNEL_1);
+
+	    		_DrawDACAmplitudeValue(DAC_CHANNEL_2);
+
+	    	}
+	    	else
+	    	{
+	    		// show DAC 1 OR DAC 2 params
+	    		switch(DU_getActiveDACChannel())
+				{
+					case DAC_CHANNEL_1:
+			    		_DrawDACAmplitudeValue(DAC_CHANNEL_1);
+						break;
+					case DAC_CHANNEL_2:
+			    		_DrawDACAmplitudeValue(DAC_CHANNEL_2);
+						break;
+					default:
+						break;
+				}
+	    	}
+
+			break;
+		default:
+			break;
+    }
+
+
+
+}
+
+
+
+/**
   * @brief	Main loop for drawing display overlays and data to OLED
   *
   * @retval None
@@ -755,20 +743,6 @@ void DM_UpdateDisplay()
 
 	switch(current_display_state)
 	{
-	// DEPRECATED
-		case DISPMAIN:
-			_DrawMainOverlay();
-			_DrawMainDisp();
-			break;
-		case DISPMODE:
-			_DrawModeOverlay();
-			_DrawModeDisp();
-			break;
-		case DISPVAL:
-			_DrawValueOverlay();
-			_DrawValueDisp();
-			break;
-	//
 		case HOME_DISP:
 			_DrawMainOverlay();
 			_DrawMainDisp();
@@ -787,6 +761,12 @@ void DM_UpdateDisplay()
 			_DrawParamSelOverlay();
 			_DrawParamSelDisp();
 			break;
+
+		case AMPLITUDE_DISP:
+			_DrawAmplitudeSelOverlay();
+			_DrawAmplitudeSelDisp();
+			break;
+
 		default:
 			break;
 	}
@@ -846,17 +826,54 @@ displayState_t DM_GetState()
 }
 
 /**
-  * @brief 	Returns the DAC channel selected by user.
-  * 		Menu button 1/2 for DAC1
-  * 		Menu button 3/4 for DAC2
+  * @brief 	draws amplitude value to OLED
   *
-  * @retval DAC_CHANNEL_1/DAC_CHANNEL_2
+  *
+  * @retval none
   */
 
-
-// moved to DU_getActiveDACChannel()
-/*uint32_t DM_GetSelectedDac()
+void _DrawDACAmplitudeValue(uint32_t Channel)
 {
-	return selected_dac_channel;
+    if(DU_isDualChannelMode() && Channel == DAC_CHANNEL_1)
+    {
+    	ssd1306_SetCursor(2, 30);
+    }
+    else if(DU_isDualChannelMode() && Channel == DAC_CHANNEL_2)
+    {
+    	ssd1306_SetCursor(2, 50);
+    }
+    else
+    {
+    	ssd1306_SetCursor(2, 30);
+    }
+
+
+	if(Channel == DAC_CHANNEL_1)
+	{
+		ssd1306_WriteString("CH1:", Font_5x7, White, 1);
+	}
+	else
+	{
+		ssd1306_WriteString("CH2:", Font_5x7, White, 1);
+	}
+
+
+	if(DU_isDualChannelMode() && Channel == DAC_CHANNEL_1)
+	{
+		ssd1306_SetCursor(27, 30);
+	}
+	else if(DU_isDualChannelMode() && Channel == DAC_CHANNEL_2)
+	{
+		ssd1306_SetCursor(27, 50);
+	}
+	else
+	{
+		ssd1306_SetCursor(27, 30);
+	}
+
+	if(!blink_display_text)
+	{
+		ssd1306_WriteString(DU_getAmplitudeSetting2String(Channel), Font_5x7, White, 1);
+	}
 }
-*/
+

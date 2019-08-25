@@ -22,6 +22,7 @@ typedef enum dacmode
 dacmode_t DU_GetDACModeActual(uint32_t Channel);
 char* DU_GetDACModeActual2String(uint32_t Channel);
 void DU_SetDACModeActual(uint32_t Channel, dacmode_t mode);
+void DU_SetDualDACModeActual(dacmode_t mode);
 
 void DU_SetDACModePreview(uint32_t Channel, dacmode_t pNewMode);
 dacmode_t DU_GetDACModePreview(uint32_t Channel);
@@ -33,6 +34,9 @@ void DU_SetVoltagePreview(uint32_t Channel, float newVolts);
 void DU_SetVoltage(uint32_t Channel);
 void DU_ClearVoltagePreview(uint32_t Channel);
 
+uint32_t DU_getAmplitudeSetting(uint32_t Channel);
+char* DU_getAmplitudeSetting2String(uint32_t Channel);
+void DU_setAmplitudeSetting(uint32_t Channel, uint32_t amplitude);
 
 void DU_SetFreqPreview(uint32_t Channel, float newHertz);
 void DU_SetFreq(uint32_t Channel);

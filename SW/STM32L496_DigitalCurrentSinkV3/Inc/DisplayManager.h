@@ -13,13 +13,11 @@
 
 typedef enum displayState
 {
-	DISPMAIN,
-	DISPMODE,
-	DISPVAL,
 	HOME_DISP,
 	CHANSEL_DISP,
 	PROGSEL_DISP,
 	PARAMS_DISP,
+	AMPLITUDE_DISP,
 
 	numStates
 
