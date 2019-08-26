@@ -176,14 +176,14 @@ void IM_ReadKeyCol0()
 			switch(mode)
 			{
 				case PROGSEL_DISP:
-					if(DU_isDualChannelMode())
+					if(DU_IsDualChannelMode())
 					{
 						DU_SetDACModePreview(DAC_CHANNEL_1, DAC_USER);
 						DU_SetDACModePreview(DAC_CHANNEL_2, DAC_USER);
 					}
 					else
 					{
-						DU_SetDACModePreview(DU_getActiveDACChannel(), DAC_USER);
+						DU_SetDACModePreview(DU_GetActiveDACChannel(), DAC_USER);
 					}
 
 					DM_SetBlinkTimer(1);
@@ -193,21 +193,31 @@ void IM_ReadKeyCol0()
 					_SetKeypadBuffer(_Concatenate(keypad_buffer, 1));
 					break;
 				case HOME_DISP:
-					DU_setActiveDACChannel(DAC_CHANNEL_1);
-					DU_setDualChannelMode(0);
+					DU_SetActiveDACChannel(DAC_CHANNEL_1);
+					DU_ToggleDualChannelMode(0);
 					break;
 				case CHANSEL_DISP:
 					break;
 				case AMPLITUDE_DISP:
-					if(DU_isDualChannelMode())
+					if(DU_IsDualChannelMode())
 					{
-						DU_setAmplitudeSetting(DAC_CHANNEL_1, DAC_TRIANGLEAMPLITUDE_15);
-						DU_setAmplitudeSetting(DAC_CHANNEL_2, DAC_TRIANGLEAMPLITUDE_15);
-
+						if(DU_GetDACModePreview(DAC_CHANNEL_1) == DAC_USER)
+						{
+							DU_SetRampAmplitudeSetting(DAC_CHANNEL_1, DAC_TRIANGLEAMPLITUDE_15);
+							DU_SetRampAmplitudeSetting(DAC_CHANNEL_2, DAC_TRIANGLEAMPLITUDE_15);
+						}
+						else
+						{
+							DU_SetRandAmplitudeSetting(DAC_CHANNEL_1, DAC_LFSRUNMASK_BITS3_0);
+							DU_SetRandAmplitudeSetting(DAC_CHANNEL_2, DAC_LFSRUNMASK_BITS3_0);
+						}
 					}
 					else
 					{
-						DU_setAmplitudeSetting(DU_getActiveDACChannel(), DAC_TRIANGLEAMPLITUDE_15);
+						if(DU_GetDACModePreview(DAC_CHANNEL_1) == DAC_USER)
+							DU_SetRampAmplitudeSetting(DU_GetActiveDACChannel(), DAC_TRIANGLEAMPLITUDE_15);
+						else
+							DU_SetRandAmplitudeSetting(DU_GetActiveDACChannel(), DAC_LFSRUNMASK_BITS3_0);
 					}
 					break;
 				default:
@@ -226,15 +236,32 @@ void IM_ReadKeyCol0()
 					_SetKeypadBuffer(_Concatenate(keypad_buffer, 4));
 					break;
 				case AMPLITUDE_DISP:
-					if(DU_isDualChannelMode())
+					if(DU_IsDualChannelMode())
 					{
-						DU_setAmplitudeSetting(DAC_CHANNEL_1, DAC_TRIANGLEAMPLITUDE_127);
-						DU_setAmplitudeSetting(DAC_CHANNEL_2, DAC_TRIANGLEAMPLITUDE_127);
+						if(DU_GetDACModePreview(DAC_CHANNEL_1) == DAC_USER)
+						{
+							DU_SetRampAmplitudeSetting(DAC_CHANNEL_1, DAC_TRIANGLEAMPLITUDE_127);
+							DU_SetRampAmplitudeSetting(DAC_CHANNEL_2, DAC_TRIANGLEAMPLITUDE_127);
+						}
+						else
+						{
+							DU_SetRandAmplitudeSetting(DAC_CHANNEL_1, DAC_LFSRUNMASK_BITS6_0);
+							DU_SetRandAmplitudeSetting(DAC_CHANNEL_2, DAC_LFSRUNMASK_BITS6_0);
+						}
+
 
 					}
 					else
 					{
-						DU_setAmplitudeSetting(DU_getActiveDACChannel(), DAC_TRIANGLEAMPLITUDE_127);
+						if(DU_GetDACModePreview(DAC_CHANNEL_1) == DAC_USER)
+						{
+							DU_SetRampAmplitudeSetting(DU_GetActiveDACChannel(), DAC_TRIANGLEAMPLITUDE_127);
+						}
+						else
+						{
+							DU_SetRandAmplitudeSetting(DU_GetActiveDACChannel(), DAC_LFSRUNMASK_BITS6_0);
+						}
+
 					}
 					break;
 				case HOME_DISP:
@@ -258,15 +285,32 @@ void IM_ReadKeyCol0()
 					_SetKeypadBuffer(_Concatenate(keypad_buffer, 7));
 					break;
 				case AMPLITUDE_DISP:
-					if(DU_isDualChannelMode())
+					if(DU_IsDualChannelMode())
 					{
-						DU_setAmplitudeSetting(DAC_CHANNEL_1, DAC_TRIANGLEAMPLITUDE_1023);
-						DU_setAmplitudeSetting(DAC_CHANNEL_2, DAC_TRIANGLEAMPLITUDE_1023);
+						if(DU_GetDACModePreview(DAC_CHANNEL_1) == DAC_USER)
+						{
+							DU_SetRampAmplitudeSetting(DAC_CHANNEL_1, DAC_TRIANGLEAMPLITUDE_1023);
+							DU_SetRampAmplitudeSetting(DAC_CHANNEL_2, DAC_TRIANGLEAMPLITUDE_1023);
+						}
+						else
+						{
+							DU_SetRandAmplitudeSetting(DAC_CHANNEL_1, DAC_LFSRUNMASK_BITS9_0);
+							DU_SetRandAmplitudeSetting(DAC_CHANNEL_2, DAC_LFSRUNMASK_BITS9_0);
+						}
+
 
 					}
 					else
 					{
-						DU_setAmplitudeSetting(DU_getActiveDACChannel(), DAC_TRIANGLEAMPLITUDE_1023);
+						if(DU_GetDACModePreview(DAC_CHANNEL_1) == DAC_USER)
+						{
+							DU_SetRampAmplitudeSetting(DU_GetActiveDACChannel(), DAC_TRIANGLEAMPLITUDE_1023);
+						}
+						else
+						{
+							DU_SetRandAmplitudeSetting(DU_GetActiveDACChannel(), DAC_LFSRUNMASK_BITS9_0);
+						}
+
 					}
 					break;
 				case PROGSEL_DISP:
@@ -332,14 +376,14 @@ void IM_ReadKeyCol1()
 			switch(mode)
 			{
 				case PROGSEL_DISP:
-					if(DU_isDualChannelMode())
+					if(DU_IsDualChannelMode())
 					{
 						DU_SetDACModePreview(DAC_CHANNEL_1, DAC_AUTO);
 						DU_SetDACModePreview(DAC_CHANNEL_2, DAC_AUTO);
 					}
 					else
 					{
-						DU_SetDACModePreview(DU_getActiveDACChannel(), DAC_AUTO);
+						DU_SetDACModePreview(DU_GetActiveDACChannel(), DAC_AUTO);
 					}
 
 					DM_SetBlinkTimer(1);
@@ -349,19 +393,36 @@ void IM_ReadKeyCol1()
 					_SetKeypadBuffer(_Concatenate(keypad_buffer, 2));
 					break;
 				case HOME_DISP:
-					DU_setActiveDACChannel(DAC_CHANNEL_2);
-					DU_setDualChannelMode(0);
+					DU_SetActiveDACChannel(DAC_CHANNEL_2);
+					DU_ToggleDualChannelMode(0);
 					break;
 				case AMPLITUDE_DISP:
-					if(DU_isDualChannelMode())
+					if(DU_IsDualChannelMode())
 					{
-						DU_setAmplitudeSetting(DAC_CHANNEL_1, DAC_TRIANGLEAMPLITUDE_31);
-						DU_setAmplitudeSetting(DAC_CHANNEL_2, DAC_TRIANGLEAMPLITUDE_31);
+						if(DU_GetDACModePreview(DAC_CHANNEL_1) == DAC_USER)
+						{
+							DU_SetRampAmplitudeSetting(DAC_CHANNEL_1, DAC_TRIANGLEAMPLITUDE_31);
+							DU_SetRampAmplitudeSetting(DAC_CHANNEL_2, DAC_TRIANGLEAMPLITUDE_31);
+						}
+						else
+						{
+							DU_SetRandAmplitudeSetting(DAC_CHANNEL_1, DAC_LFSRUNMASK_BITS4_0);
+							DU_SetRandAmplitudeSetting(DAC_CHANNEL_2, DAC_LFSRUNMASK_BITS4_0);
+						}
+
 
 					}
 					else
 					{
-						DU_setAmplitudeSetting(DU_getActiveDACChannel(), DAC_TRIANGLEAMPLITUDE_31);
+						if(DU_GetDACModePreview(DAC_CHANNEL_1) == DAC_USER)
+						{
+							DU_SetRampAmplitudeSetting(DU_GetActiveDACChannel(), DAC_TRIANGLEAMPLITUDE_31);
+						}
+						else
+						{
+							DU_SetRandAmplitudeSetting(DU_GetActiveDACChannel(), DAC_LFSRUNMASK_BITS4_0);
+						}
+
 					}
 					break;
 				case CHANSEL_DISP:
@@ -381,15 +442,30 @@ void IM_ReadKeyCol1()
 					_SetKeypadBuffer(_Concatenate(keypad_buffer, 5));
 					break;
 				case AMPLITUDE_DISP:
-					if(DU_isDualChannelMode())
+					if(DU_IsDualChannelMode())
 					{
-						DU_setAmplitudeSetting(DAC_CHANNEL_1, DAC_TRIANGLEAMPLITUDE_255);
-						DU_setAmplitudeSetting(DAC_CHANNEL_2, DAC_TRIANGLEAMPLITUDE_255);
-
+						if(DU_GetDACModePreview(DAC_CHANNEL_1) == DAC_USER)
+						{
+							DU_SetRampAmplitudeSetting(DAC_CHANNEL_1, DAC_TRIANGLEAMPLITUDE_255);
+							DU_SetRampAmplitudeSetting(DAC_CHANNEL_2, DAC_TRIANGLEAMPLITUDE_255);
+						}
+						else
+						{
+							DU_SetRandAmplitudeSetting(DAC_CHANNEL_1, DAC_LFSRUNMASK_BITS7_0);
+							DU_SetRandAmplitudeSetting(DAC_CHANNEL_2, DAC_LFSRUNMASK_BITS7_0);
+						}
 					}
 					else
 					{
-						DU_setAmplitudeSetting(DU_getActiveDACChannel(), DAC_TRIANGLEAMPLITUDE_255);
+						if(DU_GetDACModePreview(DAC_CHANNEL_1) == DAC_USER)
+						{
+							DU_SetRampAmplitudeSetting(DU_GetActiveDACChannel(), DAC_TRIANGLEAMPLITUDE_255);
+						}
+						else
+						{
+							DU_SetRandAmplitudeSetting(DU_GetActiveDACChannel(), DAC_LFSRUNMASK_BITS7_0);
+						}
+
 					}
 					break;
 				case HOME_DISP:
@@ -413,15 +489,30 @@ void IM_ReadKeyCol1()
 					_SetKeypadBuffer(_Concatenate(keypad_buffer, 8));
 					break;
 				case AMPLITUDE_DISP:
-					if(DU_isDualChannelMode())
+					if(DU_IsDualChannelMode())
 					{
-						DU_setAmplitudeSetting(DAC_CHANNEL_1, DAC_TRIANGLEAMPLITUDE_2047);
-						DU_setAmplitudeSetting(DAC_CHANNEL_2, DAC_TRIANGLEAMPLITUDE_2047);
-
+						if(DU_GetDACModePreview(DAC_CHANNEL_1) == DAC_USER)
+						{
+							DU_SetRampAmplitudeSetting(DAC_CHANNEL_1, DAC_TRIANGLEAMPLITUDE_2047);
+							DU_SetRampAmplitudeSetting(DAC_CHANNEL_2, DAC_TRIANGLEAMPLITUDE_2047);
+						}
+						else
+						{
+							DU_SetRandAmplitudeSetting(DAC_CHANNEL_1, DAC_LFSRUNMASK_BITS10_0);
+							DU_SetRandAmplitudeSetting(DAC_CHANNEL_2, DAC_LFSRUNMASK_BITS10_0);
+						}
 					}
 					else
 					{
-						DU_setAmplitudeSetting(DU_getActiveDACChannel(), DAC_TRIANGLEAMPLITUDE_2047);
+						if(DU_GetDACModePreview(DAC_CHANNEL_1) == DAC_USER)
+						{
+							DU_SetRampAmplitudeSetting(DU_GetActiveDACChannel(), DAC_TRIANGLEAMPLITUDE_2047);
+						}
+						else
+						{
+							DU_SetRandAmplitudeSetting(DU_GetActiveDACChannel(), DAC_LFSRUNMASK_BITS10_0);
+						}
+
 					}
 					break;
 				case PROGSEL_DISP:
@@ -442,15 +533,32 @@ void IM_ReadKeyCol1()
 					_SetKeypadBuffer(_Concatenate(keypad_buffer, 0));
 					break;
 				case AMPLITUDE_DISP:
-					if(DU_isDualChannelMode())
+					if(DU_IsDualChannelMode())
 					{
-						DU_setAmplitudeSetting(DAC_CHANNEL_1, DAC_TRIANGLEAMPLITUDE_7);
-						DU_setAmplitudeSetting(DAC_CHANNEL_2, DAC_TRIANGLEAMPLITUDE_7);
+						if(DU_GetDACModePreview(DAC_CHANNEL_1) == DAC_USER)
+						{
+							DU_SetRampAmplitudeSetting(DAC_CHANNEL_1, DAC_TRIANGLEAMPLITUDE_7);
+							DU_SetRampAmplitudeSetting(DAC_CHANNEL_2, DAC_TRIANGLEAMPLITUDE_7);
+						}
+						else
+						{
+							DU_SetRandAmplitudeSetting(DAC_CHANNEL_1, DAC_LFSRUNMASK_BITS2_0);
+							DU_SetRandAmplitudeSetting(DAC_CHANNEL_2, DAC_LFSRUNMASK_BITS2_0);
+						}
+
 
 					}
 					else
 					{
-						DU_setAmplitudeSetting(DU_getActiveDACChannel(), DAC_TRIANGLEAMPLITUDE_7);
+						if(DU_GetDACModePreview(DAC_CHANNEL_1) == DAC_USER)
+						{
+							DU_SetRampAmplitudeSetting(DU_GetActiveDACChannel(), DAC_TRIANGLEAMPLITUDE_7);
+						}
+						else
+						{
+							DU_SetRandAmplitudeSetting(DU_GetActiveDACChannel(), DAC_LFSRUNMASK_BITS2_0);
+						}
+
 					}
 					break;
 				case PROGSEL_DISP:
@@ -486,14 +594,14 @@ void IM_ReadKeyCol2()
 			switch(mode)
 			{
 				case PROGSEL_DISP:
-					if(DU_isDualChannelMode())
+					if(DU_IsDualChannelMode())
 					{
 						DU_SetDACModePreview(DAC_CHANNEL_1, DAC_RAND);
 						DU_SetDACModePreview(DAC_CHANNEL_2, DAC_RAND);
 					}
 					else
 					{
-						DU_SetDACModePreview(DU_getActiveDACChannel(), DAC_RAND);
+						DU_SetDACModePreview(DU_GetActiveDACChannel(), DAC_RAND);
 					}
 
 					DM_SetBlinkTimer(1);
@@ -503,18 +611,35 @@ void IM_ReadKeyCol2()
 					_SetKeypadBuffer(_Concatenate(keypad_buffer, 3));
 					break;
 				case HOME_DISP:
-					DU_setDualChannelMode(1);
+					DU_ToggleDualChannelMode(1);
 					break;
 				case AMPLITUDE_DISP:
-					if(DU_isDualChannelMode())
+					if(DU_IsDualChannelMode())
 					{
-						DU_setAmplitudeSetting(DAC_CHANNEL_1, DAC_TRIANGLEAMPLITUDE_63);
-						DU_setAmplitudeSetting(DAC_CHANNEL_2, DAC_TRIANGLEAMPLITUDE_63);
+						if(DU_GetDACModePreview(DAC_CHANNEL_1) == DAC_USER)
+						{
+							DU_SetRampAmplitudeSetting(DAC_CHANNEL_1, DAC_TRIANGLEAMPLITUDE_63);
+							DU_SetRampAmplitudeSetting(DAC_CHANNEL_2, DAC_TRIANGLEAMPLITUDE_63);
+
+						}
+						else
+						{
+							DU_SetRandAmplitudeSetting(DAC_CHANNEL_1, DAC_LFSRUNMASK_BITS5_0);
+							DU_SetRandAmplitudeSetting(DAC_CHANNEL_2, DAC_LFSRUNMASK_BITS5_0);
+						}
 
 					}
 					else
 					{
-						DU_setAmplitudeSetting(DU_getActiveDACChannel(), DAC_TRIANGLEAMPLITUDE_63);
+						if(DU_GetDACModePreview(DAC_CHANNEL_1) == DAC_USER)
+						{
+							DU_SetRampAmplitudeSetting(DU_GetActiveDACChannel(), DAC_TRIANGLEAMPLITUDE_63);
+						}
+						else
+						{
+							DU_SetRandAmplitudeSetting(DU_GetActiveDACChannel(), DAC_LFSRUNMASK_BITS5_0);
+						}
+
 					}
 					break;
 				case CHANSEL_DISP:
@@ -534,15 +659,32 @@ void IM_ReadKeyCol2()
 					_SetKeypadBuffer(_Concatenate(keypad_buffer, 6));
 					break;
 				case AMPLITUDE_DISP:
-					if(DU_isDualChannelMode())
+					if(DU_IsDualChannelMode())
 					{
-						DU_setAmplitudeSetting(DAC_CHANNEL_1, DAC_TRIANGLEAMPLITUDE_511);
-						DU_setAmplitudeSetting(DAC_CHANNEL_2, DAC_TRIANGLEAMPLITUDE_511);
+						if(DU_GetDACModePreview(DAC_CHANNEL_1) == DAC_USER)
+						{
+							DU_SetRampAmplitudeSetting(DAC_CHANNEL_1, DAC_TRIANGLEAMPLITUDE_511);
+							DU_SetRampAmplitudeSetting(DAC_CHANNEL_2, DAC_TRIANGLEAMPLITUDE_511);
+						}
+						else
+						{
+							DU_SetRandAmplitudeSetting(DAC_CHANNEL_1, DAC_LFSRUNMASK_BITS8_0);
+							DU_SetRandAmplitudeSetting(DAC_CHANNEL_2, DAC_LFSRUNMASK_BITS8_0);
+						}
+
 
 					}
 					else
 					{
-						DU_setAmplitudeSetting(DU_getActiveDACChannel(), DAC_TRIANGLEAMPLITUDE_511);
+						if(DU_GetDACModePreview(DAC_CHANNEL_1) == DAC_USER)
+						{
+							DU_SetRampAmplitudeSetting(DU_GetActiveDACChannel(), DAC_TRIANGLEAMPLITUDE_511);
+						}
+						else
+						{
+							DU_SetRandAmplitudeSetting(DU_GetActiveDACChannel(), DAC_LFSRUNMASK_BITS8_0);
+						}
+
 					}
 					break;
 				case HOME_DISP:
@@ -565,15 +707,31 @@ void IM_ReadKeyCol2()
 					_SetKeypadBuffer(_Concatenate(keypad_buffer, 9));
 					break;
 				case AMPLITUDE_DISP:
-					if(DU_isDualChannelMode())
+					if(DU_IsDualChannelMode())
 					{
-						DU_setAmplitudeSetting(DAC_CHANNEL_1, DAC_TRIANGLEAMPLITUDE_4095);
-						DU_setAmplitudeSetting(DAC_CHANNEL_2, DAC_TRIANGLEAMPLITUDE_4095);
+						if(DU_GetDACModePreview(DAC_CHANNEL_1) == DAC_USER)
+						{
+							DU_SetRampAmplitudeSetting(DAC_CHANNEL_1, DAC_TRIANGLEAMPLITUDE_4095);
+							DU_SetRampAmplitudeSetting(DAC_CHANNEL_2, DAC_TRIANGLEAMPLITUDE_4095);
+						}
+						else
+						{
+							DU_SetRandAmplitudeSetting(DAC_CHANNEL_1, DAC_LFSRUNMASK_BITS11_0);
+							DU_SetRandAmplitudeSetting(DAC_CHANNEL_2, DAC_LFSRUNMASK_BITS11_0);
+						}
 
 					}
 					else
 					{
-						DU_setAmplitudeSetting(DU_getActiveDACChannel(), DAC_TRIANGLEAMPLITUDE_4095);
+						if(DU_GetDACModePreview(DAC_CHANNEL_1) == DAC_USER)
+						{
+							DU_SetRampAmplitudeSetting(DU_GetActiveDACChannel(), DAC_TRIANGLEAMPLITUDE_4095);
+						}
+						else
+						{
+							DU_SetRandAmplitudeSetting(DU_GetActiveDACChannel(), DAC_LFSRUNMASK_BITS11_0);
+						}
+
 					}
 					break;
 				case PROGSEL_DISP:
@@ -636,8 +794,8 @@ void IM_MenuEXTIHandler()
 				break;
 
 			case CHANSEL_DISP:
-				DU_setActiveDACChannel(DAC_CHANNEL_1);
-				DU_setDualChannelMode(0);
+				DU_SetActiveDACChannel(DAC_CHANNEL_1);
+				DU_ToggleDualChannelMode(0);
 				DM_ChangeScreen(PROGSEL_DISP);
 				break;
 
@@ -683,8 +841,8 @@ void IM_MenuEXTIHandler()
 				break;
 
 			case CHANSEL_DISP:
-				DU_setActiveDACChannel(DAC_CHANNEL_2);
-				DU_setDualChannelMode(0);
+				DU_SetActiveDACChannel(DAC_CHANNEL_2);
+				DU_ToggleDualChannelMode(0);
 				DM_ChangeScreen(PROGSEL_DISP);
 				break;
 
@@ -716,21 +874,21 @@ void IM_MenuEXTIHandler()
 		{
 			case HOME_DISP:
 				// TODO: NUDGE (INCREASE) VOLTAGE/FREQ
-				if(DU_isDualChannelMode())
+				if(DU_IsDualChannelMode())
 				{
 					DU_IncreaseDAC(DAC_CHANNEL_1);
 					DU_IncreaseDAC(DAC_CHANNEL_2);
 				}
 				else
 				{
-					DU_IncreaseDAC(DU_getActiveDACChannel());
+					DU_IncreaseDAC(DU_GetActiveDACChannel());
 				}
 
 				break;
 
 			case CHANSEL_DISP:
 				// TODO SET DUAL CHANNEL MODE
-				DU_setDualChannelMode(1);
+				DU_ToggleDualChannelMode(1);
 				DM_ChangeScreen(PROGSEL_DISP);
 				break;
 
@@ -777,14 +935,14 @@ void IM_MenuEXTIHandler()
 		{
 			case HOME_DISP:
 
-				if(DU_isDualChannelMode())
+				if(DU_IsDualChannelMode())
 				{
 					DU_DecreaseDAC(DAC_CHANNEL_1);
 					DU_DecreaseDAC(DAC_CHANNEL_2);
 				}
 				else
 				{
-					DU_DecreaseDAC(DU_getActiveDACChannel());
+					DU_DecreaseDAC(DU_GetActiveDACChannel());
 				}
 
 				break;
@@ -836,40 +994,40 @@ void IM_MenuEXTIHandler()
 void _ApplyParameterSettings()
 {
 	// apply voltage/freq values to actual register
-	if(DU_GetDACModePreview(DU_getActiveDACChannel()) == DAC_USER)
+	if(DU_GetDACModePreview(DU_GetActiveDACChannel()) == DAC_USER)
 	{
-		if(DU_isDualChannelMode())
+		if(DU_IsDualChannelMode())
 		{
 			DU_SetVoltage(DAC_CHANNEL_1);
 			DU_SetVoltage(DAC_CHANNEL_2);
 		}
 		else
 		{
-			DU_SetVoltage(DU_getActiveDACChannel());
+			DU_SetVoltage(DU_GetActiveDACChannel());
 		}
 	}
-	if(DU_GetDACModePreview(DU_getActiveDACChannel()) != DAC_USER)
+	if(DU_GetDACModePreview(DU_GetActiveDACChannel()) != DAC_USER)
 	{
-		if(DU_isDualChannelMode())
+		if(DU_IsDualChannelMode())
 		{
 			DU_SetFreq(DAC_CHANNEL_1);
 			DU_SetFreq(DAC_CHANNEL_2);
 		}
 		else
 		{
-			DU_SetFreq(DU_getActiveDACChannel());
+			DU_SetFreq(DU_GetActiveDACChannel());
 		}
 	}
 
 
 	// Apply DAC Mode preview to actual DAC mode register
-	if(DU_isDualChannelMode())
+	if(DU_IsDualChannelMode())
 	{
 		DU_SetDualDACModeActual(DU_GetDACModePreview(DAC_CHANNEL_1));
 	}
 	else
 	{
-		DU_SetDACModeActual(DU_getActiveDACChannel(), DU_GetDACModePreview(DU_getActiveDACChannel()));
+		DU_SetDACModeActual(DU_GetActiveDACChannel(), DU_GetDACModePreview(DU_GetActiveDACChannel()));
 	}
 
 
@@ -909,9 +1067,9 @@ void _SetKeypadBuffer(double pValue)
 {
 
 		keypad_buffer = pValue;
-		if(DU_isDualChannelMode())
+		if(DU_IsDualChannelMode())
 		{
-			if(DU_GetDACModePreview(DU_getActiveDACChannel()) == DAC_USER)
+			if(DU_GetDACModePreview(DU_GetActiveDACChannel()) == DAC_USER)
 			{
 				// user has entered a new Amperage value, convert to DAC output voltage
 				float newCurrent = DU_CalcVoltageFromOhmsLaw(DAC_CHANNEL_1, (float)keypad_buffer);
@@ -919,7 +1077,7 @@ void _SetKeypadBuffer(double pValue)
 				newCurrent = DU_CalcVoltageFromOhmsLaw(DAC_CHANNEL_2, (float)keypad_buffer);
 				DU_SetVoltagePreview(DAC_CHANNEL_2, newCurrent);
 			}
-			if(DU_GetDACModePreview(DU_getActiveDACChannel()) != DAC_USER)
+			if(DU_GetDACModePreview(DU_GetActiveDACChannel()) != DAC_USER)
 			{
 				DU_SetFreqPreview(DAC_CHANNEL_1, (float)keypad_buffer);
 				DU_SetFreqPreview(DAC_CHANNEL_2, (float)keypad_buffer);
@@ -928,16 +1086,16 @@ void _SetKeypadBuffer(double pValue)
 		}
 		else
 		{
-			if(DU_GetDACModePreview(DU_getActiveDACChannel()) == DAC_USER)
+			if(DU_GetDACModePreview(DU_GetActiveDACChannel()) == DAC_USER)
 			{
 				// user has entered a new Amperage value, convert to DAC output voltage
-				float newCurrent = DU_CalcVoltageFromOhmsLaw(DU_getActiveDACChannel(), (float)keypad_buffer);
-				DU_SetVoltagePreview(DU_getActiveDACChannel(), newCurrent);
+				float newCurrent = DU_CalcVoltageFromOhmsLaw(DU_GetActiveDACChannel(), (float)keypad_buffer);
+				DU_SetVoltagePreview(DU_GetActiveDACChannel(), newCurrent);
 			}
 
-			if(DU_GetDACModePreview(DU_getActiveDACChannel()) != DAC_USER)
+			if(DU_GetDACModePreview(DU_GetActiveDACChannel()) != DAC_USER)
 			{
-				DU_SetFreqPreview(DU_getActiveDACChannel(), (float)keypad_buffer);
+				DU_SetFreqPreview(DU_GetActiveDACChannel(), (float)keypad_buffer);
 			}
 
 		}

@@ -9,6 +9,7 @@ typedef struct {
 	const uint16_t *data; /*!< Pointer to data font data array */
 } FontDef;
 
+extern FontDef Font_3x5;
 extern FontDef Font_5x7;
 extern FontDef Font_7x10;
 extern FontDef Font_11x18;

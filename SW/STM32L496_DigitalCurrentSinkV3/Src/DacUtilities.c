@@ -55,6 +55,12 @@ uint32_t channel1_max_triangle_amplitude = DAC_TRIANGLEAMPLITUDE_31;
 /* DAC channel2 setting for DACEx_lfsrunmask_triangleamplitude */
 uint32_t channel2_max_triangle_amplitude = DAC_TRIANGLEAMPLITUDE_31;
 
+/* DAC channel1 setting for DACEx lfsrunmask */
+uint32_t channel1_max_noise_amplitude = DAC_LFSRUNMASK_BITS2_0;
+
+/* DAC channel2 setting for DACEx_lfsrunmask */
+uint32_t channel2_max_noise_amplitude = DAC_LFSRUNMASK_BITS2_0;
+
 // private function declarations
 void _ResetDACFreq(uint32_t Channel);
 void _ResetDACVoltage(uint32_t Channel);
@@ -160,7 +166,7 @@ float DU_CalcVoltageFromOhmsLaw(uint32_t Channel, float reqAmps)
   * @retval DACEx_lfsrunmask_triangleamplitude DACEx lfsrunmask triangle amplitude
   */
 
-uint32_t DU_getAmplitudeSetting(uint32_t Channel)
+uint32_t DU_GetRampAmplitudeSetting(uint32_t Channel)
 {
 	if(Channel == DAC_CHANNEL_1)
 		return channel1_max_triangle_amplitude;
@@ -189,41 +195,41 @@ uint32_t DU_getAmplitudeSetting(uint32_t Channel)
   * 			@arg DAC_AMP_4095:	max triangle amplitude of 4095
   */
 
-char* DU_getAmplitudeSetting2String(uint32_t Channel)
+char* DU_GetRampAmplitudeSetting2String(uint32_t Channel)
 {
 	if(Channel == DAC_CHANNEL_1)
 	{
 		switch(channel1_max_triangle_amplitude)
 		{
 			case DAC_TRIANGLEAMPLITUDE_7:
-				return "DAC_AMP_7";
+				return "RAMP 30mA";
 				break;
 			case DAC_TRIANGLEAMPLITUDE_15:
-				return "DAC_AMP_15";
+				return "RAMP 80mA";
 				break;
 			case DAC_TRIANGLEAMPLITUDE_31:
-				return "DAC_AMP_31";
+				return "RAMP 160mA";
 				break;
 			case DAC_TRIANGLEAMPLITUDE_63:
-				return "DAC_AMP_63";
+				return "RAMP 340mA";
 				break;
 			case DAC_TRIANGLEAMPLITUDE_127:
-				return "DAC_AMP_127";
+				return "RAMP 680mA";
 				break;
 			case DAC_TRIANGLEAMPLITUDE_255:
-				return "DAC_AMP_255";
+				return "RAMP 1.4A";
 				break;
 			case DAC_TRIANGLEAMPLITUDE_511:
-				return "DAC_AMP_511";
+				return "RAMP 2.8A";
 				break;
 			case DAC_TRIANGLEAMPLITUDE_1023:
-				return "DAC_AMP_1023";
+				return "RAMP 5.5A";
 				break;
 			case DAC_TRIANGLEAMPLITUDE_2047:
-				return "DAC_AMP_2047";
+				return "RAMP 10A";
 				break;
 			case DAC_TRIANGLEAMPLITUDE_4095:
-				return "DAC_AMP_4095";
+				return "RAMP 20A";
 				break;
 		}
 
@@ -233,34 +239,34 @@ char* DU_getAmplitudeSetting2String(uint32_t Channel)
 		switch(channel2_max_triangle_amplitude)
 		{
 			case DAC_TRIANGLEAMPLITUDE_7:
-				return "DAC_AMP_7";
+				return "RAMP 30mA";
 				break;
 			case DAC_TRIANGLEAMPLITUDE_15:
-				return "DAC_AMP_15";
+				return "RAMP 80mA";
 				break;
 			case DAC_TRIANGLEAMPLITUDE_31:
-				return "DAC_AMP_31";
+				return "RAMP 160mA";
 				break;
 			case DAC_TRIANGLEAMPLITUDE_63:
-				return "DAC_AMP_63";
+				return "RAMP 340mA";
 				break;
 			case DAC_TRIANGLEAMPLITUDE_127:
-				return "DAC_AMP_127";
+				return "RAMP 680mA";
 				break;
 			case DAC_TRIANGLEAMPLITUDE_255:
-				return "DAC_AMP_255";
+				return "RAMP 1.4A";
 				break;
 			case DAC_TRIANGLEAMPLITUDE_511:
-				return "DAC_AMP_511";
+				return "RAMP 2.8A";
 				break;
 			case DAC_TRIANGLEAMPLITUDE_1023:
-				return "DAC_AMP_1023";
+				return "RAMP 5.5A";
 				break;
 			case DAC_TRIANGLEAMPLITUDE_2047:
-				return "DAC_AMP_2047";
+				return "RAMP 10A";
 				break;
 			case DAC_TRIANGLEAMPLITUDE_4095:
-				return "DAC_AMP_4095";
+				return "RAMP 20A";
 				break;
 		}
 	}
@@ -289,105 +295,148 @@ char* DU_getAmplitudeSetting2String(uint32_t Channel)
   * @retval DACEx_lfsrunmask_triangleamplitude DACEx lfsrunmask triangle amplitude
   */
 
-void DU_setAmplitudeSetting(uint32_t Channel, uint32_t amplitude)
+void DU_SetRampAmplitudeSetting(uint32_t Channel, uint32_t amplitude)
 {
 	if(Channel == DAC_CHANNEL_1)
 		channel1_max_triangle_amplitude = amplitude;
 	else
 		channel2_max_triangle_amplitude = amplitude;
 
-	printf("DAC_CHANNEL_1 Triangle Amplitude: %s\n", DU_getAmplitudeSetting2String(DAC_CHANNEL_1));
-	printf("DAC_CHANNEL_2 Triangle Amplitude: %s\n", DU_getAmplitudeSetting2String(DAC_CHANNEL_2));
-}
-
-
-/**
-  * @brief 	set temporary DAC mode (to be applied later on confirmation)
-  *
-  * @param  pNewMode The new DAC mode
-  *         This parameter can be one of the following values:
-  *            		DAC_ERROR 	= 	0x00,	// illegal channel request
-  *					DAC_USER 	=	0x01,
-  *					DAC_AUTO		= 	0x02,
-  *					DAC_RAND	= 	0x03
-  *
-  * @retval none
-  */
-
-void DU_SetDACModePreview(uint32_t Channel, dacmode_t pNewMode)
-{
-	if(Channel == DAC_CHANNEL_1)
-		channel1_dacmode_preview = pNewMode;
-	else
-		channel2_dacmode_preview = pNewMode;
-
+	printf("DAC_CHANNEL_1 Triangle Amplitude: %s\n", DU_GetRampAmplitudeSetting2String(DAC_CHANNEL_1));
+	printf("DAC_CHANNEL_2 Triangle Amplitude: %s\n", DU_GetRampAmplitudeSetting2String(DAC_CHANNEL_2));
 }
 
 /**
-  * @brief 	get the temporary DAC mode
+  * @brief 	get noise amplitude for DAC channel
   *
-  *
-  * @retval DAC mode
+  * @param  Channel The selected DAC channel.
   *         This parameter can be one of the following values:
-  *            		DAC_ERROR 	= 	0x00,	// illegal channel request
-  *					DAC_USER 	=	0x01,
-  *					DAC_AUTO		= 	0x02,
-  *					DAC_RAND	= 	0x03
+  *            	@arg DAC_CHANNEL_1: DAC Channel1 selected
+  *            	@arg DAC_CHANNEL_2: DAC Channel2 selected (Whenever present)
+  *
+  * @retval DACEx_lfsrunmask_triangleamplitude DACEx lfsrunmask triangle amplitude
   */
 
-dacmode_t DU_GetDACModePreview(uint32_t Channel)
+uint32_t DU_GetRandAmplitudeSetting(uint32_t Channel)
 {
 	if(Channel == DAC_CHANNEL_1)
-		return channel1_dacmode_preview;
+		return channel1_max_noise_amplitude;
 	else
-		return channel2_dacmode_preview;
+		return channel2_max_noise_amplitude;
 }
 
+/**
+  * @brief 	get noise amplitude for DAC channel
+  *
+  * @param  Channel The selected DAC channel.
+  *         This parameter can be one of the following values:
+  *            	@arg DAC_CHANNEL_1: DAC Channel1 selected
+  *            	@arg DAC_CHANNEL_2: DAC Channel2 selected (Whenever present)
+  *
+  * @retval  amplitude DACEx_lfsrunmask_triangleamplitude DACEx lfsrunmask triangle amplitude
+  *         This parameter can be one of the following values:
+  *				@arg DAC_LFSRUNMASK_BITS1_0: Unmask DAC channel LFSR bit[1:0] for noise wave generation
+  *				@arg DAC_LFSRUNMASK_BITS2_0: Unmask DAC channel LFSR bit[2:0] for noise wave generation
+  *            	@arg DAC_LFSRUNMASK_BITS3_0: Unmask DAC channel LFSR bit[3:0] for noise wave generation
+  *            	@arg DAC_LFSRUNMASK_BITS4_0: Unmask DAC channel LFSR bit[4:0] for noise wave generation
+  *            	@arg DAC_LFSRUNMASK_BITS5_0: Unmask DAC channel LFSR bit[5:0] for noise wave generation
+  *            	@arg DAC_LFSRUNMASK_BITS6_0: Unmask DAC channel LFSR bit[6:0] for noise wave generation
+  *            	@arg DAC_LFSRUNMASK_BITS7_0: Unmask DAC channel LFSR bit[7:0] for noise wave generation
+  *            	@arg DAC_LFSRUNMASK_BITS8_0: Unmask DAC channel LFSR bit[8:0] for noise wave generation
+  *            	@arg DAC_LFSRUNMASK_BITS9_0: Unmask DAC channel LFSR bit[9:0] for noise wave generation
+  *            	@arg DAC_LFSRUNMASK_BITS10_0: Unmask DAC channel LFSR bit[10:0] for noise wave generation
+  *            	@arg DAC_LFSRUNMASK_BITS11_0: Unmask DAC channel LFSR bit[11:0] for noise wave generation
+  *
+  */
 
-
-char* DU_GetDACModePreview2String(uint32_t Channel)
+char* DU_GetRandAmplitudeSetting2String(uint32_t Channel)
 {
 	if(Channel == DAC_CHANNEL_1)
 	{
-		switch(channel1_dacmode_preview)
-		{
-			case DAC_USER:
-				return "USER";
-				break;
-			case DAC_RAND:
-				return "RAND";
-				break;
-			case DAC_AUTO:
-				return "AUTO";
-				break;
-			default:
-				break;
-		}
+		if	(channel1_max_noise_amplitude == DAC_LFSRUNMASK_BITS2_0)
+			return "BITMASK2";
+		if	(channel1_max_noise_amplitude == DAC_LFSRUNMASK_BITS3_0)
+			return "BITMASK3";
+		if	(channel1_max_noise_amplitude == DAC_LFSRUNMASK_BITS4_0)
+			return "BITMASK4";
+		if	(channel1_max_noise_amplitude == DAC_LFSRUNMASK_BITS5_0)
+			return "BITMASK5";
+		if	(channel1_max_noise_amplitude == DAC_LFSRUNMASK_BITS6_0)
+			return "BITMASK6";
+		if	(channel1_max_noise_amplitude == DAC_LFSRUNMASK_BITS7_0)
+			return "BITMASK7";
+		if	(channel1_max_noise_amplitude == DAC_LFSRUNMASK_BITS8_0)
+			return "BITMASK8";
+		if	(channel1_max_noise_amplitude == DAC_LFSRUNMASK_BITS9_0)
+			return "BITMASK9";
+		if	(channel1_max_noise_amplitude == DAC_LFSRUNMASK_BITS10_0)
+			return "BITMASK10";
+		if	(channel1_max_noise_amplitude == DAC_LFSRUNMASK_BITS11_0)
+			return "BITMASK11";
 	}
 	else
 	{
-		switch(channel2_dacmode_preview)
-		{
-			case DAC_USER:
-				return "USER";
-				break;
-			case DAC_RAND:
-				return "RAND";
-				break;
-			case DAC_AUTO:
-				return "AUTO";
-				break;
-			default:
-				break;
-
-		}
+		if	(channel2_max_noise_amplitude == DAC_LFSRUNMASK_BITS2_0)
+			return "BITMASK2";
+		if	(channel2_max_noise_amplitude == DAC_LFSRUNMASK_BITS3_0)
+			return "BITMASK3";
+		if	(channel2_max_noise_amplitude == DAC_LFSRUNMASK_BITS4_0)
+			return "BITMASK4";
+		if	(channel2_max_noise_amplitude == DAC_LFSRUNMASK_BITS5_0)
+			return "BITMASK5";
+		if	(channel2_max_noise_amplitude == DAC_LFSRUNMASK_BITS6_0)
+			return "BITMASK6";
+		if	(channel2_max_noise_amplitude == DAC_LFSRUNMASK_BITS7_0)
+			return "BITMASK7";
+		if	(channel2_max_noise_amplitude == DAC_LFSRUNMASK_BITS8_0)
+			return "BITMASK8";
+		if	(channel2_max_noise_amplitude == DAC_LFSRUNMASK_BITS9_0)
+			return "BITMASK9";
+		if	(channel2_max_noise_amplitude == DAC_LFSRUNMASK_BITS10_0)
+			return "BITMASK10";
+		if	(channel2_max_noise_amplitude == DAC_LFSRUNMASK_BITS11_0)
+			return "BITMASK11";
 	}
 
-	// something went wrong
-	return "ERR:DU146";
 
+	return "DU:ERR:189";
 }
 
+/**
+  * @brief 	set noise amplitude for DAC channel
+  *
+  * @param  Channel The selected DAC channel.
+  *         This parameter can be one of the following values:
+  *            	@arg DAC_CHANNEL_1: DAC Channel1 selected
+  *            	@arg DAC_CHANNEL_2: DAC Channel2 selected (Whenever present)
+  * @param  amplitude DACEx_lfsrunmask_triangleamplitude DACEx lfsrunmask triangle amplitude
+  *         This parameter can be one of the following values:
+  *				@arg DAC_LFSRUNMASK_BIT0: Unmask DAC channel LFSR bit0 for noise wave generation
+  *				@arg DAC_LFSRUNMASK_BITS1_0: Unmask DAC channel LFSR bit[1:0] for noise wave generation
+  *				@arg DAC_LFSRUNMASK_BITS2_0: Unmask DAC channel LFSR bit[2:0] for noise wave generation
+  *            	@arg DAC_LFSRUNMASK_BITS3_0: Unmask DAC channel LFSR bit[3:0] for noise wave generation
+  *            	@arg DAC_LFSRUNMASK_BITS4_0: Unmask DAC channel LFSR bit[4:0] for noise wave generation
+  *            	@arg DAC_LFSRUNMASK_BITS5_0: Unmask DAC channel LFSR bit[5:0] for noise wave generation
+  *            	@arg DAC_LFSRUNMASK_BITS6_0: Unmask DAC channel LFSR bit[6:0] for noise wave generation
+  *            	@arg DAC_LFSRUNMASK_BITS7_0: Unmask DAC channel LFSR bit[7:0] for noise wave generation
+  *            	@arg DAC_LFSRUNMASK_BITS8_0: Unmask DAC channel LFSR bit[8:0] for noise wave generation
+  *            	@arg DAC_LFSRUNMASK_BITS9_0: Unmask DAC channel LFSR bit[9:0] for noise wave generation
+  *            	@arg DAC_LFSRUNMASK_BITS10_0: Unmask DAC channel LFSR bit[10:0] for noise wave generation
+  *            	@arg DAC_LFSRUNMASK_BITS11_0: Unmask DAC channel LFSR bit[11:0] for noise wave generation
+  *
+  * @retval DACEx_lfsrunmask_triangleamplitude DACEx lfsrunmask triangle amplitude
+  */
+
+void DU_SetRandAmplitudeSetting(uint32_t Channel, uint32_t amplitude)
+{
+	if(Channel == DAC_CHANNEL_1)
+		channel1_max_noise_amplitude = amplitude;
+	else
+		channel2_max_noise_amplitude = amplitude;
+
+	printf("DAC_CHANNEL_1 Noise Amplitude: %s\n", DU_GetRandAmplitudeSetting2String(DAC_CHANNEL_1));
+	printf("DAC_CHANNEL_2 Noise Amplitude: %s\n", DU_GetRandAmplitudeSetting2String(DAC_CHANNEL_2));
+}
 
 
 /**
@@ -504,7 +553,7 @@ void DU_SetVoltage(uint32_t Channel)
 	__HAL_TIM_CLEAR_FLAG(&htim15, TIM_FLAG_UPDATE);
 	HAL_TIM_Base_Start_IT(&htim15);
 
-	if(DU_isDualChannelMode())
+	if(DU_IsDualChannelMode())
 	{
 		// update register from the preview variable
 		if(chan1_amp_count_preview > (DACRES-1))
@@ -726,6 +775,94 @@ void DU_DecreaseDAC(uint32_t Channel)
 	}
 }
 
+
+/**
+  * @brief 	set temporary DAC mode (to be applied later on confirmation)
+  *
+  * @param  pNewMode The new DAC mode
+  *         This parameter can be one of the following values:
+  *            		DAC_ERROR 	= 	0x00,	// illegal channel request
+  *					DAC_USER 	=	0x01,
+  *					DAC_AUTO		= 	0x02,
+  *					DAC_RAND	= 	0x03
+  *
+  * @retval none
+  */
+
+void DU_SetDACModePreview(uint32_t Channel, dacmode_t pNewMode)
+{
+	if(Channel == DAC_CHANNEL_1)
+		channel1_dacmode_preview = pNewMode;
+	else
+		channel2_dacmode_preview = pNewMode;
+
+}
+
+/**
+  * @brief 	get the temporary DAC mode
+  *
+  *
+  * @retval DAC mode
+  *         This parameter can be one of the following values:
+  *            		DAC_ERROR 	= 	0x00,	// illegal channel request
+  *					DAC_USER 	=	0x01,
+  *					DAC_AUTO		= 	0x02,
+  *					DAC_RAND	= 	0x03
+  */
+
+dacmode_t DU_GetDACModePreview(uint32_t Channel)
+{
+	if(Channel == DAC_CHANNEL_1)
+		return channel1_dacmode_preview;
+	else
+		return channel2_dacmode_preview;
+}
+
+
+
+char* DU_GetDACModePreview2String(uint32_t Channel)
+{
+	if(Channel == DAC_CHANNEL_1)
+	{
+		switch(channel1_dacmode_preview)
+		{
+			case DAC_USER:
+				return "USER";
+				break;
+			case DAC_RAND:
+				return "RAND";
+				break;
+			case DAC_AUTO:
+				return "AUTO";
+				break;
+			default:
+				break;
+		}
+	}
+	else
+	{
+		switch(channel2_dacmode_preview)
+		{
+			case DAC_USER:
+				return "USER";
+				break;
+			case DAC_RAND:
+				return "RAND";
+				break;
+			case DAC_AUTO:
+				return "AUTO";
+				break;
+			default:
+				break;
+
+		}
+	}
+
+	// something went wrong
+	return "ERR:DU146";
+
+}
+
 /**
   * @brief	Return the current DAC mode for the selected channel as enumerated value
   *
@@ -827,7 +964,7 @@ char* DU_GetDACModeActual2String(uint32_t Channel)
 	}
 	else
 	{
-		return "Error";
+		return "ERR";
 	}
 
 }
@@ -856,7 +993,8 @@ void DU_SetDACModeActual(uint32_t Channel, dacmode_t mode)
 		if(mode == DAC_USER)
 			hdac1.Instance->CR &= ~(DAC_CR_WAVE1_0 | DAC_CR_WAVE1_1);
 		else if (mode == DAC_RAND)
-			hdac1.Instance->CR |= (DAC_CR_WAVE1_0 | DAC_LFSRUNMASK_BITS11_0);
+			HAL_DACEx_NoiseWaveGenerate(&hdac1,DAC_CHANNEL_1, channel1_max_noise_amplitude);
+			//hdac1.Instance->CR |= (DAC_CR_WAVE1_0 | DAC_LFSRUNMASK_BITS11_0);
 		else if (mode == DAC_AUTO)
 			HAL_DACEx_TriangleWaveGenerate(&hdac1, DAC_CHANNEL_1, channel1_max_triangle_amplitude);
 
@@ -867,12 +1005,15 @@ void DU_SetDACModeActual(uint32_t Channel, dacmode_t mode)
 		if(mode == DAC_USER)
 			hdac1.Instance->CR &= ~(DAC_CR_WAVE2_0 | DAC_CR_WAVE2_1);
 		else if (mode == DAC_RAND)
-			hdac1.Instance->CR |= (DAC_CR_WAVE2_0 | (DAC_LFSRUNMASK_BITS11_0 << (Channel & 0x10UL)));
+			HAL_DACEx_NoiseWaveGenerate(&hdac1,DAC_CHANNEL_2, channel2_max_noise_amplitude);
+			//hdac1.Instance->CR |= (DAC_CR_WAVE2_0 | (DAC_LFSRUNMASK_BITS11_0 << (Channel & 0x10UL)));
 		else if (mode == DAC_AUTO)
 			HAL_DACEx_TriangleWaveGenerate(&hdac1, DAC_CHANNEL_2, channel2_max_triangle_amplitude);
 
 	}
 }
+
+
 
 /**
   * @brief Set the DAC mode for BOTH channels; Needs to stop and re-initialize the DAC
@@ -898,7 +1039,8 @@ void DU_SetDualDACModeActual(dacmode_t mode)
 		if(mode == DAC_USER)
 			hdac1.Instance->CR &= ~(DAC_CR_WAVE1_0 | DAC_CR_WAVE1_1);
 		else if (mode == DAC_RAND)
-			hdac1.Instance->CR |= (DAC_CR_WAVE1_0 | DAC_LFSRUNMASK_BITS11_0);
+			//hdac1.Instance->CR |= (DAC_CR_WAVE1_0 | DAC_LFSRUNMASK_BITS11_0);
+			HAL_DACEx_NoiseWaveGenerate(&hdac1,DAC_CHANNEL_1, channel1_max_noise_amplitude);
 		else if (mode == DAC_AUTO)
 			HAL_DACEx_TriangleWaveGenerate(&hdac1, DAC_CHANNEL_1, channel1_max_triangle_amplitude);
 
@@ -907,7 +1049,8 @@ void DU_SetDualDACModeActual(dacmode_t mode)
 		if(mode == DAC_USER)
 			hdac1.Instance->CR &= ~(DAC_CR_WAVE2_0 | DAC_CR_WAVE2_1);
 		else if (mode == DAC_RAND)
-			hdac1.Instance->CR |= (DAC_CR_WAVE2_0 | (DAC_LFSRUNMASK_BITS11_0 << (DAC_CHANNEL_2 & 0x10UL)));
+			//hdac1.Instance->CR |= (DAC_CR_WAVE2_0 | (DAC_LFSRUNMASK_BITS11_0 << (DAC_CHANNEL_2 & 0x10UL)));
+			HAL_DACEx_NoiseWaveGenerate(&hdac1,DAC_CHANNEL_2, channel2_max_noise_amplitude);
 		else if (mode == DAC_AUTO)
 			HAL_DACEx_TriangleWaveGenerate(&hdac1, DAC_CHANNEL_2, channel2_max_triangle_amplitude);
 
@@ -915,6 +1058,32 @@ void DU_SetDualDACModeActual(dacmode_t mode)
 	HAL_DAC_Start(&hdac1,DAC_CHANNEL_1);
 	HAL_DAC_Start(&hdac1,DAC_CHANNEL_2);
 
+}
+
+/**
+  * @brief	Set the DAC dual mode status
+  *
+  * @param enable: 1=Dual Mode enabled, 0=Dual Mode disabled
+  *
+  * @retval None
+  */
+
+void DU_ToggleDualChannelMode(uint8_t enable)
+{
+	dual_channel_mode = enable;
+}
+
+
+/**
+  * @brief	Get the DAC dual mode status
+  *
+  * @retval boolean: 1=Dual Mode enabled, 0=Dual Mode disabled
+  *
+  */
+
+uint8_t DU_IsDualChannelMode()
+{
+	return dual_channel_mode;
 }
 
 /**
@@ -931,7 +1100,7 @@ void DU_SetDualDACModeActual(dacmode_t mode)
 
 void DU_CompleteCallback(uint32_t Channel)
 {
-	if(DU_isDualChannelMode())
+	if(DU_IsDualChannelMode())
 	{
 		if(DU_GetDACModeActual(DAC_CHANNEL_1) == DAC_USER)
 			printf("New DAC_CHANNEL_1 Volt Setting: %2.4fV\n", DU_CalcVoltsFromBits(DAC_CHANNEL_1, 0 ));
@@ -977,10 +1146,10 @@ void DU_CompleteCallback(uint32_t Channel)
   *  @retval None
   */
 
-void DU_setActiveDACChannel(uint32_t Channel)
+void DU_SetActiveDACChannel(uint32_t Channel)
 {
 	selected_dac_channel = Channel;
-	printf("Active DAC Channel = %s", DU_getActiveDACChannel2String());
+	printf("Active DAC Channel = %s", DU_GetActiveDACChannel2String());
 }
 
 /**
@@ -993,7 +1162,7 @@ void DU_setActiveDACChannel(uint32_t Channel)
   *
   */
 
-uint32_t DU_getActiveDACChannel()
+uint32_t DU_GetActiveDACChannel()
 {
 	return selected_dac_channel;
 }
@@ -1008,7 +1177,7 @@ uint32_t DU_getActiveDACChannel()
   *
   */
 
-char* DU_getActiveDACChannel2String()
+char* DU_GetActiveDACChannel2String()
 {
 	if(selected_dac_channel == DAC_CHANNEL_1)
 		return "CH1";
@@ -1016,31 +1185,7 @@ char* DU_getActiveDACChannel2String()
 		return "CH2";
 }
 
-/**
-  * @brief	Set the DAC dual mode status
-  *
-  * @param enable: 1=Dual Mode enabled, 0=Dual Mode disabled
-  *
-  * @retval None
-  */
 
-void DU_setDualChannelMode(uint8_t enable)
-{
-	dual_channel_mode = enable;
-}
-
-
-/**
-  * @brief	Get the DAC dual mode status
-  *
-  * @retval boolean: 1=Dual Mode enabled, 0=Dual Mode disabled
-  *
-  */
-
-uint8_t DU_isDualChannelMode()
-{
-	return dual_channel_mode;
-}
 
 /**
   * @brief	Calculate new register value for DAC output register (DOR) in decimal-counted binary

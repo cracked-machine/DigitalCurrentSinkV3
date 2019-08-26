@@ -34,9 +34,12 @@ void DU_SetVoltagePreview(uint32_t Channel, float newVolts);
 void DU_SetVoltage(uint32_t Channel);
 void DU_ClearVoltagePreview(uint32_t Channel);
 
-uint32_t DU_getAmplitudeSetting(uint32_t Channel);
-char* DU_getAmplitudeSetting2String(uint32_t Channel);
-void DU_setAmplitudeSetting(uint32_t Channel, uint32_t amplitude);
+uint32_t DU_GetRampAmplitudeSetting(uint32_t Channel);
+char* DU_GetRampAmplitudeSetting2String(uint32_t Channel);
+void DU_SetRampAmplitudeSetting(uint32_t Channel, uint32_t amplitude);
+uint32_t DU_GetRandAmplitudeSetting(uint32_t Channel);
+char* DU_GetRandAmplitudeSetting2String(uint32_t Channel);
+void DU_SetRandAmplitudeSetting(uint32_t Channel, uint32_t amplitude);
 
 void DU_SetFreqPreview(uint32_t Channel, float newHertz);
 void DU_SetFreq(uint32_t Channel);
@@ -51,10 +54,10 @@ uint32_t DU_GetDATDOR(uint32_t Channel);
 
 void DU_CompleteCallback(uint32_t Channel);
 
-void DU_setActiveDACChannel(uint32_t Channel);
-uint32_t DU_getActiveDACChannel();
-char* DU_getActiveDACChannel2String();
-void DU_setDualChannelMode(uint8_t enable);
-uint8_t DU_isDualChannelMode();
+void DU_SetActiveDACChannel(uint32_t Channel);
+uint32_t DU_GetActiveDACChannel();
+char* DU_GetActiveDACChannel2String();
+void DU_ToggleDualChannelMode(uint8_t enable);
+uint8_t DU_IsDualChannelMode();
 
 #endif /* DAC_UTILS_H_ */
