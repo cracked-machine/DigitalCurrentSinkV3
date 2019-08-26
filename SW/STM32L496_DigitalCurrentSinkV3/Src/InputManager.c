@@ -201,7 +201,7 @@ void IM_ReadKeyCol0()
 				case AMPLITUDE_DISP:
 					if(DU_IsDualChannelMode())
 					{
-						if(DU_GetDACModePreview(DAC_CHANNEL_1) == DAC_USER)
+						if(DU_GetDACModePreview(DAC_CHANNEL_1) == DAC_AUTO)
 						{
 							DU_SetRampAmplitudeSetting(DAC_CHANNEL_1, DAC_TRIANGLEAMPLITUDE_15);
 							DU_SetRampAmplitudeSetting(DAC_CHANNEL_2, DAC_TRIANGLEAMPLITUDE_15);
@@ -214,7 +214,7 @@ void IM_ReadKeyCol0()
 					}
 					else
 					{
-						if(DU_GetDACModePreview(DAC_CHANNEL_1) == DAC_USER)
+						if(DU_GetDACModePreview(DAC_CHANNEL_1) == DAC_AUTO)
 							DU_SetRampAmplitudeSetting(DU_GetActiveDACChannel(), DAC_TRIANGLEAMPLITUDE_15);
 						else
 							DU_SetRandAmplitudeSetting(DU_GetActiveDACChannel(), DAC_LFSRUNMASK_BITS3_0);
@@ -238,7 +238,7 @@ void IM_ReadKeyCol0()
 				case AMPLITUDE_DISP:
 					if(DU_IsDualChannelMode())
 					{
-						if(DU_GetDACModePreview(DAC_CHANNEL_1) == DAC_USER)
+						if(DU_GetDACModePreview(DAC_CHANNEL_1) == DAC_AUTO)
 						{
 							DU_SetRampAmplitudeSetting(DAC_CHANNEL_1, DAC_TRIANGLEAMPLITUDE_127);
 							DU_SetRampAmplitudeSetting(DAC_CHANNEL_2, DAC_TRIANGLEAMPLITUDE_127);
@@ -253,7 +253,7 @@ void IM_ReadKeyCol0()
 					}
 					else
 					{
-						if(DU_GetDACModePreview(DAC_CHANNEL_1) == DAC_USER)
+						if(DU_GetDACModePreview(DAC_CHANNEL_1) == DAC_AUTO)
 						{
 							DU_SetRampAmplitudeSetting(DU_GetActiveDACChannel(), DAC_TRIANGLEAMPLITUDE_127);
 						}
@@ -287,7 +287,7 @@ void IM_ReadKeyCol0()
 				case AMPLITUDE_DISP:
 					if(DU_IsDualChannelMode())
 					{
-						if(DU_GetDACModePreview(DAC_CHANNEL_1) == DAC_USER)
+						if(DU_GetDACModePreview(DAC_CHANNEL_1) == DAC_AUTO)
 						{
 							DU_SetRampAmplitudeSetting(DAC_CHANNEL_1, DAC_TRIANGLEAMPLITUDE_1023);
 							DU_SetRampAmplitudeSetting(DAC_CHANNEL_2, DAC_TRIANGLEAMPLITUDE_1023);
@@ -302,7 +302,7 @@ void IM_ReadKeyCol0()
 					}
 					else
 					{
-						if(DU_GetDACModePreview(DAC_CHANNEL_1) == DAC_USER)
+						if(DU_GetDACModePreview(DAC_CHANNEL_1) == DAC_AUTO)
 						{
 							DU_SetRampAmplitudeSetting(DU_GetActiveDACChannel(), DAC_TRIANGLEAMPLITUDE_1023);
 						}
@@ -399,7 +399,7 @@ void IM_ReadKeyCol1()
 				case AMPLITUDE_DISP:
 					if(DU_IsDualChannelMode())
 					{
-						if(DU_GetDACModePreview(DAC_CHANNEL_1) == DAC_USER)
+						if(DU_GetDACModePreview(DAC_CHANNEL_1) == DAC_AUTO)
 						{
 							DU_SetRampAmplitudeSetting(DAC_CHANNEL_1, DAC_TRIANGLEAMPLITUDE_31);
 							DU_SetRampAmplitudeSetting(DAC_CHANNEL_2, DAC_TRIANGLEAMPLITUDE_31);
@@ -414,7 +414,7 @@ void IM_ReadKeyCol1()
 					}
 					else
 					{
-						if(DU_GetDACModePreview(DAC_CHANNEL_1) == DAC_USER)
+						if(DU_GetDACModePreview(DAC_CHANNEL_1) == DAC_AUTO)
 						{
 							DU_SetRampAmplitudeSetting(DU_GetActiveDACChannel(), DAC_TRIANGLEAMPLITUDE_31);
 						}
@@ -444,7 +444,7 @@ void IM_ReadKeyCol1()
 				case AMPLITUDE_DISP:
 					if(DU_IsDualChannelMode())
 					{
-						if(DU_GetDACModePreview(DAC_CHANNEL_1) == DAC_USER)
+						if(DU_GetDACModePreview(DAC_CHANNEL_1) == DAC_AUTO)
 						{
 							DU_SetRampAmplitudeSetting(DAC_CHANNEL_1, DAC_TRIANGLEAMPLITUDE_255);
 							DU_SetRampAmplitudeSetting(DAC_CHANNEL_2, DAC_TRIANGLEAMPLITUDE_255);
@@ -457,7 +457,7 @@ void IM_ReadKeyCol1()
 					}
 					else
 					{
-						if(DU_GetDACModePreview(DAC_CHANNEL_1) == DAC_USER)
+						if(DU_GetDACModePreview(DAC_CHANNEL_1) == DAC_AUTO)
 						{
 							DU_SetRampAmplitudeSetting(DU_GetActiveDACChannel(), DAC_TRIANGLEAMPLITUDE_255);
 						}
@@ -491,7 +491,7 @@ void IM_ReadKeyCol1()
 				case AMPLITUDE_DISP:
 					if(DU_IsDualChannelMode())
 					{
-						if(DU_GetDACModePreview(DAC_CHANNEL_1) == DAC_USER)
+						if(DU_GetDACModePreview(DAC_CHANNEL_1) == DAC_AUTO)
 						{
 							DU_SetRampAmplitudeSetting(DAC_CHANNEL_1, DAC_TRIANGLEAMPLITUDE_2047);
 							DU_SetRampAmplitudeSetting(DAC_CHANNEL_2, DAC_TRIANGLEAMPLITUDE_2047);
@@ -504,7 +504,7 @@ void IM_ReadKeyCol1()
 					}
 					else
 					{
-						if(DU_GetDACModePreview(DAC_CHANNEL_1) == DAC_USER)
+						if(DU_GetDACModePreview(DAC_CHANNEL_1) == DAC_AUTO)
 						{
 							DU_SetRampAmplitudeSetting(DU_GetActiveDACChannel(), DAC_TRIANGLEAMPLITUDE_2047);
 						}
@@ -535,7 +535,7 @@ void IM_ReadKeyCol1()
 				case AMPLITUDE_DISP:
 					if(DU_IsDualChannelMode())
 					{
-						if(DU_GetDACModePreview(DAC_CHANNEL_1) == DAC_USER)
+						if(DU_GetDACModePreview(DAC_CHANNEL_1) == DAC_AUTO)
 						{
 							DU_SetRampAmplitudeSetting(DAC_CHANNEL_1, DAC_TRIANGLEAMPLITUDE_7);
 							DU_SetRampAmplitudeSetting(DAC_CHANNEL_2, DAC_TRIANGLEAMPLITUDE_7);
@@ -550,7 +550,7 @@ void IM_ReadKeyCol1()
 					}
 					else
 					{
-						if(DU_GetDACModePreview(DAC_CHANNEL_1) == DAC_USER)
+						if(DU_GetDACModePreview(DAC_CHANNEL_1) == DAC_AUTO)
 						{
 							DU_SetRampAmplitudeSetting(DU_GetActiveDACChannel(), DAC_TRIANGLEAMPLITUDE_7);
 						}
@@ -616,7 +616,7 @@ void IM_ReadKeyCol2()
 				case AMPLITUDE_DISP:
 					if(DU_IsDualChannelMode())
 					{
-						if(DU_GetDACModePreview(DAC_CHANNEL_1) == DAC_USER)
+						if(DU_GetDACModePreview(DAC_CHANNEL_1) == DAC_AUTO)
 						{
 							DU_SetRampAmplitudeSetting(DAC_CHANNEL_1, DAC_TRIANGLEAMPLITUDE_63);
 							DU_SetRampAmplitudeSetting(DAC_CHANNEL_2, DAC_TRIANGLEAMPLITUDE_63);
@@ -631,7 +631,7 @@ void IM_ReadKeyCol2()
 					}
 					else
 					{
-						if(DU_GetDACModePreview(DAC_CHANNEL_1) == DAC_USER)
+						if(DU_GetDACModePreview(DAC_CHANNEL_1) == DAC_AUTO)
 						{
 							DU_SetRampAmplitudeSetting(DU_GetActiveDACChannel(), DAC_TRIANGLEAMPLITUDE_63);
 						}
@@ -661,7 +661,7 @@ void IM_ReadKeyCol2()
 				case AMPLITUDE_DISP:
 					if(DU_IsDualChannelMode())
 					{
-						if(DU_GetDACModePreview(DAC_CHANNEL_1) == DAC_USER)
+						if(DU_GetDACModePreview(DAC_CHANNEL_1) == DAC_AUTO)
 						{
 							DU_SetRampAmplitudeSetting(DAC_CHANNEL_1, DAC_TRIANGLEAMPLITUDE_511);
 							DU_SetRampAmplitudeSetting(DAC_CHANNEL_2, DAC_TRIANGLEAMPLITUDE_511);
@@ -676,7 +676,7 @@ void IM_ReadKeyCol2()
 					}
 					else
 					{
-						if(DU_GetDACModePreview(DAC_CHANNEL_1) == DAC_USER)
+						if(DU_GetDACModePreview(DAC_CHANNEL_1) == DAC_AUTO)
 						{
 							DU_SetRampAmplitudeSetting(DU_GetActiveDACChannel(), DAC_TRIANGLEAMPLITUDE_511);
 						}
@@ -709,7 +709,7 @@ void IM_ReadKeyCol2()
 				case AMPLITUDE_DISP:
 					if(DU_IsDualChannelMode())
 					{
-						if(DU_GetDACModePreview(DAC_CHANNEL_1) == DAC_USER)
+						if(DU_GetDACModePreview(DAC_CHANNEL_1) == DAC_AUTO)
 						{
 							DU_SetRampAmplitudeSetting(DAC_CHANNEL_1, DAC_TRIANGLEAMPLITUDE_4095);
 							DU_SetRampAmplitudeSetting(DAC_CHANNEL_2, DAC_TRIANGLEAMPLITUDE_4095);
@@ -723,7 +723,7 @@ void IM_ReadKeyCol2()
 					}
 					else
 					{
-						if(DU_GetDACModePreview(DAC_CHANNEL_1) == DAC_USER)
+						if(DU_GetDACModePreview(DAC_CHANNEL_1) == DAC_AUTO)
 						{
 							DU_SetRampAmplitudeSetting(DU_GetActiveDACChannel(), DAC_TRIANGLEAMPLITUDE_4095);
 						}

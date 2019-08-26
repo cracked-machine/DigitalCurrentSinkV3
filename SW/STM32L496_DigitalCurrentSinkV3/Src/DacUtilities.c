@@ -67,7 +67,7 @@ void _ResetDACVoltage(uint32_t Channel);
 void _ChangeVoltage(uint32_t Channel, int increase);
 void _CycleDACMode(uint32_t Channel);
 void _ChangeFreq(uint32_t Channel, int increase);
-uint16_t _CalcNewARR(uint16_t Channel, float hertz);
+uint16_t _CalcNewARR(uint16_t Channel, float hertz, int preview);
 uint32_t _CalcNewDOR(float volts);
 
 /**
@@ -492,15 +492,19 @@ float DU_CalcFreqFromBits(uint32_t Channel, uint8_t preview)
 	float result = 0;
 	if(Channel == DAC_CHANNEL_1)
 	{
-		if(preview)
-			result = (float)MASTERCLK/((float)htim6.Instance->PSC * (float)chan1_freq_count_preview);
+		if(preview && (DU_GetDACModePreview(DAC_CHANNEL_1) == DAC_AUTO))
+			result = (float)MASTERCLK/((float)TIM_PSC_AUTOMODE * (float)chan1_freq_count_preview);
+		else if(preview && (DU_GetDACModePreview(DAC_CHANNEL_1) == DAC_RAND))
+			result = (float)MASTERCLK/((float)TIM_PSC_RANDMODE * (float)chan1_freq_count_preview);
 		else
 			result = (float)MASTERCLK/((float)htim6.Instance->PSC * (float)htim6.Instance->ARR);
 	}
 	if(Channel == DAC_CHANNEL_2)
 	{
-		if(preview)
-			result = (float)MASTERCLK/((float)htim7.Instance->PSC * (float)chan2_freq_count_preview);
+		if(preview && (DU_GetDACModePreview(DAC_CHANNEL_2) == DAC_AUTO))
+			result = (float)MASTERCLK/((float)TIM_PSC_AUTOMODE * (float)chan2_freq_count_preview);
+		else if(preview && (DU_GetDACModePreview(DAC_CHANNEL_2) == DAC_RAND))
+			result = (float)MASTERCLK/((float)TIM_PSC_RANDMODE * (float)chan2_freq_count_preview);
 		else
 			result = (float)MASTERCLK/((float)htim7.Instance->PSC * (float)htim7.Instance->ARR);
 	}
@@ -692,7 +696,7 @@ void DU_SetFreqPreview(uint32_t Channel, float new_hertz)
 {
 	if (Channel == DAC_CHANNEL_1)
 	{
-		chan1_freq_count_preview = _CalcNewARR(DAC_CHANNEL_1, new_hertz);
+		chan1_freq_count_preview = _CalcNewARR(DAC_CHANNEL_1, new_hertz, 1);
 		printf("New DAC_CHANNEL_1 Freq Request: %2.4fHz\n", (float)DU_CalcFreqFromBits(DAC_CHANNEL_1,1));
 		//htim6.Instance->ARR = (uint32_t)(MASTERCLK/(htim6.Instance->PSC * newHertz));
 		//printf("New Freq request: %lu\n", newHertz);
@@ -701,7 +705,7 @@ void DU_SetFreqPreview(uint32_t Channel, float new_hertz)
 	}
 	else if (Channel == DAC_CHANNEL_2)
 	{
-		chan2_freq_count_preview = _CalcNewARR(DAC_CHANNEL_2, new_hertz);
+		chan2_freq_count_preview = _CalcNewARR(DAC_CHANNEL_2, new_hertz, 1);
 		printf("New DAC_CHANNEL_2 Freq Request: %2.4fHz\n", (float)DU_CalcFreqFromBits(DAC_CHANNEL_2,1));
 		/*htim7.Instance->ARR = (uint32_t)(MASTERCLK/(htim7.Instance->PSC * newHertz));
 		printf("New Freq request: %lu\n", newHertz);
@@ -991,25 +995,39 @@ void DU_SetDACModeActual(uint32_t Channel, dacmode_t mode)
 	{
 		hdac1.Instance->CR &= ~(DAC_CR_WAVE1_Msk | DAC_CR_MAMP1_Msk);
 		if(mode == DAC_USER)
+		{
 			hdac1.Instance->CR &= ~(DAC_CR_WAVE1_0 | DAC_CR_WAVE1_1);
+		}
 		else if (mode == DAC_RAND)
+		{
+			htim6.Instance->PSC = TIM_PSC_RANDMODE;
 			HAL_DACEx_NoiseWaveGenerate(&hdac1,DAC_CHANNEL_1, channel1_max_noise_amplitude);
 			//hdac1.Instance->CR |= (DAC_CR_WAVE1_0 | DAC_LFSRUNMASK_BITS11_0);
+		}
 		else if (mode == DAC_AUTO)
+		{
+			htim6.Instance->PSC = TIM_PSC_AUTOMODE;
 			HAL_DACEx_TriangleWaveGenerate(&hdac1, DAC_CHANNEL_1, channel1_max_triangle_amplitude);
-
+		}
 	}
 	else if (Channel == DAC_CHANNEL_2)
 	{
 		hdac1.Instance->CR &= ~(DAC_CR_WAVE2_Msk | DAC_CR_MAMP2_Msk);
 		if(mode == DAC_USER)
+		{
 			hdac1.Instance->CR &= ~(DAC_CR_WAVE2_0 | DAC_CR_WAVE2_1);
+		}
 		else if (mode == DAC_RAND)
+		{
+			htim7.Instance->PSC = TIM_PSC_RANDMODE;
 			HAL_DACEx_NoiseWaveGenerate(&hdac1,DAC_CHANNEL_2, channel2_max_noise_amplitude);
 			//hdac1.Instance->CR |= (DAC_CR_WAVE2_0 | (DAC_LFSRUNMASK_BITS11_0 << (Channel & 0x10UL)));
+		}
 		else if (mode == DAC_AUTO)
+		{
+			htim7.Instance->PSC = TIM_PSC_AUTOMODE;
 			HAL_DACEx_TriangleWaveGenerate(&hdac1, DAC_CHANNEL_2, channel2_max_triangle_amplitude);
-
+		}
 	}
 }
 
@@ -1215,13 +1233,31 @@ uint32_t _CalcNewDOR(float volts)
   * @retval The decimal-counted binary version of the hertz parameter
   */
 
-uint16_t _CalcNewARR(uint16_t Channel, float hertz)
+uint16_t _CalcNewARR(uint16_t Channel, float hertz, int preview)
 {
 	uint32_t result = 0;
 	if(Channel == DAC_CHANNEL_1)
-		result = (MASTERCLK / hertz) / htim6.Instance->PSC;
+	{
+		if(DU_GetDACModePreview(Channel) == DAC_AUTO && preview)
+			result = (MASTERCLK / hertz) / TIM_PSC_AUTOMODE;
+		if(DU_GetDACModePreview(Channel) == DAC_RAND && preview)
+			result = (MASTERCLK / hertz) / TIM_PSC_RANDMODE;
+		if(DU_GetDACModePreview(Channel) == DAC_AUTO && !preview)
+			result = (MASTERCLK / hertz) / htim6.Instance->PSC;
+		if(DU_GetDACModePreview(Channel) == DAC_RAND && !preview)
+			result = (MASTERCLK / hertz) / htim6.Instance->PSC;
+	}
 	if(Channel == DAC_CHANNEL_2)
-		result = (MASTERCLK / hertz) / htim7.Instance->PSC;
+	{
+		if(DU_GetDACModePreview(Channel) == DAC_AUTO && preview)
+			result = (MASTERCLK / hertz) / TIM_PSC_AUTOMODE;
+		if(DU_GetDACModePreview(Channel) == DAC_RAND && preview)
+			result = (MASTERCLK / hertz) / TIM_PSC_RANDMODE;
+		if(DU_GetDACModePreview(Channel) == DAC_AUTO && !preview)
+			result = (MASTERCLK / hertz) / htim7.Instance->PSC;
+		if(DU_GetDACModePreview(Channel) == DAC_RAND && !preview)
+			result = (MASTERCLK / hertz) / htim7.Instance->PSC;
+	}
 	// clamp new ARR max to timer resolution, increase the PSC to get a lower ARR ceiling
 	if(result > TIMRES)
 		result = TIMRES;

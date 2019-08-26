@@ -33,6 +33,10 @@
 /* gain compensation. must not be zero! */
 #define INAMP_GAIN_COMP		8.5
 
+/* prescaler for RAND and AUTO modes. RAND PSC should be much larger than AUTO PSC */
+#define TIM_PSC_RANDMODE	16383
+#define TIM_PSC_AUTOMODE	1023
+
 void SYS_Init();
 
 #endif /* SYSTEMCONSTANTS_H_ */

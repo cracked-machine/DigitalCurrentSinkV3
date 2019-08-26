@@ -500,124 +500,95 @@ void _DrawParamSelOverlay()
 
 void _DrawParamSelDisp()
 {
-	dacmode_t dacmode;
 
-    ssd1306_SetCursor(0, 15);
-
-    if(DU_IsDualChannelMode())
-    {
-    	char mode[32] = "";
-    	// both channels should be set to same mode, so either channel can be used as ref
+	if(DU_IsDualChannelMode())
+	{
+		// dual/single mode header
+	   	char mode[32] = "";
     	sprintf(mode, "[DUAL MODE: %s]", DU_GetDACModePreview2String(DU_GetActiveDACChannel()));
+		ssd1306_SetCursor(0, 15);
     	ssd1306_WriteString(mode, Font_5x7, White, 1);
-    	dacmode = DU_GetDACModePreview(DAC_CHANNEL_1);
-    }
-    else
-    {
-    	char mode[32] = "";
-    	// get the mode for this specific channel
-    	sprintf(mode, " [%s MODE: %s]", DU_GetActiveDACChannel2String(), DU_GetDACModePreview2String(DU_GetActiveDACChannel()));
-    	ssd1306_WriteString(mode, Font_5x7, White, 1);
-    	dacmode = DU_GetDACModePreview(DU_GetActiveDACChannel());
-    }
 
-    switch(dacmode)
-    {
-		case DAC_USER:
-		    	if(DU_IsDualChannelMode())
-		    	{
-		    		// show BOTH DAC 1 and DAC 2 params
-		    		ssd1306_SetCursor(2, 30);
-					ssd1306_WriteString("CH1: ", Font_5x7, White, 1);
-					ssd1306_SetCursor(27, 30);
-					if(!blink_display_text)
-						_DrawDAC1Value(1);
+    	// dac ch1 value
+		ssd1306_SetCursor(32, 30);
+		ssd1306_WriteString("CH1: ", Font_5x7, White, 1);
+		ssd1306_SetCursor(57, 30);
+		if(!blink_display_text)
+			_DrawDAC1Value(1);
 
-					ssd1306_SetCursor(2, 50);
-					ssd1306_WriteString("CH2: ", Font_5x7, White, 1);
-					ssd1306_SetCursor(27, 50);
-					if(!blink_display_text)
-						_DrawDAC2Value(1);
+	 	// dac ch2 value
+		ssd1306_SetCursor(32, 40);
+		ssd1306_WriteString("CH2: ", Font_5x7, White, 1);
+		ssd1306_SetCursor(57, 40);
+		if(!blink_display_text)
+			_DrawDAC2Value(1);
 
-		    	}
-		    	else
-		    	{
-		    		// show DAC 1 OR DAC 2 params
-		    		switch(DU_GetActiveDACChannel())
-					{
-						case DAC_CHANNEL_1:
-							ssd1306_SetCursor(2, 30);
-							ssd1306_WriteString("CH1: ", Font_5x7, White, 1);
-							ssd1306_SetCursor(27, 30);
-							if(!blink_display_text)
-								_DrawDAC1Value(1);
-							break;
-						case DAC_CHANNEL_2:
-							ssd1306_SetCursor(2, 30);
-							ssd1306_WriteString("CH2: ", Font_5x7, White, 1);
-							ssd1306_SetCursor(27, 30);
-							if(!blink_display_text)
-								_DrawDAC2Value(1);
-							break;
-						default:
-							break;
-					}
-		    	}
+	 	// min value warning
+		if(DU_GetDACModePreview(DAC_CHANNEL_1) != DAC_USER)
+		{
+			char min[32] = "";
+			if(DU_GetDACModePreview(DAC_CHANNEL_1) == DAC_AUTO)
+				snprintf(min, sizeof(min), "[ %2.3f HZ MIN ]", (float)MASTERCLK/(TIM_PSC_AUTOMODE*TIMRES));
+			if(DU_GetDACModePreview(DAC_CHANNEL_1) == DAC_RAND)
+				snprintf(min, sizeof(min), "[ %2.3f HZ MIN ]", (float)MASTERCLK/(TIM_PSC_RANDMODE*TIMRES));
+			ssd1306_SetCursor(18, 55);
+			ssd1306_WriteString(min, Font_3x5, White, 0);
+		}
+
+	}
+	else
+	{
+		char mode[32] = "";
+		char min[32] = "";
+		// dual/single mode header
+		sprintf(mode, " [%s MODE: %s]", DU_GetActiveDACChannel2String(), DU_GetDACModePreview2String(DU_GetActiveDACChannel()));
+		ssd1306_SetCursor(0, 15);
+		ssd1306_WriteString(mode, Font_5x7, White, 1);
 
 
-			break;
-		case DAC_RAND:
-		case DAC_AUTO:
 
-	    	if(DU_IsDualChannelMode())
-	    	{
-	    		// show BOTH DAC 1 and DAC 2 params
-	    		ssd1306_SetCursor(2, 30);
-				ssd1306_WriteString("CH1:", Font_5x7, White, 1);
-				ssd1306_SetCursor(27, 30);
+		switch(DU_GetActiveDACChannel())
+		{
+			default:
+			case DAC_CHANNEL_1:
+			 	// dac ch1 value
+				ssd1306_SetCursor(32, 30);
+				ssd1306_WriteString("CH1: ", Font_5x7, White, 1);
+				ssd1306_SetCursor(57, 30);
 				if(!blink_display_text)
 					_DrawDAC1Value(1);
 
-				ssd1306_SetCursor(2, 50);
-				ssd1306_WriteString("CH2:", Font_5x7, White, 1);
-				ssd1306_SetCursor(27, 50);
+			 	// min value warning
+				if(DU_GetDACModePreview(DAC_CHANNEL_1) == DAC_RAND)
+					snprintf(min, sizeof(min), "[ %2.3f HZ MIN ]", (float)MASTERCLK/(TIM_PSC_RANDMODE*TIMRES));
+				if(DU_GetDACModePreview(DAC_CHANNEL_1) == DAC_AUTO)
+					snprintf(min, sizeof(min), "[ %2.3f HZ MIN ]", (float)MASTERCLK/(TIM_PSC_AUTOMODE*TIMRES));
+
+				break;
+
+			case DAC_CHANNEL_2:
+			 	// dac ch2 value
+				ssd1306_SetCursor(32, 30);
+				ssd1306_WriteString("CH2: ", Font_5x7, White, 1);
+				ssd1306_SetCursor(57, 30);
 				if(!blink_display_text)
 					_DrawDAC2Value(1);
 
-	    	}
-	    	else
-	    	{
-	    		// show DAC 1 OR DAC 2 params
-	    		switch(DU_GetActiveDACChannel())
-				{
-					case DAC_CHANNEL_1:
-						ssd1306_SetCursor(2, 30);
-						ssd1306_WriteString("CH1:", Font_5x7, White, 1);
-						ssd1306_SetCursor(27, 30);
-						if(!blink_display_text)
-							_DrawDAC1Value(1);
-						break;
-					case DAC_CHANNEL_2:
-						ssd1306_SetCursor(2, 30);
-						ssd1306_WriteString("CH2:", Font_5x7, White, 1);
-						ssd1306_SetCursor(27, 30);
-						if(!blink_display_text)
-							_DrawDAC2Value(1);
-						break;
-					default:
-						break;
-				}
-	    	}
+			 	// min value warning
+				if(DU_GetDACModePreview(DAC_CHANNEL_2) == DAC_RAND)
+					snprintf(min, sizeof(min), "[ %2.3f HZ MIN ]", (float)MASTERCLK/(TIM_PSC_RANDMODE*TIMRES));
+				if(DU_GetDACModePreview(DAC_CHANNEL_2) == DAC_AUTO)
+					snprintf(min, sizeof(min), "[ %2.3f HZ MIN ]", (float)MASTERCLK/(TIM_PSC_AUTOMODE*TIMRES));
+
+				break;
+
+		}
+
+		ssd1306_SetCursor(18, 45);
+		ssd1306_WriteString(min, Font_3x5, White, 0);
 
 
-
-			break;
-		default:
-			break;
-    }
-
-
-
+	}
 }
 
 /**
