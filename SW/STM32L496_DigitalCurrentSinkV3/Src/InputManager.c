@@ -54,7 +54,7 @@ int keypad_row_mux_count=0;
 uint8_t decimal_point_count = 0;
 
 /* size of number to be drawn. Used by DisplayManager   */
-uint8_t digit_length = 1;
+uint8_t digit_length = 0;
 
 /* Keypad debounce variables. Increase min_keypad_bounce_delay to decrease bouncing */
 uint32_t keypad_debounce_counter = 0;
@@ -90,7 +90,7 @@ double _Concatenate(double _buffer, double _newDigit);
 
 uint8_t IM_GetDigitLength()
 {
-	return digit_length;
+	return decimal_point_count;
 }
 
 /**
@@ -185,7 +185,7 @@ void IM_ReadKeyCol0()
 					{
 						DU_SetDACModePreview(DU_GetActiveDACChannel(), DAC_USER);
 					}
-
+					decimal_point_count=0;		// show no decimal place by default in DAC_USER mode
 					DM_SetBlinkTimer(1);
 					DM_ChangeScreen(PARAMS_DISP);
 					break;
@@ -387,6 +387,7 @@ void IM_ReadKeyCol1()
 					}
 
 					DM_SetBlinkTimer(1);
+					//decimal_point_count=1;			// show .0f by default in DAC_AUTO mode
 					DM_ChangeScreen(PARAMS_DISP);
 					break;
 				case PARAMS_DISP:
@@ -603,7 +604,7 @@ void IM_ReadKeyCol2()
 					{
 						DU_SetDACModePreview(DU_GetActiveDACChannel(), DAC_RAND);
 					}
-
+					//decimal_point_count=1;		// show .0f by default in DAC_RAND mode
 					DM_SetBlinkTimer(1);
 					DM_ChangeScreen(PARAMS_DISP);
 					break;
@@ -1079,6 +1080,7 @@ void _SetKeypadBuffer(double pValue)
 			}
 			if(DU_GetDACModePreview(DU_GetActiveDACChannel()) != DAC_USER)
 			{
+
 				DU_SetFreqPreview(DAC_CHANNEL_1, (float)keypad_buffer);
 				DU_SetFreqPreview(DAC_CHANNEL_2, (float)keypad_buffer);
 			}

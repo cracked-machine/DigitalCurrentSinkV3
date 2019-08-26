@@ -809,7 +809,7 @@ void _DrawDAC1Value(uint8_t preview)
 				snprintf(dac1cnt, sizeof(dac1cnt), "%lu%s", (uint32_t)new_dac_value, units);
 				break;
 			case 1:
-				snprintf(dac1cnt, sizeof(dac1cnt), "%2.0f%s", new_dac_value, units);
+				snprintf(dac1cnt, sizeof(dac1cnt), "%2.1f%s", new_dac_value, units);
 				break;
 			case 2:
 				snprintf(dac1cnt, sizeof(dac1cnt), "%2.1f%s", new_dac_value, units);
@@ -890,7 +890,7 @@ void _DrawDAC2Value(uint8_t preview)
 				snprintf(dac2cnt, sizeof(dac2cnt), "%lu%s", (uint32_t)new_dac_value, units);
 				break;
 			case 1:
-				snprintf(dac2cnt, sizeof(dac2cnt), "%2.0f%s", new_dac_value, units);
+				snprintf(dac2cnt, sizeof(dac2cnt), "%2.1f%s", new_dac_value, units);
 				break;
 			case 2:
 				snprintf(dac2cnt, sizeof(dac2cnt), "%2.1f%s", new_dac_value, units);

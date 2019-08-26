@@ -469,7 +469,10 @@ float DU_CalcVoltsFromBits(uint32_t Channel, uint8_t preview)
 		else
 			result = (float)(VREF * ((float)hdac1.Instance->DOR2/(float)DACRES));
 	}
-	return result;
+	/* 	Round up to the nearest 2 decimal places e.g. 0.147 --> 0.15.
+	*	This prevents truncation issues if the fp result is converted back to integer
+	*	i.e. 0.9 would be truncated to 0 */
+	return (ceil(result*100)/100);
 }
 
 
