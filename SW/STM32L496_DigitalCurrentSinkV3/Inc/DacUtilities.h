@@ -19,6 +19,8 @@ typedef enum dacmode
 
 } dacmode_t;
 
+void DU_FullReset();
+
 dacmode_t DU_GetDACModeActual(uint32_t Channel);
 char* DU_GetDACModeActual2String(uint32_t Channel);
 void DU_SetDACModeActual(uint32_t Channel, dacmode_t mode);

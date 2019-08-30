@@ -70,6 +70,26 @@ void _ChangeFreq(uint32_t Channel, int increase);
 uint16_t _CalcNewARR(uint16_t Channel, float hertz, int preview);
 uint32_t _CalcNewDOR(float volts);
 
+void DU_FullReset()
+{
+	DU_ClearVoltagePreview(DAC_CHANNEL_1);
+	DU_SetVoltage(DAC_CHANNEL_1);
+	DU_ClearFreqPreview(DAC_CHANNEL_1);
+	DU_SetFreq(DAC_CHANNEL_1);
+
+
+	DU_ClearVoltagePreview(DAC_CHANNEL_2);
+	DU_SetVoltage(DAC_CHANNEL_2);
+	DU_ClearFreqPreview(DAC_CHANNEL_2);
+	DU_SetFreq(DAC_CHANNEL_2);
+
+	DU_SetDualDACModeActual(DAC_USER);
+
+	// TODO add reset screen
+}
+
+
+
 /**
   * @brief 	get the DAC channel Data Output Register value
   *

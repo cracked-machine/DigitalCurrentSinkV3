@@ -203,21 +203,22 @@ void IM_ReadKeyCol0()
 					{
 						if(DU_GetDACModePreview(DAC_CHANNEL_1) == DAC_AUTO)
 						{
-							DU_SetRampAmplitudeSetting(DAC_CHANNEL_1, DAC_TRIANGLEAMPLITUDE_15);
-							DU_SetRampAmplitudeSetting(DAC_CHANNEL_2, DAC_TRIANGLEAMPLITUDE_15);
+							DU_SetRampAmplitudeSetting(DAC_CHANNEL_1, DAC_TRIANGLEAMPLITUDE_7);
+							DU_SetRampAmplitudeSetting(DAC_CHANNEL_2, DAC_TRIANGLEAMPLITUDE_7);
+
 						}
 						else
 						{
-							DU_SetRandAmplitudeSetting(DAC_CHANNEL_1, DAC_LFSRUNMASK_BITS3_0);
-							DU_SetRandAmplitudeSetting(DAC_CHANNEL_2, DAC_LFSRUNMASK_BITS3_0);
+							DU_SetRandAmplitudeSetting(DAC_CHANNEL_1, DAC_LFSRUNMASK_BITS2_0);
+							DU_SetRandAmplitudeSetting(DAC_CHANNEL_2, DAC_LFSRUNMASK_BITS2_0);
 						}
 					}
 					else
 					{
 						if((DU_GetDACModePreview(DAC_CHANNEL_1) == DAC_AUTO) || (DU_GetDACModePreview(DAC_CHANNEL_2) == DAC_AUTO))
-							DU_SetRampAmplitudeSetting(DU_GetActiveDACChannel(), DAC_TRIANGLEAMPLITUDE_15);
+							DU_SetRampAmplitudeSetting(DU_GetActiveDACChannel(), DAC_TRIANGLEAMPLITUDE_7);
 						else
-							DU_SetRandAmplitudeSetting(DU_GetActiveDACChannel(), DAC_LFSRUNMASK_BITS3_0);
+							DU_SetRandAmplitudeSetting(DU_GetActiveDACChannel(), DAC_LFSRUNMASK_BITS2_0);
 					}
 					break;
 				default:
@@ -240,13 +241,14 @@ void IM_ReadKeyCol0()
 					{
 						if(DU_GetDACModePreview(DAC_CHANNEL_1) == DAC_AUTO)
 						{
-							DU_SetRampAmplitudeSetting(DAC_CHANNEL_1, DAC_TRIANGLEAMPLITUDE_127);
-							DU_SetRampAmplitudeSetting(DAC_CHANNEL_2, DAC_TRIANGLEAMPLITUDE_127);
+							DU_SetRampAmplitudeSetting(DAC_CHANNEL_1, DAC_TRIANGLEAMPLITUDE_63);
+							DU_SetRampAmplitudeSetting(DAC_CHANNEL_2, DAC_TRIANGLEAMPLITUDE_63);
+
 						}
 						else
 						{
-							DU_SetRandAmplitudeSetting(DAC_CHANNEL_1, DAC_LFSRUNMASK_BITS6_0);
-							DU_SetRandAmplitudeSetting(DAC_CHANNEL_2, DAC_LFSRUNMASK_BITS6_0);
+							DU_SetRandAmplitudeSetting(DAC_CHANNEL_1, DAC_LFSRUNMASK_BITS5_0);
+							DU_SetRandAmplitudeSetting(DAC_CHANNEL_2, DAC_LFSRUNMASK_BITS5_0);
 						}
 
 
@@ -255,11 +257,11 @@ void IM_ReadKeyCol0()
 					{
 						if((DU_GetDACModePreview(DAC_CHANNEL_1) == DAC_AUTO) || (DU_GetDACModePreview(DAC_CHANNEL_2) == DAC_AUTO))
 						{
-							DU_SetRampAmplitudeSetting(DU_GetActiveDACChannel(), DAC_TRIANGLEAMPLITUDE_127);
+							DU_SetRampAmplitudeSetting(DU_GetActiveDACChannel(), DAC_TRIANGLEAMPLITUDE_63);
 						}
 						else
 						{
-							DU_SetRandAmplitudeSetting(DU_GetActiveDACChannel(), DAC_LFSRUNMASK_BITS6_0);
+							DU_SetRandAmplitudeSetting(DU_GetActiveDACChannel(), DAC_LFSRUNMASK_BITS5_0);
 						}
 
 					}
@@ -289,13 +291,17 @@ void IM_ReadKeyCol0()
 					{
 						if(DU_GetDACModePreview(DAC_CHANNEL_1) == DAC_AUTO)
 						{
-							DU_SetRampAmplitudeSetting(DAC_CHANNEL_1, DAC_TRIANGLEAMPLITUDE_1023);
-							DU_SetRampAmplitudeSetting(DAC_CHANNEL_2, DAC_TRIANGLEAMPLITUDE_1023);
+							DU_SetRampAmplitudeSetting(DAC_CHANNEL_1, DAC_TRIANGLEAMPLITUDE_511);
+							DU_SetRampAmplitudeSetting(DAC_CHANNEL_2, DAC_TRIANGLEAMPLITUDE_511);
+							// 5A is too high for the heatsink
+							//DU_SetRampAmplitudeSetting(DAC_CHANNEL_1, DAC_TRIANGLEAMPLITUDE_1023);
+							//DU_SetRampAmplitudeSetting(DAC_CHANNEL_2, DAC_TRIANGLEAMPLITUDE_1023);
 						}
 						else
 						{
-							DU_SetRandAmplitudeSetting(DAC_CHANNEL_1, DAC_LFSRUNMASK_BITS9_0);
-							DU_SetRandAmplitudeSetting(DAC_CHANNEL_2, DAC_LFSRUNMASK_BITS9_0);
+							// 5A is too high for the heatsink
+							//DU_SetRandAmplitudeSetting(DAC_CHANNEL_1, DAC_LFSRUNMASK_BITS9_0);
+							//DU_SetRandAmplitudeSetting(DAC_CHANNEL_2, DAC_LFSRUNMASK_BITS9_0);
 						}
 
 
@@ -304,11 +310,12 @@ void IM_ReadKeyCol0()
 					{
 						if((DU_GetDACModePreview(DAC_CHANNEL_1) == DAC_AUTO) || (DU_GetDACModePreview(DAC_CHANNEL_2) == DAC_AUTO))
 						{
-							DU_SetRampAmplitudeSetting(DU_GetActiveDACChannel(), DAC_TRIANGLEAMPLITUDE_1023);
+							DU_SetRampAmplitudeSetting(DU_GetActiveDACChannel(), DAC_TRIANGLEAMPLITUDE_511);
 						}
 						else
 						{
-							DU_SetRandAmplitudeSetting(DU_GetActiveDACChannel(), DAC_LFSRUNMASK_BITS9_0);
+							// 5A is too high for the heatsink
+							//DU_SetRandAmplitudeSetting(DU_GetActiveDACChannel(), DAC_LFSRUNMASK_BITS9_0);
 						}
 
 					}
@@ -402,13 +409,13 @@ void IM_ReadKeyCol1()
 					{
 						if(DU_GetDACModePreview(DAC_CHANNEL_1) == DAC_AUTO)
 						{
-							DU_SetRampAmplitudeSetting(DAC_CHANNEL_1, DAC_TRIANGLEAMPLITUDE_31);
-							DU_SetRampAmplitudeSetting(DAC_CHANNEL_2, DAC_TRIANGLEAMPLITUDE_31);
+							DU_SetRampAmplitudeSetting(DAC_CHANNEL_1, DAC_TRIANGLEAMPLITUDE_15);
+							DU_SetRampAmplitudeSetting(DAC_CHANNEL_2, DAC_TRIANGLEAMPLITUDE_15);
 						}
 						else
 						{
-							DU_SetRandAmplitudeSetting(DAC_CHANNEL_1, DAC_LFSRUNMASK_BITS4_0);
-							DU_SetRandAmplitudeSetting(DAC_CHANNEL_2, DAC_LFSRUNMASK_BITS4_0);
+							DU_SetRandAmplitudeSetting(DAC_CHANNEL_1, DAC_LFSRUNMASK_BITS3_0);
+							DU_SetRandAmplitudeSetting(DAC_CHANNEL_2, DAC_LFSRUNMASK_BITS3_0);
 						}
 
 
@@ -417,11 +424,11 @@ void IM_ReadKeyCol1()
 					{
 						if((DU_GetDACModePreview(DAC_CHANNEL_1) == DAC_AUTO) || (DU_GetDACModePreview(DAC_CHANNEL_2) == DAC_AUTO))
 						{
-							DU_SetRampAmplitudeSetting(DU_GetActiveDACChannel(), DAC_TRIANGLEAMPLITUDE_31);
+							DU_SetRampAmplitudeSetting(DU_GetActiveDACChannel(), DAC_TRIANGLEAMPLITUDE_15);
 						}
 						else
 						{
-							DU_SetRandAmplitudeSetting(DU_GetActiveDACChannel(), DAC_LFSRUNMASK_BITS4_0);
+							DU_SetRandAmplitudeSetting(DU_GetActiveDACChannel(), DAC_LFSRUNMASK_BITS3_0);
 						}
 
 					}
@@ -447,24 +454,24 @@ void IM_ReadKeyCol1()
 					{
 						if(DU_GetDACModePreview(DAC_CHANNEL_1) == DAC_AUTO)
 						{
-							DU_SetRampAmplitudeSetting(DAC_CHANNEL_1, DAC_TRIANGLEAMPLITUDE_255);
-							DU_SetRampAmplitudeSetting(DAC_CHANNEL_2, DAC_TRIANGLEAMPLITUDE_255);
+							DU_SetRampAmplitudeSetting(DAC_CHANNEL_1, DAC_TRIANGLEAMPLITUDE_127);
+							DU_SetRampAmplitudeSetting(DAC_CHANNEL_2, DAC_TRIANGLEAMPLITUDE_127);
 						}
 						else
 						{
-							DU_SetRandAmplitudeSetting(DAC_CHANNEL_1, DAC_LFSRUNMASK_BITS7_0);
-							DU_SetRandAmplitudeSetting(DAC_CHANNEL_2, DAC_LFSRUNMASK_BITS7_0);
+							DU_SetRandAmplitudeSetting(DAC_CHANNEL_1, DAC_LFSRUNMASK_BITS6_0);
+							DU_SetRandAmplitudeSetting(DAC_CHANNEL_2, DAC_LFSRUNMASK_BITS6_0);
 						}
 					}
 					else
 					{
 						if((DU_GetDACModePreview(DAC_CHANNEL_1) == DAC_AUTO) || (DU_GetDACModePreview(DAC_CHANNEL_2) == DAC_AUTO))
 						{
-							DU_SetRampAmplitudeSetting(DU_GetActiveDACChannel(), DAC_TRIANGLEAMPLITUDE_255);
+							DU_SetRampAmplitudeSetting(DU_GetActiveDACChannel(), DAC_TRIANGLEAMPLITUDE_127);
 						}
 						else
 						{
-							DU_SetRandAmplitudeSetting(DU_GetActiveDACChannel(), DAC_LFSRUNMASK_BITS7_0);
+							DU_SetRandAmplitudeSetting(DU_GetActiveDACChannel(), DAC_LFSRUNMASK_BITS6_0);
 						}
 
 					}
@@ -494,24 +501,28 @@ void IM_ReadKeyCol1()
 					{
 						if(DU_GetDACModePreview(DAC_CHANNEL_1) == DAC_AUTO)
 						{
-							DU_SetRampAmplitudeSetting(DAC_CHANNEL_1, DAC_TRIANGLEAMPLITUDE_2047);
-							DU_SetRampAmplitudeSetting(DAC_CHANNEL_2, DAC_TRIANGLEAMPLITUDE_2047);
+							// 10A is too high for the heatsink
+							//DU_SetRampAmplitudeSetting(DAC_CHANNEL_1, DAC_TRIANGLEAMPLITUDE_2047);
+							//DU_SetRampAmplitudeSetting(DAC_CHANNEL_2, DAC_TRIANGLEAMPLITUDE_2047);
 						}
 						else
 						{
-							DU_SetRandAmplitudeSetting(DAC_CHANNEL_1, DAC_LFSRUNMASK_BITS10_0);
-							DU_SetRandAmplitudeSetting(DAC_CHANNEL_2, DAC_LFSRUNMASK_BITS10_0);
+							// 10A is too high for the heatsink
+							//DU_SetRandAmplitudeSetting(DAC_CHANNEL_1, DAC_LFSRUNMASK_BITS10_0);
+							//DU_SetRandAmplitudeSetting(DAC_CHANNEL_2, DAC_LFSRUNMASK_BITS10_0);
 						}
 					}
 					else
 					{
 						if((DU_GetDACModePreview(DAC_CHANNEL_1) == DAC_AUTO) || (DU_GetDACModePreview(DAC_CHANNEL_2) == DAC_AUTO))
 						{
-							DU_SetRampAmplitudeSetting(DU_GetActiveDACChannel(), DAC_TRIANGLEAMPLITUDE_2047);
+							// 10A is too high for the heatsink
+							//DU_SetRampAmplitudeSetting(DU_GetActiveDACChannel(), DAC_TRIANGLEAMPLITUDE_2047);
 						}
 						else
 						{
-							DU_SetRandAmplitudeSetting(DU_GetActiveDACChannel(), DAC_LFSRUNMASK_BITS10_0);
+							// 10A is too high for the heatsink
+							//DU_SetRandAmplitudeSetting(DU_GetActiveDACChannel(), DAC_LFSRUNMASK_BITS10_0);
 						}
 
 					}
@@ -538,13 +549,12 @@ void IM_ReadKeyCol1()
 					{
 						if(DU_GetDACModePreview(DAC_CHANNEL_1) == DAC_AUTO)
 						{
-							DU_SetRampAmplitudeSetting(DAC_CHANNEL_1, DAC_TRIANGLEAMPLITUDE_7);
-							DU_SetRampAmplitudeSetting(DAC_CHANNEL_2, DAC_TRIANGLEAMPLITUDE_7);
+
 						}
 						else
 						{
-							DU_SetRandAmplitudeSetting(DAC_CHANNEL_1, DAC_LFSRUNMASK_BITS2_0);
-							DU_SetRandAmplitudeSetting(DAC_CHANNEL_2, DAC_LFSRUNMASK_BITS2_0);
+							//DU_SetRandAmplitudeSetting(DAC_CHANNEL_1, DAC_LFSRUNMASK_BITS2_0);
+							//DU_SetRandAmplitudeSetting(DAC_CHANNEL_2, DAC_LFSRUNMASK_BITS2_0);
 						}
 
 
@@ -557,7 +567,7 @@ void IM_ReadKeyCol1()
 						}
 						else
 						{
-							DU_SetRandAmplitudeSetting(DU_GetActiveDACChannel(), DAC_LFSRUNMASK_BITS2_0);
+							//DU_SetRandAmplitudeSetting(DU_GetActiveDACChannel(), DAC_LFSRUNMASK_BITS2_0);
 						}
 
 					}
@@ -619,14 +629,13 @@ void IM_ReadKeyCol2()
 					{
 						if(DU_GetDACModePreview(DAC_CHANNEL_1) == DAC_AUTO)
 						{
-							DU_SetRampAmplitudeSetting(DAC_CHANNEL_1, DAC_TRIANGLEAMPLITUDE_63);
-							DU_SetRampAmplitudeSetting(DAC_CHANNEL_2, DAC_TRIANGLEAMPLITUDE_63);
-
+							DU_SetRampAmplitudeSetting(DAC_CHANNEL_1, DAC_TRIANGLEAMPLITUDE_31);
+							DU_SetRampAmplitudeSetting(DAC_CHANNEL_2, DAC_TRIANGLEAMPLITUDE_31);
 						}
 						else
 						{
-							DU_SetRandAmplitudeSetting(DAC_CHANNEL_1, DAC_LFSRUNMASK_BITS5_0);
-							DU_SetRandAmplitudeSetting(DAC_CHANNEL_2, DAC_LFSRUNMASK_BITS5_0);
+							DU_SetRandAmplitudeSetting(DAC_CHANNEL_1, DAC_LFSRUNMASK_BITS4_0);
+							DU_SetRandAmplitudeSetting(DAC_CHANNEL_2, DAC_LFSRUNMASK_BITS4_0);
 						}
 
 					}
@@ -634,11 +643,11 @@ void IM_ReadKeyCol2()
 					{
 						if((DU_GetDACModePreview(DAC_CHANNEL_1) == DAC_AUTO) || (DU_GetDACModePreview(DAC_CHANNEL_2) == DAC_AUTO))
 						{
-							DU_SetRampAmplitudeSetting(DU_GetActiveDACChannel(), DAC_TRIANGLEAMPLITUDE_63);
+							DU_SetRampAmplitudeSetting(DU_GetActiveDACChannel(), DAC_TRIANGLEAMPLITUDE_31);
 						}
 						else
 						{
-							DU_SetRandAmplitudeSetting(DU_GetActiveDACChannel(), DAC_LFSRUNMASK_BITS5_0);
+							DU_SetRandAmplitudeSetting(DU_GetActiveDACChannel(), DAC_LFSRUNMASK_BITS4_0);
 						}
 
 					}
@@ -664,13 +673,13 @@ void IM_ReadKeyCol2()
 					{
 						if(DU_GetDACModePreview(DAC_CHANNEL_1) == DAC_AUTO)
 						{
-							DU_SetRampAmplitudeSetting(DAC_CHANNEL_1, DAC_TRIANGLEAMPLITUDE_511);
-							DU_SetRampAmplitudeSetting(DAC_CHANNEL_2, DAC_TRIANGLEAMPLITUDE_511);
+							DU_SetRampAmplitudeSetting(DAC_CHANNEL_1, DAC_TRIANGLEAMPLITUDE_255);
+							DU_SetRampAmplitudeSetting(DAC_CHANNEL_2, DAC_TRIANGLEAMPLITUDE_255);
 						}
 						else
 						{
-							DU_SetRandAmplitudeSetting(DAC_CHANNEL_1, DAC_LFSRUNMASK_BITS8_0);
-							DU_SetRandAmplitudeSetting(DAC_CHANNEL_2, DAC_LFSRUNMASK_BITS8_0);
+							DU_SetRandAmplitudeSetting(DAC_CHANNEL_1, DAC_LFSRUNMASK_BITS7_0);
+							DU_SetRandAmplitudeSetting(DAC_CHANNEL_2, DAC_LFSRUNMASK_BITS7_0);
 						}
 
 
@@ -679,11 +688,11 @@ void IM_ReadKeyCol2()
 					{
 						if((DU_GetDACModePreview(DAC_CHANNEL_1) == DAC_AUTO) || (DU_GetDACModePreview(DAC_CHANNEL_2) == DAC_AUTO))
 						{
-							DU_SetRampAmplitudeSetting(DU_GetActiveDACChannel(), DAC_TRIANGLEAMPLITUDE_511);
+							DU_SetRampAmplitudeSetting(DU_GetActiveDACChannel(), DAC_TRIANGLEAMPLITUDE_255);
 						}
 						else
 						{
-							DU_SetRandAmplitudeSetting(DU_GetActiveDACChannel(), DAC_LFSRUNMASK_BITS8_0);
+							DU_SetRandAmplitudeSetting(DU_GetActiveDACChannel(), DAC_LFSRUNMASK_BITS7_0);
 						}
 
 					}
@@ -712,13 +721,15 @@ void IM_ReadKeyCol2()
 					{
 						if(DU_GetDACModePreview(DAC_CHANNEL_1) == DAC_AUTO)
 						{
-							DU_SetRampAmplitudeSetting(DAC_CHANNEL_1, DAC_TRIANGLEAMPLITUDE_4095);
-							DU_SetRampAmplitudeSetting(DAC_CHANNEL_2, DAC_TRIANGLEAMPLITUDE_4095);
+							// 20A is too high for the heatsink
+							//DU_SetRampAmplitudeSetting(DAC_CHANNEL_1, DAC_TRIANGLEAMPLITUDE_4095);
+							//DU_SetRampAmplitudeSetting(DAC_CHANNEL_2, DAC_TRIANGLEAMPLITUDE_4095);
 						}
 						else
 						{
-							DU_SetRandAmplitudeSetting(DAC_CHANNEL_1, DAC_LFSRUNMASK_BITS11_0);
-							DU_SetRandAmplitudeSetting(DAC_CHANNEL_2, DAC_LFSRUNMASK_BITS11_0);
+							// 20A is too high for the heatsink
+							//DU_SetRandAmplitudeSetting(DAC_CHANNEL_1, DAC_LFSRUNMASK_BITS11_0);
+							//DU_SetRandAmplitudeSetting(DAC_CHANNEL_2, DAC_LFSRUNMASK_BITS11_0);
 						}
 
 					}
@@ -726,11 +737,13 @@ void IM_ReadKeyCol2()
 					{
 						if((DU_GetDACModePreview(DAC_CHANNEL_1) == DAC_AUTO) || (DU_GetDACModePreview(DAC_CHANNEL_2) == DAC_AUTO))
 						{
-							DU_SetRampAmplitudeSetting(DU_GetActiveDACChannel(), DAC_TRIANGLEAMPLITUDE_4095);
+							// 20A is too high for the heatsink
+							//DU_SetRampAmplitudeSetting(DU_GetActiveDACChannel(), DAC_TRIANGLEAMPLITUDE_4095);
 						}
 						else
 						{
-							DU_SetRandAmplitudeSetting(DU_GetActiveDACChannel(), DAC_LFSRUNMASK_BITS11_0);
+							// 20A is too high for the heatsink
+							//DU_SetRandAmplitudeSetting(DU_GetActiveDACChannel(), DAC_LFSRUNMASK_BITS11_0);
 						}
 
 					}
@@ -827,18 +840,7 @@ void IM_MenuEXTIHandler()
 		{
 			case HOME_DISP:
 				// RESET
-				DU_ClearVoltagePreview(DAC_CHANNEL_1);
-				DU_SetVoltage(DAC_CHANNEL_1);
-				DU_ClearFreqPreview(DAC_CHANNEL_1);
-				DU_SetFreq(DAC_CHANNEL_1);
-
-
-				DU_ClearVoltagePreview(DAC_CHANNEL_2);
-				DU_SetVoltage(DAC_CHANNEL_2);
-				DU_ClearFreqPreview(DAC_CHANNEL_2);
-				DU_SetFreq(DAC_CHANNEL_2);
-
-				DU_SetDualDACModeActual(DAC_USER);
+				DU_FullReset();
 				break;
 
 			case CHANSEL_DISP:
@@ -874,7 +876,6 @@ void IM_MenuEXTIHandler()
 		switch(theDisplayState)
 		{
 			case HOME_DISP:
-				// TODO: NUDGE (INCREASE) VOLTAGE/FREQ
 				if(DU_IsDualChannelMode())
 				{
 					DU_IncreaseDAC(DAC_CHANNEL_1);
@@ -888,7 +889,6 @@ void IM_MenuEXTIHandler()
 				break;
 
 			case CHANSEL_DISP:
-				// TODO SET DUAL CHANNEL MODE
 				DU_ToggleDualChannelMode(1);
 				DM_ChangeScreen(PROGSEL_DISP);
 				break;
@@ -949,12 +949,10 @@ void IM_MenuEXTIHandler()
 				break;
 
 			case CHANSEL_DISP:
-				// TODO:  CANCEL ALL PREVIEW SETTINGS
 				DM_ChangeScreen(HOME_DISP);
 				break;
 
 			case PROGSEL_DISP:
-				// TODO:  CANCEL ALL PREVIEW SETTINGS
 				DM_ChangeScreen(HOME_DISP);
 				break;
 
@@ -1072,11 +1070,20 @@ void _SetKeypadBuffer(double pValue)
 		{
 			if(DU_GetDACModePreview(DU_GetActiveDACChannel()) == DAC_USER)
 			{
+				// 3 AMPS HARD LIMIT!
+				if (keypad_buffer > 3)
+				{
+					keypad_buffer = 0;
+					decimal_point_count = 0;
+					// TODO Add warning to bottom screen
+				}
 				// user has entered a new Amperage value, convert to DAC output voltage
-				float newCurrent = DU_CalcVoltageFromOhmsLaw(DAC_CHANNEL_1, (float)keypad_buffer);
-				DU_SetVoltagePreview(DAC_CHANNEL_1, newCurrent);
-				newCurrent = DU_CalcVoltageFromOhmsLaw(DAC_CHANNEL_2, (float)keypad_buffer);
-				DU_SetVoltagePreview(DAC_CHANNEL_2, newCurrent);
+				float new_current = DU_CalcVoltageFromOhmsLaw(DAC_CHANNEL_1, (float)keypad_buffer);
+
+				DU_SetVoltagePreview(DAC_CHANNEL_1, new_current);
+				new_current = DU_CalcVoltageFromOhmsLaw(DAC_CHANNEL_2, (float)keypad_buffer);
+				DU_SetVoltagePreview(DAC_CHANNEL_2, new_current);
+
 			}
 			if(DU_GetDACModePreview(DU_GetActiveDACChannel()) != DAC_USER)
 			{
@@ -1090,6 +1097,13 @@ void _SetKeypadBuffer(double pValue)
 		{
 			if(DU_GetDACModePreview(DU_GetActiveDACChannel()) == DAC_USER)
 			{
+				// 3 AMPS HARD LIMIT!
+				if (keypad_buffer > 3)
+				{
+					keypad_buffer = 0;
+					decimal_point_count = 0;
+					// TODO Add warning to bottom screen
+				}
 				// user has entered a new Amperage value, convert to DAC output voltage
 				float newCurrent = DU_CalcVoltageFromOhmsLaw(DU_GetActiveDACChannel(), (float)keypad_buffer);
 				DU_SetVoltagePreview(DU_GetActiveDACChannel(), newCurrent);

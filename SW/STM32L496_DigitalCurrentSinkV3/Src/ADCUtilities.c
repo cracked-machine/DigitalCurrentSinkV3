@@ -9,6 +9,7 @@
 #include "ADCUtilities.h"
 #include "adc.h"
 #include <stdio.h>
+#include "DacUtilities.h"
 
 #include "SystemConstants.h"
 
@@ -74,5 +75,9 @@ float AU_CalcCurrent(uint32_t Channel)
 		default:
 			break;
 	}
+
+	if(result > 3)
+		DU_FullReset();
+
 	return result;
 }

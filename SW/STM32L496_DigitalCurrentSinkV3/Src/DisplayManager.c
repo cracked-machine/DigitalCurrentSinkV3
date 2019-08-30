@@ -512,14 +512,14 @@ void _DrawParamSelDisp()
     	// dac ch1 value
 		ssd1306_SetCursor(32, 30);
 		ssd1306_WriteString("CH1: ", Font_5x7, White, 1);
-		ssd1306_SetCursor(57, 30);
+		ssd1306_SetCursor(65, 30);
 		if(!blink_display_text)
 			_DrawDAC1Value(1);
 
 	 	// dac ch2 value
 		ssd1306_SetCursor(32, 40);
 		ssd1306_WriteString("CH2: ", Font_5x7, White, 1);
-		ssd1306_SetCursor(57, 40);
+		ssd1306_SetCursor(65, 40);
 		if(!blink_display_text)
 			_DrawDAC2Value(1);
 
@@ -554,7 +554,7 @@ void _DrawParamSelDisp()
 			 	// dac ch1 value
 				ssd1306_SetCursor(32, 30);
 				ssd1306_WriteString("CH1: ", Font_5x7, White, 1);
-				ssd1306_SetCursor(57, 30);
+				ssd1306_SetCursor(65, 30);
 				if(!blink_display_text)
 					_DrawDAC1Value(1);
 
@@ -570,7 +570,7 @@ void _DrawParamSelDisp()
 			 	// dac ch2 value
 				ssd1306_SetCursor(32, 30);
 				ssd1306_WriteString("CH2: ", Font_5x7, White, 1);
-				ssd1306_SetCursor(57, 30);
+				ssd1306_SetCursor(65, 30);
 				if(!blink_display_text)
 					_DrawDAC2Value(1);
 
@@ -713,7 +713,7 @@ void _DrawADC1Value()
 		default:
 		case SHOWCURR:
 
-			snprintf(currvalue, sizeof(currvalue), "%2.2fA", AU_CalcCurrent(ADC_CH0));
+			snprintf(currvalue, sizeof(currvalue), "%2.3fA", AU_CalcCurrent(ADC_CH0));
 			ssd1306_WriteString(currvalue, Font_5x7, White, 1);
 			break;
 
@@ -723,7 +723,7 @@ void _DrawADC1Value()
 			break;
 
 		case SHOWVOLT:
-			snprintf(voltvalue, sizeof(voltvalue), "%2.2fV", AU_CalcVoltage(ADC_CH0));
+			snprintf(voltvalue, sizeof(voltvalue), "%2.3fV", AU_CalcVoltage(ADC_CH0));
 			ssd1306_WriteString(voltvalue, Font_5x7, White, 1);
 			break;
 
@@ -751,7 +751,7 @@ void _DrawADC2Value()
 		default:
 		case SHOWCURR:
 
-			snprintf(currvalue, sizeof(currvalue), "%2.2fA", AU_CalcCurrent(ADC_CH1));
+			snprintf(currvalue, sizeof(currvalue), "%2.3fA", AU_CalcCurrent(ADC_CH1));
 			ssd1306_WriteString(currvalue, Font_5x7, White, 1);
 			break;
 
@@ -762,7 +762,7 @@ void _DrawADC2Value()
 
 		case SHOWVOLT:
 
-			snprintf(voltvalue, sizeof(voltvalue), "%2.2fV", AU_CalcVoltage(ADC_CH1));
+			snprintf(voltvalue, sizeof(voltvalue), "%2.3fV", AU_CalcVoltage(ADC_CH1));
 			ssd1306_WriteString(voltvalue, Font_5x7, White, 1);
 			break;
 	}
@@ -835,10 +835,10 @@ void _DrawDAC1Value(uint8_t preview)
 		{
 			default:
 			case SHOWCURR:
-				snprintf(dac1cnt, sizeof(dac1cnt), "%2.2fA", DU_CalcCurrentFromOhmsLaw(DAC_CHANNEL_1, 0));
+				snprintf(dac1cnt, sizeof(dac1cnt), "%2.3fA", DU_CalcCurrentFromOhmsLaw(DAC_CHANNEL_1, 0));
 				break;
 			case SHOWVOLT:
-				snprintf(dac1cnt, sizeof(dac1cnt), "%2.2fV", DU_CalcVoltsFromBits(DAC_CHANNEL_1, 0));
+				snprintf(dac1cnt, sizeof(dac1cnt), "%2.3fV", DU_CalcVoltsFromBits(DAC_CHANNEL_1, 0));
 				break;
 			case SHOWBITS:
 				snprintf(dac1cnt, sizeof(dac1cnt), "%lu", DU_GetDATDOR(DAC_CHANNEL_1));
@@ -916,10 +916,10 @@ void _DrawDAC2Value(uint8_t preview)
 		{
 			default:
 			case SHOWCURR:
-				snprintf(dac2cnt, sizeof(dac2cnt), "%2.2fA", DU_CalcCurrentFromOhmsLaw(DAC_CHANNEL_2, 0));
+				snprintf(dac2cnt, sizeof(dac2cnt), "%2.3fA", DU_CalcCurrentFromOhmsLaw(DAC_CHANNEL_2, 0));
 				break;
 			case SHOWVOLT:
-				snprintf(dac2cnt, sizeof(dac2cnt), "%2.2fV", DU_CalcVoltsFromBits(DAC_CHANNEL_2, 0));
+				snprintf(dac2cnt, sizeof(dac2cnt), "%2.3fV", DU_CalcVoltsFromBits(DAC_CHANNEL_2, 0));
 				break;
 			case SHOWBITS:
 				snprintf(dac2cnt, sizeof(dac2cnt), "%lu", DU_GetDATDOR(DAC_CHANNEL_2));
