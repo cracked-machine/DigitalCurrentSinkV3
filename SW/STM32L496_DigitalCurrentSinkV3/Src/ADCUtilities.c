@@ -49,11 +49,11 @@ float AU_CalcVoltage(uint32_t Channel)
 	{
 		case ADC_CH0:
 			result = (VREF / ADCRES) * adc_out[0];
-			result = result * INAMP_GAIN_COMP;
+			result = result * CH0_INAMP_GAIN_COMP;
 			break;
 		case ADC_CH1:
 			result = (VREF / ADCRES) * adc_out[1];
-			result = result * INAMP_GAIN_COMP;
+			result = result * CH1_INAMP_GAIN_COMP;
 			break;
 		default:
 			break;
@@ -76,7 +76,7 @@ float AU_CalcCurrent(uint32_t Channel)
 			break;
 	}
 
-	if(result > 3)
+	if(result > 3.1)
 		DU_FullReset();
 
 	return result;

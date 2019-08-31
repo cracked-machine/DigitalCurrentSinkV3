@@ -8,8 +8,6 @@
 #include "SystemConstants.h"
 
 
-
-
 void SYS_Init()
 {
 	// TODO initialise ADC, DAC settings from registers

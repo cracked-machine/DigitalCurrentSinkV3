@@ -1078,11 +1078,11 @@ void _SetKeypadBuffer(double pValue)
 					// TODO Add warning to bottom screen
 				}
 				// user has entered a new Amperage value, convert to DAC output voltage
-				float new_current = DU_CalcVoltageFromOhmsLaw(DAC_CHANNEL_1, (float)keypad_buffer);
+				float new_dac_voltage = DU_CalcVoltageFromOhmsLaw(DAC_CHANNEL_1, (float)keypad_buffer);
+				DU_SetVoltagePreview(DAC_CHANNEL_1, new_dac_voltage);
 
-				DU_SetVoltagePreview(DAC_CHANNEL_1, new_current);
-				new_current = DU_CalcVoltageFromOhmsLaw(DAC_CHANNEL_2, (float)keypad_buffer);
-				DU_SetVoltagePreview(DAC_CHANNEL_2, new_current);
+				new_dac_voltage = DU_CalcVoltageFromOhmsLaw(DAC_CHANNEL_2, (float)keypad_buffer);
+				DU_SetVoltagePreview(DAC_CHANNEL_2, new_dac_voltage);
 
 			}
 			if(DU_GetDACModePreview(DU_GetActiveDACChannel()) != DAC_USER)

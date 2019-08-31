@@ -20,25 +20,31 @@
 /* DAC resolution */
 #define DACRES 				4096
 
+/* ADC Resolution */
+#define ADCRES				4095
+
 /* increment amounts for nudging voltage/frequency values */
 #define MAXFREQSTEP 		32
 #define MAXAMPSTEP 			1
 
-/* ADC Resolution */
-#define ADCRES				4095
+// adjust to match power resistor value, allows for variation according to tolerances
+#define CH0_PWR_RESISTOR	0.113
+#define CH1_PWR_RESISTOR	0.103
 
-#define CH0_PWR_RESISTOR	0.15
-#define CH1_PWR_RESISTOR	0.15
-
-/* gain compensation. must not be zero! */
-#define INAMP_GAIN_COMP		7.5
+/* instrumentation amp gain compensation.
+ * This can be done in HW using gain resistor or "fixed" here in SW
+ * Absolute minimum value is 1 */
+#define CH0_INAMP_GAIN_COMP		8.01
+#define CH1_INAMP_GAIN_COMP		7.57
 
 /* prescaler for RAND and AUTO modes. RAND PSC should be much larger than AUTO PSC */
 #define TIM_PSC_RANDMODE	16383
 #define TIM_PSC_AUTOMODE	1023
 
+// not used
 #define MAX_WATTAGE			36
 
+// not used
 void SYS_Init();
 
 #endif /* SYSTEMCONSTANTS_H_ */
