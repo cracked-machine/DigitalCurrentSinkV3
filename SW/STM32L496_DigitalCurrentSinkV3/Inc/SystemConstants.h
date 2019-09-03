@@ -28,8 +28,8 @@
 #define MAXAMPSTEP 			1
 
 // adjust to match power resistor value, allows for variation according to tolerances
-#define CH0_PWR_RESISTOR	0.113
-#define CH1_PWR_RESISTOR	0.103
+#define CH0_PWR_RESISTOR	0.110
+#define CH1_PWR_RESISTOR	0.10
 
 /* instrumentation amp gain compensation.
  * This can be done in HW using gain resistor or "fixed" here in SW
