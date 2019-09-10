@@ -26,7 +26,7 @@ F 3 "https://recom-power.com/pdf/Econoline/RS6.pdf" H 3275 4275 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L Regulator_Linear:LM7912_TO220 U4
+L ExternRegulatedConverter-rescue:LM7912_TO220-Regulator_Linear U4
 U 1 1 5CFB7C7C
 P 5525 4875
 F 0 "U4" H 5525 4725 50  0000 C CNN
@@ -37,7 +37,7 @@ F 3 "http://www.fairchildsemi.com/ds/LM/LM7905.pdf" H 5525 4875 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L Regulator_Linear:LM7812_TO220 U3
+L ExternRegulatedConverter-rescue:LM7812_TO220-Regulator_Linear U3
 U 1 1 5CFB7D75
 P 5525 3875
 F 0 "U3" H 5525 4117 50  0000 C CNN
@@ -479,7 +479,7 @@ Wire Wire Line
 Wire Wire Line
 	2075 1825 2375 1825
 $Comp
-L Regulator_Linear:LM7805_TO220 U2
+L ExternRegulatedConverter-rescue:LM7805_TO220-Regulator_Linear U2
 U 1 1 5D0A57CB
 P 4200 8225
 F 0 "U2" H 4200 8467 50  0000 C CNN
@@ -599,7 +599,7 @@ Wire Wire Line
 Connection ~ 3500 7225
 Connection ~ 4200 7225
 $Comp
-L Regulator_Linear:LM7812_TO220 U5
+L ExternRegulatedConverter-rescue:LM7812_TO220-Regulator_Linear U5
 U 1 1 5D121B10
 P 4200 6525
 F 0 "U5" H 4200 6767 50  0000 C CNN

@@ -1,0 +1,8 @@
+(fp_lib_table
+  (lib (name Grayhill-96AB2-102-F)(type KiCad)(uri ${KIPRJMOD}/lib/Grayhill-96AB2-102-F.pretty)(options "")(descr ""))
+  (lib (name DIYMORE_SSD1309)(type KiCad)(uri ${KIPRJMOD}/lib/DIYMORE_SSD1309.pretty)(options "")(descr ""))
+  (lib (name 1454P_OUTLINE)(type KiCad)(uri ${KIPRJMOD}/lib/1454P_OUTLINE.pretty)(options "")(descr ""))
+  (lib (name 1458G4_OUTLINE)(type KiCad)(uri ${KIPRJMOD}/lib/1458G4_OUTLINE.pretty)(options "")(descr ""))
+  (lib (name Omron_SPST_B3F-5050)(type KiCad)(uri ${KIPRJMOD}/lib/Omron_SPST_B3F-5050.pretty)(options "")(descr ""))
+  (lib (name 12x12x7_3mmTactilePushButtonMomentary)(type KiCad)(uri ${KIPRJMOD}/lib/12x12x7_3mmTactilePushButtonMomentary.pretty)(options "")(descr ""))
+)

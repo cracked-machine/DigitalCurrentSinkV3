@@ -1,0 +1,5 @@
+(sym_lib_table
+  (lib (name Tactile_SPST-NO)(type Legacy)(uri /Users/GB080220/workspace/circuits/ProgrammableSymmetricalCurrentSink/HW/STM32F103_ControlModule/lib/Tactile_SPST-NO.lib)(options "")(descr ""))
+  (lib (name LM4132)(type Legacy)(uri ${KIPRJMOD}/lib/LM4132.lib)(options "")(descr ""))
+  (lib (name ControlModule-rescue)(type Legacy)(uri ${KIPRJMOD}/ControlModule-rescue.lib)(options "")(descr ""))
+)

@@ -1,0 +1,5 @@
+(sym_lib_table
+  (lib (name DCConverters)(type Legacy)(uri /Users/GB080220/workspace/circuits/ProgrammableSymmetricalCurrentSink/HW/IsolatedThreeOutputSMPS/OutputFilteredConverters/lib/DCConverters.lib)(options "")(descr ""))
+  (lib (name ExternRegulatedConverter-rescue)(type Legacy)(uri ${KIPRJMOD}/ExternRegulatedConverter-rescue.lib)(options "")(descr ""))
+  (lib (name ExternRegulatedConverter_12D_12S_5S_DelayedStart-rescue)(type Legacy)(uri ${KIPRJMOD}/ExternRegulatedConverter_12D_12S_5S_DelayedStart-rescue.lib)(options "")(descr ""))
+)
