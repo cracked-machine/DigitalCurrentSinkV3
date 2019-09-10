@@ -1,22 +1,32 @@
 #include "ssd1306.h"
+#include "utils.h"
 
 #if defined(SSD1306_USE_I2C)
 
+uint16_t SSD1306_I2C_ADDR = 0x3D;
+
+
+void ssd1306_SetI2CAddress(uint16_t addr)
+{
+	SSD1306_I2C_ADDR = addr;
+}
+
 void ssd1306_Reset(void) {
+	//HAL_I2C_ClearBusyFlagErrata_2_14_7(&hi2c1);
 	/* for I2C - do nothing */
 }
 
 
 // Send a byte to the command register
 void ssd1306_WriteCommand(uint8_t byte) {
-	HAL_I2C_Mem_Write(&SSD1306_I2C_PORT, SSD1306_I2C_ADDR, 0x00, 1, &byte, 1, HAL_MAX_DELAY);
+	HAL_I2C_Mem_Write(&SSD1306_I2C_PORT, SSD1306_I2C_ADDR << 1, 0x00, 1, &byte, 1, HAL_MAX_DELAY);
 	//HAL_StatusTypeDef ret =  HAL_I2C_Mem_Write(&SSD1306_I2C_PORT, SSD1306_I2C_ADDR, 0x00, 1, &byte, 1, HAL_MAX_DELAY);
 	//printf("ssd1306_WriteCommand %d Status: %d\n", byte, ret);
 }
 
 // Send data
 void ssd1306_WriteData(uint8_t* buffer, size_t buff_size) {
-	HAL_I2C_Mem_Write(&SSD1306_I2C_PORT, SSD1306_I2C_ADDR, 0x40, 1, buffer, buff_size, HAL_MAX_DELAY);
+	HAL_I2C_Mem_Write(&SSD1306_I2C_PORT, SSD1306_I2C_ADDR << 1, 0x40, 1, buffer, buff_size, HAL_MAX_DELAY);
 }
 
 #elif defined(SSD1306_USE_SPI)
@@ -65,7 +75,7 @@ void ssd1306_Init(void) {
 	ssd1306_Reset();
 
     // Wait for the screen to boot
-    HAL_Delay(100);
+    HAL_Delay(3000);
     
     // Init OLED
     ssd1306_WriteCommand(0xAE); //display off

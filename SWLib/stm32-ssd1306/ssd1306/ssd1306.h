@@ -34,8 +34,11 @@
 #endif
 
 #ifndef SSD1306_I2C_ADDR
-#define SSD1306_I2C_ADDR        (0x3D << 1)
+
+//#define SSD1306_I2C_ADDR        (0x3D << 1)
 #endif
+
+void ssd1306_SetI2CAddress(uint16_t addr);
 
 /* ^^^ I2C config ^^^ */
 

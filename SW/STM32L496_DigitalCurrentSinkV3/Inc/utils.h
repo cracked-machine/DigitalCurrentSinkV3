@@ -26,6 +26,6 @@
 void Utils_Init();
 int _write(int file, char *ptr, int len);
 void Utils_i2c_scan();
-
+void HAL_I2C_ClearBusyFlagErrata_2_14_7(I2C_HandleTypeDef *hi2c);
 
 #endif /* UTILS_H_ */
