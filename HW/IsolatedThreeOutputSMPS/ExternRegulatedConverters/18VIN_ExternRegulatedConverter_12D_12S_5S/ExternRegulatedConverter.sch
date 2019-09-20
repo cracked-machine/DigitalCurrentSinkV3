@@ -322,9 +322,9 @@ L Device:D_Schottky D1
 U 1 1 5D0895FB
 P 1925 1825
 F 0 "D1" H 1925 1609 50  0000 C CNN
-F 1 "D_Schottky" H 1925 1700 50  0000 C CNN
+F 1 "BYS12-90-E3/TR" H 1925 1700 50  0000 C CNN
 F 2 "Diode_SMD:D_SMA_Handsoldering" H 1925 1825 50  0001 C CNN
-F 3 "~" H 1925 1825 50  0001 C CNN
+F 3 "https://www.vishay.com/docs/88950/bys12-90.pdf" H 1925 1825 50  0001 C CNN
 	1    1925 1825
 	-1   0    0    1   
 $EndComp
@@ -697,9 +697,9 @@ L Device:D D2
 U 1 1 5D9D1C3C
 P 3450 7250
 F 0 "D2" H 3450 7463 50  0000 C CNN
-F 1 "1N4001" H 3450 7374 50  0000 C CNN
+F 1 "ES2G" H 3450 7374 50  0000 C CNN
 F 2 "" H 3450 7250 50  0001 C CNN
-F 3 "~" H 3450 7250 50  0001 C CNN
+F 3 "https://www.vishay.com/docs/88588/es2f.pdf" H 3450 7250 50  0001 C CNN
 	1    3450 7250
 	1    0    0    -1  
 $EndComp
@@ -788,17 +788,6 @@ F 3 "~" H 4825 8150 50  0001 C CNN
 $EndComp
 Wire Wire Line
 	4050 8000 4050 7725
-$Comp
-L Device:D D3
-U 1 1 5DA01D35
-P 4050 8150
-F 0 "D3" V 4005 8229 50  0000 L CNN
-F 1 "1N4001" V 4094 8229 50  0000 L CNN
-F 2 "" H 4050 8150 50  0001 C CNN
-F 3 "~" H 4050 8150 50  0001 C CNN
-	1    4050 8150
-	0    1    1    0   
-$EndComp
 Wire Wire Line
 	3450 8525 3450 8750
 Connection ~ 3450 8525
@@ -808,17 +797,6 @@ Wire Wire Line
 	3450 8025 3450 8525
 Wire Wire Line
 	4050 8525 3450 8525
-$Comp
-L Device:D D4
-U 1 1 5DA96FCE
-P 5900 8500
-F 0 "D4" V 5855 8579 50  0000 L CNN
-F 1 "1N4001" V 5944 8579 50  0000 L CNN
-F 2 "" H 5900 8500 50  0001 C CNN
-F 3 "~" H 5900 8500 50  0001 C CNN
-	1    5900 8500
-	0    1    1    0   
-$EndComp
 Wire Wire Line
 	5900 8350 5900 7725
 Connection ~ 5900 7725
@@ -829,4 +807,26 @@ Wire Wire Line
 Wire Wire Line
 	5900 9225 5375 9225
 Connection ~ 5375 9225
+$Comp
+L Device:D D?
+U 1 1 5D85587B
+P 4050 8150
+F 0 "D?" H 4050 8363 50  0000 C CNN
+F 1 "ES2G" H 4050 8274 50  0000 C CNN
+F 2 "" H 4050 8150 50  0001 C CNN
+F 3 "https://www.vishay.com/docs/88588/es2f.pdf" H 4050 8150 50  0001 C CNN
+	1    4050 8150
+	0    1    1    0   
+$EndComp
+$Comp
+L Device:D D?
+U 1 1 5D8561FF
+P 5900 8500
+F 0 "D?" H 5900 8713 50  0000 C CNN
+F 1 "ES2G" H 5900 8624 50  0000 C CNN
+F 2 "" H 5900 8500 50  0001 C CNN
+F 3 "https://www.vishay.com/docs/88588/es2f.pdf" H 5900 8500 50  0001 C CNN
+	1    5900 8500
+	0    1    1    0   
+$EndComp
 $EndSCHEMATC
