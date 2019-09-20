@@ -32,14 +32,17 @@ void Utils_Init()
 {
 
 
-	//printf("Initialising Display...\n");
-	Utils_i2c_scan();
-	ssd1306_Init();
+
 
 	//HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_7);
 	// start DAC and associated timers
 	HAL_TIM_Base_Start_IT(&htim6);
 	HAL_TIM_Base_Start_IT(&htim7);
+
+	HAL_Delay(3000);	// I2C needs to delay before initializing the display
+	//printf("Initialising Display...\n");
+		Utils_i2c_scan();
+		ssd1306_Init();
 
 	DAC_ChannelConfTypeDef sConfig = {0};
 	HAL_DACEx_SelfCalibrate(&hdac1, &sConfig, DAC_CHANNEL_1);
@@ -52,7 +55,7 @@ void Utils_Init()
 	DU_SetVoltagePreview(DAC_CHANNEL_2, 0.0f);
 	DU_SetVoltage(DAC_CHANNEL_2);
 
-	//HAL_Delay(2000);	// I2C needs to delay before initializing the display
+
 
 
 
@@ -67,7 +70,6 @@ void Utils_Init()
 
 	HAL_ADCEx_Calibration_Start(&hadc1, ADC_SINGLE_ENDED);
 	HAL_ADC_Start_DMA(&hadc1, AU_GetADCOut(), 2);
-
 
 
 }
@@ -106,6 +108,7 @@ void Utils_i2c_scan() {
     }
     if(!DeviceFound)
     {
+
     	printf("%s\n", notFound);
     	printf("No device found\n");
     }

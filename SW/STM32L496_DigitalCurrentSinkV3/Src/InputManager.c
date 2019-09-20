@@ -927,7 +927,7 @@ void IM_MenuEXTIHandler()
 		}
 
 	}
-	else if(HAL_GPIO_ReadPin(GPIOD, Btn4_EXT13_Pin) == GPIO_PIN_RESET)
+else if(HAL_GPIO_ReadPin(GPIOD, Btn4_EXT13_Pin) == GPIO_PIN_RESET)
 	{
 		// MENU BUTTON 4
 
@@ -981,6 +981,7 @@ void IM_MenuEXTIHandler()
 
 		}
 	}
+
 }
 
 /**

@@ -308,7 +308,7 @@
   )
 
   (module MountingHole:MountingHole_8.4mm_M8 (layer F.Cu) (tedit 5D77C8C7) (tstamp 5D7815E6)
-    (at 241.3 110.109)
+    (at 240.03 110.109)
     (descr "Mounting Hole 8.4mm, no annular, M8")
     (tags "mounting hole 8.4mm no annular m8")
     (attr virtual)
@@ -327,7 +327,7 @@
   )
 
   (module MountingHole:MountingHole_8.4mm_M8 (layer F.Cu) (tedit 5D77C8C2) (tstamp 5D7815D1)
-    (at 241.3 90.043)
+    (at 240.03 90.043)
     (descr "Mounting Hole 8.4mm, no annular, M8")
     (tags "mounting hole 8.4mm no annular m8")
     (attr virtual)
@@ -346,7 +346,7 @@
   )
 
   (module MountingHole:MountingHole_8.4mm_M8 (layer F.Cu) (tedit 5D77C8BD) (tstamp 5D7815BC)
-    (at 241.3 69.723)
+    (at 240.03 69.723)
     (descr "Mounting Hole 8.4mm, no annular, M8")
     (tags "mounting hole 8.4mm no annular m8")
     (attr virtual)
