@@ -1,4 +1,4 @@
 (fp_lib_table
-  (lib (name ITX1212S)(type KiCad)(uri ${KIPRJMOD}/lib/ITX1212S.pretty)(options "")(descr ""))
   (lib (name RKZE-1205S)(type KiCad)(uri ${KIPRJMOD}/lib/RKZE-1205S.pretty)(options "")(descr ""))
+  (lib (name RS6)(type KiCad)(uri ${KIPRJMOD}/lib/RS6.pretty)(options "")(descr ""))
 )

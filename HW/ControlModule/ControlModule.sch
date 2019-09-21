@@ -5,11 +5,11 @@ EELAYER END
 $Descr A4 11693 8268
 encoding utf-8
 Sheet 1 2
-Title ""
+Title "System Overview"
 Date "2019-04-11"
-Rev "B"
+Rev "C"
 Comp ""
-Comment1 ""
+Comment1 "Nominal Current Draw: 110mA"
 Comment2 ""
 Comment3 ""
 Comment4 ""

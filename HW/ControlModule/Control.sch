@@ -5,9 +5,9 @@ EELAYER END
 $Descr A2 23386 16535
 encoding utf-8
 Sheet 2 2
-Title ""
+Title "System Detail"
 Date ""
-Rev ""
+Rev "C"
 Comp ""
 Comment1 ""
 Comment2 ""

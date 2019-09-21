@@ -122,7 +122,7 @@ L Device:R R6
 U 1 1 5C9DC714
 P 19100 8200
 F 0 "R6" V 19175 8125 50  0000 L CNN
-F 1 "4K7" V 19100 8125 50  0000 L CNN
+F 1 "0R" V 19100 8125 50  0000 L CNN
 F 2 "Resistor_SMD:R_0805_2012Metric_Pad1.15x1.40mm_HandSolder" V 19030 8200 50  0001 C CNN
 F 3 "~" H 19100 8200 50  0001 C CNN
 	1    19100 8200
@@ -133,7 +133,7 @@ L Device:R R7
 U 1 1 5C9E1083
 P 19100 8500
 F 0 "R7" V 19200 8450 50  0000 L CNN
-F 1 "4K7" V 19100 8425 50  0000 L CNN
+F 1 "0R" V 19100 8425 50  0000 L CNN
 F 2 "Resistor_SMD:R_0805_2012Metric_Pad1.15x1.40mm_HandSolder" V 19030 8500 50  0001 C CNN
 F 3 "~" H 19100 8500 50  0001 C CNN
 	1    19100 8500
@@ -436,7 +436,7 @@ L Device:C C24
 U 1 1 5CADBA23
 P 20150 9250
 F 0 "C24" H 20036 9204 50  0000 R CNN
-F 1 "1pF" H 20036 9295 50  0000 R CNN
+F 1 "0pF" H 20036 9295 50  0000 R CNN
 F 2 "Capacitor_SMD:C_0805_2012Metric_Pad1.15x1.40mm_HandSolder" H 20188 9100 50  0001 C CNN
 F 3 "~" H 20150 9250 50  0001 C CNN
 	1    20150 9250
@@ -447,7 +447,7 @@ L Device:C C25
 U 1 1 5CADBAAE
 P 20500 9250
 F 0 "C25" H 20615 9296 50  0000 L CNN
-F 1 "1pF" H 20615 9205 50  0000 L CNN
+F 1 "0pF" H 20615 9205 50  0000 L CNN
 F 2 "Capacitor_SMD:C_0805_2012Metric_Pad1.15x1.40mm_HandSolder" H 20538 9100 50  0001 C CNN
 F 3 "~" H 20500 9250 50  0001 C CNN
 	1    20500 9250
@@ -2653,6 +2653,6 @@ F 3 "http://www.st.com/st-web-ui/static/active/en/resource/technical/document/da
 	1    0    0    -1  
 $EndComp
 NoConn ~ 11900 5800
-Text Notes 18675 9650 0    50   ~ 0
-NOTE:\nIncreasing C24/C25 will increase \npower cycle delay time
+Text Notes 19150 7875 0    50   ~ 0
+Passives footprint to be left empty\nif direct PCB connection is used.
 $EndSCHEMATC
