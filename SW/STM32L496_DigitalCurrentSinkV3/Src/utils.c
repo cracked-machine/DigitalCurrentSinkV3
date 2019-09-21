@@ -39,10 +39,7 @@ void Utils_Init()
 	HAL_TIM_Base_Start_IT(&htim6);
 	HAL_TIM_Base_Start_IT(&htim7);
 
-	HAL_Delay(3000);	// I2C needs to delay before initializing the display
-	//printf("Initialising Display...\n");
-		Utils_i2c_scan();
-		ssd1306_Init();
+
 
 	DAC_ChannelConfTypeDef sConfig = {0};
 	HAL_DACEx_SelfCalibrate(&hdac1, &sConfig, DAC_CHANNEL_1);
@@ -56,7 +53,10 @@ void Utils_Init()
 	DU_SetVoltage(DAC_CHANNEL_2);
 
 
-
+	HAL_Delay(2000);	// I2C needs to delay before initializing the display
+	//printf("Initialising Display...\n");
+		Utils_i2c_scan();
+		ssd1306_Init();
 
 
 	// OLED display timer
