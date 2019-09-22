@@ -1,4 +1,4 @@
-(kicad_pcb (version 20171130) (host pcbnew "(5.1.2-1)-1")
+(kicad_pcb (version 20171130) (host pcbnew "(5.1.2)-2")
 
   (general
     (thickness 1.6)
@@ -388,12 +388,12 @@
   (gr_line (start 129.413 110.871) (end 129.413 81.534) (layer Edge.Cuts) (width 0.15))
   (gr_line (start 185.674 110.871) (end 129.413 110.871) (layer Edge.Cuts) (width 0.15))
   (gr_line (start 72.3646 61.3156) (end 72.3646 58.674) (layer Dwgs.User) (width 0.15) (tstamp 5D77B289))
-  (gr_line (start 104.4575 113.0935) (end 104.4575 55.9435) (layer Edge.Cuts) (width 0.15) (tstamp 5D77AE59))
+  (gr_line (start 104.4575 113.157) (end 104.4575 55.88) (layer Edge.Cuts) (width 0.15) (tstamp 5D77AE59))
   (gr_line (start 90.2462 61.3156) (end 72.3646 61.3156) (layer Dwgs.User) (width 0.15))
-  (gr_line (start 58.1025 113.0935) (end 104.4575 113.0935) (layer Edge.Cuts) (width 0.15) (tstamp 5D77ADFB))
+  (gr_line (start 58.1025 113.157) (end 104.4575 113.157) (layer Edge.Cuts) (width 0.15) (tstamp 5D77ADFB))
   (gr_line (start 72.3646 58.674) (end 90.2462 58.674) (layer Dwgs.User) (width 0.15))
-  (gr_line (start 58.1025 55.9435) (end 104.4575 55.9435) (layer Edge.Cuts) (width 0.15) (tstamp 5D77ADD2))
-  (gr_line (start 58.1025 113.0935) (end 58.1025 55.9435) (layer Edge.Cuts) (width 0.15))
+  (gr_line (start 58.1025 55.88) (end 104.4575 55.88) (layer Edge.Cuts) (width 0.15) (tstamp 5D77ADD2))
+  (gr_line (start 58.1025 113.157) (end 58.1025 55.88) (layer Edge.Cuts) (width 0.15))
   (gr_line (start 58.166 59.944) (end 104.394 59.944) (layer Dwgs.User) (width 0.15))
   (gr_line (start 81.3054 61.7982) (end 81.3054 57.023) (layer Dwgs.User) (width 0.15))
   (gr_line (start 90.2462 58.674) (end 90.2462 61.3156) (layer Dwgs.User) (width 0.15))
