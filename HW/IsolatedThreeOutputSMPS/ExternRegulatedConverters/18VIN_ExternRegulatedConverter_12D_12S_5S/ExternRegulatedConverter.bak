@@ -269,12 +269,12 @@ Wire Wire Line
 $Comp
 L power:+5V #PWR011
 U 1 1 5D074863
-P 5300 1525
-F 0 "#PWR011" H 5300 1375 50  0001 C CNN
-F 1 "+5V" H 5315 1698 50  0000 C CNN
-F 2 "" H 5300 1525 50  0001 C CNN
-F 3 "" H 5300 1525 50  0001 C CNN
-	1    5300 1525
+P 5600 1475
+F 0 "#PWR011" H 5600 1325 50  0001 C CNN
+F 1 "+5V" H 5615 1648 50  0000 C CNN
+F 2 "" H 5600 1475 50  0001 C CNN
+F 3 "" H 5600 1475 50  0001 C CNN
+	1    5600 1475
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
@@ -462,16 +462,16 @@ $EndComp
 $Comp
 L power:+15V #PWR013
 U 1 1 5D9B4E3F
-P 5600 1475
-F 0 "#PWR013" H 5600 1325 50  0001 C CNN
-F 1 "+15V" H 5615 1646 50  0000 C CNN
-F 2 "" H 5600 1475 50  0001 C CNN
-F 3 "" H 5600 1475 50  0001 C CNN
-	1    5600 1475
+P 5300 1525
+F 0 "#PWR013" H 5300 1375 50  0001 C CNN
+F 1 "+15V" H 5315 1696 50  0000 C CNN
+F 2 "" H 5300 1525 50  0001 C CNN
+F 3 "" H 5300 1525 50  0001 C CNN
+	1    5300 1525
 	1    0    0    -1  
 $EndComp
 Text Notes 6325 2650 0    50   ~ 0
-Pin Assignments:\n———————————\n1. Analog +12V\n2. Isolated GND\n3. Analog -12V\n4. Digital +5V\n5. Common GND\n6. Fan +15V\n7. Common GND\n\nPSU Module Nominal Current Usage:               65mA\n\nPSU Current Requirements:\n——————————————————\n\nA) Analog +/-12V   —>   CurrentSinkModule:   30mA\nB) Digital +5V       —>   ControlModule:       100mA\nC) +15V Fans        —>   Fans (x4):           150mA (700mA)
+Pin Assignments:\n———————————\n1. Analog +12V\n2. Isolated GND\n3. Analog -12V\n4. Fan +15V\n5. Common GND\n6. Digital +5V\n7. Common GND\n\nPSU Module Nominal Current Usage:               65mA\n\nPSU Current Requirements:\n——————————————————\n\nA) Analog +/-12V   —>   CurrentSinkModule:   30mA\nB) Digital +5V       —>   ControlModule:       100mA\nC) +15V Fans        —>   Fans (x4):           150mA (700mA)
 $Comp
 L power:GNDS #PWR014
 U 1 1 5D9BBD9E
@@ -934,10 +934,10 @@ U6 JC Power Dissipation: (24V-18V) * 0.7A = 4.2W \nU6 JC Temp: 5 * 4.2 = 21 degC
 Text Notes 7150 11300 0    50   ~ 0
 U7 JC Power Dissipation: (18V-15V) * 0.7A = 2.1W \nU7 JC Temp: 3 * 2.1 = 6.3 degC\n  \nHS3 Temp = 2.1 * 5.5 = 11.5 degC\n\nTotal U7 Temp = 30 + 6.3C + 11.5 = 47.8 degC
 $Comp
-L power:PWR_FLAG #FLG?
+L power:PWR_FLAG #FLG0104
 U 1 1 5D9F43DD
 P 6525 5175
-F 0 "#FLG?" H 6525 5250 50  0001 C CNN
+F 0 "#FLG0104" H 6525 5250 50  0001 C CNN
 F 1 "PWR_FLAG" H 6525 5348 50  0000 C CNN
 F 2 "" H 6525 5175 50  0001 C CNN
 F 3 "~" H 6525 5175 50  0001 C CNN

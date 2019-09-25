@@ -361,7 +361,7 @@ Wire Wire Line
 Wire Wire Line
 	5525 5875 5800 5875
 $Comp
-L Regulator_Linear:LM7812_TO220 U2
+L ExternRegulatedConverter-rescue:LM7812_TO220-Regulator_Linear U2
 U 1 1 5D8AD9F3
 P 7150 5175
 F 0 "U2" H 7150 5414 50  0000 C CNN
@@ -372,7 +372,7 @@ F 3 "http://www.fairchildsemi.com/ds/LM/LM7805.pdf" H 7150 5125 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L Regulator_Linear:LM7912_TO220 U3
+L ExternRegulatedConverter-rescue:LM7912_TO220-Regulator_Linear U3
 U 1 1 5D8B3C95
 P 7150 6175
 F 0 "U3" H 7150 6026 50  0000 C CNN
@@ -569,7 +569,7 @@ F 3 "~" H 7325 8700 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L Regulator_Linear:LM7805_TO220 U5
+L ExternRegulatedConverter-rescue:LM7805_TO220-Regulator_Linear U5
 U 1 1 5D9569CB
 P 6825 8425
 F 0 "U5" H 6825 8667 50  0000 C CNN
@@ -675,7 +675,7 @@ Wire Notes Line
 Wire Notes Line
 	10875 9750 1200 9750
 $Comp
-L Regulator_Linear:LM7818_TO220 U6
+L ExternRegulatedConverter-rescue:LM7818_TO220-Regulator_Linear U6
 U 1 1 5DB04640
 P 5175 12200
 F 0 "U6" H 5175 12442 50  0000 C CNN
@@ -688,7 +688,7 @@ F 5 "793-1352" H 5175 12200 50  0001 C CNN "RSComponentsNo"
 	1    0    0    -1  
 $EndComp
 $Comp
-L Regulator_Linear:LM7815_TO220 U7
+L ExternRegulatedConverter-rescue:LM7815_TO220-Regulator_Linear U7
 U 1 1 5DB0595F
 P 7750 12200
 F 0 "U7" H 7750 12442 50  0000 C CNN
