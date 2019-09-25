@@ -53,7 +53,7 @@ void Utils_Init()
 	DU_SetVoltage(DAC_CHANNEL_2);
 
 
-	HAL_Delay(2000);	// I2C needs to delay before initializing the display
+	HAL_Delay(3000);	// I2C needs to delay before initializing the display
 	//printf("Initialising Display...\n");
 		Utils_i2c_scan();
 		ssd1306_Init();
