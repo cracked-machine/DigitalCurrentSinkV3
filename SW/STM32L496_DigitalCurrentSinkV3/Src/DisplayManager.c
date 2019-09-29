@@ -838,7 +838,7 @@ void _DrawDAC1Value(uint8_t preview)
 				snprintf(dac1cnt, sizeof(dac1cnt), "%2.3fA", DU_CalcCurrentFromOhmsLaw(DAC_CHANNEL_1, 0));
 				break;
 			case SHOWVOLT:
-				snprintf(dac1cnt, sizeof(dac1cnt), "%2.3fV", DU_CalcVoltsFromBits(DAC_CHANNEL_1, 0));
+				snprintf(dac1cnt, sizeof(dac1cnt), "%2.4fV", DU_CalcVoltsFromBits(DAC_CHANNEL_1, 0));
 				break;
 			case SHOWBITS:
 				snprintf(dac1cnt, sizeof(dac1cnt), "%lu", DU_GetDATDOR(DAC_CHANNEL_1));
@@ -919,7 +919,7 @@ void _DrawDAC2Value(uint8_t preview)
 				snprintf(dac2cnt, sizeof(dac2cnt), "%2.3fA", DU_CalcCurrentFromOhmsLaw(DAC_CHANNEL_2, 0));
 				break;
 			case SHOWVOLT:
-				snprintf(dac2cnt, sizeof(dac2cnt), "%2.3fV", DU_CalcVoltsFromBits(DAC_CHANNEL_2, 0));
+				snprintf(dac2cnt, sizeof(dac2cnt), "%2.4fV", DU_CalcVoltsFromBits(DAC_CHANNEL_2, 0));
 				break;
 			case SHOWBITS:
 				snprintf(dac2cnt, sizeof(dac2cnt), "%lu", DU_GetDATDOR(DAC_CHANNEL_2));

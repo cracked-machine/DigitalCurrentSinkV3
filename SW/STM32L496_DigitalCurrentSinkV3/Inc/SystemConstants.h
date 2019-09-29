@@ -28,14 +28,14 @@
 #define MAXAMPSTEP 			1
 
 // adjust to match power resistor value, allows for variation according to tolerances
-#define CH0_PWR_RESISTOR	0.110
-#define CH1_PWR_RESISTOR	0.10
+#define CH0_PWR_RESISTOR	0.131 // positive N-channel
+#define CH1_PWR_RESISTOR	0.12 // negative P-channel
 
 /* instrumentation amp gain compensation.
  * This can be done in HW using gain resistor or "fixed" here in SW
  * Absolute minimum value is 1 */
-#define CH0_INAMP_GAIN_COMP		8.01
-#define CH1_INAMP_GAIN_COMP		7.57
+#define CH0_INAMP_GAIN_COMP		8.1
+#define CH1_INAMP_GAIN_COMP		7.5
 
 /* prescaler for RAND and AUTO modes. RAND PSC should be much larger than AUTO PSC */
 #define TIM_PSC_RANDMODE	16383
