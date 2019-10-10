@@ -1,26 +1,11 @@
 EESchema-LIBRARY Version 2.4
 #encoding utf-8
 #
-# +18V-power
+# LM7805_TO220-Regulator_Linear-ExternRegulatedConverter-rescue
 #
-DEF +18V-power #PWR 0 0 Y Y 1 F P
-F0 "#PWR" 0 -150 50 H I C CNN
-F1 "+18V-power" 0 140 50 H V C CNN
-F2 "" 0 0 50 H I C CNN
-F3 "" 0 0 50 H I C CNN
-DRAW
-P 2 0 1 0 -30 50 0 100 N
-P 2 0 1 0 0 0 0 100 N
-P 2 0 1 0 0 100 30 50 N
-X +15V 1 0 0 0 U 50 50 1 1 W N
-ENDDRAW
-ENDDEF
-#
-# LM7805_TO220-Regulator_Linear
-#
-DEF LM7805_TO220-Regulator_Linear U 0 10 Y Y 1 F N
+DEF LM7805_TO220-Regulator_Linear-ExternRegulatedConverter-rescue U 0 10 Y Y 1 F N
 F0 "U" -150 125 50 H V C CNN
-F1 "LM7805_TO220-Regulator_Linear" 0 125 50 H V L CNN
+F1 "LM7805_TO220-Regulator_Linear-ExternRegulatedConverter-rescue" 0 125 50 H V L CNN
 F2 "Package_TO_SOT_THT:TO-220-3_Vertical" 0 225 50 H I C CIN
 F3 "" 0 -50 50 H I C CNN
 $FPLIST
@@ -34,11 +19,11 @@ X VO 3 300 0 100 L 50 50 1 1 w
 ENDDRAW
 ENDDEF
 #
-# LM7812_TO220-Regulator_Linear
+# LM7812_TO220-Regulator_Linear-ExternRegulatedConverter-rescue
 #
-DEF LM7812_TO220-Regulator_Linear U 0 10 Y Y 1 F N
+DEF LM7812_TO220-Regulator_Linear-ExternRegulatedConverter-rescue U 0 10 Y Y 1 F N
 F0 "U" -150 125 50 H V C CNN
-F1 "LM7812_TO220-Regulator_Linear" 0 125 50 H V L CNN
+F1 "LM7812_TO220-Regulator_Linear-ExternRegulatedConverter-rescue" 0 125 50 H V L CNN
 F2 "Package_TO_SOT_THT:TO-220-3_Vertical" 0 225 50 H I C CIN
 F3 "" 0 -50 50 H I C CNN
 $FPLIST
@@ -52,11 +37,11 @@ X VO 3 300 0 100 L 50 50 1 1 w
 ENDDRAW
 ENDDEF
 #
-# LM7815_TO220-Regulator_Linear
+# LM7815_TO220-Regulator_Linear-ExternRegulatedConverter-rescue
 #
-DEF LM7815_TO220-Regulator_Linear U 0 10 Y Y 1 F N
+DEF LM7815_TO220-Regulator_Linear-ExternRegulatedConverter-rescue U 0 10 Y Y 1 F N
 F0 "U" -150 125 50 H V C CNN
-F1 "LM7815_TO220-Regulator_Linear" 0 125 50 H V L CNN
+F1 "LM7815_TO220-Regulator_Linear-ExternRegulatedConverter-rescue" 0 125 50 H V L CNN
 F2 "Package_TO_SOT_THT:TO-220-3_Vertical" 0 225 50 H I C CIN
 F3 "" 0 -50 50 H I C CNN
 $FPLIST
@@ -70,11 +55,11 @@ X VO 3 300 0 100 L 50 50 1 1 w
 ENDDRAW
 ENDDEF
 #
-# LM7818_TO220-Regulator_Linear
+# LM7818_TO220-Regulator_Linear-ExternRegulatedConverter-rescue
 #
-DEF LM7818_TO220-Regulator_Linear U 0 10 Y Y 1 F N
+DEF LM7818_TO220-Regulator_Linear-ExternRegulatedConverter-rescue U 0 10 Y Y 1 F N
 F0 "U" -150 125 50 H V C CNN
-F1 "LM7818_TO220-Regulator_Linear" 0 125 50 H V L CNN
+F1 "LM7818_TO220-Regulator_Linear-ExternRegulatedConverter-rescue" 0 125 50 H V L CNN
 F2 "Package_TO_SOT_THT:TO-220-3_Vertical" 0 225 50 H I C CIN
 F3 "" 0 -50 50 H I C CNN
 $FPLIST
@@ -88,11 +73,11 @@ X VO 3 300 0 100 L 50 50 1 1 w
 ENDDRAW
 ENDDEF
 #
-# LM7912_TO220-Regulator_Linear
+# LM7912_TO220-Regulator_Linear-ExternRegulatedConverter-rescue
 #
-DEF LM7912_TO220-Regulator_Linear U 0 10 Y Y 1 F N
+DEF LM7912_TO220-Regulator_Linear-ExternRegulatedConverter-rescue U 0 10 Y Y 1 F N
 F0 "U" -150 -125 50 H V C CNN
-F1 "LM7912_TO220-Regulator_Linear" 0 -125 50 H V L CNN
+F1 "LM7912_TO220-Regulator_Linear-ExternRegulatedConverter-rescue" 0 -125 50 H V L CNN
 F2 "Package_TO_SOT_THT:TO-220-3_Vertical" 0 -200 50 H I C CIN
 F3 "" 0 0 50 H I C CNN
 $FPLIST
@@ -103,25 +88,6 @@ S -200 200 200 -75 0 1 10 f
 X GND 1 0 300 100 D 50 50 1 1 W
 X VI 2 -300 0 100 R 50 50 1 1 W
 X VO 3 300 0 100 L 50 50 1 1 w
-ENDDRAW
-ENDDEF
-#
-# RS6-1212D-DCConverters
-#
-DEF RS6-1212D-DCConverters U 0 40 Y Y 1 F N
-F0 "U" 0 650 50 H V C CNN
-F1 "RS6-1212D-DCConverters" 0 550 50 H V C CNN
-F2 "" 0 0 50 H I C CNN
-F3 "" 0 0 50 H I C CNN
-DRAW
-S -300 400 300 -400 0 1 0 N
-X -Vin 1 -500 -300 200 R 50 50 1 1 P
-X +Vin 2 -500 0 200 R 50 50 1 1 P
-X CTRL 3 -500 300 200 R 50 50 1 1 P
-X NC 5 500 300 200 L 50 50 1 1 N
-X +Vout 6 500 100 200 L 50 50 1 1 P
-X COM 7 500 -100 200 L 50 50 1 1 P
-X -Vout 8 500 -300 200 L 50 50 1 1 P
 ENDDRAW
 ENDDEF
 #
