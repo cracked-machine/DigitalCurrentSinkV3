@@ -102,7 +102,7 @@ void Utils_i2c_scan() {
         }
         if(res == HAL_ERROR)
         {
-        	snprintf(notFound + strlen(notFound), sizeof("."), "%s", ".");
+        	//printf("%d: No device found\n", i);
 
         }
     }
