@@ -76,8 +76,8 @@ float AU_CalcCurrent(uint32_t Channel)
 			break;
 	}
 
-	if(result > 3.1)
-		DU_FullReset();
+//	if(result > 3.1)
+//		DU_FullReset();
 
 	return result;
 }
