@@ -1,0 +1,65 @@
+EESchema Schematic File Version 4
+LIBS:24VIN_ExternRegulatedConverter_12D_24S_5S-cache
+EELAYER 30 0
+EELAYER END
+$Descr A4 11693 8268
+encoding utf-8
+Sheet 2 2
+Title ""
+Date ""
+Rev ""
+Comp ""
+Comment1 ""
+Comment2 ""
+Comment3 ""
+Comment4 ""
+$EndDescr
+$Comp
+L power:PWR_FLAG #FLG05
+U 1 1 5D497D1D
+P 6200 3350
+F 0 "#FLG05" H 6200 3425 50  0001 C CNN
+F 1 "PWR_FLAG" H 6200 3521 50  0000 C CNN
+F 2 "" H 6200 3350 50  0001 C CNN
+F 3 "~" H 6200 3350 50  0001 C CNN
+	1    6200 3350
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	6200 3675 6200 3350
+$Comp
+L power:PWR_FLAG #FLG04
+U 1 1 5D497A82
+P 5750 3350
+F 0 "#FLG04" H 5750 3425 50  0001 C CNN
+F 1 "PWR_FLAG" H 5750 3521 50  0000 C CNN
+F 2 "" H 5750 3350 50  0001 C CNN
+F 3 "~" H 5750 3350 50  0001 C CNN
+	1    5750 3350
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	5750 3650 5750 3350
+$Comp
+L power:GNDS #PWR025
+U 1 1 5D492EAD
+P 5750 3650
+F 0 "#PWR025" H 5750 3400 50  0001 C CNN
+F 1 "GNDS" H 5755 3479 50  0000 C CNN
+F 2 "" H 5750 3650 50  0001 C CNN
+F 3 "" H 5750 3650 50  0001 C CNN
+	1    5750 3650
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:VCOM #PWR026
+U 1 1 5D492B31
+P 6200 3675
+F 0 "#PWR026" H 6200 3525 50  0001 C CNN
+F 1 "VCOM" H 6218 3846 50  0000 C CNN
+F 2 "" H 6200 3675 50  0001 C CNN
+F 3 "" H 6200 3675 50  0001 C CNN
+	1    6200 3675
+	-1   0    0    1   
+$EndComp
+$EndSCHEMATC

@@ -1,0 +1,6 @@
+(fp_lib_table
+  (lib (name RKZE-1205S)(type KiCad)(uri ${KIPRJMOD}/lib/RKZE-1205S.pretty)(options "")(descr ""))
+  (lib (name RS6)(type KiCad)(uri ${KIPRJMOD}/lib/RS6.pretty)(options "")(descr ""))
+  (lib (name XPower_Converter_DCDC)(type KiCad)(uri ${KIPRJMOD}/lib/RS6.pretty/XPower_Converter_DCDC.pretty)(options "")(descr ""))
+  (lib (name FischerElektronikHeatsinks)(type KiCad)(uri ${KIPRJMOD}/lib/FischerElektronikHeatsinks.pretty)(options "")(descr ""))
+)
