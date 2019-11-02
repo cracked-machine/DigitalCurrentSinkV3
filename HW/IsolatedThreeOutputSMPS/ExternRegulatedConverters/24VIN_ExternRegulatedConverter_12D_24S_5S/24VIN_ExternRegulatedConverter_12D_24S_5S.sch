@@ -780,11 +780,11 @@ L Transistor_FET:IRF9540N Q1
 U 1 1 5DBFB79C
 P 3450 2425
 F 0 "Q1" V 3793 2425 50  0000 C CNN
-F 1 "IRF9540N" V 3702 2425 50  0000 C CNN
+F 1 "IPP80P03P4L04AKSA1 " V 3702 2425 50  0000 C CNN
 F 2 "Package_TO_SOT_THT:TO-220-3_Vertical" H 3650 2350 50  0001 L CIN
 F 3 "http://www.irf.com/product-info/datasheets/data/irf9540n.pdf" H 3450 2425 50  0001 L CNN
 	1    3450 2425
-	0    1    -1   0   
+	0    -1   -1   0   
 $EndComp
 Wire Wire Line
 	3650 2325 3900 2325
@@ -852,7 +852,7 @@ U 1 1 5DC97D14
 P 7050 6775
 F 0 "U2" H 7050 6626 50  0000 C CNN
 F 1 "L79L12_TO92" H 7050 6535 50  0000 C CNN
-F 2 "Package_TO_SOT_THT:TO-92_Inline" H 7050 6575 50  0001 C CIN
+F 2 "Package_TO_SOT_THT:TO-92_Inline_Wide" H 7050 6575 50  0001 C CIN
 F 3 "http://www.farnell.com/datasheets/1827870.pdf" H 7050 6775 50  0001 C CNN
 	1    7050 6775
 	1    0    0    -1  
@@ -863,7 +863,7 @@ U 1 1 5DC988B3
 P 7050 5775
 F 0 "U1" H 7050 6017 50  0000 C CNN
 F 1 "L78L12_TO92" H 7050 5926 50  0000 C CNN
-F 2 "Package_TO_SOT_THT:TO-92_Inline" H 7050 6000 50  0001 C CIN
+F 2 "Package_TO_SOT_THT:TO-92_Inline_Wide" H 7050 6000 50  0001 C CIN
 F 3 "http://www.st.com/content/ccc/resource/technical/document/datasheet/15/55/e5/aa/23/5b/43/fd/CD00000446.pdf/files/CD00000446.pdf/jcr:content/translations/en.CD00000446.pdf" H 7050 5725 50  0001 C CNN
 	1    7050 5775
 	1    0    0    -1  

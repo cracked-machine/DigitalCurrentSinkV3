@@ -2807,10 +2807,10 @@ Expect increasing negative voltage on TP10 and TP12 as U4A output voltage increa
 Text Notes 17400 9500 0    100  ~ 0
 Expect increasing positive voltage on TP8 and TP11 as U3A output voltage increases. \nTP7 should remain at GND (some offset normal).
 $Comp
-L Device:R R27
+L Device:R R?
 U 1 1 5DBFA5D9
 P 3200 6800
-F 0 "R27" H 3075 6775 50  0000 C CNN
+F 0 "R?" H 3075 6775 50  0000 C CNN
 F 1 "10K" H 3050 6875 50  0000 C CNN
 F 2 "Resistor_SMD:R_0402_1005Metric" V 3130 6800 50  0001 C CNN
 F 3 "~" H 3200 6800 50  0001 C CNN
@@ -2827,10 +2827,10 @@ Connection ~ 4750 7500
 Wire Wire Line
 	4750 7500 4750 7375
 $Comp
-L Device:R R28
+L Device:R R?
 U 1 1 5DC3AA56
 P 3200 15850
-F 0 "R28" H 3050 15800 50  0000 C CNN
+F 0 "R?" H 3050 15800 50  0000 C CNN
 F 1 "10K" H 3050 15900 50  0000 C CNN
 F 2 "Resistor_SMD:R_0402_1005Metric" V 3130 15850 50  0001 C CNN
 F 3 "~" H 3200 15850 50  0001 C CNN
