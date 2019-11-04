@@ -55,8 +55,14 @@ void Utils_Init()
 
 	HAL_Delay(3000);	// I2C needs to delay before initializing the display
 	//printf("Initialising Display...\n");
-		Utils_i2c_scan();
-		ssd1306_Init();
+
+	HAL_GPIO_WritePin(OLED_RST_GPIO_Port, OLED_RST_Pin, GPIO_PIN_RESET);
+	HAL_Delay(10);
+	HAL_GPIO_WritePin(OLED_RST_GPIO_Port, OLED_RST_Pin, GPIO_PIN_SET);
+	HAL_Delay(10);
+
+	Utils_i2c_scan();
+	ssd1306_Init();
 
 
 	// OLED display timer

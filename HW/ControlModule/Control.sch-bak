@@ -2526,10 +2526,10 @@ F 3 "" H 9500 2625 50  0001 C CNN
 $EndComp
 Text Label 20750 8700 0    50   ~ 0
 OLED_RST
-Text Label 10775 5800 0    50   ~ 0
+Text Label 10725 5800 0    50   ~ 0
 OLED_RST
 Wire Wire Line
-	11900 5800 10775 5800
+	11900 5800 10725 5800
 Text Notes 10675 5800 2    50   ~ 0
 OLED_RST (PUP)
 $Comp

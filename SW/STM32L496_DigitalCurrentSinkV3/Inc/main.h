@@ -58,6 +58,8 @@ void Error_Handler(void);
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/
+#define OLED_RST_Pin GPIO_PIN_1
+#define OLED_RST_GPIO_Port GPIOC
 #define KP5_EXTI0_Pin GPIO_PIN_0
 #define KP5_EXTI0_GPIO_Port GPIOB
 #define KP5_EXTI0_EXTI_IRQn EXTI0_IRQn

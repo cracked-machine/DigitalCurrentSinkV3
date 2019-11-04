@@ -281,7 +281,8 @@ void _DrawMainDisp()
 {
 
 
-
+	//HAL_GPIO_TogglePin(GPIOD, BLINK_Pin);
+	//HAL_Delay(10);
 
     ssd1306_SetCursor(28, 25);
     _DrawDAC1Value(0);

@@ -16,6 +16,7 @@ void ssd1306_SetI2CAddress(uint16_t addr)
 }
 
 void ssd1306_Reset(void) {
+
 	//HAL_I2C_ClearBusyFlagErrata_2_14_7(&hi2c1);
 	/* for I2C - do nothing */
 }
