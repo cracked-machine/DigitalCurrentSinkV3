@@ -1,8 +1,8 @@
-(kicad_pcb (version 20171130) (host pcbnew "(5.1.2)-2")
+(kicad_pcb (version 20171130) (host pcbnew "(5.1.4-0-10_14)")
 
   (general
     (thickness 1.6)
-    (drawings 47)
+    (drawings 51)
     (tracks 461)
     (zones 0)
     (modules 133)
@@ -14,7 +14,7 @@
     (title "CurrentModule for Digital CurrentSink")
     (date 2019-05-06)
     (rev RevC)
-    (comment 1 https://www.hammfg.com/files/parts/pdf/1454P.pdf)
+    (comment 1 "Hammond Enclosure 1458G4")
   )
 
   (layers
@@ -4682,6 +4682,10 @@
     )
   )
 
+  (gr_poly (pts (xy 147.2565 83.058) (xy 239.3315 83.058) (xy 239.395 106.172) (xy 147.32 106.172)) (layer Cmts.User) (width 0.1) (tstamp 5DC21832))
+  (gr_poly (pts (xy 147.32 108.712) (xy 239.395 108.712) (xy 239.4585 131.826) (xy 147.3835 131.826)) (layer Cmts.User) (width 0.1) (tstamp 5DC217B9))
+  (gr_poly (pts (xy 183.134 132.461) (xy 183.134 137.668) (xy 203.2 137.668) (xy 203.2 132.461)) (layer Dwgs.User) (width 0.1) (tstamp 5DC21452))
+  (gr_poly (pts (xy 183.134 77.343) (xy 183.134 82.55) (xy 203.2 82.55) (xy 203.2 77.343)) (layer Dwgs.User) (width 0.1))
   (gr_text "BYPASS\nINPUT" (at 261.0866 61.9252) (layer F.SilkS) (tstamp 5D326CBF)
     (effects (font (size 0.8 0.8) (thickness 0.15)))
   )

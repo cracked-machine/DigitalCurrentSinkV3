@@ -815,12 +815,12 @@ Text HLabel 9225 20400 0    50   Input ~ 0
 DUT_NEG
 Text Label 28900 8650 2    50   ~ 0
 DUT_POS
-Text Notes 14725 5150 0    50   ~ 0
-N-Channel\nPower Mosfet\nIPP80N03S4L03AKSA1\nhttps://www.mouser.com/ds/2/196/Infineon-IPB80N03S4L_03_IPP_I80N03S4L_04-DS-v02_01-1226077.pdf
+Text Notes 14575 4325 0    50   ~ 0
+N-Channel\nPower Mosfet\nIXFK50N85X\nhttps://www.littelfuse.com/~/media/electronics/datasheets/discrete_mosfets/littelfuse_discrete_mosfets_n-channel_ultra_junction_ixf_50n85x_datasheet.pdf.pdf
 Text Notes 13675 7225 0    50   ~ 0
 Power Resistor\nArcol HS100 \n1ohm 100W
 Text Notes 14550 15625 0    50   ~ 0
-P-Channel\nPower Mosfet\n IPP80P03P4L-04\nhttps://www.infineon.com/dgdl/Infineon-I80P03P4L_04-DS-v01_01-en.pdf?fileId=db3a30431ddc9372011e07e95eb827d7
+P-Channel\nPower Mosfet\nIXTK90P20P\nhttps://m.littelfuse.com/~/media/electronics/datasheets/discrete_mosfets/littelfuse_discrete_mosfets_p-channel_ixt_90p20p_datasheet.pdf.pdf
 Text Notes 19700 6750 0    50   ~ 0
 InstGain: 14dB
 Text Notes 19725 13825 0    50   ~ 0
