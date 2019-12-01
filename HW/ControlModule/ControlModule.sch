@@ -164,67 +164,14 @@ Wire Wire Line
 Wire Wire Line
 	3300 2550 4050 2550
 Wire Wire Line
-	2150 6200 2150 6000
-Text Label 3275 6000 0    50   ~ 0
-5V
-NoConn ~ 2350 6200
-NoConn ~ 2450 6200
-NoConn ~ 2550 6200
-Wire Wire Line
-	4050 6500 4050 6600
-Wire Wire Line
-	2750 6600 4050 6600
-$Comp
-L Connector:TestPoint TP?
-U 1 1 5E71B6B9
-P 2150 5900
-AR Path="/5D061C98/5E71B6B9" Ref="TP?"  Part="1" 
-AR Path="/5E71B6B9" Ref="TP12"  Part="1" 
-F 0 "TP12" H 2100 6125 50  0000 L CNN
-F 1 "TestPoint" H 2207 5930 50  0001 L CNN
-F 2 "TestPoint:TestPoint_Pad_2.0x2.0mm" H 2350 5900 50  0001 C CNN
-F 3 "~" H 2350 5900 50  0001 C CNN
-F 4 "855-S2751-46R" H 2150 5900 50  0001 C CNN "MouserNo"
-F 5 "S2751-46R" H 2150 5900 50  0001 C CNN "Mfr. No:"
-F 6 "Harwin" H 2150 5900 50  0001 C CNN "Mfr:"
-	1    2150 5900
-	1    0    0    -1  
-$EndComp
-Wire Wire Line
-	2150 5900 2150 6000
-$Comp
-L Connector:USB_B_Micro J_5VUSB?
-U 1 1 5E71B6C1
-P 2350 6500
-AR Path="/5D061C98/5E71B6C1" Ref="J_5VUSB?"  Part="1" 
-AR Path="/5E71B6C1" Ref="J_5VUSB1"  Part="1" 
-F 0 "J_5VUSB1" V 2452 6830 50  0000 L CNN
-F 1 "USB_B_Micro" V 2361 6830 50  0000 L CNN
-F 2 "Connector_USB:USB_Micro-B_Amphenol_10103594-0001LF_Horizontal" H 2500 6450 50  0001 C CNN
-F 3 "https://cdn.amphenol-icc.com/media/wysiwyg/files/documentation/datasheet/inputoutput/io_usb_micro.pdf" H 2500 6450 50  0001 C CNN
-F 4 "609-4050-2-ND" H 2350 6500 50  0001 C CNN "DigikeyNo"
-F 5 "649-10103594-0001LF" H 2350 6500 50  0001 C CNN "MouserNo"
-F 6 "10103594-0001LF" H 2350 6500 50  0001 C CNN "Mfr. No:"
-	1    2350 6500
-	0    -1   -1   0   
-$EndComp
-Connection ~ 2150 6000
-Wire Wire Line
 	5100 5050 2350 5050
-Connection ~ 4050 6500
-Wire Wire Line
-	5100 6500 4050 6500
 Wire Wire Line
 	3550 1350 3000 1350
 Wire Wire Line
 	4050 1800 3500 1800
 Text Label 3500 1800 0    50   ~ 0
 PWRGND
-Text Label 5100 6500 2    50   ~ 0
-PWRGND
 Text Label 3000 1350 0    50   ~ 0
-PWR5V
-Text Label 5100 6000 2    50   ~ 0
 PWR5V
 Text Label 5100 5050 2    50   ~ 0
 PWRGND
@@ -248,10 +195,6 @@ F 6 "SS110FL-TP" H 3700 1350 50  0001 C CNN "Mfr. No:"
 $EndComp
 Wire Wire Line
 	3850 1350 4050 1350
-Wire Wire Line
-	2150 6000 5100 6000
-Wire Wire Line
-	2750 6500 4050 6500
 $Comp
 L Connector_Generic:Conn_01x02 JPWR1
 U 1 1 5D504877
@@ -265,4 +208,61 @@ F 3 "~" H 2150 5050 50  0001 C CNN
 $EndComp
 Wire Wire Line
 	2350 4950 5100 4950
+Wire Wire Line
+	2150 6000 5100 6000
+Text Label 5100 6000 2    50   ~ 0
+PWR5V
+Text Label 5100 6500 2    50   ~ 0
+PWRGND
+$Comp
+L Connector:USB_B_Micro J_5VUSB?
+U 1 1 5E71B6C1
+P 2350 6500
+AR Path="/5D061C98/5E71B6C1" Ref="J_5VUSB?"  Part="1" 
+AR Path="/5E71B6C1" Ref="J_5VUSB1"  Part="1" 
+F 0 "J_5VUSB1" V 2452 6830 50  0000 L CNN
+F 1 "USB_B_Micro" V 2361 6830 50  0000 L CNN
+F 2 "Connector_USB:USB_Micro-B_Amphenol_10103594-0001LF_Horizontal" H 2500 6450 50  0001 C CNN
+F 3 "https://cdn.amphenol-icc.com/media/wysiwyg/files/documentation/datasheet/inputoutput/io_usb_micro.pdf" H 2500 6450 50  0001 C CNN
+F 4 "609-4050-2-ND" H 2350 6500 50  0001 C CNN "DigikeyNo"
+F 5 "649-10103594-0001LF" H 2350 6500 50  0001 C CNN "MouserNo"
+F 6 "10103594-0001LF" H 2350 6500 50  0001 C CNN "Mfr. No:"
+	1    2350 6500
+	0    -1   -1   0   
+$EndComp
+Wire Wire Line
+	2150 5900 2150 6000
+$Comp
+L Connector:TestPoint TP?
+U 1 1 5E71B6B9
+P 2150 5900
+AR Path="/5D061C98/5E71B6B9" Ref="TP?"  Part="1" 
+AR Path="/5E71B6B9" Ref="TP12"  Part="1" 
+F 0 "TP12" H 2100 6125 50  0000 L CNN
+F 1 "TestPoint" H 2207 5930 50  0001 L CNN
+F 2 "TestPoint:TestPoint_Pad_2.0x2.0mm" H 2350 5900 50  0001 C CNN
+F 3 "~" H 2350 5900 50  0001 C CNN
+F 4 "855-S2751-46R" H 2150 5900 50  0001 C CNN "MouserNo"
+F 5 "S2751-46R" H 2150 5900 50  0001 C CNN "Mfr. No:"
+F 6 "Harwin" H 2150 5900 50  0001 C CNN "Mfr:"
+	1    2150 5900
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	2750 6600 4050 6600
+Wire Wire Line
+	2750 6500 4050 6500
+Wire Wire Line
+	5100 6500 4050 6500
+Connection ~ 4050 6500
+Wire Wire Line
+	4050 6500 4050 6600
+NoConn ~ 2550 6200
+NoConn ~ 2450 6200
+NoConn ~ 2350 6200
+Text Label 3275 6000 0    50   ~ 0
+5V
+Connection ~ 2150 6000
+Wire Wire Line
+	2150 6200 2150 6000
 $EndSCHEMATC

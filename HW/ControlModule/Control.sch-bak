@@ -2373,7 +2373,7 @@ U 1 1 5D58B097
 P 5200 4550
 F 0 "JP5" H 5200 4731 50  0000 C CNN
 F 1 "BYPASS" H 5200 4642 50  0000 C CNN
-F 2 "Jumper:SolderJumper-2_P1.3mm_Open_Pad1.0x1.5mm" H 5200 4550 50  0001 C CNN
+F 2 "Jumper:SolderJumper-2_P1.3mm_Bridged_Pad1.0x1.5mm" H 5200 4550 50  0001 C CNN
 F 3 "~" H 5200 4550 50  0001 C CNN
 	1    5200 4550
 	1    0    0    -1  
@@ -2398,7 +2398,7 @@ U 1 1 5D5C7866
 P 5200 7400
 F 0 "JP6" H 5200 7581 50  0000 C CNN
 F 1 "BYPASS" H 5200 7492 50  0000 C CNN
-F 2 "Jumper:SolderJumper-2_P1.3mm_Open_Pad1.0x1.5mm" H 5200 7400 50  0001 C CNN
+F 2 "Jumper:SolderJumper-2_P1.3mm_Bridged_Pad1.0x1.5mm" H 5200 7400 50  0001 C CNN
 F 3 "~" H 5200 7400 50  0001 C CNN
 	1    5200 7400
 	1    0    0    -1  

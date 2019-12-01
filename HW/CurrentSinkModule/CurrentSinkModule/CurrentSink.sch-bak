@@ -815,12 +815,12 @@ Text HLabel 9225 20400 0    50   Input ~ 0
 DUT_NEG
 Text Label 28900 8650 2    50   ~ 0
 DUT_POS
-Text Notes 14725 5150 0    50   ~ 0
-N-Channel\nPower Mosfet\nIPP80N03S4L03AKSA1\nhttps://www.mouser.com/ds/2/196/Infineon-IPB80N03S4L_03_IPP_I80N03S4L_04-DS-v02_01-1226077.pdf
+Text Notes 14575 4325 0    50   ~ 0
+N-Channel\nPower Mosfet\nIXFK50N85X\nhttps://www.littelfuse.com/~/media/electronics/datasheets/discrete_mosfets/littelfuse_discrete_mosfets_n-channel_ultra_junction_ixf_50n85x_datasheet.pdf.pdf
 Text Notes 13675 7225 0    50   ~ 0
 Power Resistor\nArcol HS100 \n1ohm 100W
 Text Notes 14550 15625 0    50   ~ 0
-P-Channel\nPower Mosfet\n IPP80P03P4L-04\nhttps://www.infineon.com/dgdl/Infineon-I80P03P4L_04-DS-v01_01-en.pdf?fileId=db3a30431ddc9372011e07e95eb827d7
+P-Channel\nPower Mosfet\nIXTK90P20P\nhttps://m.littelfuse.com/~/media/electronics/datasheets/discrete_mosfets/littelfuse_discrete_mosfets_p-channel_ixt_90p20p_datasheet.pdf.pdf
 Text Notes 19700 6750 0    50   ~ 0
 InstGain: 14dB
 Text Notes 19725 13825 0    50   ~ 0
@@ -1203,9 +1203,9 @@ Wire Wire Line
 Connection ~ 1900 20600
 Wire Wire Line
 	1900 20600 1950 20600
-Text Label 2575 15200 0    50   ~ 0
+Text Label 1325 15200 0    50   ~ 0
 DACSIG2
-Text Label 2575 6300 0    50   ~ 0
+Text Label 1325 6300 0    50   ~ 0
 DACSIG1
 $Comp
 L Device:C C2
@@ -1245,7 +1245,7 @@ $EndComp
 Wire Wire Line
 	3750 6300 3950 6300
 Wire Wire Line
-	2575 6300 3200 6300
+	1325 6300 2425 6300
 $Comp
 L Device:C C4
 U 1 1 5D7BF10A
@@ -1322,7 +1322,7 @@ $EndComp
 Wire Wire Line
 	3750 15200 3950 15200
 Wire Wire Line
-	2575 15200 3200 15200
+	1325 15200 2425 15200
 $Comp
 L Device:C C3
 U 1 1 5D8CA469
@@ -2846,4 +2846,49 @@ Wire Wire Line
 Connection ~ 4850 16400
 Wire Wire Line
 	4850 16400 4850 16275
+$Comp
+L Device:R R?
+U 1 1 5DE88293
+P 2425 15850
+F 0 "R?" H 2495 15895 50  0000 L CNN
+F 1 "1M" H 2495 15806 50  0000 L CNN
+F 2 "" V 2355 15850 50  0001 C CNN
+F 3 "~" H 2425 15850 50  0001 C CNN
+	1    2425 15850
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	2425 15700 2425 15200
+Connection ~ 2425 15200
+Wire Wire Line
+	2425 15200 3200 15200
+Wire Wire Line
+	2425 16000 2425 16400
+Wire Wire Line
+	2425 16400 3200 16400
+Connection ~ 3200 16400
+$Comp
+L Device:R R?
+U 1 1 5DECD66E
+P 2425 6950
+F 0 "R?" H 2495 6995 50  0000 L CNN
+F 1 "1M" H 2495 6906 50  0000 L CNN
+F 2 "" V 2355 6950 50  0001 C CNN
+F 3 "~" H 2425 6950 50  0001 C CNN
+	1    2425 6950
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	2425 6800 2425 6300
+Wire Wire Line
+	2425 7100 2425 7500
+Wire Wire Line
+	2425 7500 3200 7500
+Connection ~ 2425 6300
+Wire Wire Line
+	2425 6300 3200 6300
+Text Notes 14000 4750 0    50   ~ 0
+DRAIN\nGATE\nSOURCE
+Text Notes 13975 16025 0    50   ~ 0
+DRAIN\nGATE\nSOURCE
 $EndSCHEMATC

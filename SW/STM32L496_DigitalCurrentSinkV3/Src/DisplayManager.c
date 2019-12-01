@@ -241,10 +241,10 @@ void _DrawMainOverlay()
 
 
 	ssd1306_SetCursor(0, 26);
-	ssd1306_WriteString("CH1:", Font_3x5, White, 0);
+	ssd1306_WriteString("POS:", Font_3x5, White, 0);
 
 	ssd1306_SetCursor(0, 41);
-	ssd1306_WriteString("CH2:", Font_3x5, White, 0);
+	ssd1306_WriteString("NEG:", Font_3x5, White, 0);
 
 	ssd1306_SetCursor(38, 16);
 	ssd1306_WriteString("OUT:", Font_3x5, White, 1);
@@ -285,21 +285,21 @@ void _DrawMainDisp()
 	//HAL_Delay(10);
 
     ssd1306_SetCursor(28, 25);
-    _DrawDAC1Value(0);
+    _DrawDAC1Value(0);				// OUT1
 
     ssd1306_SetCursor(28, 40);
-    _DrawDAC2Value(0);
+    _DrawDAC2Value(0);				// OUT2
 
     ssd1306_SetCursor(85, 25);
-    _DrawADC1Value();
+    _DrawADC1Value();				// IN1
 
     ssd1306_SetCursor(85, 40);
-    _DrawADC2Value();
+    _DrawADC2Value();				// IN2
 
     // bottom status
     // DAC_CHANNEL_1 mode status
 	ssd1306_SetCursor(1, 56);
-	ssd1306_WriteString("CH1", Font_3x5, White, 0);
+	ssd1306_WriteString("POS", Font_3x5, White, 0);
 	ssd1306_SetCursor(15, 56);
 	ssd1306_WriteString(":", Font_3x5, White, 0);
 	char dac1mode[16];
@@ -309,7 +309,7 @@ void _DrawMainDisp()
 
 	// DAC_CHANNEL_2 mode status
 	ssd1306_SetCursor(44, 56);
-	ssd1306_WriteString("CH2", Font_3x5, White, 0);
+	ssd1306_WriteString("NEG", Font_3x5, White, 0);
 	ssd1306_SetCursor(58, 56);
 	ssd1306_WriteString(":", Font_3x5, White, 0);
 	char dac2mode[16];
@@ -365,9 +365,9 @@ void _DrawChanSelOverlay()
 		ssd1306_DrawPixel(96, y, White);
 	}
 	ssd1306_SetCursor(7,3);
-	ssd1306_WriteString("CH1", Font_5x7, White, 1);
+	ssd1306_WriteString("POS", Font_5x7, White, 1);
 	ssd1306_SetCursor(38,3);
-	ssd1306_WriteString("CH2", Font_5x7, White, 1);
+	ssd1306_WriteString("NEG", Font_5x7, White, 1);
 	ssd1306_SetCursor(66,3);
 	ssd1306_WriteString("DUAL", Font_5x7, White, 1);
 	ssd1306_SetCursor(99,3);
@@ -512,14 +512,14 @@ void _DrawParamSelDisp()
 
     	// dac ch1 value
 		ssd1306_SetCursor(32, 30);
-		ssd1306_WriteString("CH1: ", Font_5x7, White, 1);
+		ssd1306_WriteString("POS: ", Font_5x7, White, 1);
 		ssd1306_SetCursor(65, 30);
 		if(!blink_display_text)
 			_DrawDAC1Value(1);
 
 	 	// dac ch2 value
 		ssd1306_SetCursor(32, 40);
-		ssd1306_WriteString("CH2: ", Font_5x7, White, 1);
+		ssd1306_WriteString("NEG: ", Font_5x7, White, 1);
 		ssd1306_SetCursor(65, 40);
 		if(!blink_display_text)
 			_DrawDAC2Value(1);
@@ -554,7 +554,7 @@ void _DrawParamSelDisp()
 			case DAC_CHANNEL_1:
 			 	// dac ch1 value
 				ssd1306_SetCursor(32, 30);
-				ssd1306_WriteString("CH1: ", Font_5x7, White, 1);
+				ssd1306_WriteString("POS: ", Font_5x7, White, 1);
 				ssd1306_SetCursor(65, 30);
 				if(!blink_display_text)
 					_DrawDAC1Value(1);
@@ -570,7 +570,7 @@ void _DrawParamSelDisp()
 			case DAC_CHANNEL_2:
 			 	// dac ch2 value
 				ssd1306_SetCursor(32, 30);
-				ssd1306_WriteString("CH2: ", Font_5x7, White, 1);
+				ssd1306_WriteString("NEG: ", Font_5x7, White, 1);
 				ssd1306_SetCursor(65, 30);
 				if(!blink_display_text)
 					_DrawDAC2Value(1);
@@ -957,11 +957,11 @@ void _DrawDACAmplitudeValue(uint32_t Channel)
 
 	if(Channel == DAC_CHANNEL_1)
 	{
-		ssd1306_WriteString("CH1:", Font_5x7, White, 1);
+		ssd1306_WriteString("POS:", Font_5x7, White, 1);
 	}
 	else
 	{
-		ssd1306_WriteString("CH2:", Font_5x7, White, 1);
+		ssd1306_WriteString("NEG:", Font_5x7, White, 1);
 	}
 
 

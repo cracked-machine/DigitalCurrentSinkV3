@@ -1203,9 +1203,9 @@ Wire Wire Line
 Connection ~ 1900 20600
 Wire Wire Line
 	1900 20600 1950 20600
-Text Label 2575 15200 0    50   ~ 0
+Text Label 1325 15200 0    50   ~ 0
 DACSIG2
-Text Label 2575 6300 0    50   ~ 0
+Text Label 1325 6300 0    50   ~ 0
 DACSIG1
 $Comp
 L Device:C C2
@@ -1245,7 +1245,7 @@ $EndComp
 Wire Wire Line
 	3750 6300 3950 6300
 Wire Wire Line
-	2575 6300 3200 6300
+	1325 6300 2425 6300
 $Comp
 L Device:C C4
 U 1 1 5D7BF10A
@@ -1322,7 +1322,7 @@ $EndComp
 Wire Wire Line
 	3750 15200 3950 15200
 Wire Wire Line
-	2575 15200 3200 15200
+	1325 15200 2425 15200
 $Comp
 L Device:C C3
 U 1 1 5D8CA469
@@ -2846,4 +2846,49 @@ Wire Wire Line
 Connection ~ 4850 16400
 Wire Wire Line
 	4850 16400 4850 16275
+$Comp
+L Device:R R30
+U 1 1 5DE88293
+P 2425 15850
+F 0 "R30" H 2495 15895 50  0000 L CNN
+F 1 "1M" H 2495 15806 50  0000 L CNN
+F 2 "" V 2355 15850 50  0001 C CNN
+F 3 "~" H 2425 15850 50  0001 C CNN
+	1    2425 15850
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	2425 15700 2425 15200
+Connection ~ 2425 15200
+Wire Wire Line
+	2425 15200 3200 15200
+Wire Wire Line
+	2425 16000 2425 16400
+Wire Wire Line
+	2425 16400 3200 16400
+Connection ~ 3200 16400
+$Comp
+L Device:R R29
+U 1 1 5DECD66E
+P 2425 6950
+F 0 "R29" H 2495 6995 50  0000 L CNN
+F 1 "1M" H 2495 6906 50  0000 L CNN
+F 2 "" V 2355 6950 50  0001 C CNN
+F 3 "~" H 2425 6950 50  0001 C CNN
+	1    2425 6950
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	2425 6800 2425 6300
+Wire Wire Line
+	2425 7100 2425 7500
+Wire Wire Line
+	2425 7500 3200 7500
+Connection ~ 2425 6300
+Wire Wire Line
+	2425 6300 3200 6300
+Text Notes 14000 4750 0    50   ~ 0
+DRAIN\nGATE\nSOURCE
+Text Notes 13975 16025 0    50   ~ 0
+DRAIN\nGATE\nSOURCE
 $EndSCHEMATC

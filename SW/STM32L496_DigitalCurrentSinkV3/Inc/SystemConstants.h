@@ -28,7 +28,7 @@
 #define MAXAMPSTEP 			1
 
 // adjust to match power resistor value, allows for variation according to tolerances
-#define CH0_PWR_RESISTOR	0.1 	// positive N-channel
+#define CH0_PWR_RESISTOR	0.15 	// positive N-channel
 #define CH0_RESISTOR_ERR	0.0	// tolerance compensation
 #define CH1_PWR_RESISTOR	0.1 	// negative P-channel
 #define CH1_RESISTOR_ERR	0.00	// tolerance compensation
